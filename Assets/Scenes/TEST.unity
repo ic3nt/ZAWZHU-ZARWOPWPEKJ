@@ -16561,6 +16561,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1406188314120671283, guid: da63b51b69e663f4e8d9dddca4f71450, type: 3}
+      propertyPath: ChanceOfLock
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1406188314120671283, guid: da63b51b69e663f4e8d9dddca4f71450, type: 3}
+      propertyPath: ChanceOfStaying
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1850871838296987598, guid: da63b51b69e663f4e8d9dddca4f71450, type: 3}
       propertyPath: m_Name
       value: Door (1)
@@ -16609,8 +16617,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1406188314120671283, guid: da63b51b69e663f4e8d9dddca4f71450, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -33948,7 +33955,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1406188314120671283, guid: da63b51b69e663f4e8d9dddca4f71450, type: 3}
       propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1406188314120671283, guid: da63b51b69e663f4e8d9dddca4f71450, type: 3}
+      propertyPath: ChanceOfLock
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1406188314120671283, guid: da63b51b69e663f4e8d9dddca4f71450, type: 3}
+      propertyPath: ChanceOfStaying
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1850871838296987598, guid: da63b51b69e663f4e8d9dddca4f71450, type: 3}
       propertyPath: m_Name
@@ -33998,8 +34013,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1406188314120671283, guid: da63b51b69e663f4e8d9dddca4f71450, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

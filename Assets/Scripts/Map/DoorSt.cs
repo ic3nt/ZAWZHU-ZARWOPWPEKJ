@@ -8,11 +8,11 @@ public class DoorSt : MonoBehaviour
     public bool islocked;
 
     [Range(0, 1)]
-    public float ChanceOfStaying = 0.1f;
+    public float ChanceOfLock = 0.1f;
 
     private void Start()
     {
-        if (Random.value > ChanceOfStaying)
+        if (Random.value > ChanceOfLock)
         {
             islocked = true;
 
@@ -25,7 +25,7 @@ public class DoorSt : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if ((other.CompareTag("canPickUp"))&& islocked )
+        if ((other.CompareTag("canPickUp")) && islocked )
         {
             if (other.TryGetComponent<Key>(out var ke))
             {
