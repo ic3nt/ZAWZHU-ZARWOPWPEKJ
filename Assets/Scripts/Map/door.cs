@@ -17,6 +17,7 @@ public class Door : MonoBehaviour
 
     public bool canOpen = true;
 
+    public GameObject LockText;
 
     private void Awake()
     {
@@ -37,6 +38,8 @@ public class Door : MonoBehaviour
         Ray ray = new Ray(transform.position, transform.forward);
         RaycastHit hit;
 
+        
+
         if (fill < 0)
         {
             fill = 0;
@@ -47,54 +50,71 @@ public class Door : MonoBehaviour
         {
             if (hit.collider.gameObject.tag == "Door")
             {
-                
-                    Animator an = hit.collider.transform.GetComponent<Animator>();
-                    GameObject Doorr = hit.collider.transform.gameObject;
-
-                    AudioSource doorSound = hit.collider.gameObject.GetComponent<AudioSource>();
-
-                    intText.SetActive(true);
-
-                    if (Input.GetKey(KeyCode.E) && fill < maxfill && canOpen == true)
+                if (hit.collider.TryGetComponent<DoorSt>(out var ds))
+                {
+                    if (!ds.islocked)
                     {
-                        fill += Time.deltaTime * 160f; // Adjust fill rate if needed
-                        progressBar.fillAmount = fill / maxfill;
+
+                        Animator an = hit.collider.transform.GetComponent<Animator>();
+                        GameObject Doorr = hit.collider.transform.gameObject;
+
+                        AudioSource doorSound = hit.collider.gameObject.GetComponent<AudioSource>();
+
+                        intText.SetActive(true);
+
+                        if (Input.GetKey(KeyCode.E) && fill < maxfill && canOpen == true)
+                        {
+                            fill += Time.deltaTime * 160f; // Adjust fill rate if needed
+                            progressBar.fillAmount = fill / maxfill;
+                        }
+                        else
+                        {
+                            fill -= Time.deltaTime * 160f; // Adjust fill rate if needed
+                            progressBar.fillAmount = fill / maxfill;
+                        }
+
+                        if (fill >= maxfill)
+                        {
+                            canOpen = false;
+                            StartCoroutine(WaitSec());
+
+                            if (an.GetCurrentAnimatorStateInfo(0).IsName(doorOpenAnimName))
+                            {
+                                doorSound.clip = doorClose;
+                                doorSound.Play();
+                                an.ResetTrigger("Open");
+                                an.SetTrigger("Close");
+
+
+                            }
+                            else if (an.GetCurrentAnimatorStateInfo(0).IsName(doorCloseAnimName))
+                            {
+                                doorSound.clip = doorOpen;
+                                doorSound.Play();
+                                an.ResetTrigger("Close");
+                                an.SetTrigger("Open");
+
+                            }
+                            fill = 0;
+                            progressBar.fillAmount = fill;
+                        }
+
                     }
                     else
                     {
-                        fill -= Time.deltaTime * 160f; // Adjust fill rate if needed
-                        progressBar.fillAmount = fill / maxfill;
-                    }
-
-                    if (fill >= maxfill)
-                    {
-                        canOpen = false;
-                        StartCoroutine(WaitSec());
-
-                        if (an.GetCurrentAnimatorStateInfo(0).IsName(doorOpenAnimName))
-                        {
-                            doorSound.clip = doorClose;
-                            doorSound.Play();
-                            an.ResetTrigger("Open");
-                            an.SetTrigger("Close");
-
-
-                        }
-                        else if (an.GetCurrentAnimatorStateInfo(0).IsName(doorCloseAnimName))
-                        {
-                            doorSound.clip = doorOpen;
-                            doorSound.Play();
-                            an.ResetTrigger("Close");
-                            an.SetTrigger("Open");
-
-                        }
+                        LockText.SetActive(true);
+                        intText.SetActive(false);
                         fill = 0;
                         progressBar.fillAmount = fill;
-                    
+                    }
+
                 }
+               
+
             }
                 else
                 {
+                    LockText.SetActive(false);
                     intText.SetActive(false);
                     fill = 0;
                     progressBar.fillAmount = fill;
@@ -102,6 +122,7 @@ public class Door : MonoBehaviour
             }
             else
             {
+                LockText.SetActive(false);
                 intText.SetActive(false);
                 fill = 0;
                 progressBar.fillAmount = fill;
