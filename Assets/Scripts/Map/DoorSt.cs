@@ -8,7 +8,7 @@ public class DoorSt : MonoBehaviour
     public bool islocked;
 
     [Range(0, 1)]
-    public float ChanceOfLock = 0.5f;
+    public float ChanceOfLock = 0.65f;
 
     private void Start()
     {
