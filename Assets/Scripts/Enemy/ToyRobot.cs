@@ -78,7 +78,7 @@ public class ToyRobot : MonoBehaviour
         anim.SetBool("IsRun", false);
         dmg.HitColl.enabled = false;
         aiAgent.isStopped = true;
-        yield return new WaitForSeconds(Random.Range(8,12));
+        yield return new WaitForSeconds(Random.Range(2,5));
         aud1.Stop();
 
         StartCoroutine(Go());
@@ -94,7 +94,7 @@ public class ToyRobot : MonoBehaviour
         dmg.HitColl.enabled = true;
         aiAgent.isStopped = false;
 
-        yield return new WaitForSeconds(Random.Range(2, 4));
+        yield return new WaitForSeconds(Random.Range(1, 2));
         aud2.Stop();
 
         StartCoroutine(Stop());

@@ -13,8 +13,9 @@ public class HealthManager : MonoBehaviour
     public FirstPersonAudio personAudio;
     public Image healthBar;
     public float healthAmount = 100f;
-
     public bool timerOn;
+
+    private Coroutine healthCoroutine;
 
     void Start()
     {
@@ -30,8 +31,36 @@ public class HealthManager : MonoBehaviour
         {
             Dead();
         }
+        else
+        {
+            if (Input.GetKey(KeyCode.LeftShift) && ((personMovement.GetComponent<Rigidbody>().velocity.x != 0) && (personMovement.GetComponent<Rigidbody>().velocity.z != 0)))
+            {
+                // Запускаем корутину, если timerOn выключен
+                if (!timerOn)
+                {
+                    timerOn = true;
+                    healthCoroutine = StartCoroutine(DeductHealthOverTime());
+                }
+            }
+            else
+            {
+                // Останавливаем корутину, если условие больше не выполняется
+                if (timerOn)
+                {
+                    timerOn = false;
+                    StopCoroutine(healthCoroutine);
+                }
+            }
+        }
+    }
 
-      
+    private IEnumerator DeductHealthOverTime()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(0.3f);
+            TakeDamage(1);
+        }
     }
 
     public void TakeDamage(float damage)
@@ -47,6 +76,7 @@ public class HealthManager : MonoBehaviour
 
         healthBar.fillAmount = healthAmount / 100f;
     }
+
     public void Dead()
     {
         timerOn = false;
@@ -55,10 +85,11 @@ public class HealthManager : MonoBehaviour
         personMovement.GetComponent<FirstPersonMovement>().enabled = false;
         personLook.GetComponent<FirstPersonLook>().enabled = false;
         personAudio.GetComponent<FirstPersonAudio>().enabled = false;
-       
     }
+
     public void GoToMenuButton()
     {
         loadScene.LoadScene("IsMenuScene");
     }
 }
+

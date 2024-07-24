@@ -18682,8 +18682,8 @@ Transform:
   m_GameObject: {fileID: 1552474819}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.9999998, z: -0, w: 0.00057253236}
-  m_LocalPosition: {x: 2.415, y: 1.587, z: -9.763}
-  m_LocalScale: {x: 0.1249802, y: 0.12498014, z: 0.1249802}
+  m_LocalPosition: {x: 2.472, y: 1.631, z: -9.763}
+  m_LocalScale: {x: 0.23039095, y: 0.23039083, z: 0.23039095}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 138738109}
@@ -18708,7 +18708,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2530a24bc4ad3464e8ea895a38089229, type: 2}
+  - {fileID: 2100000, guid: b224e507cd92340b08f6fc8e70acf7be, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -52202,13 +52202,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97fca36bd81de7c4cafce7bbf02ca611, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 4
+  speed: 3
   animator: {fileID: 7799323418767018358}
   camera: {fileID: 1977262760645787912}
   zoomSpeed: 4
   returnSpeed: 4
-  canRun: 1
-  runSpeed: 7
+  canRun: 0
+  runSpeed: 6
   runningKey: 304
 --- !u!1 &7623487316509124146
 GameObject:
