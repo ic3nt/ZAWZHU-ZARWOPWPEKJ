@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class DoorSt : MonoBehaviour
 {
-
+    public AudioSource aus;
     public bool islocked;
 
     [Range(0, 1)]
-    public float ChanceOfLock = 0.1f;
+    public float ChanceOfLock = 0.5f;
 
     private void Start()
     {
@@ -29,8 +29,9 @@ public class DoorSt : MonoBehaviour
         {
             if (other.TryGetComponent<Key>(out var ke))
             {
-                Destroy(ke);
+                aus.Play();
                 islocked = false;
+                Destroy(ke.keyobj);
             }
         }
 

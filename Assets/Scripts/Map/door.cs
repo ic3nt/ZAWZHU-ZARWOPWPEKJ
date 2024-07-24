@@ -99,6 +99,7 @@ public class Door : MonoBehaviour
                             progressBar.fillAmount = fill;
                         }
 
+
                     }
                     else
                     {
@@ -109,7 +110,13 @@ public class Door : MonoBehaviour
                     }
 
                 }
-               
+                else
+                {
+                    LockText.SetActive(false);
+                    intText.SetActive(false);
+                    fill = 0;
+                    progressBar.fillAmount = fill;
+                }
 
             }
                 else
@@ -119,7 +126,7 @@ public class Door : MonoBehaviour
                     fill = 0;
                     progressBar.fillAmount = fill;
                 }
-            }
+        }
             else
             {
                 LockText.SetActive(false);
