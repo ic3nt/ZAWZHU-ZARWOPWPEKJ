@@ -20,6 +20,10 @@ public class MenuManagerNew : MonoBehaviour
     {
         animator.SetTrigger("PlayMenu");
     }
+    public void QuitButton()
+    {
+        animator.SetTrigger("PlayMenu");
+    }
     void Update()
     {
 
