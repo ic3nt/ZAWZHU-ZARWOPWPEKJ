@@ -36,5 +36,6 @@ public class MenuManagerNew : MonoBehaviour
     {
         animator.SetTrigger("SettingsMenu");
         animatorSettings.SetTrigger("Open");
+
     }
 }

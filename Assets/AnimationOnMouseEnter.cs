@@ -44,6 +44,6 @@ public class AnimationOnMouseEnter : MonoBehaviour
 
     private void OnMouseDown()
     {
-        
+        Debug.Log("Click");
     }
 }
