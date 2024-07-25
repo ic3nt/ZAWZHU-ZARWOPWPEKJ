@@ -12,13 +12,13 @@ public class ConnectManager : MonoBehaviour
 
     void Start()
     {
-      if (Application.internetReachability == NetworkReachability.NotReachable)
-      {
+        if (Application.internetReachability == NetworkReachability.NotReachable)
+        {
             NoConnectionWarningWindows.SetActive(true);
             Debug.Log("Offline");
         }
-      else
-      {
+        else
+        {
             NoConnectionWarningWindows.SetActive(false);
             Debug.Log("Online");
         }
