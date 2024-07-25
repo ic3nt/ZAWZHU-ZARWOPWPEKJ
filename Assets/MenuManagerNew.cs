@@ -22,7 +22,7 @@ public class MenuManagerNew : MonoBehaviour
     }
     public void QuitButton()
     {
-        animator.SetTrigger("PlayMenu");
+        animator.SetTrigger("QuitMenu");
     }
     void Update()
     {
