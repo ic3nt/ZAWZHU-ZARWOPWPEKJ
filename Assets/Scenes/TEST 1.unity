@@ -5376,11 +5376,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 5914155791044123706}
   ChunkPrefabs:
-  - {fileID: 7479931358086203721, guid: 474c0a854b9bb4b0aa39d7e9e6399c69, type: 3}
   - {fileID: 7479931358086203721, guid: 83d751a737a474fafb435bd00c33deb1, type: 3}
-  - {fileID: 7479931358086203721, guid: 683dc4f3ef28848a48bbd9809b08f537, type: 3}
-  - {fileID: 7479931358086203721, guid: 38aefbbc5ad6541b181db59c9f7e6cf1, type: 3}
-  - {fileID: 7479931358086203721, guid: c94baa7d5eed54791b39eac2e6cfc53f, type: 3}
   TenthFloorPrefab: {fileID: 7479931358086203721, guid: c92121b1c508b4f1ba22912e4064ccfa, type: 3}
   FirstChunk: {fileID: 6637120525572885231}
   floors: 20
@@ -6025,7 +6021,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 355df2dc625b640ac85c125b9155100b, type: 2}
+  - {fileID: 2100000, guid: 0a08af134b891644ab6a76229880abbf, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -19459,7 +19455,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 355df2dc625b640ac85c125b9155100b, type: 2}
+  - {fileID: 2100000, guid: 0a08af134b891644ab6a76229880abbf, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -33962,10 +33958,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 365683196927761396, guid: 4c16e32d911e4497b8eab68e8c656da5, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 8f6b78143df5767419e29ed5efdd526e, type: 3}
     - target: {fileID: 4397076294017743965, guid: 4c16e32d911e4497b8eab68e8c656da5, type: 3}
       propertyPath: m_Name
       value: radio
       objectReference: {fileID: 0}
+    - target: {fileID: 5488048530314880871, guid: 4c16e32d911e4497b8eab68e8c656da5, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 8f6b78143df5767419e29ed5efdd526e, type: 3}
     - target: {fileID: 7973506168315140599, guid: 4c16e32d911e4497b8eab68e8c656da5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.497
