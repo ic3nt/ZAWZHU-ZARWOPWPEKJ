@@ -6,11 +6,6 @@ public class MenuManagerNew : MonoBehaviour
 {
     public Animator animator;
 
-    void Start()
-    {
- 
-    }
-
     public void MenuButton()
     {
         animator.SetTrigger("DefaultMenu");
@@ -23,6 +18,10 @@ public class MenuManagerNew : MonoBehaviour
     public void QuitButton()
     {
         animator.SetTrigger("QuitMenu");
+    }
+    public void SettingsButton()
+    {
+        animator.SetTrigger("SettingsMenu");
     }
     void Update()
     {
