@@ -16,9 +16,9 @@ public class MenuManagerNew : MonoBehaviour
         animator.SetTrigger("DefaultMenu");
     }
 
-    public void SingleplayerButton()
+    public void PlayButton()
     {
-        animator.SetTrigger("SingleplayerMenu");
+        animator.SetTrigger("PlayMenu");
     }
     void Update()
     {
