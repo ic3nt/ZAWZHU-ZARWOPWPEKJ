@@ -28,15 +28,16 @@ public class MultiplMovment : NetworkBehaviour
     {
         defaultZoom = camera.fieldOfView;
 
+        if (!IsOwner)
+        {
+            camera.enabled = false;
+        }
     }
 
 
     private void Update()
     {
-        if (IsOwner)
-        {
-            camera.enabled = false;
-        }
+     
         if (!IsOwner) return;
         if ((Input.GetKey(KeyCode.LeftShift)) && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)))
             {
