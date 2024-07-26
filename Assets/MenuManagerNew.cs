@@ -109,6 +109,7 @@ public class MenuManagerNew : MonoBehaviour
     {
         isSettings = false;
         isMenu = true;
+        isManual = false;
         animator.SetTrigger("DefaultMenu");
     }
 
@@ -116,6 +117,7 @@ public class MenuManagerNew : MonoBehaviour
     {
         isSettings = false;
         isMenu = false;
+        isManual = false;
         animator.SetTrigger("PlayMenu");
     }
 
@@ -123,6 +125,7 @@ public class MenuManagerNew : MonoBehaviour
     {
         isSettings = false;
         isMenu = false;
+        isManual = false;
         animator.SetTrigger("QuitMenu");
     }
 
@@ -130,17 +133,20 @@ public class MenuManagerNew : MonoBehaviour
     {
         isSettings = true;
         isMenu = false;
+        isManual = false;
         animator.SetTrigger("SettingsMenu");
     }
     public void CatalogButton()
     {
         isSettings = false;
         isMenu = false;
+        isManual = false;
         animator.SetTrigger("CatalogMenu");
         animatorManual.SetTrigger("Close");
     }
     public void ManualButton()
     {
+        isManual = true;
         isSettings = false;
         isMenu = false;
         animator.SetTrigger("ManualMenu");
