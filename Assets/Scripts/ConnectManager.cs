@@ -17,12 +17,14 @@ public class ConnectManager : MonoBehaviour
         {
             NoConnectionWarningWindows.SetActive(true);
             BoxCollider.enabled = false;
+            Objects.SetActive(true);
             Debug.Log("Offline");
         }
         else
         {
             NoConnectionWarningWindows.SetActive(false);
             BoxCollider.enabled = true;
+            Objects.SetActive(false);
             Debug.Log("Online");
         }
     }
