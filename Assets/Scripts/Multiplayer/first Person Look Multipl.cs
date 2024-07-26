@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
+using System.Globalization;
 
-public class firstPersonLookMultipl : MonoBehaviour
+public class firstPersonLookMultipl : NetworkBehaviour
 {
 
     [SerializeField]
@@ -14,10 +15,11 @@ public class firstPersonLookMultipl : MonoBehaviour
     Vector2 velocity;
     Vector2 frameVelocity;
 
-    private bool islplr;
+
 
     void Reset()
     {
+        if (!IsOwner) return;
         // Get the character from the FirstPersonMovement in parents.
         character = GetComponentInParent<FirstPersonMovement>().transform;
     }
@@ -32,10 +34,10 @@ public class firstPersonLookMultipl : MonoBehaviour
 
     void Update()
     {
-        
+        if (!IsOwner) return;
 
-            // Get smooth velocity.
-            PlayerPrefs.SetFloat("currentSensitivity", sensitivity);
+        // Get smooth velocity.
+        PlayerPrefs.SetFloat("currentSensitivity", sensitivity);
             Vector2 mouseDelta = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
             Vector2 rawFrameVelocity = Vector2.Scale(mouseDelta, Vector2.one * sensitivity);
             frameVelocity = Vector2.Lerp(frameVelocity, rawFrameVelocity, 1 / smoothing);
