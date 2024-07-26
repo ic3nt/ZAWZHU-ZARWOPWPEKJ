@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
 
-public class MultiplMovment : NetworkBehaviour
+public class MultiplayerMovment : NetworkBehaviour
 {
     public float speed = 5;
 
