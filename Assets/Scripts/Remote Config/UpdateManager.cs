@@ -8,9 +8,11 @@ public class UpdateManager : MonoBehaviour
 {
     [SerializeField]
     public GameObject UpdateWindow;
+    public GameObject DisableWindow;
     void Awake()
     {
         UpdateWindow.SetActive(false);
+        DisableWindow.SetActive(true);
         ConfigManager.FetchCompleted += AppyRemoteSettings;
         ConfigManager.FetchConfigs(new usersAttributes(), new appAttributes());
     }
@@ -21,7 +23,8 @@ public class UpdateManager : MonoBehaviour
 
         if(!string.IsNullOrEmpty(newAppVersion) && Application.version != newAppVersion)
         {
-            UpdateWindow.SetActive(true);
+            DisableWindow.SetActive(false);
+            StartCoroutine(UpdateWindowWaitForSecondCoroutine());
         }
 
 #if DEBUG
@@ -37,4 +40,10 @@ public class UpdateManager : MonoBehaviour
     struct usersAttributes { }
 
     struct appAttributes { }
+
+    private IEnumerator UpdateWindowWaitForSecondCoroutine()
+    {
+        yield return new WaitForSeconds(0.8f);
+        UpdateWindow.SetActive(true);
+    }
 }

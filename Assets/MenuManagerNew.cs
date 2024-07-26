@@ -7,35 +7,218 @@ public class MenuManagerNew : MonoBehaviour
 {
     public Animator animator;
     public Animator animatorSettings;
+    public Animator animatorNoConnectionWarning;
+    public Animator animatorManual;
+    public Animator animatorCatalog;
+
+    private bool isMenu;
+    private bool isSettings;
+    private bool isManual;
+    private bool isCatalog;
+
+    private bool isPlayedSettingsAnimation;
+    private bool isSettingsOpen = false;
+    private bool isSettingsAnimationPlaying = false;
+
+    private bool isPlayedManualAnimation;
+    private bool isManualOpen = false;
+    private bool isManualAnimationPlaying = false;
+
+    private bool isPlayedCatalogAnimation;
+    private bool isCatalogOpen = false;
+    private bool isCataloglAnimationPlaying = false;
+
+    void Start()
+    {
+        isPlayedManualAnimation = false;
+        isPlayedSettingsAnimation = false;
+        isPlayedCatalogAnimation = false;
+        isMenu = true;
+        isSettings = false;
+        isManual = false;
+        isCatalog = false;
+    }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (!isMenu)
         {
-            MenuButton();
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                MenuButton();
+                Debug.Log("Menu");
+            }
         }
-        
+        else
+        {
+            isMenu = true;
+        }
+
+        if (isSettings)
+        {
+            if (!isSettingsOpen && !isSettingsAnimationPlaying)
+            {
+                SettingsOpen();
+                isSettingsOpen = true;
+                isSettingsAnimationPlaying = true;
+                Debug.Log("Settings");
+            }
+        }
+        else
+        {
+            if (isSettingsOpen && !isSettingsAnimationPlaying)
+            {
+                SettingsClose();
+                isSettingsOpen = false;
+                isSettingsAnimationPlaying = true;
+            }
+        }
+
+        if (isSettingsAnimationPlaying)
+        {
+            if (!animatorSettings.GetCurrentAnimatorStateInfo(0).IsName("Open") &&
+                !animatorSettings.GetCurrentAnimatorStateInfo(0).IsName("Close"))
+            {
+                isSettingsAnimationPlaying = false;
+            }
+        }
+
+        if (isManual)
+        {
+            if (!isManualOpen && !isPlayedManualAnimation)
+            {
+                ManualOpen();
+                isManualOpen = true;
+                isPlayedManualAnimation = true;
+                Debug.Log("Manual");
+            }
+        }
+        else
+        {
+            if (isManual && !isPlayedManualAnimation)
+            {
+                ManualClose();
+                isManualOpen = false;
+                isPlayedManualAnimation = true;
+            }
+        }
+
+        if (isPlayedManualAnimation)
+        {
+            if (!animatorManual.GetCurrentAnimatorStateInfo(0).IsName("Open") &&
+                !animatorManual.GetCurrentAnimatorStateInfo(0).IsName("Close"))
+            {
+                isPlayedManualAnimation = false;
+            }
+        }
+
+        if (isCatalog)
+        {
+            if (!isCatalogOpen && !isPlayedCatalogAnimation)
+            {
+                CatalogOpen();
+                isCatalogOpen = true;
+                isPlayedCatalogAnimation = true;
+                Debug.Log("Catalog");
+            }
+        }
+        else
+        {
+            if (isCatalog && !isPlayedCatalogAnimation)
+            {
+                CatalogDefault();
+                isCatalogOpen = false;
+                isPlayedCatalogAnimation = true;
+            }
+        }
+
+        if (isPlayedCatalogAnimation)
+        {
+            if (!animatorCatalog.GetCurrentAnimatorStateInfo(0).IsName("Open") &&
+                !animatorCatalog.GetCurrentAnimatorStateInfo(0).IsName("Default"))
+            {
+                isPlayedCatalogAnimation = false;
+            }
+        }
     }
 
     public void MenuButton()
     {
+        isSettings = false;
+        isMenu = true;
+        isManual = false;
+        isCatalog = false;
         animator.SetTrigger("DefaultMenu");
-        animatorSettings.SetTrigger("Close");
     }
+
     public void PlayButton()
     {
+        isSettings = false;
+        isMenu = false;
+        isManual = false;
+        isCatalog = false;
         animator.SetTrigger("PlayMenu");
-        animatorSettings.SetTrigger("Close");
     }
+
     public void QuitButton()
     {
+        isSettings = false;
+        isMenu = false;
+        isManual = false;
+        isCatalog = false;
         animator.SetTrigger("QuitMenu");
-        animatorSettings.SetTrigger("Close");
     }
+
     public void SettingsButton()
     {
+        isSettings = true;
+        isMenu = false;
+        isManual = false;
+        isCatalog = false;
         animator.SetTrigger("SettingsMenu");
+    }
+    public void CatalogButton()
+    {
+        isSettings = false;
+        isMenu = false;
+        isManual = false;
+        isCatalog = true;
+        animator.SetTrigger("CatalogMenu");
+        animatorManual.SetTrigger("Close");
+    }
+    public void ManualButton()
+    {
+        isManual = true;
+        isSettings = false;
+        isMenu = false;
+        isCatalog = false;
+        animator.SetTrigger("ManualMenu");
+        animatorManual.SetTrigger("Open");
+    }
+    void SettingsOpen()
+    {
         animatorSettings.SetTrigger("Open");
-
+        animatorNoConnectionWarning.SetTrigger("Close");
+    }
+    void SettingsClose()
+    {
+        animatorSettings.SetTrigger("Close");
+        animatorNoConnectionWarning.SetTrigger("Open");
+    }
+    void ManualOpen()
+    {
+        animatorManual.SetTrigger("Open");
+    }
+    void ManualClose()
+    {
+        animatorManual.SetTrigger("Close");
+    }
+    void CatalogOpen()
+    {
+        animatorCatalog.SetTrigger("Open");
+    }
+    void CatalogDefault()
+    {
+        animatorCatalog.SetTrigger("Default");
     }
 }

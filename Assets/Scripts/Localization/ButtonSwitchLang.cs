@@ -8,5 +8,6 @@ public class ButtonSwitchLang: MonoBehaviour
     void OnButtonClick()
     {
 		localizationManager.CurrentLanguage = name;
+        Debug.Log("Change");
     }
 }

@@ -3,18 +3,32 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
-public class NetworkPlayer : MonoBehaviour
+public class NetworkPlayer : NetworkBehaviour
 {
 
     [SerializeField] private GameObject playerCamera;
 
-    void Start()
+
+
+    public override void OnNetworkSpawn()
     {
-        if (!GetComponent<NetworkObject>().IsLocalPlayer)
+        if (!IsLocalPlayer)
         {
-            playerCamera.SetActive(false);
             GetComponent<FirstPersonMovement>().enabled = false;
-            GetComponent<FirstPersonLook>().enabled = false;
+            playerCamera.GetComponent<FirstPersonLook>().enabled = false;
+
+            playerCamera.GetComponent<Camera>().enabled = false;
+        }
+
+
+        if (IsClient)
+        {
+            GetComponent<FirstPersonMovement>().enabled = true;
+            playerCamera.GetComponent<FirstPersonLook>().enabled = true;
+
+            playerCamera.GetComponent<Camera>().enabled = true;
         }
     }
+
+    
 }
