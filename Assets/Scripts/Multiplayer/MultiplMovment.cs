@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
 
-public class MultiplMovment : MonoBehaviour
+public class MultiplMovment : NetworkBehaviour
 {
     public float speed = 5;
 
@@ -12,8 +12,6 @@ public class MultiplMovment : MonoBehaviour
     private float defaultZoom;
     public float zoomSpeed = 1f;
     public float returnSpeed = 1f;
-
-    private bool iscurplr;
 
 
     [Header("Running")]
@@ -32,10 +30,15 @@ public class MultiplMovment : MonoBehaviour
 
     }
 
+
     private void Update()
     {
-        
-            if ((Input.GetKey(KeyCode.LeftShift)) && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)))
+        if (IsOwner)
+        {
+            camera.enabled = false;
+        }
+        if (!IsOwner) return;
+        if ((Input.GetKey(KeyCode.LeftShift)) && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)))
             {
                 ZoomCamera(defaultZoom + 15f);
             }
@@ -97,6 +100,7 @@ public class MultiplMovment : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (!IsOwner) return;
         
             // Update IsRunning from input.
             IsRunning = canRun && Input.GetKey(KeyCode.LeftShift);
@@ -113,8 +117,8 @@ public class MultiplMovment : MonoBehaviour
 
             // Apply movement.
             rigidbody.velocity = transform.rotation * new Vector3(targetVelocity.x, rigidbody.velocity.y, targetVelocity.y);
-        }
-    
+        
+    }
     private void ZoomCamera(float targetZoom)
     {
         camera.fieldOfView = Mathf.Lerp(camera.fieldOfView, targetZoom, zoomSpeed * Time.deltaTime);
