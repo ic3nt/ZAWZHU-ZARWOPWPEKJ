@@ -9,10 +9,12 @@ public class MenuManagerNew : MonoBehaviour
     public Animator animatorSettings;
     public Animator animatorNoConnectionWarning;
     public Animator animatorManual;
+    public Animator animatorCatalog;
 
     private bool isMenu;
     private bool isSettings;
     private bool isManual;
+    private bool isCatalog;
 
     private bool isPlayedSettingsAnimation;
     private bool isSettingsOpen = false;
@@ -20,15 +22,21 @@ public class MenuManagerNew : MonoBehaviour
 
     private bool isPlayedManualAnimation;
     private bool isManualOpen = false;
-    private bool isSettingsManualPlaying = false;
+    private bool isManualAnimationPlaying = false;
+
+    private bool isPlayedCatalogAnimation;
+    private bool isCatalogOpen = false;
+    private bool isCataloglAnimationPlaying = false;
 
     void Start()
     {
         isPlayedManualAnimation = false;
         isPlayedSettingsAnimation = false;
+        isPlayedCatalogAnimation = false;
         isMenu = true;
         isSettings = false;
         isManual = false;
+        isCatalog = false;
     }
 
     void Update()
@@ -103,6 +111,35 @@ public class MenuManagerNew : MonoBehaviour
                 isPlayedManualAnimation = false;
             }
         }
+
+        if (isCatalog)
+        {
+            if (!isCatalogOpen && !isPlayedCatalogAnimation)
+            {
+                CatalogOpen();
+                isCatalogOpen = true;
+                isPlayedCatalogAnimation = true;
+                Debug.Log("Catalog");
+            }
+        }
+        else
+        {
+            if (isCatalog && !isPlayedCatalogAnimation)
+            {
+                CatalogDefault();
+                isCatalogOpen = false;
+                isPlayedCatalogAnimation = true;
+            }
+        }
+
+        if (isPlayedCatalogAnimation)
+        {
+            if (!animatorCatalog.GetCurrentAnimatorStateInfo(0).IsName("Open") &&
+                !animatorCatalog.GetCurrentAnimatorStateInfo(0).IsName("Default"))
+            {
+                isPlayedCatalogAnimation = false;
+            }
+        }
     }
 
     public void MenuButton()
@@ -110,6 +147,7 @@ public class MenuManagerNew : MonoBehaviour
         isSettings = false;
         isMenu = true;
         isManual = false;
+        isCatalog = false;
         animator.SetTrigger("DefaultMenu");
     }
 
@@ -118,6 +156,7 @@ public class MenuManagerNew : MonoBehaviour
         isSettings = false;
         isMenu = false;
         isManual = false;
+        isCatalog = false;
         animator.SetTrigger("PlayMenu");
     }
 
@@ -126,6 +165,7 @@ public class MenuManagerNew : MonoBehaviour
         isSettings = false;
         isMenu = false;
         isManual = false;
+        isCatalog = false;
         animator.SetTrigger("QuitMenu");
     }
 
@@ -134,6 +174,7 @@ public class MenuManagerNew : MonoBehaviour
         isSettings = true;
         isMenu = false;
         isManual = false;
+        isCatalog = false;
         animator.SetTrigger("SettingsMenu");
     }
     public void CatalogButton()
@@ -141,6 +182,7 @@ public class MenuManagerNew : MonoBehaviour
         isSettings = false;
         isMenu = false;
         isManual = false;
+        isCatalog = true;
         animator.SetTrigger("CatalogMenu");
         animatorManual.SetTrigger("Close");
     }
@@ -149,27 +191,34 @@ public class MenuManagerNew : MonoBehaviour
         isManual = true;
         isSettings = false;
         isMenu = false;
+        isCatalog = false;
         animator.SetTrigger("ManualMenu");
         animatorManual.SetTrigger("Open");
     }
     void SettingsOpen()
     {
         animatorSettings.SetTrigger("Open");
-        animatorNoConnectionWarning.SetTrigger("Open");
+        animatorNoConnectionWarning.SetTrigger("Close");
     }
     void SettingsClose()
     {
         animatorSettings.SetTrigger("Close");
-        animatorNoConnectionWarning.SetTrigger("Close");
+        animatorNoConnectionWarning.SetTrigger("Open");
     }
     void ManualOpen()
     {
         animatorManual.SetTrigger("Open");
-        animatorNoConnectionWarning.SetTrigger("Open");
     }
     void ManualClose()
     {
         animatorManual.SetTrigger("Close");
-        animatorNoConnectionWarning.SetTrigger("Close");
+    }
+    void CatalogOpen()
+    {
+        animatorCatalog.SetTrigger("Open");
+    }
+    void CatalogDefault()
+    {
+        animatorCatalog.SetTrigger("Default");
     }
 }
