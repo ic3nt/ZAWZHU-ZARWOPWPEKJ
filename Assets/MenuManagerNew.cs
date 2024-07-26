@@ -5,21 +5,30 @@ using UnityEngine.PlayerLoop;
 
 public class MenuManagerNew : MonoBehaviour
 {
-    private bool isPlayedSettingsAnimation;
-    private bool isMenu;
-    private bool isSettings;
     public Animator animator;
     public Animator animatorSettings;
     public Animator animatorNoConnectionWarning;
+    public Animator animatorManual;
 
+    private bool isMenu;
+    private bool isSettings;
+    private bool isManual;
+
+    private bool isPlayedSettingsAnimation;
     private bool isSettingsOpen = false;
     private bool isSettingsAnimationPlaying = false;
 
+    private bool isPlayedManualAnimation;
+    private bool isManualOpen = false;
+    private bool isSettingsManualPlaying = false;
+
     void Start()
     {
+        isPlayedManualAnimation = false;
         isPlayedSettingsAnimation = false;
         isMenu = true;
         isSettings = false;
+        isManual = false;
     }
 
     void Update()
@@ -65,6 +74,35 @@ public class MenuManagerNew : MonoBehaviour
                 isSettingsAnimationPlaying = false;
             }
         }
+
+        if (isManual)
+        {
+            if (!isManualOpen && !isPlayedManualAnimation)
+            {
+                ManualOpen();
+                isManualOpen = true;
+                isPlayedManualAnimation = true;
+                Debug.Log("Manual");
+            }
+        }
+        else
+        {
+            if (isManual && !isPlayedManualAnimation)
+            {
+                ManualClose();
+                isManualOpen = false;
+                isPlayedManualAnimation = true;
+            }
+        }
+
+        if (isPlayedManualAnimation)
+        {
+            if (!animatorManual.GetCurrentAnimatorStateInfo(0).IsName("Open") &&
+                !animatorManual.GetCurrentAnimatorStateInfo(0).IsName("Close"))
+            {
+                isPlayedManualAnimation = false;
+            }
+        }
     }
 
     public void MenuButton()
@@ -99,6 +137,14 @@ public class MenuManagerNew : MonoBehaviour
         isSettings = false;
         isMenu = false;
         animator.SetTrigger("CatalogMenu");
+        animatorManual.SetTrigger("Close");
+    }
+    public void ManualButton()
+    {
+        isSettings = false;
+        isMenu = false;
+        animator.SetTrigger("ManualMenu");
+        animatorManual.SetTrigger("Open");
     }
     void SettingsOpen()
     {
@@ -108,6 +154,16 @@ public class MenuManagerNew : MonoBehaviour
     void SettingsClose()
     {
         animatorSettings.SetTrigger("Close");
+        animatorNoConnectionWarning.SetTrigger("Close");
+    }
+    void ManualOpen()
+    {
+        animatorManual.SetTrigger("Open");
+        animatorNoConnectionWarning.SetTrigger("Open");
+    }
+    void ManualClose()
+    {
+        animatorManual.SetTrigger("Close");
         animatorNoConnectionWarning.SetTrigger("Close");
     }
 }
