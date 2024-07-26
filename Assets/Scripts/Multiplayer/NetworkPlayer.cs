@@ -7,14 +7,17 @@ public class NetworkPlayer : MonoBehaviour
 {
 
     [SerializeField] private GameObject playerCamera;
-
+  
     void Start()
     {
         if (!GetComponent<NetworkObject>().IsLocalPlayer)
         {
-            playerCamera.SetActive(false);
+            
+
             GetComponent<FirstPersonMovement>().enabled = false;
-            GetComponent<FirstPersonLook>().enabled = false;
+            playerCamera.GetComponent<FirstPersonLook>().enabled = false;
+
+            playerCamera.SetActive(false);
         }
     }
 }
