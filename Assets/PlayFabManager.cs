@@ -5,9 +5,11 @@ using PlayFab.AdminModels;
 using PlayFab.AuthenticationModels;
 using PlayFab.ClientModels;
 using System.Collections;
+using TMPro;
 
 public class PlayFabManager : MonoBehaviour
 {
+    public TextMeshProUGUI NameText;
     public GameObject ErrorLoginWindow;
     public GameObject BanWindow;
     public GameObject Buttons;
@@ -31,6 +33,7 @@ public class PlayFabManager : MonoBehaviour
 
     private void OnLoginSuccess(LoginResult result)
     {
+        NameText.text = result.PlayFabId;
         Debug.Log("Успешный вход: " + result.PlayFabId);
         PlayFabClientAPI.GetAccountInfo(new GetAccountInfoRequest(), OnGetAccountInfoSuccess, OnBanned);
     }
