@@ -777,10 +777,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 641617181}
+  - component: {fileID: 641617185}
   - component: {fileID: 641617179}
   - component: {fileID: 641617184}
   - component: {fileID: 641617186}
-  - component: {fileID: 641617185}
   m_Layer: 0
   m_Name: NetworkManager
   m_TagString: Untagged
@@ -852,18 +852,34 @@ MonoBehaviour:
   m_GameObject: {fileID: 641617178}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Script: {fileID: 11500000, guid: 593a2fe42fa9d37498c96f9a383b6521, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1570948432
-  InScenePlacedSourceGlobalObjectIdHash: 0
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
+  NetworkConfig:
+    ProtocolVersion: 0
+    NetworkTransport: {fileID: 641617179}
+    PlayerPrefab: {fileID: 4283364824617576930, guid: 267fd1d4a7ddee040b75519a424364c0, type: 3}
+    Prefabs:
+      NetworkPrefabsLists:
+      - {fileID: 11400000, guid: dbc3475b523646d47b9311a92c5e8aae, type: 2}
+    TickRate: 30
+    ClientConnectionBufferTimeout: 10
+    ConnectionApproval: 0
+    ConnectionData: 
+    EnableTimeResync: 0
+    TimeResyncInterval: 30
+    EnsureNetworkVariableLengthSafety: 0
+    EnableSceneManagement: 1
+    ForceSamePrefabs: 1
+    RecycleNetworkIds: 1
+    NetworkIdRecycleDelay: 120
+    RpcHashSize: 0
+    LoadSceneTimeOut: 120
+    SpawnTimeout: 10
+    EnableNetworkLogs: 1
+    OldPrefabList: []
+  RunInBackground: 1
+  LogLevel: 1
 --- !u!114 &641617186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -876,7 +892,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76031bbd0fdd64d4bbae7e5792333add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  connectionWarningPrefab: {fileID: 0}
+  warningUI: {fileID: 378375408}
+  pingThreshold: 150
 --- !u!1 &656495105
 GameObject:
   m_ObjectHideFlags: 0
@@ -1599,7 +1616,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1604963696}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &1604963699
 Camera:
   m_ObjectHideFlags: 0

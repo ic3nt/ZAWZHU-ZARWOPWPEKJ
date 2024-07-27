@@ -8,6 +8,7 @@ public class MenuManagerNew : MonoBehaviour
     public Animator animator;
     public Animator animatorSettings;
     public Animator animatorNoConnectionWarning;
+    public Animator animatorMultiplayerUnavailableWarning;
     public Animator animatorManual;
     public Animator animatorCatalog;
 
@@ -199,11 +200,13 @@ public class MenuManagerNew : MonoBehaviour
     {
         animatorSettings.SetTrigger("Open");
         animatorNoConnectionWarning.SetTrigger("Close");
+        animatorMultiplayerUnavailableWarning.SetTrigger("Close");
     }
     void SettingsClose()
     {
         animatorSettings.SetTrigger("Close");
         animatorNoConnectionWarning.SetTrigger("Open");
+        animatorMultiplayerUnavailableWarning.SetTrigger("Open");
     }
     void ManualOpen()
     {
