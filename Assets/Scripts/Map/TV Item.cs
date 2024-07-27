@@ -15,7 +15,7 @@ public class TVItem : MonoBehaviour
     public IEnumerator Go()
     {
       
-        yield return new WaitForSeconds(Random.Range(5,60));
+        yield return new WaitForSeconds(Random.Range(10,120));
         video.SetActive(true);
 
 
