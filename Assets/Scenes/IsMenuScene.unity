@@ -2094,7 +2094,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.009969711}
+  m_AnchoredPosition: {x: 0, y: -0.014066696}
   m_SizeDelta: {x: 0, y: 28}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &187589529
@@ -2454,6 +2454,63 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 269909181}
   m_Mesh: {fileID: 4958226066170557399, guid: 282b956815fa473448f7773e797ad7c7, type: 3}
+--- !u!1001 &271486373
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 836de40035d450349ab7b2507afdbcf5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.412
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 836de40035d450349ab7b2507afdbcf5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 7.103
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 836de40035d450349ab7b2507afdbcf5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -6.374
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 836de40035d450349ab7b2507afdbcf5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.50008726
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 836de40035d450349ab7b2507afdbcf5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.49991274
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 836de40035d450349ab7b2507afdbcf5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.50008726
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 836de40035d450349ab7b2507afdbcf5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.49991274
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 836de40035d450349ab7b2507afdbcf5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -89.98
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 836de40035d450349ab7b2507afdbcf5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 836de40035d450349ab7b2507afdbcf5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 836de40035d450349ab7b2507afdbcf5, type: 3}
+      propertyPath: m_Name
+      value: Kusok_govna_na_potolke_izogutiy
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 836de40035d450349ab7b2507afdbcf5, type: 3}
 --- !u!1 &271665219
 GameObject:
   m_ObjectHideFlags: 0
@@ -3504,6 +3561,63 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1001 &333573914
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.519
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 7.104205
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -6.355
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.50008726
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.49991274
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.50008726
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.49991274
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -89.98
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_Name
+      value: Kusok_govna_na_potolke (4)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
 --- !u!1 &352823001
 GameObject:
   m_ObjectHideFlags: 0
@@ -5945,6 +6059,65 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 566788736}
   m_Mesh: {fileID: 3324190174241489457, guid: 282b956815fa473448f7773e797ad7c7, type: 3}
+--- !u!1001 &570533269
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 62aae41fb6b20a346b8be58700aee198, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -5.31
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 62aae41fb6b20a346b8be58700aee198, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6.659
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 62aae41fb6b20a346b8be58700aee198, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -6.35
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 62aae41fb6b20a346b8be58700aee198, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 62aae41fb6b20a346b8be58700aee198, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 62aae41fb6b20a346b8be58700aee198, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 62aae41fb6b20a346b8be58700aee198, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 62aae41fb6b20a346b8be58700aee198, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 62aae41fb6b20a346b8be58700aee198, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 62aae41fb6b20a346b8be58700aee198, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 62aae41fb6b20a346b8be58700aee198, type: 3}
+      propertyPath: m_Name
+      value: AAAAAAAAA_POPE_BOLNA (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects:
+    - {fileID: 65702495048144492, guid: 62aae41fb6b20a346b8be58700aee198, type: 3}
+    - {fileID: -8700617353114198275, guid: 62aae41fb6b20a346b8be58700aee198, type: 3}
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 62aae41fb6b20a346b8be58700aee198, type: 3}
 --- !u!1 &579916018
 GameObject:
   m_ObjectHideFlags: 0
@@ -7025,6 +7198,65 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 630389410}
   m_CullTransparentMesh: 1
+--- !u!1001 &631559576
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 62aae41fb6b20a346b8be58700aee198, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.531
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 62aae41fb6b20a346b8be58700aee198, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6.659
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 62aae41fb6b20a346b8be58700aee198, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -6.35
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 62aae41fb6b20a346b8be58700aee198, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 62aae41fb6b20a346b8be58700aee198, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 62aae41fb6b20a346b8be58700aee198, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 62aae41fb6b20a346b8be58700aee198, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 62aae41fb6b20a346b8be58700aee198, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 62aae41fb6b20a346b8be58700aee198, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 62aae41fb6b20a346b8be58700aee198, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 62aae41fb6b20a346b8be58700aee198, type: 3}
+      propertyPath: m_Name
+      value: AAAAAAAAA_POPE_BOLNA
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects:
+    - {fileID: 65702495048144492, guid: 62aae41fb6b20a346b8be58700aee198, type: 3}
+    - {fileID: -8700617353114198275, guid: 62aae41fb6b20a346b8be58700aee198, type: 3}
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 62aae41fb6b20a346b8be58700aee198, type: 3}
 --- !u!1 &668082041
 GameObject:
   m_ObjectHideFlags: 0
@@ -10575,6 +10807,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1010029843}
   m_CullTransparentMesh: 1
+--- !u!1001 &1021562366
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.439
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 7.104205
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -6.355
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.50008726
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.49991274
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.50008726
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.49991274
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -89.98
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_Name
+      value: Kusok_govna_na_potolke (3)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
 --- !u!1 &1042940057
 GameObject:
   m_ObjectHideFlags: 0
@@ -11064,6 +11353,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1067589892}
   m_CullTransparentMesh: 1
+--- !u!1001 &1072224239
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.431
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 7.104205
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -6.355
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.50008726
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.49991274
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.50008726
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.49991274
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -89.98
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_Name
+      value: Kusok_govna_na_potolke (2)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
 --- !u!1 &1076474669
 GameObject:
   m_ObjectHideFlags: 0
@@ -16381,7 +16727,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 483147369}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.9999626
+  m_Size: 0.99996203
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -16601,6 +16947,63 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1663614105}
   m_Mesh: {fileID: -3859577986556565815, guid: 7a9a03ad3e7c6da4eb3f81144d293a36, type: 3}
+--- !u!1001 &1683167064
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -7.422
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 7.104205
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -6.355
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.50008726
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.49991274
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.50008726
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.49991274
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -89.98
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_Name
+      value: Kusok_govna_na_potolke
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
 --- !u!1 &1698187983
 GameObject:
   m_ObjectHideFlags: 0
@@ -19950,6 +20353,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1999095444}
   m_CullTransparentMesh: 1
+--- !u!1001 &2001082354
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5.083
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 7.104205
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -3.668
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7072302
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7069834
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -89.98
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_Name
+      value: Kusok_govna_na_potolke (5)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
 --- !u!1 &2001657964
 GameObject:
   m_ObjectHideFlags: 0
@@ -20033,6 +20493,63 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2001657964}
   m_Mesh: {fileID: 1418337770082825235, guid: 282b956815fa473448f7773e797ad7c7, type: 3}
+--- !u!1001 &2027335271
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -5.427
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 7.104205
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -6.355
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.50008726
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.49991274
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.50008726
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.49991274
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -89.98
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
+      propertyPath: m_Name
+      value: Kusok_govna_na_potolke (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
 --- !u!1 &2031983564
 GameObject:
   m_ObjectHideFlags: 0
@@ -30148,3 +30665,12 @@ SceneRoots:
   - {fileID: 548664440}
   - {fileID: 461823142}
   - {fileID: 1507282218}
+  - {fileID: 1683167064}
+  - {fileID: 2027335271}
+  - {fileID: 1072224239}
+  - {fileID: 1021562366}
+  - {fileID: 333573914}
+  - {fileID: 2001082354}
+  - {fileID: 631559576}
+  - {fileID: 570533269}
+  - {fileID: 271486373}
