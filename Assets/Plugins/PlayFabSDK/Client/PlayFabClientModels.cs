@@ -2319,6 +2319,7 @@ namespace PlayFab.ClientModels
     [Serializable]
     public class GetPlayerSegmentsRequest : PlayFabRequestCommon
     {
+        public string PlayFabId { get; set; }
     }
 
     [Serializable]

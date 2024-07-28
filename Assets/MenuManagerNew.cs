@@ -9,6 +9,7 @@ public class MenuManagerNew : MonoBehaviour
     public Animator animatorSettings;
     public Animator animatorNoConnectionWarning;
     public Animator animatorMultiplayerUnavailableWarning;
+    public Animator animatorYouAreDeveloper;
     public Animator animatorManual;
     public Animator animatorCatalog;
 
@@ -201,12 +202,14 @@ public class MenuManagerNew : MonoBehaviour
         animatorSettings.SetTrigger("Open");
         animatorNoConnectionWarning.SetTrigger("Close");
         animatorMultiplayerUnavailableWarning.SetTrigger("Close");
+        animatorYouAreDeveloper.SetTrigger("Close");
     }
     void SettingsClose()
     {
         animatorSettings.SetTrigger("Close");
         animatorNoConnectionWarning.SetTrigger("Open");
         animatorMultiplayerUnavailableWarning.SetTrigger("Open");
+        animatorYouAreDeveloper.SetTrigger("Open");
     }
     void ManualOpen()
     {

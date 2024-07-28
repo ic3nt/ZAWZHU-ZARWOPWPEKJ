@@ -1,11 +1,8 @@
-using UnityEngine;
 using PlayFab;
-using PlayFab.ProfilesModels;
-using PlayFab.AdminModels;
-using PlayFab.AuthenticationModels;
 using PlayFab.ClientModels;
-using System.Collections;
+using UnityEngine;
 using TMPro;
+using System.Collections;
 
 public class PlayFabManager : MonoBehaviour
 {
@@ -13,6 +10,9 @@ public class PlayFabManager : MonoBehaviour
     public GameObject ErrorLoginWindow;
     public GameObject BanWindow;
     public GameObject Buttons;
+    public GameObject DevelopersSegmentObject; // Объект, который активируем, если игрок в сегменте Developers
+
+    private string playFabId;
 
     private void Start()
     {
@@ -33,9 +33,13 @@ public class PlayFabManager : MonoBehaviour
 
     private void OnLoginSuccess(LoginResult result)
     {
-        NameText.text = result.PlayFabId;
-        Debug.Log("Успешный вход: " + result.PlayFabId);
+        playFabId = result.PlayFabId; // сохранить PlayFabID
+        NameText.text = playFabId;
+        Debug.Log("Успешный вход: " + playFabId);
+
+        // Получаем информацию о пользователе и проверяем сегменты
         PlayFabClientAPI.GetAccountInfo(new GetAccountInfoRequest(), OnGetAccountInfoSuccess, OnBanned);
+        GetPlayerSegments(); // получаем сегменты после успешного входа
     }
 
     private void OnGetAccountInfoSuccess(GetAccountInfoResult result)
@@ -61,7 +65,6 @@ public class PlayFabManager : MonoBehaviour
     {
         Debug.LogError("Ошибка входа: " + error.ErrorMessage);
 
-
         if (error.Error == PlayFabErrorCode.AccountBanned)
         {
             OnBanned(error);
@@ -73,7 +76,6 @@ public class PlayFabManager : MonoBehaviour
         }
     }
 
-
     private IEnumerator ErrorWindowWaitForSecondCoroutine()
     {
         yield return new WaitForSeconds(0.8f);
@@ -84,5 +86,43 @@ public class PlayFabManager : MonoBehaviour
     {
         yield return new WaitForSeconds(0.8f);
         BanWindow.SetActive(true);
+    }
+
+    private void GetPlayerSegments()
+    {
+        // Запрос информации о пользователе
+        var request = new GetPlayerSegmentsRequest
+        {
+            PlayFabId = playFabId // используем сохраненный PlayFabID
+        };
+
+        PlayFabClientAPI.GetPlayerSegments(request, OnGetPlayerSegmentsSuccess, OnGetPlayerSegmentsFailure);
+    }
+
+    private void OnGetPlayerSegmentsSuccess(GetPlayerSegmentsResult result)
+    {
+        Debug.Log("Сегменты для игрока: " + playFabId);
+
+        // Проверка и вывод сегментов
+        if (result.Segments != null && result.Segments.Count > 0)
+        {
+            foreach (var segment in result.Segments)
+            {
+                Debug.Log("Имя сегмента: " + segment.Name);
+                if (segment.Name == "Developers")
+                {
+                    DevelopersSegmentObject.SetActive(true); // Включаем объект, если игрок в сегменте Developers
+                }
+            }
+        }
+        else
+        {
+            Debug.Log("Этот игрок не принадлежит ни к одному сегменту.");
+        }
+    }
+
+    private void OnGetPlayerSegmentsFailure(PlayFabError error)
+    {
+        Debug.LogError("Ошибка получения сегментов: " + error.GenerateErrorReport());
     }
 }
