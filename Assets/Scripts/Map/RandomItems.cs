@@ -6,7 +6,7 @@ public class RandomItems : MonoBehaviour
     public Transform parentTransform; // Преобразование родительского объекта, куда будут спавниться предметы
 
     private Transform CurTr;
-    
+      
     void Start()
     {
 

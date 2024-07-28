@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Door : MonoBehaviour
+using Unity.Netcode;
+
+public class Door : NetworkBehaviour
 {
     public float interactionDistance;
     public GameObject intText;
@@ -35,6 +37,7 @@ public class Door : MonoBehaviour
 
     void Update()
     {
+        if (!IsOwner) return;
         Ray ray = new Ray(transform.position, transform.forward);
         RaycastHit hit;
 
