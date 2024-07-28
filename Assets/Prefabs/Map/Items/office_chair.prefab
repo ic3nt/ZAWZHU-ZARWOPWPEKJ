@@ -95,7 +95,6 @@ GameObject:
   - component: {fileID: 7225045348613230152}
   - component: {fileID: 9107814739623447334}
   - component: {fileID: 6590414486554526310}
-  - component: {fileID: 1602390612166344118}
   m_Layer: 0
   m_Name: office_chair
   m_TagString: Untagged
@@ -193,17 +192,3 @@ LODGroup:
     fadeTransitionWidth: 0
     renderers: []
   m_Enabled: 1
---- !u!114 &1602390612166344118
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5762119877006072524}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3088f1744a22b4505883ee568089846e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DestTime: 180
-  DestObj: {fileID: 5762119877006072524}

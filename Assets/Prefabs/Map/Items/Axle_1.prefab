@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 3780642721135089735}
   - component: {fileID: 7672148861878218247}
   - component: {fileID: 3494969501100009481}
-  - component: {fileID: -1486498149136214334}
   m_Layer: 0
   m_Name: Axle_1
   m_TagString: canPickUp
@@ -159,17 +158,3 @@ LODGroup:
     fadeTransitionWidth: 0
     renderers: []
   m_Enabled: 1
---- !u!114 &-1486498149136214334
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8511545583711426638}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3088f1744a22b4505883ee568089846e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DestTime: 180
-  DestObj: {fileID: 8511545583711426638}

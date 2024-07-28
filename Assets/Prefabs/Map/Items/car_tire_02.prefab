@@ -95,7 +95,6 @@ GameObject:
   - component: {fileID: 5556588883926803461}
   - component: {fileID: 4073292933542996721}
   - component: {fileID: 3136597856452235544}
-  - component: {fileID: 5875598869488678216}
   m_Layer: 0
   m_Name: car_tire_02
   m_TagString: Untagged
@@ -191,17 +190,3 @@ LODGroup:
     fadeTransitionWidth: 0
     renderers: []
   m_Enabled: 1
---- !u!114 &5875598869488678216
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8084899065796083278}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3088f1744a22b4505883ee568089846e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DestTime: 180
-  DestObj: {fileID: 8084899065796083278}

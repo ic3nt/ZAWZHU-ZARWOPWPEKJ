@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 7836975259379560833}
   - component: {fileID: 3303051672257630378}
   - component: {fileID: 2858868123899534308}
-  - component: {fileID: 4504515509359095339}
   m_Layer: 0
   m_Name: computer_keyboard_01
   m_TagString: canPickUp
@@ -108,20 +107,6 @@ LODGroup:
     fadeTransitionWidth: 0
     renderers: []
   m_Enabled: 1
---- !u!114 &4504515509359095339
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6844519328870134274}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3088f1744a22b4505883ee568089846e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DestTime: 180
-  DestObj: {fileID: 6844519328870134274}
 --- !u!1 &8334654613382091433
 GameObject:
   m_ObjectHideFlags: 0
