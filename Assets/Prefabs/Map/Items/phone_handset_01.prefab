@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 4665938088118924821}
   - component: {fileID: 8630526215889369548}
   - component: {fileID: 3432435680193414767}
-  - component: {fileID: 6172859121158072411}
   - component: {fileID: 2472460013496639724}
   - component: {fileID: 4828114742226404513}
   m_Layer: 0
@@ -162,20 +161,6 @@ LODGroup:
     fadeTransitionWidth: 0
     renderers: []
   m_Enabled: 1
---- !u!114 &6172859121158072411
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2499537538847192259}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3088f1744a22b4505883ee568089846e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DestTime: 180
-  DestObj: {fileID: 2499537538847192259}
 --- !u!114 &2472460013496639724
 MonoBehaviour:
   m_ObjectHideFlags: 0

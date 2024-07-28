@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 1762580989754670031}
   - component: {fileID: 6662380562337380954}
   - component: {fileID: 3406038776132520092}
-  - component: {fileID: 1134181190842122677}
   m_Layer: 0
   m_Name: food_prep_table
   m_TagString: Untagged
@@ -102,20 +101,6 @@ LODGroup:
     fadeTransitionWidth: 0
     renderers: []
   m_Enabled: 1
---- !u!114 &1134181190842122677
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3233914161359449948}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3088f1744a22b4505883ee568089846e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DestTime: 180
-  DestObj: {fileID: 3233914161359449948}
 --- !u!1 &9128380330393416942
 GameObject:
   m_ObjectHideFlags: 0
