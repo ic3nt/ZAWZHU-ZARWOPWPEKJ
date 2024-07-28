@@ -3,8 +3,9 @@ using System.Linq;
 using UnityEngine;
 using System.Collections;
 using Unity.AI.Navigation;
+using Unity.Netcode;
 
-public class ChunksPlacer : MonoBehaviour
+public class ChunksPlacer : NetworkBehaviour
 {
     public Transform Player;
     public Chunkk[] ChunkPrefabs;
@@ -32,8 +33,11 @@ public class ChunksPlacer : MonoBehaviour
         }
     }
 
+    
+
     private void SpawnChunk()
     {
+        if (!IsServer) return;
         curflr += 1;
         Chunkk newChunk;
 
