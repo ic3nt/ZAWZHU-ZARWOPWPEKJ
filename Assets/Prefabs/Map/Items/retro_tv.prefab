@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8cd9cd6999f164eb7b99a9b4fc9e44b0, type: 2}
+  - {fileID: 2100000, guid: b3c50e5618b224c23a6dcff9b11f6ea0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -212,6 +212,7 @@ GameObject:
   - component: {fileID: 3858171368409411273}
   - component: {fileID: 5785568927361013033}
   - component: {fileID: 8829561519731081109}
+  - component: {fileID: 5653291136696852965}
   m_Layer: 0
   m_Name: retro_tv
   m_TagString: Untagged
@@ -336,6 +337,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   video: {fileID: 612659816951522335}
   ChanceOfgo: 0.97
+  IsOn: 0
+--- !u!135 &5653291136696852965
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3797604023719294548}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 1.6
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7674785907849468504
 GameObject:
   m_ObjectHideFlags: 0
