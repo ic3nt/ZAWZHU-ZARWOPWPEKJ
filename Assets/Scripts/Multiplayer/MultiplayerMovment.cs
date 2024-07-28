@@ -37,18 +37,18 @@ public class MultiplayerMovment : NetworkBehaviour
 
     private void Update()
     {
-     
+
         if (!IsOwner) return;
         if ((Input.GetKey(KeyCode.LeftShift)) && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)))
-            {
-                ZoomCamera(defaultZoom + 15f);
-            }
-            else
-            {
-                ZoomCamera(defaultZoom);
-            }
-        
-       
+        {
+            ZoomCamera(defaultZoom + 15f);
+        }
+        else
+        {
+            ZoomCamera(defaultZoom);
+        }
+
+
 
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
 
@@ -93,32 +93,32 @@ public class MultiplayerMovment : NetworkBehaviour
     }
     void Awake()
     {
-        
-            // Get the rigidbody on this.
-            rigidbody = GetComponent<Rigidbody>();
-        
+
+        // Get the rigidbody on this.
+        rigidbody = GetComponent<Rigidbody>();
+
     }
 
     void FixedUpdate()
     {
         if (!IsOwner) return;
-        
-            // Update IsRunning from input.
-            IsRunning = canRun && Input.GetKey(KeyCode.LeftShift);
 
-            // Get targetMovingSpeed.
-            float targetMovingSpeed = IsRunning ? runSpeed : speed;
-            if (speedOverrides.Count > 0)
-            {
-                targetMovingSpeed = speedOverrides[speedOverrides.Count - 1]();
-            }
+        // Update IsRunning from input.
+        IsRunning = canRun && Input.GetKey(KeyCode.LeftShift);
 
-            // Get targetVelocity from input.
-            Vector2 targetVelocity = new Vector2(Input.GetAxis("Horizontal") * targetMovingSpeed, Input.GetAxis("Vertical") * targetMovingSpeed);
+        // Get targetMovingSpeed.
+        float targetMovingSpeed = IsRunning ? runSpeed : speed;
+        if (speedOverrides.Count > 0)
+        {
+            targetMovingSpeed = speedOverrides[speedOverrides.Count - 1]();
+        }
 
-            // Apply movement.
-            rigidbody.velocity = transform.rotation * new Vector3(targetVelocity.x, rigidbody.velocity.y, targetVelocity.y);
-        
+        // Get targetVelocity from input.
+        Vector2 targetVelocity = new Vector2(Input.GetAxis("Horizontal") * targetMovingSpeed, Input.GetAxis("Vertical") * targetMovingSpeed);
+
+        // Apply movement.
+        rigidbody.velocity = transform.rotation * new Vector3(targetVelocity.x, rigidbody.velocity.y, targetVelocity.y);
+
     }
     private void ZoomCamera(float targetZoom)
     {

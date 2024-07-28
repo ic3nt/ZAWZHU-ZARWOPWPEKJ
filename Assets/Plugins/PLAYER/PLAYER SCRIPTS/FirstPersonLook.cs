@@ -1,31 +1,37 @@
 ﻿using UnityEngine;
-
-public class FirstPersonLook : MonoBehaviour
+using Unity.Netcode;
+using System.Collections;
+using System.Collections.Generic;
+public class FirstPersonLook : NetworkBehaviour
 {
+
     [SerializeField]
     Transform character;
+    public GameObject Head;
     public float sensitivity = 2;
     public float smoothing = 1.5f;
 
     Vector2 velocity;
     Vector2 frameVelocity;
 
-
     void Reset()
     {
-        // Get the character from the FirstPersonMovement in parents.
+        if (!IsOwner) return;
         character = GetComponentInParent<FirstPersonMovement>().transform;
     }
 
     void Start()
     {
-        // Lock the mouse cursor to the game screen.
         Cursor.lockState = CursorLockMode.Locked;
+        if (IsOwner)
+        {
+            Head.SetActive(false);
+        }
     }
-
     void Update()
     {
-        // Get smooth velocity.
+        if (!IsOwner) return;
+
         PlayerPrefs.SetFloat("currentSensitivity", sensitivity);
         Vector2 mouseDelta = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
         Vector2 rawFrameVelocity = Vector2.Scale(mouseDelta, Vector2.one * sensitivity);
@@ -33,8 +39,8 @@ public class FirstPersonLook : MonoBehaviour
         velocity += frameVelocity;
         velocity.y = Mathf.Clamp(velocity.y, -70, 80);
 
-        // Rotate camera up-down and controller left-right from velocity.
         transform.localRotation = Quaternion.AngleAxis(-velocity.y, Vector3.right);
         character.localRotation = Quaternion.AngleAxis(velocity.x, Vector3.up);
+
     }
 }

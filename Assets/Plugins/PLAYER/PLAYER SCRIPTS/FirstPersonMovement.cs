@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
+using Unity.Netcode;
 
-public class FirstPersonMovement : MonoBehaviour
+public class FirstPersonMovement : NetworkBehaviour
 {
     public float speed = 5;
 
@@ -11,7 +13,6 @@ public class FirstPersonMovement : MonoBehaviour
     private float defaultZoom;
     public float zoomSpeed = 1f;
     public float returnSpeed = 1f;
-
 
 
     [Header("Running")]
@@ -27,11 +28,18 @@ public class FirstPersonMovement : MonoBehaviour
     private void Start()
     {
         defaultZoom = camera.fieldOfView;
+
+        if (!IsOwner)
+        {
+            camera.enabled = false;
+        }
     }
+
 
     private void Update()
     {
 
+        if (!IsOwner) return;
         if ((Input.GetKey(KeyCode.LeftShift)) && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)))
         {
             ZoomCamera(defaultZoom + 15f);
@@ -41,9 +49,11 @@ public class FirstPersonMovement : MonoBehaviour
             ZoomCamera(defaultZoom);
         }
 
+
+
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
 
-            {
+        {
             animator.SetBool("IsDanceOne", false);
 
             animator.SetBool("IsWalk", true);
@@ -56,7 +66,7 @@ public class FirstPersonMovement : MonoBehaviour
                 animator.SetBool("IsWalk", false);
                 animator.SetBool("IsIdle", false);
             }
-            }
+        }
         if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D))
         {
             animator.SetBool("IsIdle", true);
@@ -82,31 +92,35 @@ public class FirstPersonMovement : MonoBehaviour
             }
         }
     }
-        void Awake()
+    void Awake()
+    {
+
+        // Get the rigidbody on this.
+        rigidbody = GetComponent<Rigidbody>();
+
+    }
+
+    void FixedUpdate()
+    {
+        if (!IsOwner) return;
+
+        // Update IsRunning from input.
+        IsRunning = canRun && Input.GetKey(KeyCode.LeftShift);
+
+        // Get targetMovingSpeed.
+        float targetMovingSpeed = IsRunning ? runSpeed : speed;
+        if (speedOverrides.Count > 0)
         {
-            // Get the rigidbody on this.
-            rigidbody = GetComponent<Rigidbody>();
+            targetMovingSpeed = speedOverrides[speedOverrides.Count - 1]();
         }
 
-        void FixedUpdate()
-        {
-            // Update IsRunning from input.
-            IsRunning = canRun && Input.GetKey(KeyCode.LeftShift);
+        // Get targetVelocity from input.
+        Vector2 targetVelocity = new Vector2(Input.GetAxis("Horizontal") * targetMovingSpeed, Input.GetAxis("Vertical") * targetMovingSpeed);
 
-            // Get targetMovingSpeed.
-            float targetMovingSpeed = IsRunning ? runSpeed : speed;
-            if (speedOverrides.Count > 0)
-            {
-                targetMovingSpeed = speedOverrides[speedOverrides.Count - 1]();
-            }
+        // Apply movement.
+        rigidbody.velocity = transform.rotation * new Vector3(targetVelocity.x, rigidbody.velocity.y, targetVelocity.y);
 
-            // Get targetVelocity from input.
-            Vector2 targetVelocity = new Vector2(Input.GetAxis("Horizontal") * targetMovingSpeed, Input.GetAxis("Vertical") * targetMovingSpeed);
-
-            // Apply movement.
-            rigidbody.velocity = transform.rotation * new Vector3(targetVelocity.x, rigidbody.velocity.y, targetVelocity.y);
-        }
-
+    }
     private void ZoomCamera(float targetZoom)
     {
         camera.fieldOfView = Mathf.Lerp(camera.fieldOfView, targetZoom, zoomSpeed * Time.deltaTime);
