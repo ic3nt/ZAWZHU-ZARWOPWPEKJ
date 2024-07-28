@@ -25,10 +25,14 @@ public class OnItem : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if ((other.CompareTag("Player")) && IsOn)
+        if (IsOn)
         {
-            StartCoroutine(Go());
+            if (other.CompareTag("Player"))
+            {
+                StartCoroutine(Go());
+            }
         }
+       
     }
 
     public IEnumerator Go()
