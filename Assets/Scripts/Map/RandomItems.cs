@@ -7,11 +7,7 @@ public class RandomItems : MonoBehaviour
 
     void Start()
     {
-        // Убедитесь, что родительский трансформ задан в редакторе или инициализируйте его здесь
-        if (parentTransform == null)
-        {
-            parentTransform = transform; // или вы можете назначить его на другой объект
-        }
+   
 
         SpawnObject();
     }
@@ -28,6 +24,6 @@ public class RandomItems : MonoBehaviour
         GameObject randomObject = Items[randomIndex]; // Выбор случайного объекта из массива
 
         GameObject spawnedObject = Instantiate(randomObject, parentTransform); // Спавн объекта как дочернего
-        spawnedObject.transform.localPosition = Vector3.zero; // Установка локальной позиции на (0, 0, 0)
+       
     }
 }
