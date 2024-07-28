@@ -10,7 +10,7 @@ public class PlayFabManager : MonoBehaviour
     public GameObject ErrorLoginWindow;
     public GameObject BanWindow;
     public GameObject Buttons;
-    public GameObject DevelopersSegmentObject; // Объект, который активируем, если игрок в сегменте Developers
+    public GameObject DevelopersSegmentObject;
 
     private string playFabId;
 
@@ -33,13 +33,12 @@ public class PlayFabManager : MonoBehaviour
 
     private void OnLoginSuccess(LoginResult result)
     {
-        playFabId = result.PlayFabId; // сохранить PlayFabID
+        playFabId = result.PlayFabId;
         NameText.text = playFabId;
         Debug.Log("Успешный вход: " + playFabId);
 
-        // Получаем информацию о пользователе и проверяем сегменты
         PlayFabClientAPI.GetAccountInfo(new GetAccountInfoRequest(), OnGetAccountInfoSuccess, OnBanned);
-        GetPlayerSegments(); // получаем сегменты после успешного входа
+        GetPlayerSegments();
     }
 
     private void OnGetAccountInfoSuccess(GetAccountInfoResult result)
@@ -90,10 +89,9 @@ public class PlayFabManager : MonoBehaviour
 
     private void GetPlayerSegments()
     {
-        // Запрос информации о пользователе
         var request = new GetPlayerSegmentsRequest
         {
-            PlayFabId = playFabId // используем сохраненный PlayFabID
+            PlayFabId = playFabId
         };
 
         PlayFabClientAPI.GetPlayerSegments(request, OnGetPlayerSegmentsSuccess, OnGetPlayerSegmentsFailure);
@@ -103,7 +101,6 @@ public class PlayFabManager : MonoBehaviour
     {
         Debug.Log("Сегменты для игрока: " + playFabId);
 
-        // Проверка и вывод сегментов
         if (result.Segments != null && result.Segments.Count > 0)
         {
             foreach (var segment in result.Segments)
@@ -111,7 +108,7 @@ public class PlayFabManager : MonoBehaviour
                 Debug.Log("Имя сегмента: " + segment.Name);
                 if (segment.Name == "Developers")
                 {
-                    DevelopersSegmentObject.SetActive(true); // Включаем объект, если игрок в сегменте Developers
+                    DevelopersSegmentObject.SetActive(true);
                 }
             }
         }
