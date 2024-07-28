@@ -7,7 +7,7 @@ public class TVItem : MonoBehaviour
     public GameObject video;
 
     [Range(0, 1)]
-    public float ChanceOfgo = 0.9f;
+    public float ChanceOfgo = 1f;
 
     
     private void Start()
@@ -24,7 +24,7 @@ public class TVItem : MonoBehaviour
     public IEnumerator Go()
     {
       
-        yield return new WaitForSeconds(Random.Range(5,60));
+        yield return new WaitForSeconds(Random.Range(20,60));
         video.SetActive(true);
 
 
