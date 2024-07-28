@@ -2168,7 +2168,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.010879517}
+  m_AnchoredPosition: {x: 0, y: -0.0092659}
   m_SizeDelta: {x: 0, y: 28}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &187589529
@@ -4423,6 +4423,21 @@ MonoBehaviour:
   otherAnimator: {fileID: 0}
   otherAnimationTriggerMouseExitName: 
   otherAnimationTriggerMouseEnterName: 
+  OnMouseDownEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1532457419}
+        m_TargetAssemblyTypeName: MenuManagerNew, Assembly-CSharp
+        m_MethodName: MultiplayerButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &403723244
 GameObject:
   m_ObjectHideFlags: 0
@@ -4855,7 +4870,6 @@ GameObject:
   - component: {fileID: 461823143}
   - component: {fileID: 461823145}
   - component: {fileID: 461823144}
-  - component: {fileID: 461823146}
   m_Layer: 0
   m_Name: ConnectManager
   m_TagString: Untagged
@@ -4922,18 +4936,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UpdateWindow: {fileID: 1924486760}
   DisableWindow: {fileID: 477637034}
---- !u!114 &461823146
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 461823140}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27a7a9142e38f7b419823780b4bd685a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &465113186
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17352,8 +17354,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 483147370}
   m_HandleRect: {fileID: 483147369}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.99996245
+  m_Value: 0
+  m_Size: 0.99996275
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -23609,6 +23611,21 @@ MonoBehaviour:
   otherAnimator: {fileID: 68388649}
   otherAnimationTriggerMouseExitName: Quit
   otherAnimationTriggerMouseEnterName: Default
+  OnMouseDownEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1532457419}
+        m_TargetAssemblyTypeName: MenuManagerNew, Assembly-CSharp
+        m_MethodName: ApplicationQuit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!95 &919132149052867523
 Animator:
   serializedVersion: 5
@@ -29170,6 +29187,21 @@ MonoBehaviour:
   otherAnimator: {fileID: 0}
   otherAnimationTriggerMouseExitName: 
   otherAnimationTriggerMouseEnterName: 
+  OnMouseDownEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1532457419}
+        m_TargetAssemblyTypeName: MenuManagerNew, Assembly-CSharp
+        m_MethodName: SingleplayerButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!4 &6758965410388235722
 Transform:
   m_ObjectHideFlags: 0

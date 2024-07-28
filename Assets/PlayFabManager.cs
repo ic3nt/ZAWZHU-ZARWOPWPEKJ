@@ -35,7 +35,7 @@ public class PlayFabManager : MonoBehaviour
     {
         playFabId = result.PlayFabId;
         NameText.text = playFabId;
-        Debug.Log("Успешный вход: " + playFabId);
+        Debug.Log("Successful login: " + playFabId);
 
         PlayFabClientAPI.GetAccountInfo(new GetAccountInfoRequest(), OnGetAccountInfoSuccess, OnBanned);
         GetPlayerSegments();
@@ -45,24 +45,24 @@ public class PlayFabManager : MonoBehaviour
     {
         if (result.AccountInfo.TitleInfo.isBanned == true)
         {
-            Debug.Log("Игрок забанен.");
+            Debug.Log("The player is banned.");
         }
         else
         {
-            Debug.Log("Игрок успешно авторизован и не забанен.");
+            Debug.Log("The player is successfully authorized and not banned.");
         }
     }
 
     private void OnBanned(PlayFabError fabError)
     {
-        Debug.Log("Игрок забанен.");
+        Debug.Log("The player is banned.");
         StartCoroutine(BanWindowWaitForSecondCoroutine());
         Buttons.SetActive(false);
     }
 
     private void OnLoginError(PlayFabError error)
     {
-        Debug.LogError("Ошибка входа: " + error.ErrorMessage);
+        Debug.LogError("Login failed: " + error.ErrorMessage);
 
         if (error.Error == PlayFabErrorCode.AccountBanned)
         {
@@ -99,13 +99,13 @@ public class PlayFabManager : MonoBehaviour
 
     private void OnGetPlayerSegmentsSuccess(GetPlayerSegmentsResult result)
     {
-        Debug.Log("Сегменты для игрока: " + playFabId);
+        Debug.Log("Segments for the player: " + playFabId);
 
         if (result.Segments != null && result.Segments.Count > 0)
         {
             foreach (var segment in result.Segments)
             {
-                Debug.Log("Имя сегмента: " + segment.Name);
+                Debug.Log("Segment name: " + segment.Name);
                 if (segment.Name == "Developers")
                 {
                     DevelopersSegmentObject.SetActive(true);
@@ -114,12 +114,12 @@ public class PlayFabManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("Этот игрок не принадлежит ни к одному сегменту.");
+            Debug.Log("This player does not belong to any segment.");
         }
     }
 
     private void OnGetPlayerSegmentsFailure(PlayFabError error)
     {
-        Debug.LogError("Ошибка получения сегментов: " + error.GenerateErrorReport());
+        Debug.LogError("Error receiving segments: " + error.GenerateErrorReport());
     }
 }

@@ -227,4 +227,17 @@ public class MenuManagerNew : MonoBehaviour
     {
         animatorCatalog.SetTrigger("Default");
     }
+    public void ApplicationQuit()
+    {
+        Application.Quit();
+        Debug.Log("Left the game (((");
+    }
+    public void SingleplayerButton()
+    {
+        Debug.Log("Single-player mode");
+    }
+    public void MultiplayerButton()
+    {
+        Debug.Log("Multiplayer mode");
+    }
 }
