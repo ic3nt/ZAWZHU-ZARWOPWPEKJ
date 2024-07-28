@@ -6,10 +6,19 @@ public class TVItem : MonoBehaviour
 {
     public GameObject video;
 
+    [Range(0, 1)]
+    public float ChanceOfgo = 0.9f;
+
+    
     private void Start()
     {
+
         video.SetActive(false);
-        StartCoroutine(Go());
+        if (Random.value > ChanceOfgo)
+        {
+            StartCoroutine(Go());
+        }
+      
     }
 
     public IEnumerator Go()
