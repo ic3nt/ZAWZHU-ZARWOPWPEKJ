@@ -40,6 +40,7 @@ public class OnItem : MonoBehaviour
       
         yield return new WaitForSeconds(Random.Range(0.1f,0.6f));
         video.SetActive(true);
+        IsOn = false;
 
 
     }
