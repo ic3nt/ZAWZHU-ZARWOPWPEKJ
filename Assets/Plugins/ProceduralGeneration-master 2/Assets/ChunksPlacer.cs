@@ -7,7 +7,7 @@ using Unity.Netcode;
 
 public class ChunksPlacer : NetworkBehaviour
 {
-    public Transform Player;
+    private Transform closestPlayer;
     public Chunkk[] ChunkPrefabs;
     public Chunkk TenthFloorPrefab;
     public Chunkk FirstChunk;
@@ -24,16 +24,44 @@ public class ChunksPlacer : NetworkBehaviour
 
     private void Update()
     {
-        if ((curflr < floors))
+        if (closestPlayer == null || !closestPlayer.gameObject.activeInHierarchy)
         {
-            if (Player.position.y < spawnedChunks[spawnedChunks.Count - 1].End.position.y + 10)
+            FindClosestPlayer();
+        }
+
+
+
+        if ((curflr < floors) && IsServer)
+        {
+            if (closestPlayer.position.y < spawnedChunks[spawnedChunks.Count - 1].End.position.y + 10)
             {
                 SpawnChunk();
             }
         }
     }
 
-    
+    void FindClosestPlayer()
+    {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        float closestDistanceSqr = Mathf.Infinity;
+        GameObject closestPlayerObj = null;
+
+        foreach (GameObject player in players)
+        {
+            Vector3 directionToTarget = player.transform.position - transform.position;
+            float dSqrToTarget = directionToTarget.sqrMagnitude;
+            if (dSqrToTarget < closestDistanceSqr)
+            {
+                closestDistanceSqr = dSqrToTarget;
+                closestPlayerObj = player;
+            }
+        }
+
+        if (closestPlayerObj != null)
+        {
+            closestPlayer = closestPlayerObj.transform;
+        }
+    }
 
     private void SpawnChunk()
     {

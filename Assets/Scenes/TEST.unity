@@ -3216,8 +3216,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 462639617}
-  - component: {fileID: 462639616}
   - component: {fileID: 462639618}
+  - component: {fileID: 462639616}
   m_Layer: 0
   m_Name: "Chunk Pla\u0441er"
   m_TagString: Untagged
@@ -3237,7 +3237,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c1d31463ef427242afe8b1def81b4c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 0}
   ChunkPrefabs:
   - {fileID: 7479931358086203721, guid: 474c0a854b9bb4b0aa39d7e9e6399c69, type: 3}
   - {fileID: 0}
