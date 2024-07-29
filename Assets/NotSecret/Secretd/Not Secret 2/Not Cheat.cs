@@ -7,7 +7,8 @@ using UnityEngine.TextCore.Text;
 
 public class NotCheat : NetworkBehaviour
 {
-   
+    public Animator an;
+
     public float slowSpeed;
     public float normalSpeed;
     public float sprintSpeed;
@@ -20,18 +21,116 @@ public class NotCheat : NetworkBehaviour
     Vector2 velocity;
     Vector2 frameVelocity;
 
+   
+    public AudioSource aus;
+   
+    
+ 
+
+    private bool canSh;
+
+  
+
+    public GameObject bullet;
+    public Camera mainCamera;
+    public Transform spawnBullet;
+
+    public float shootForce;
+    public float spread;
+
+  
+
+
     private void Start()
     {
+        an.SetBool("Smod", true);
         Cursor.lockState = CursorLockMode.Locked;
+        canSh = false;
+
     }
 
-    void Update()
+    private void Shoot()
     {
+        Ray ray = mainCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+        RaycastHit hit;
+
+        Vector3 targetPoint;
+        if (Physics.Raycast(ray, out hit))
+            targetPoint = hit.point;
+        else
+            targetPoint = ray.GetPoint(75);
+
+        Vector3 dirWithoutSpread = targetPoint - spawnBullet.position;
+
+        float x = Random.Range(-spread, spread);
+        float y = Random.Range(-spread, spread);
+
+        Vector3 dirWithSpread = dirWithoutSpread + new Vector3(x, y, 0);
+
+        GameObject currentBullet = Instantiate(bullet, spawnBullet.position, Quaternion.identity);
+
+        currentBullet.transform.forward = dirWithSpread.normalized;
+
+      
+
+    }
+
+    private void SpawnEffect(GameObject effectPrefab, Vector3 position)
+    {
+        GameObject effect = Instantiate(effectPrefab, position, Quaternion.identity);
+        Destroy(effect, 3f); // Удаляем эффект через 3 секунды
+    }
+
+
+
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0) && canSh == true)
+        {
+            Shoot();
+       
+            an.SetTrigger("Shoot");
+            aus.Play();
+            an.SetBool("IsSh", true);
+           
+            StartCoroutine(Cooldown());
+
+        }
 
         Movement();
         Rotation();
 
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            an.SetBool("Smod", true);
+            canSh = false;
+        }
+
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            an.SetBool("Smod", false);
+            canSh = true;
+
+        }
+
+
     }
+
+
+    public IEnumerator Cooldown()
+    {
+        canSh = false;
+        yield return new WaitForSeconds(0.1f);
+        canSh = true;
+        an.SetBool("IsSh", false);
+    }
+
+
+
+    
+
+    
 
     public void Rotation()
     {
