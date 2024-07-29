@@ -1,11 +1,8 @@
-using UnityEngine;
 using PlayFab;
-using PlayFab.ProfilesModels;
-using PlayFab.AdminModels;
-using PlayFab.AuthenticationModels;
 using PlayFab.ClientModels;
-using System.Collections;
+using UnityEngine;
 using TMPro;
+using System.Collections;
 
 public class PlayFabManager : MonoBehaviour
 {
@@ -13,6 +10,9 @@ public class PlayFabManager : MonoBehaviour
     public GameObject ErrorLoginWindow;
     public GameObject BanWindow;
     public GameObject Buttons;
+    public GameObject DevelopersSegmentObject;
+
+    private string playFabId;
 
     private void Start()
     {
@@ -33,34 +33,36 @@ public class PlayFabManager : MonoBehaviour
 
     private void OnLoginSuccess(LoginResult result)
     {
-        NameText.text = result.PlayFabId;
-        Debug.Log("Успешный вход: " + result.PlayFabId);
+        playFabId = result.PlayFabId;
+        NameText.text = playFabId;
+        Debug.Log("Successful login: " + playFabId);
+
         PlayFabClientAPI.GetAccountInfo(new GetAccountInfoRequest(), OnGetAccountInfoSuccess, OnBanned);
+        GetPlayerSegments();
     }
 
     private void OnGetAccountInfoSuccess(GetAccountInfoResult result)
     {
         if (result.AccountInfo.TitleInfo.isBanned == true)
         {
-            Debug.Log("Игрок забанен.");
+            Debug.Log("The player is banned.");
         }
         else
         {
-            Debug.Log("Игрок успешно авторизован и не забанен.");
+            Debug.Log("The player is successfully authorized and not banned.");
         }
     }
 
     private void OnBanned(PlayFabError fabError)
     {
-        Debug.Log("Игрок забанен.");
+        Debug.Log("The player is banned.");
         StartCoroutine(BanWindowWaitForSecondCoroutine());
         Buttons.SetActive(false);
     }
 
     private void OnLoginError(PlayFabError error)
     {
-        Debug.LogError("Ошибка входа: " + error.ErrorMessage);
-
+        Debug.LogError("Login failed: " + error.ErrorMessage);
 
         if (error.Error == PlayFabErrorCode.AccountBanned)
         {
@@ -73,7 +75,6 @@ public class PlayFabManager : MonoBehaviour
         }
     }
 
-
     private IEnumerator ErrorWindowWaitForSecondCoroutine()
     {
         yield return new WaitForSeconds(0.8f);
@@ -84,5 +85,41 @@ public class PlayFabManager : MonoBehaviour
     {
         yield return new WaitForSeconds(0.8f);
         BanWindow.SetActive(true);
+    }
+
+    private void GetPlayerSegments()
+    {
+        var request = new GetPlayerSegmentsRequest
+        {
+            PlayFabId = playFabId
+        };
+
+        PlayFabClientAPI.GetPlayerSegments(request, OnGetPlayerSegmentsSuccess, OnGetPlayerSegmentsFailure);
+    }
+
+    private void OnGetPlayerSegmentsSuccess(GetPlayerSegmentsResult result)
+    {
+        Debug.Log("Segments for the player: " + playFabId);
+
+        if (result.Segments != null && result.Segments.Count > 0)
+        {
+            foreach (var segment in result.Segments)
+            {
+                Debug.Log("Segment name: " + segment.Name);
+                if (segment.Name == "Developers")
+                {
+                    DevelopersSegmentObject.SetActive(true);
+                }
+            }
+        }
+        else
+        {
+            Debug.Log("This player does not belong to any segment.");
+        }
+    }
+
+    private void OnGetPlayerSegmentsFailure(PlayFabError error)
+    {
+        Debug.LogError("Error receiving segments: " + error.GenerateErrorReport());
     }
 }

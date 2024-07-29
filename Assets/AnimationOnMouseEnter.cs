@@ -1,6 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class AnimationOnMouseEnter : MonoBehaviour
 {
@@ -11,6 +11,9 @@ public class AnimationOnMouseEnter : MonoBehaviour
     public Animator otherAnimator;
     public string otherAnimationTriggerMouseExitName;
     public string otherAnimationTriggerMouseEnterName;
+
+    
+    public UnityEvent OnMouseDownEvent;
 
     void Start()
     {
@@ -24,7 +27,7 @@ public class AnimationOnMouseEnter : MonoBehaviour
             animator.SetBool(animationTriggerMouseEnterName, true);
         }
 
-        if (otherAnimatorLink == true)
+        if (otherAnimatorLink)
         {
             otherAnimator.SetBool(otherAnimationTriggerMouseEnterName, true);
         }
@@ -36,7 +39,7 @@ public class AnimationOnMouseEnter : MonoBehaviour
         {
             animator.SetBool(animationTriggerMouseExitName, true);
         }
-        if (otherAnimatorLink == true)
+        if (otherAnimatorLink)
         {
             otherAnimator.SetBool(otherAnimationTriggerMouseExitName, true);
         }
@@ -45,5 +48,6 @@ public class AnimationOnMouseEnter : MonoBehaviour
     private void OnMouseDown()
     {
         Debug.Log("Click");
+        OnMouseDownEvent?.Invoke();
     }
 }

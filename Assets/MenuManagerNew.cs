@@ -9,6 +9,7 @@ public class MenuManagerNew : MonoBehaviour
     public Animator animatorSettings;
     public Animator animatorNoConnectionWarning;
     public Animator animatorMultiplayerUnavailableWarning;
+    public Animator animatorYouAreDeveloper;
     public Animator animatorManual;
     public Animator animatorCatalog;
 
@@ -201,12 +202,14 @@ public class MenuManagerNew : MonoBehaviour
         animatorSettings.SetTrigger("Open");
         animatorNoConnectionWarning.SetTrigger("Close");
         animatorMultiplayerUnavailableWarning.SetTrigger("Close");
+        animatorYouAreDeveloper.SetTrigger("Close");
     }
     void SettingsClose()
     {
         animatorSettings.SetTrigger("Close");
         animatorNoConnectionWarning.SetTrigger("Open");
         animatorMultiplayerUnavailableWarning.SetTrigger("Open");
+        animatorYouAreDeveloper.SetTrigger("Open");
     }
     void ManualOpen()
     {
@@ -223,5 +226,18 @@ public class MenuManagerNew : MonoBehaviour
     void CatalogDefault()
     {
         animatorCatalog.SetTrigger("Default");
+    }
+    public void ApplicationQuit()
+    {
+        Application.Quit();
+        Debug.Log("Left the game (((");
+    }
+    public void SingleplayerButton()
+    {
+        Debug.Log("Single-player mode");
+    }
+    public void MultiplayerButton()
+    {
+        Debug.Log("Multiplayer mode");
     }
 }
