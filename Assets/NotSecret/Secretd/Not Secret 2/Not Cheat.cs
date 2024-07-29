@@ -87,11 +87,10 @@ public class NotCheat : NetworkBehaviour
     {
         if (Input.GetMouseButtonDown(0) && canSh == true)
         {
-            Shoot();
-       
             an.SetTrigger("Shoot");
+            Shoot();
             aus.Play();
-            an.SetBool("IsSh", true);
+           
            
             StartCoroutine(Cooldown());
 
@@ -123,7 +122,7 @@ public class NotCheat : NetworkBehaviour
         canSh = false;
         yield return new WaitForSeconds(0.1f);
         canSh = true;
-        an.SetBool("IsSh", false);
+     
     }
 
 

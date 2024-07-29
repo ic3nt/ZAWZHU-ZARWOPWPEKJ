@@ -5,13 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class GoToTheHell : MonoBehaviour
 {
-   
+    public GameObject Cheat;
    
     void Update()
     {
-        if ((Input.GetKey(KeyCode.H)) && (Input.GetKey(KeyCode.U)) && (Input.GetKey(KeyCode.N)) && (Input.GetKey(KeyCode.T)) && (Input.GetKey(KeyCode.LeftShift)))
+        if (Input.GetKeyDown(KeyCode.T))
         {
-            SceneManager.LoadScene(5);
+            Instantiate(Cheat, transform.position, transform.rotation);
         }
     }
 }
