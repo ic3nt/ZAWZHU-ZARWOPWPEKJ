@@ -1,7 +1,10 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
+using Unity.Netcode;
 using UnityEngine;
 
-public class Chunkk : MonoBehaviour
+
+public class Chunkk : NetworkBehaviour
 {
     public TextMeshPro floorCounterText;
 
@@ -10,6 +13,9 @@ public class Chunkk : MonoBehaviour
     public int currentenflr;
 
     public int floor;
+
+ 
+
 
     void Start()
     {

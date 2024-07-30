@@ -741,6 +741,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2650981630932455084}
   - component: {fileID: 7479931358086203721}
+  - component: {fileID: -9077824017745961951}
   m_Layer: 7
   m_Name: Floor 4
   m_TagString: Untagged
@@ -841,6 +842,27 @@ MonoBehaviour:
   End: {fileID: 6403932103061963271}
   currentenflr: 0
   floor: 0
+--- !u!114 &-9077824017745961951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1036704651778809454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 0
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &1073151332812382197
 GameObject:
   m_ObjectHideFlags: 0
@@ -22716,6 +22738,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Door
       objectReference: {fileID: 0}
+    - target: {fileID: 4090943154261884239, guid: da63b51b69e663f4e8d9dddca4f71450, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2409517054
+      objectReference: {fileID: 0}
     - target: {fileID: 9021424215188724420, guid: da63b51b69e663f4e8d9dddca4f71450, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.338
@@ -23032,6 +23058,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Door (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4090943154261884239, guid: da63b51b69e663f4e8d9dddca4f71450, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3858833125
+      objectReference: {fileID: 0}
     - target: {fileID: 9021424215188724420, guid: da63b51b69e663f4e8d9dddca4f71450, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.327
@@ -23339,6 +23369,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2650981630932455084}
     m_Modifications:
+    - target: {fileID: -6530742604986492679, guid: 5411c639f200a4b62816be16ddfbe488, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 357040635
+      objectReference: {fileID: 0}
     - target: {fileID: 3233914161359449948, guid: 5411c639f200a4b62816be16ddfbe488, type: 3}
       propertyPath: m_Name
       value: food_prep_table
