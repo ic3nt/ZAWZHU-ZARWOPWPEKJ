@@ -65,7 +65,7 @@ public class ChunksPlacer : NetworkBehaviour
 
     private void SpawnChunk()
     {
-        if (!IsServer) return;
+      
         curflr += 1;
         Chunkk newChunk;
 
