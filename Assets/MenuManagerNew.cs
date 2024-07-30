@@ -18,6 +18,10 @@ public class MenuManagerNew : MonoBehaviour
     private bool isManual;
     private bool isCatalog;
 
+    public GameObject ManualMonstersObjects;
+    public GameObject ToyRobotObject;
+    public GameObject MimicObject;
+
     private bool isPlayedSettingsAnimation;
     private bool isSettingsOpen = false;
     private bool isSettingsAnimationPlaying = false;
@@ -171,6 +175,15 @@ public class MenuManagerNew : MonoBehaviour
         animator.SetTrigger("QuitMenu");
     }
 
+    public void CreditsButton()
+    {
+        isSettings = false;
+        isMenu = false;
+        isManual = false;
+        isCatalog = false;
+        animator.SetTrigger("CreditsMenu");
+    }
+
     public void SettingsButton()
     {
         isSettings = true;
@@ -187,6 +200,7 @@ public class MenuManagerNew : MonoBehaviour
         isCatalog = true;
         animator.SetTrigger("CatalogMenu");
         animatorManual.SetTrigger("Close");
+        ManualMonstersObjects.SetActive(false);
     }
     public void ManualButton()
     {
@@ -196,6 +210,7 @@ public class MenuManagerNew : MonoBehaviour
         isCatalog = false;
         animator.SetTrigger("ManualMenu");
         animatorManual.SetTrigger("Open");
+        ManualMonstersObjects.SetActive(true);
     }
     void SettingsOpen()
     {
@@ -214,14 +229,17 @@ public class MenuManagerNew : MonoBehaviour
     void ManualOpen()
     {
         animatorManual.SetTrigger("Open");
+        ManualMonstersObjects.SetActive(true);
     }
     void ManualClose()
     {
         animatorManual.SetTrigger("Close");
+        ManualMonstersObjects.SetActive(false);
     }
     void CatalogOpen()
     {
         animatorCatalog.SetTrigger("Open");
+        ManualMonstersObjects.SetActive(false);
     }
     void CatalogDefault()
     {
@@ -239,5 +257,17 @@ public class MenuManagerNew : MonoBehaviour
     public void MultiplayerButton()
     {
         Debug.Log("Multiplayer mode");
+    }
+    public void ManualToyRobot()
+    {
+        ManualMonstersObjects.SetActive(true);
+        ToyRobotObject.SetActive(true);
+        MimicObject.SetActive(false);
+    }
+    public void ManualMimic()
+    {
+        ManualMonstersObjects.SetActive(true);
+        ToyRobotObject.SetActive(false);
+        MimicObject.SetActive(true);
     }
 }

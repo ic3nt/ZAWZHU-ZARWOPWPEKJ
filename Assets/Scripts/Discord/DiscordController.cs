@@ -80,4 +80,9 @@ public class DiscordController : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    private void OnDestroy()
+    {
+        discord.Dispose();
+    }
 }
