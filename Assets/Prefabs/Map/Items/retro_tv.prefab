@@ -96,7 +96,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 77e3ef7347e83411e8fb852bcebcaa53, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.6
+  m_Volume: 0.4
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -259,8 +259,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.78865194, y: 0.525226, z: 0.5775415}
-  m_Center: {x: 0.023886118, y: 0.26765472, z: -0.16969223}
+  m_Size: {x: 0.788, y: 0.52, z: 0.5}
+  m_Center: {x: 0.02, y: 0.2676, z: -0.1696}
 --- !u!54 &8679376004775497974
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -374,7 +374,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3440179026
+  GlobalObjectIdHash: 4279231866
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1

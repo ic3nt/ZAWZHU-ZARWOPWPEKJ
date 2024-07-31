@@ -111,8 +111,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.06281855, y: 0.23411955, z: 0.08148172}
-  m_Center: {x: 0, y: -0.004521288, z: -0.004574906}
+  m_Size: {x: 0.062, y: 0.234, z: 0.081}
+  m_Center: {x: 0, y: -0.004, z: -0.0045}
 --- !u!54 &8630526215889369548
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -212,7 +212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3115244618
+  GlobalObjectIdHash: 244076031
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -308,7 +308,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: ddb8b549054a445ab9eb3d3e97314379, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.6
   m_Pitch: 1
   Loop: 1
   Mute: 0
