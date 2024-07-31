@@ -56,12 +56,12 @@ public class RotatingModels : MonoBehaviour
         }
     }
 
-    void OnMouseEnter()
+    public void OnMouseEnter()
     {
         Debug.Log("Mouse Entered");
     }
 
-    void OnMouseExit()
+    public void OnMouseExit()
     {
         Debug.Log("Mouse Exited");
         isRotating = false;
