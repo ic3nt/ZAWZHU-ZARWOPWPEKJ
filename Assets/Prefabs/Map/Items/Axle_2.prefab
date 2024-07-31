@@ -109,8 +109,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.0034130348, y: 0.0038557725, z: 0.029975059}
-  m_Center: {x: 0.000026303049, y: -0.0002587172, z: -0.011411845}
+  m_Size: {x: 0.0034, y: 0.003, z: 0.029}
+  m_Center: {x: 2.63, y: -0.00025, z: -0.0114}
 --- !u!54 &6945819328560596852
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -157,8 +157,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.019854177, y: 0.02, z: 0.0017519683}
-  m_Center: {x: 0, y: 0, z: 0.00031530348}
+  m_Size: {x: 0.019, y: 0.02, z: 0.00175}
+  m_Center: {x: 0, y: 0, z: 0.00031}
 --- !u!205 &8777844800005856575
 LODGroup:
   m_ObjectHideFlags: 0
@@ -195,7 +195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3233456697
+  GlobalObjectIdHash: 3485083718
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
