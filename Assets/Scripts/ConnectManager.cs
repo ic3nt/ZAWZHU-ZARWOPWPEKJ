@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 
 public class ConnectManager : MonoBehaviour
 {
     public GameObject NoConnectionWarningWindows;
-    public BoxCollider BoxCollider;
+    public Button button;
     public GameObject Objects;
 
     void Start()
@@ -16,14 +17,14 @@ public class ConnectManager : MonoBehaviour
         if (Application.internetReachability == NetworkReachability.NotReachable)
         {
             NoConnectionWarningWindows.SetActive(true);
-            BoxCollider.enabled = false;
+            button.gameObject.SetActive(false);
             Objects.SetActive(true);
             Debug.Log("Offline");
         }
         else
         {
             NoConnectionWarningWindows.SetActive(false);
-            BoxCollider.enabled = true;
+            button.gameObject.SetActive(true);
             Objects.SetActive(false);
             Debug.Log("Online");
         }
