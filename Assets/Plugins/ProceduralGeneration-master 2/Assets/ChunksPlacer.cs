@@ -29,11 +29,13 @@ public class ChunksPlacer : NetworkBehaviour
             FindClosestPlayer();
         }
 
+
+
         if ((curflr < floors) && IsServer)
         {
             if (closestPlayer.position.y < spawnedChunks[spawnedChunks.Count - 1].End.position.y + 10)
             {
-                SpawnChunkServerRpc();
+                SpawnChunk();
             }
         }
     }
@@ -60,24 +62,32 @@ public class ChunksPlacer : NetworkBehaviour
             closestPlayer = closestPlayerObj.transform;
         }
     }
-    [ServerRpc(RequireOwnership = false)]
-    private void SpawnChunkServerRpc()
+
+    private void SpawnChunk()
     {
         if (!IsServer) return;
+        curflr += 1;
+        Chunkk newChunk;
 
-        curflr++;
-        if (curflr >= floors) return; // Early exit
+        if (curflr == 19) // Check if it's the tenth floor 
+        {
+            newChunk = Instantiate(TenthFloorPrefab);
+        }
+        else
+        {
+            newChunk = Instantiate(ChunkPrefabs[Random.Range(0, ChunkPrefabs.Length)]);
+        }
 
-        // Create chunk on the server
-        Chunkk newChunk = Instantiate(curflr == 19 ? TenthFloorPrefab :
-            ChunkPrefabs[Random.Range(0, ChunkPrefabs.Length)]);
+        newChunk.transform.position = spawnedChunks[spawnedChunks.Count - 1].End.position - newChunk.Begin.localPosition;
 
-        Vector3 spawnPosition = spawnedChunks[spawnedChunks.Count - 1].End.position - newChunk.Begin.localPosition;
-        newChunk.transform.position = spawnPosition;
-
-        newChunk.transform.rotation = (currentRotationIndex % 2 == 0)
-            ? Quaternion.Euler(0f, 0f, 0f)
-            : Quaternion.Euler(0f, 180f, 0f);
+        if (currentRotationIndex % 2 == 0)
+        {
+            newChunk.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+        }
+        else
+        {
+            newChunk.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+        }
 
         newChunk.currentenflr = curflr + 1;
         newChunk.floor = floors - newChunk.currentenflr;
@@ -90,40 +100,5 @@ public class ChunksPlacer : NetworkBehaviour
             Destroy(spawnedChunks[0].gameObject);
             spawnedChunks.RemoveAt(0);
         }
-
-        // Spawn the NetworkObject for the chunk
-        newChunk.GetComponent<NetworkObject>().Spawn();
-
-        // Notify clients to spawn the new chunk
-        SpawnChunkForClientsClientRpc(newChunk.GetComponent<NetworkObject>().NetworkObjectId, newChunk.transform.position, newChunk.transform.rotation);
-    }
-
-
-    [ClientRpc]
-    private void SpawnChunkForClientsClientRpc(ulong networkObjectId, Vector3 position, Quaternion rotation)
-    {
-        // Find the prefab associated with the network object
-        var prefabToSpawn = (curflr == 19) ? TenthFloorPrefab : ChunkPrefabs[Random.Range(0, ChunkPrefabs.Length)];
-
-        // Instantiate a new chunk for clients
-        Chunkk newChunk = Instantiate(prefabToSpawn);
-
-        // Set the position and rotation
-        newChunk.transform.position = position;
-        newChunk.transform.rotation = rotation;
-
-        // Set the floor information
-        newChunk.currentenflr = curflr + 1; // Same as server
-        newChunk.floor = floors - newChunk.currentenflr;
-
-        // Add to spawned chunks
-        spawnedChunks.Add(newChunk);
-
-        if (spawnedChunks.Count >= 6)
-        {
-            Destroy(spawnedChunks[0].gameObject);
-            spawnedChunks.RemoveAt(0);
-        }
     }
 }
-
