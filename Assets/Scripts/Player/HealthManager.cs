@@ -1,8 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using EasyTransition;
 using UnityEngine.UI;
+using TMPro;
+using EasyTransition;
 
 public class HealthManager : MonoBehaviour
 {
@@ -12,10 +12,14 @@ public class HealthManager : MonoBehaviour
     public FirstPersonLook personLook;
     public FirstPersonAudio personAudio;
     public Image healthBar;
+    public TextMeshProUGUI healthAmountText;
+    public Animator animatorHealth;
     public float healthAmount = 100f;
     public bool timerOn;
 
     private Coroutine healthCoroutine;
+    private float damageCooldown = 0.3f;
+    private float lastDamageTime;
 
     void Start()
     {
@@ -23,10 +27,12 @@ public class HealthManager : MonoBehaviour
         personMovement.GetComponent<FirstPersonMovement>().enabled = true;
         personLook.GetComponent<FirstPersonLook>().enabled = true;
         personAudio.GetComponent<FirstPersonAudio>().enabled = true;
+        lastDamageTime = Time.time;
     }
 
     void Update()
     {
+        healthAmountText.text = healthAmount.ToString("F0") + "%";
         if (healthAmount <= 0)
         {
             Dead();
@@ -35,7 +41,6 @@ public class HealthManager : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.LeftShift) && ((personMovement.GetComponent<Rigidbody>().velocity.x != 0) && (personMovement.GetComponent<Rigidbody>().velocity.z != 0)))
             {
-                // Запускаем корутину, если timerOn выключен
                 if (!timerOn)
                 {
                     timerOn = true;
@@ -44,12 +49,16 @@ public class HealthManager : MonoBehaviour
             }
             else
             {
-                // Останавливаем корутину, если условие больше не выполняется
                 if (timerOn)
                 {
                     timerOn = false;
                     StopCoroutine(healthCoroutine);
                 }
+            }
+
+            if (Time.time - lastDamageTime >= damageCooldown)
+            {
+                animatorHealth.SetTrigger("Normal");
             }
         }
     }
@@ -65,8 +74,10 @@ public class HealthManager : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        animatorHealth.SetTrigger("Damage");
         healthAmount -= damage;
         healthBar.fillAmount = healthAmount / 100f;
+        lastDamageTime = Time.time;
     }
 
     public void Heal(float healingAmount)
@@ -92,4 +103,3 @@ public class HealthManager : MonoBehaviour
         loadScene.LoadScene("IsMenuScene");
     }
 }
-

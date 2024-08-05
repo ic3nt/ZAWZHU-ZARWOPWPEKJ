@@ -38,7 +38,7 @@ public class MenuManagerNew : MonoBehaviour
 
     private bool isPlayedCatalogAnimation;
     private bool isCatalogOpen = false;
-    private bool isCataloglAnimationPlaying = false;
+    private bool isCatalogAnimationPlaying = false;
 
     void Start()
     {

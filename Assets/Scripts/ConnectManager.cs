@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 public class ConnectManager : MonoBehaviour
 {
     public GameObject NoConnectionWarningWindows;
-    public Button button;
+    public BoxCollider boxCollider;
     public GameObject Objects;
 
     void Start()
@@ -17,14 +17,14 @@ public class ConnectManager : MonoBehaviour
         if (Application.internetReachability == NetworkReachability.NotReachable)
         {
             NoConnectionWarningWindows.SetActive(true);
-            button.gameObject.SetActive(false);
+            boxCollider.enabled = false;
             Objects.SetActive(true);
             Debug.Log("Offline");
         }
         else
         {
             NoConnectionWarningWindows.SetActive(false);
-            button.gameObject.SetActive(true);
+            boxCollider.enabled = true;
             Objects.SetActive(false);
             Debug.Log("Online");
         }

@@ -11,7 +11,7 @@ public class Forester : MonoBehaviour
 
     private NavMeshAgent aiAgent;
 
-    public EnemDamage dmg;
+    public EnemyDamage dmg;
 
     void Start()
     {

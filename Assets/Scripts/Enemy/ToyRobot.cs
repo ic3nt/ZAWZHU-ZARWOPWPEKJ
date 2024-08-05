@@ -20,7 +20,7 @@ public class ToyRobot : MonoBehaviour
 
     private Animator anim;
 
-    public EnemDamage dmg;
+    public EnemyDamage dmg;
 
 
     void Start()

@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class Mimic : MonoBehaviour
 {
     private Transform closestPlayer;
-    public EnemDamage dmg;
+    public EnemyDamage dmg;
 
     private NavMeshAgent aiAgent;
 

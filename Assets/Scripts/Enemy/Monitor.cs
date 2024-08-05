@@ -13,7 +13,7 @@ public class Monitor : MonoBehaviour
 
     private NavMeshAgent aiAgent;
 
-    public EnemDamage dmg;
+    public EnemyDamage dmg;
 
     void Start()
     {

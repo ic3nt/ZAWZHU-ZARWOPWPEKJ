@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemDamage : MonoBehaviour
+public class EnemyDamage : MonoBehaviour
 {
     public float damageEn;
-    public float cooldownTime; // Время кулдауна в секундах
-    private float nextAttackTime = 0f; // Время следующего удара
+    public float cooldownTime;
+    private float nextAttackTime = 0f;
     public Collider HitColl;
 
     void OnTriggerStay(Collider other)
@@ -16,7 +16,7 @@ public class EnemDamage : MonoBehaviour
             if (other.TryGetComponent<HealthManager>(out var hp))
             {
                 hp.TakeDamage(damageEn);
-                nextAttackTime = Time.time + cooldownTime; // Устанавливаем время следующего удара с учетом кулдауна
+                nextAttackTime = Time.time + cooldownTime;
             }
         }
     }

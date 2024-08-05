@@ -19,7 +19,7 @@ public class BrokenMimic : MonoBehaviour
 
     public float brokeT;
 
-    public EnemDamage dg;
+    public EnemyDamage dg;
 
     public Collider coll;
 
