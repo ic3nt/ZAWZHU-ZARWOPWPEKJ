@@ -11,11 +11,13 @@ public class MenuManagerNew : MonoBehaviour
     public Animator animatorMultiplayerUnavailableWarning;
     public Animator animatorYouAreDeveloper;
     public Animator animatorManual;
+    public Animator animatorStore;
     public Animator animatorCatalog;
 
     private bool isMenu;
     private bool isSettings;
     private bool isManual;
+    private bool isStore;
     private bool isCatalog;
 
     public GameObject ManualMonstersObjects;
@@ -30,18 +32,24 @@ public class MenuManagerNew : MonoBehaviour
     private bool isManualOpen = false;
     private bool isManualAnimationPlaying = false;
 
+    private bool isPlayedStoreAnimation;
+    private bool isStoreOpen = false;
+    private bool isStoreAnimationPlaying = false;
+
     private bool isPlayedCatalogAnimation;
     private bool isCatalogOpen = false;
     private bool isCataloglAnimationPlaying = false;
 
     void Start()
     {
+        isPlayedStoreAnimation = false;
         isPlayedManualAnimation = false;
         isPlayedSettingsAnimation = false;
         isPlayedCatalogAnimation = false;
         isMenu = true;
         isSettings = false;
         isManual = false;
+        isStore = false;
         isCatalog = false;
     }
 
@@ -111,10 +119,39 @@ public class MenuManagerNew : MonoBehaviour
 
         if (isPlayedManualAnimation)
         {
-            if (!animatorManual.GetCurrentAnimatorStateInfo(0).IsName("Open") &&
-                !animatorManual.GetCurrentAnimatorStateInfo(0).IsName("Close"))
+            if (!animatorManual.GetCurrentAnimatorStateInfo(0).IsName("OpenManual") &&
+                !animatorManual.GetCurrentAnimatorStateInfo(0).IsName("CloseManual"))
             {
                 isPlayedManualAnimation = false;
+            }
+        }
+
+        if (isStore)
+        {
+            if (!isStoreOpen && !isPlayedStoreAnimation)
+            {
+                StoreOpen();
+                isStoreOpen = true;
+                isPlayedStoreAnimation = true;
+                Debug.Log("Store");
+            }
+        }
+        else
+        {
+            if (isStore && !isPlayedStoreAnimation)
+            {
+                StoreClose();
+                isStoreOpen = false;
+                isPlayedStoreAnimation = true;
+            }
+        }
+
+        if (isPlayedStoreAnimation)
+        {
+            if (!animatorStore.GetCurrentAnimatorStateInfo(0).IsName("OpenStore") &&
+                !animatorStore.GetCurrentAnimatorStateInfo(0).IsName("CloseStore"))
+            {
+                isPlayedStoreAnimation = false;
             }
         }
 
@@ -153,6 +190,7 @@ public class MenuManagerNew : MonoBehaviour
         isSettings = false;
         isMenu = true;
         isManual = false;
+        isStore = false;
         isCatalog = false;
         animator.SetTrigger("DefaultMenu");
     }
@@ -162,6 +200,7 @@ public class MenuManagerNew : MonoBehaviour
         isSettings = false;
         isMenu = false;
         isManual = false;
+        isStore = false;
         isCatalog = false;
         animator.SetTrigger("PlayMenu");
     }
@@ -171,6 +210,7 @@ public class MenuManagerNew : MonoBehaviour
         isSettings = false;
         isMenu = false;
         isManual = false;
+        isStore = false;
         isCatalog = false;
         animator.SetTrigger("QuitMenu");
     }
@@ -180,6 +220,7 @@ public class MenuManagerNew : MonoBehaviour
         isSettings = false;
         isMenu = false;
         isManual = false;
+        isStore = false;
         isCatalog = false;
         animator.SetTrigger("CreditsMenu");
     }
@@ -189,6 +230,7 @@ public class MenuManagerNew : MonoBehaviour
         isSettings = true;
         isMenu = false;
         isManual = false;
+        isStore = false;
         isCatalog = false;
         animator.SetTrigger("SettingsMenu");
     }
@@ -197,20 +239,33 @@ public class MenuManagerNew : MonoBehaviour
         isSettings = false;
         isMenu = false;
         isManual = false;
+        isStore = false;
         isCatalog = true;
         animator.SetTrigger("CatalogMenu");
-        animatorManual.SetTrigger("Close");
+        animatorManual.SetTrigger("CloseManual"); 
+        animatorStore.SetTrigger("CloseStore");
         ManualMonstersObjects.SetActive(false);
     }
     public void ManualButton()
     {
         isManual = true;
+        isStore = false;
         isSettings = false;
         isMenu = false;
         isCatalog = false;
         animator.SetTrigger("ManualMenu");
-        animatorManual.SetTrigger("Open");
+        animatorManual.SetTrigger("OpenManual");
         ManualMonstersObjects.SetActive(true);
+    }
+    public void StoreButton()
+    {
+        isManual = false;
+        isStore = true;
+        isSettings = false;
+        isMenu = false;
+        isCatalog = false;
+        animator.SetTrigger("StoreMenu");
+        animatorStore.SetTrigger("OpenStore");
     }
     void SettingsOpen()
     {
@@ -228,13 +283,21 @@ public class MenuManagerNew : MonoBehaviour
     }
     void ManualOpen()
     {
-        animatorManual.SetTrigger("Open");
+        animatorManual.SetTrigger("OpenManual");
         ManualMonstersObjects.SetActive(true);
     }
     void ManualClose()
     {
-        animatorManual.SetTrigger("Close");
+        animatorManual.SetTrigger("CloseManual");
         ManualMonstersObjects.SetActive(false);
+    }
+    void StoreOpen()
+    {
+        animatorManual.SetTrigger("OpenStore");
+    }
+    void StoreClose()
+    {
+        animatorStore.SetTrigger("CloseStore");
     }
     void CatalogOpen()
     {
