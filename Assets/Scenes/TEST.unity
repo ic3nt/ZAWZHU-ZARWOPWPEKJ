@@ -3240,13 +3240,13 @@ MonoBehaviour:
   ChunkPrefabs:
   - {fileID: 7479931358086203721, guid: 474c0a854b9bb4b0aa39d7e9e6399c69, type: 3}
   - {fileID: 0}
-  - {fileID: 7479931358086203721, guid: 38aefbbc5ad6541b181db59c9f7e6cf1, type: 3}
-  - {fileID: 7479931358086203721, guid: c94baa7d5eed54791b39eac2e6cfc53f, type: 3}
-  - {fileID: 7479931358086203721, guid: 83d751a737a474fafb435bd00c33deb1, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   TenthFloorPrefab: {fileID: 7479931358086203721, guid: c92121b1c508b4f1ba22912e4064ccfa, type: 3}
   FirstChunk: {fileID: 6637120525572885231}
   floors: 20
-  curflr: -1
+  curflr: 0
 --- !u!4 &462639617
 Transform:
   m_ObjectHideFlags: 0
@@ -17491,7 +17491,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2140511662
 Transform:
   m_ObjectHideFlags: 0
@@ -18156,8 +18156,37 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7897689681454068690, guid: 59c31932df5864206a967e27a808a173, type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 244068741106886502}
   m_SourcePrefab: {fileID: 100100000, guid: 59c31932df5864206a967e27a808a173, type: 3}
+--- !u!1 &244068741106886501 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7897689681454068690, guid: 59c31932df5864206a967e27a808a173, type: 3}
+  m_PrefabInstance: {fileID: 244068741106886500}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &244068741106886502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 244068741106886501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 843490570
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!4 &265478308423481456
 Transform:
   m_ObjectHideFlags: 0
@@ -39527,6 +39556,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1069862977595466440}
+  - component: {fileID: 6809873422630586801}
   - component: {fileID: 6637120525572885231}
   m_Layer: 7
   m_Name: Floor Start
@@ -39535,6 +39565,27 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &6809873422630586801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6809873422630586800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 4090898050
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!4 &6812173447777256223
 Transform:
   m_ObjectHideFlags: 0

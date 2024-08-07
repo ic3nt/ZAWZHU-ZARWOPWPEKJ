@@ -17,6 +17,8 @@ public class ChunksPlacer : NetworkBehaviour
     private List<Chunkk> spawnedChunks = new List<Chunkk>();
     private int currentRotationIndex = 0;
 
+
+
     private void Start()
     {
         spawnedChunks.Add(FirstChunk);
@@ -24,6 +26,8 @@ public class ChunksPlacer : NetworkBehaviour
 
     private void Update()
     {
+      
+
         if (closestPlayer == null || !closestPlayer.gameObject.activeInHierarchy)
         {
             FindClosestPlayer();
@@ -35,13 +39,16 @@ public class ChunksPlacer : NetworkBehaviour
         {
             if (closestPlayer.position.y < spawnedChunks[spawnedChunks.Count - 1].End.position.y + 10)
             {
-                SpawnChunk();
+             
+                int newChunkind = UnityEngine.Random.Range(0, ChunkPrefabs.Length);
+                SpawnChunkClientRpc(newChunkind);
             }
         }
     }
 
     void FindClosestPlayer()
     {
+        if (!IsServer) return;
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         float closestDistanceSqr = Mathf.Infinity;
         GameObject closestPlayerObj = null;
@@ -63,11 +70,12 @@ public class ChunksPlacer : NetworkBehaviour
         }
     }
 
-    private void SpawnChunk()
+    [ClientRpc]
+    private void SpawnChunkClientRpc(int newChunkind)
     {
-        if (!IsServer) return;
-        curflr += 1;
         Chunkk newChunk;
+
+        curflr += 1;
 
         if (curflr == 19) // Check if it's the tenth floor 
         {
@@ -75,8 +83,17 @@ public class ChunksPlacer : NetworkBehaviour
         }
         else
         {
-            newChunk = Instantiate(ChunkPrefabs[Random.Range(0, ChunkPrefabs.Length)]);
+
+
+           
+            newChunk = Instantiate(ChunkPrefabs[newChunkind]);
+
+            SpawnChunkClientRpc(newChunkind);
+
+
+
         }
+
 
         newChunk.transform.position = spawnedChunks[spawnedChunks.Count - 1].End.position - newChunk.Begin.localPosition;
 
@@ -101,4 +118,6 @@ public class ChunksPlacer : NetworkBehaviour
             spawnedChunks.RemoveAt(0);
         }
     }
+
+
 }
