@@ -5,34 +5,36 @@ using Unity.Netcode;
 
 public class ChunksPlacer : NetworkBehaviour
 {
-    private Transform lowestPlayer; // Changed from closestPlayer to lowestPlayer
+    private Transform lowestPlayer;
     public Chunkk[] ChunkPrefabs;
     public Chunkk TenthFloorPrefab;
     public Chunkk FirstChunk;
-    public int floors;
-    public int curflr = 0;
+    public int totalFloors; // Переименовано в totalFloors для ясности
+    private int currentFloor = 0; // Изменено имя переменной на currentFloor
 
     private List<Chunkk> spawnedChunks = new List<Chunkk>();
-    private int currentRotationIndex = 0;
 
     private void Start()
     {
-        spawnedChunks.Add(FirstChunk);
+        // Добавить первый кусок (chunk) и обновить текущее значение этажа
+        Chunkk firstChunk = Instantiate(FirstChunk);
+        spawnedChunks.Add(firstChunk);
+        currentFloor = 1; // Первый этаж создан
     }
 
     private void Update()
     {
         if (lowestPlayer == null || !lowestPlayer.gameObject.activeInHierarchy)
         {
-            FindLowestPlayerByYAxis(); // Updated to use the new method
+            FindLowestPlayerByYAxis();
         }
 
-        if ((curflr < floors) && IsServer)
+        // Проверяем, можно ли спавнить новый кусок (chunk)
+        if (currentFloor < totalFloors && IsServer)
         {
             if (lowestPlayer.position.y < spawnedChunks[spawnedChunks.Count - 1].End.position.y + 10)
             {
-                int newChunkind = UnityEngine.Random.Range(0, ChunkPrefabs.Length);
-                SpawnChunkClientRpc(newChunkind);
+                SpawnChunk();
             }
         }
     }
@@ -49,61 +51,54 @@ public class ChunksPlacer : NetworkBehaviour
             return;
         }
 
-        GameObject lowestPlayerObj = players[0]; // предположим, что первый игрок - самый низкий
+        lowestPlayer = players[0].transform; // предположим, что первый игрок - самый низкий
 
-        // Ищем игрока с минимальным значением по оси Y
-        for (int i = 1; i < players.Length; i++)
+        foreach (GameObject player in players)
         {
-            if (players[i].transform.position.y < lowestPlayerObj.transform.position.y)
+            if (player.transform.position.y < lowestPlayer.position.y)
             {
-                lowestPlayerObj = players[i];
+                lowestPlayer = player.transform;
             }
         }
 
-        // Устанавливаем lowestPlayer
-        lowestPlayer = lowestPlayerObj.transform;
-
-        // Выводим информацию о самом низком игроке
-        Debug.Log("Самый низкий игрок: " + lowestPlayer.name + " на высоте Y: " + lowestPlayer.transform.position.y);
+        Debug.Log("Самый низкий игрок: " + lowestPlayer.name + " на высоте Y: " + lowestPlayer.position.y);
     }
 
-    [ClientRpc]
-    private void SpawnChunkClientRpc(int newChunkind)
+    private void SpawnChunk()
     {
+        int newChunkIndex = UnityEngine.Random.Range(0, ChunkPrefabs.Length);
         Chunkk newChunk;
 
-        curflr += 1;
-
-        if (curflr == 19) // Check if it's the tenth floor 
+        // Определяем, какой кусок (chunk) спавнить
+        if (currentFloor % 10 == 0) // Если текущий этаж кратен 10, используем TenthFloorPrefab
         {
             newChunk = Instantiate(TenthFloorPrefab);
         }
         else
         {
-            newChunk = Instantiate(ChunkPrefabs[newChunkind]);
+            newChunk = Instantiate(ChunkPrefabs[newChunkIndex]);
         }
 
+        // Устанавливаем позицию нового куска (chunk)
         newChunk.transform.position = spawnedChunks[spawnedChunks.Count - 1].End.position - newChunk.Begin.localPosition;
 
-        if (currentRotationIndex % 2 == 0)
-        {
-            newChunk.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-        }
-        else
-        {
-            newChunk.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
-        }
+        // Установка вращения нового куска (chunk)
+        newChunk.transform.rotation = (currentFloor % 2 == 0) ? Quaternion.Euler(0f, 180f, 0f) : Quaternion.Euler(0f, 0f, 0f);
 
-        newChunk.currentenflr = curflr + 1;
-        newChunk.floor = floors - newChunk.currentenflr;
+        // Обновляем значения текущего этажа куска (chunk)
+        newChunk.currentenflr = currentFloor;
+        newChunk.floor = totalFloors - currentFloor;
 
+        // Добавление нового куска (chunk) в список
         spawnedChunks.Add(newChunk);
-        currentRotationIndex++;
+        currentFloor++;
 
-        if (spawnedChunks.Count >= 6)
+        // Удаляем старый кусок (chunk), если их больше 6
+        if (spawnedChunks.Count > 6)
         {
             Destroy(spawnedChunks[0].gameObject);
             spawnedChunks.RemoveAt(0);
         }
     }
 }
+

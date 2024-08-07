@@ -3245,8 +3245,7 @@ MonoBehaviour:
   - {fileID: 0}
   TenthFloorPrefab: {fileID: 7479931358086203721, guid: c92121b1c508b4f1ba22912e4064ccfa, type: 3}
   FirstChunk: {fileID: 6637120525572885231}
-  floors: 20
-  curflr: 0
+  totalFloors: 20
 --- !u!4 &462639617
 Transform:
   m_ObjectHideFlags: 0
@@ -39728,7 +39727,7 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 2
+  m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
