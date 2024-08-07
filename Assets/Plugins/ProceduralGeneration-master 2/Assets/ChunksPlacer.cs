@@ -1,13 +1,11 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using System.Collections;
 using Unity.AI.Navigation;
 using Unity.Netcode;
 
 public class ChunksPlacer : NetworkBehaviour
 {
-    private Transform closestPlayer;
+    private Transform lowestPlayer; // Changed from closestPlayer to lowestPlayer
     public Chunkk[] ChunkPrefabs;
     public Chunkk TenthFloorPrefab;
     public Chunkk FirstChunk;
@@ -17,8 +15,6 @@ public class ChunksPlacer : NetworkBehaviour
     private List<Chunkk> spawnedChunks = new List<Chunkk>();
     private int currentRotationIndex = 0;
 
-
-
     private void Start()
     {
         spawnedChunks.Add(FirstChunk);
@@ -26,48 +22,49 @@ public class ChunksPlacer : NetworkBehaviour
 
     private void Update()
     {
-      
-
-        if (closestPlayer == null || !closestPlayer.gameObject.activeInHierarchy)
+        if (lowestPlayer == null || !lowestPlayer.gameObject.activeInHierarchy)
         {
-            FindClosestPlayer();
+            FindLowestPlayerByYAxis(); // Updated to use the new method
         }
-
-
 
         if ((curflr < floors) && IsServer)
         {
-            if (closestPlayer.position.y < spawnedChunks[spawnedChunks.Count - 1].End.position.y + 10)
+            if (lowestPlayer.position.y < spawnedChunks[spawnedChunks.Count - 1].End.position.y + 10)
             {
-             
                 int newChunkind = UnityEngine.Random.Range(0, ChunkPrefabs.Length);
                 SpawnChunkClientRpc(newChunkind);
             }
         }
     }
 
-    void FindClosestPlayer()
+    void FindLowestPlayerByYAxis()
     {
         if (!IsServer) return;
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-        float closestDistanceSqr = Mathf.Infinity;
-        GameObject closestPlayerObj = null;
 
-        foreach (GameObject player in players)
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+
+        if (players.Length == 0)
         {
-            Vector3 directionToTarget = player.transform.position - transform.position;
-            float dSqrToTarget = directionToTarget.sqrMagnitude;
-            if (dSqrToTarget < closestDistanceSqr)
+            Debug.Log("Нет игроков с тегом 'Player'.");
+            return;
+        }
+
+        GameObject lowestPlayerObj = players[0]; // предположим, что первый игрок - самый низкий
+
+        // Ищем игрока с минимальным значением по оси Y
+        for (int i = 1; i < players.Length; i++)
+        {
+            if (players[i].transform.position.y < lowestPlayerObj.transform.position.y)
             {
-                closestDistanceSqr = dSqrToTarget;
-                closestPlayerObj = player;
+                lowestPlayerObj = players[i];
             }
         }
 
-        if (closestPlayerObj != null)
-        {
-            closestPlayer = closestPlayerObj.transform;
-        }
+        // Устанавливаем lowestPlayer
+        lowestPlayer = lowestPlayerObj.transform;
+
+        // Выводим информацию о самом низком игроке
+        Debug.Log("Самый низкий игрок: " + lowestPlayer.name + " на высоте Y: " + lowestPlayer.transform.position.y);
     }
 
     [ClientRpc]
@@ -83,17 +80,8 @@ public class ChunksPlacer : NetworkBehaviour
         }
         else
         {
-
-
-           
             newChunk = Instantiate(ChunkPrefabs[newChunkind]);
-
-            SpawnChunkClientRpc(newChunkind);
-
-
-
         }
-
 
         newChunk.transform.position = spawnedChunks[spawnedChunks.Count - 1].End.position - newChunk.Begin.localPosition;
 
@@ -118,6 +106,4 @@ public class ChunksPlacer : NetworkBehaviour
             spawnedChunks.RemoveAt(0);
         }
     }
-
-
 }
