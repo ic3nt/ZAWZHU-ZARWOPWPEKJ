@@ -1,3 +1,4 @@
+using EasyTransition;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,12 @@ using UnityEngine.PlayerLoop;
 
 public class MenuManagerNew : MonoBehaviour
 {
+    public DiscordController discordController;
+    public LocalizationManager localizationManager;
+
+    public TransitionSettings transition;
+    public float startDelay;
+
     public Animator animator;
     public Animator animatorSettings;
     public Animator animatorNoConnectionWarning;
@@ -20,6 +27,13 @@ public class MenuManagerNew : MonoBehaviour
     private bool isStore;
     private bool isCatalog;
 
+    private bool isNotSelect;
+    private bool isToyRobot;
+    private bool isMimic;
+
+    public GameObject ManualMonsterButton;
+    public GameObject ManualMonsterToyRobotWindow;
+    public GameObject ManualMonsterMimicWindow;
     public GameObject ManualMonstersObjects;
     public GameObject ToyRobotObject;
     public GameObject MimicObject;
@@ -51,16 +65,53 @@ public class MenuManagerNew : MonoBehaviour
         isManual = false;
         isStore = false;
         isCatalog = false;
+        isNotSelect = true;
+
+
+
+        if (localizationManager.CurrentLanguage == "en_US")
+        {
+            discordController.state = "He just sits on the menu and that's it.";
+        }
+        if (localizationManager.CurrentLanguage == "ru_RU")
+        {
+            discordController.state = "Просто сидит в меню и все.";
+        }
+
+        if (localizationManager.CurrentLanguage == "en_US")
+        {
+            discordController.details = "Menu";
+        }
+        if (localizationManager.CurrentLanguage == "ru_RU")
+        {
+            discordController.details = "Меню";
+        }
+
     }
 
     void Update()
     {
+        if (isNotSelect == false)
+        {
+            ManualMonsterToyRobotWindow.SetActive(false);
+            ManualMonsterMimicWindow.SetActive(false);
+        }
+
         if (!isMenu)
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 MenuButton();
                 Debug.Log("Menu");
+
+                if (localizationManager.CurrentLanguage == "en_US")
+                {
+                    discordController.state = "He just sits on the menu and that's it.";
+                }
+                if (localizationManager.CurrentLanguage == "ru_RU")
+                {
+                    discordController.state = "Просто сидит в меню и все.";
+                }
             }
         }
         else
@@ -76,6 +127,15 @@ public class MenuManagerNew : MonoBehaviour
                 isSettingsOpen = true;
                 isSettingsAnimationPlaying = true;
                 Debug.Log("Settings");
+
+                if (localizationManager.CurrentLanguage == "en_US")
+                {
+                    discordController.state = "Sets up Deadly Devastation...";
+                }
+                if (localizationManager.CurrentLanguage == "ru_RU")
+                {
+                    discordController.state = "Настраивает Deadly Devastation...";
+                }
             }
         }
         else
@@ -105,6 +165,15 @@ public class MenuManagerNew : MonoBehaviour
                 isManualOpen = true;
                 isPlayedManualAnimation = true;
                 Debug.Log("Manual");
+
+                if (localizationManager.CurrentLanguage == "en_US")
+                {
+                    discordController.state = "Carefully examines the manual...";
+                }
+                if (localizationManager.CurrentLanguage == "ru_RU")
+                {
+                    discordController.state = "Внимательно изучает справочник...";
+                }
             }
         }
         else
@@ -134,6 +203,15 @@ public class MenuManagerNew : MonoBehaviour
                 isStoreOpen = true;
                 isPlayedStoreAnimation = true;
                 Debug.Log("Store");
+
+                if (localizationManager.CurrentLanguage == "en_US")
+                {
+                    discordController.state = "On a shopping trip...";
+                }
+                if (localizationManager.CurrentLanguage == "ru_RU")
+                {
+                    discordController.state = "На шоппинге...";
+                }
             }
         }
         else
@@ -163,6 +241,15 @@ public class MenuManagerNew : MonoBehaviour
                 isCatalogOpen = true;
                 isPlayedCatalogAnimation = true;
                 Debug.Log("Catalog");
+
+                if (localizationManager.CurrentLanguage == "en_US")
+                {
+                    discordController.state = "Looks at the catalog...";
+                }
+                if (localizationManager.CurrentLanguage == "ru_RU")
+                {
+                    discordController.state = "Рассматривает каталог...";
+                }
             }
         }
         else
@@ -184,6 +271,10 @@ public class MenuManagerNew : MonoBehaviour
             }
         }
     }
+    public void LoadScene(string _sceneName)
+    {
+        TransitionManager.Instance().Transition(_sceneName, transition, startDelay);
+    }
 
     public void MenuButton()
     {
@@ -192,7 +283,26 @@ public class MenuManagerNew : MonoBehaviour
         isManual = false;
         isStore = false;
         isCatalog = false;
+        isNotSelect = true;
         animator.SetTrigger("DefaultMenu");
+
+        if (localizationManager.CurrentLanguage == "en_US")
+        {
+            discordController.state = "He just sits on the menu and that's it.";
+        }
+        if (localizationManager.CurrentLanguage == "ru_RU")
+        {
+            discordController.state = "Просто сидит в меню и все.";
+        }
+
+        if (localizationManager.CurrentLanguage == "en_US")
+        {
+            discordController.details = "Menu";
+        }
+        if (localizationManager.CurrentLanguage == "ru_RU")
+        {
+            discordController.details = "Меню";
+        }
     }
 
     public void PlayButton()
@@ -202,7 +312,17 @@ public class MenuManagerNew : MonoBehaviour
         isManual = false;
         isStore = false;
         isCatalog = false;
+        isNotSelect = true;
         animator.SetTrigger("PlayMenu");
+
+        if (localizationManager.CurrentLanguage == "en_US")
+        {
+            discordController.state = "Multiplayer or Single-player? Hmmm.";
+        }
+        if (localizationManager.CurrentLanguage == "ru_RU")
+        {
+            discordController.state = "Мультиплеер или Одиночная игра? Хммм.";
+        }
     }
 
     public void QuitButton()
@@ -212,7 +332,17 @@ public class MenuManagerNew : MonoBehaviour
         isManual = false;
         isStore = false;
         isCatalog = false;
+        isNotSelect = true;
         animator.SetTrigger("QuitMenu");
+
+        if (localizationManager.CurrentLanguage == "en_US")
+        {
+            discordController.state = "WANTS TO QUIT THE GAME ((((";
+        }
+        if (localizationManager.CurrentLanguage == "ru_RU")
+        {
+            discordController.state = "ХОЧЕТ ВЫЙТИ ИЗ ИГРЫ ((((";
+        }
     }
 
     public void CreditsButton()
@@ -222,7 +352,17 @@ public class MenuManagerNew : MonoBehaviour
         isManual = false;
         isStore = false;
         isCatalog = false;
+        isNotSelect = true;
         animator.SetTrigger("CreditsMenu");
+
+        if (localizationManager.CurrentLanguage == "en_US")
+        {
+            discordController.state = "Admires the developers ^^";
+        }
+        if (localizationManager.CurrentLanguage == "ru_RU")
+        {
+            discordController.state = "Любуется разработчиками ^^";
+        }
     }
 
     public void SettingsButton()
@@ -232,6 +372,7 @@ public class MenuManagerNew : MonoBehaviour
         isManual = false;
         isStore = false;
         isCatalog = false;
+        isNotSelect = true;
         animator.SetTrigger("SettingsMenu");
     }
     public void CatalogButton()
@@ -241,6 +382,7 @@ public class MenuManagerNew : MonoBehaviour
         isManual = false;
         isStore = false;
         isCatalog = true;
+        isNotSelect = true;
         animator.SetTrigger("CatalogMenu");
         animatorManual.SetTrigger("CloseManual"); 
         animatorStore.SetTrigger("CloseStore");
@@ -253,6 +395,7 @@ public class MenuManagerNew : MonoBehaviour
         isSettings = false;
         isMenu = false;
         isCatalog = false;
+        isNotSelect = true;
         animator.SetTrigger("ManualMenu");
         animatorManual.SetTrigger("OpenManual");
         ManualMonstersObjects.SetActive(true);
@@ -264,6 +407,7 @@ public class MenuManagerNew : MonoBehaviour
         isSettings = false;
         isMenu = false;
         isCatalog = false;
+        isNotSelect = true;
         animator.SetTrigger("StoreMenu");
         animatorStore.SetTrigger("OpenStore");
     }
@@ -316,6 +460,7 @@ public class MenuManagerNew : MonoBehaviour
     public void SingleplayerButton()
     {
         Debug.Log("Single-player mode");
+        LoadScene("TEST");
     }
     public void MultiplayerButton()
     {
@@ -323,14 +468,37 @@ public class MenuManagerNew : MonoBehaviour
     }
     public void ManualToyRobot()
     {
+        isNotSelect = false;
+        isMimic = false;
+        isToyRobot = true;
+        ManualMonsterMimicWindow.SetActive(false);
+        ManualMonsterToyRobotWindow.SetActive(true);
         ManualMonstersObjects.SetActive(true);
         ToyRobotObject.SetActive(true);
         MimicObject.SetActive(false);
     }
     public void ManualMimic()
     {
+        isNotSelect = false;
+        isToyRobot = false;
+        isMimic = true;
+        ManualMonsterMimicWindow.SetActive(true);
+        ManualMonsterToyRobotWindow.SetActive(false);
         ManualMonstersObjects.SetActive(true);
         ToyRobotObject.SetActive(false);
         MimicObject.SetActive(true);
+    }
+    public void ManualInfoButton()
+    {
+        if (isMimic == true) 
+        {
+            ManualMonsterMimicWindow.SetActive(true);
+            Debug.Log("Mimic Info");
+        }
+        if (isMimic == true)
+        {
+            ManualMonsterMimicWindow.SetActive(true);
+            Debug.Log("Mimic Info");
+        }
     }
 }
