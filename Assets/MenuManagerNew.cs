@@ -27,6 +27,13 @@ public class MenuManagerNew : MonoBehaviour
     private bool isStore;
     private bool isCatalog;
 
+    private bool isNotSelect;
+    private bool isToyRobot;
+    private bool isMimic;
+
+    public GameObject ManualMonsterButton;
+    public GameObject ManualMonsterToyRobotWindow;
+    public GameObject ManualMonsterMimicWindow;
     public GameObject ManualMonstersObjects;
     public GameObject ToyRobotObject;
     public GameObject MimicObject;
@@ -58,6 +65,7 @@ public class MenuManagerNew : MonoBehaviour
         isManual = false;
         isStore = false;
         isCatalog = false;
+        isNotSelect = true;
 
 
 
@@ -83,6 +91,12 @@ public class MenuManagerNew : MonoBehaviour
 
     void Update()
     {
+        if (isNotSelect == false)
+        {
+            ManualMonsterToyRobotWindow.SetActive(false);
+            ManualMonsterMimicWindow.SetActive(false);
+        }
+
         if (!isMenu)
         {
             if (Input.GetKeyDown(KeyCode.Escape))
@@ -269,6 +283,7 @@ public class MenuManagerNew : MonoBehaviour
         isManual = false;
         isStore = false;
         isCatalog = false;
+        isNotSelect = true;
         animator.SetTrigger("DefaultMenu");
 
         if (localizationManager.CurrentLanguage == "en_US")
@@ -297,6 +312,7 @@ public class MenuManagerNew : MonoBehaviour
         isManual = false;
         isStore = false;
         isCatalog = false;
+        isNotSelect = true;
         animator.SetTrigger("PlayMenu");
 
         if (localizationManager.CurrentLanguage == "en_US")
@@ -316,6 +332,7 @@ public class MenuManagerNew : MonoBehaviour
         isManual = false;
         isStore = false;
         isCatalog = false;
+        isNotSelect = true;
         animator.SetTrigger("QuitMenu");
 
         if (localizationManager.CurrentLanguage == "en_US")
@@ -335,6 +352,7 @@ public class MenuManagerNew : MonoBehaviour
         isManual = false;
         isStore = false;
         isCatalog = false;
+        isNotSelect = true;
         animator.SetTrigger("CreditsMenu");
 
         if (localizationManager.CurrentLanguage == "en_US")
@@ -354,6 +372,7 @@ public class MenuManagerNew : MonoBehaviour
         isManual = false;
         isStore = false;
         isCatalog = false;
+        isNotSelect = true;
         animator.SetTrigger("SettingsMenu");
     }
     public void CatalogButton()
@@ -363,6 +382,7 @@ public class MenuManagerNew : MonoBehaviour
         isManual = false;
         isStore = false;
         isCatalog = true;
+        isNotSelect = true;
         animator.SetTrigger("CatalogMenu");
         animatorManual.SetTrigger("CloseManual"); 
         animatorStore.SetTrigger("CloseStore");
@@ -375,6 +395,7 @@ public class MenuManagerNew : MonoBehaviour
         isSettings = false;
         isMenu = false;
         isCatalog = false;
+        isNotSelect = true;
         animator.SetTrigger("ManualMenu");
         animatorManual.SetTrigger("OpenManual");
         ManualMonstersObjects.SetActive(true);
@@ -386,6 +407,7 @@ public class MenuManagerNew : MonoBehaviour
         isSettings = false;
         isMenu = false;
         isCatalog = false;
+        isNotSelect = true;
         animator.SetTrigger("StoreMenu");
         animatorStore.SetTrigger("OpenStore");
     }
@@ -446,15 +468,37 @@ public class MenuManagerNew : MonoBehaviour
     }
     public void ManualToyRobot()
     {
+        isNotSelect = false;
+        isMimic = false;
+        isToyRobot = true;
+        ManualMonsterMimicWindow.SetActive(false);
+        ManualMonsterToyRobotWindow.SetActive(true);
         ManualMonstersObjects.SetActive(true);
         ToyRobotObject.SetActive(true);
         MimicObject.SetActive(false);
     }
     public void ManualMimic()
     {
+        isNotSelect = false;
+        isToyRobot = false;
+        isMimic = true;
+        ManualMonsterMimicWindow.SetActive(true);
+        ManualMonsterToyRobotWindow.SetActive(false);
         ManualMonstersObjects.SetActive(true);
         ToyRobotObject.SetActive(false);
         MimicObject.SetActive(true);
     }
-
+    public void ManualInfoButton()
+    {
+        if (isMimic == true) 
+        {
+            ManualMonsterMimicWindow.SetActive(true);
+            Debug.Log("Mimic Info");
+        }
+        if (isMimic == true)
+        {
+            ManualMonsterMimicWindow.SetActive(true);
+            Debug.Log("Mimic Info");
+        }
+    }
 }
