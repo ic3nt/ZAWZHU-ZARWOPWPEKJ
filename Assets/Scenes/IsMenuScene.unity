@@ -3076,7 +3076,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.012132645}
+  m_AnchoredPosition: {x: 0, y: -0.009860992}
   m_SizeDelta: {x: 0, y: 28}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &187589529
@@ -7519,7 +7519,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!81 &498434104
 AudioListener:
   m_ObjectHideFlags: 0
@@ -7677,7 +7677,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!95 &508239229
 Animator:
   serializedVersion: 5
@@ -12382,18 +12382,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 770674546}
-  m_LocalRotation: {x: 0.059255242, y: -0.05372258, z: 0.0031935924, w: 0.9967911}
-  m_LocalPosition: {x: 0, y: 0, z: -6.11}
-  m_LocalScale: {x: 0.022000467, y: 0.027729, z: 0.027729006}
+  m_LocalRotation: {x: 0.03097724, y: 0.9786884, z: -0.07445097, w: 0.18885605}
+  m_LocalPosition: {x: 0, y: 0, z: -11.995}
+  m_LocalScale: {x: 0.016865972, y: 0.021257574, z: 0.02125758}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 135363425}
   - {fileID: 1664280617}
   m_Father: {fileID: 1118204152}
-  m_LocalEulerAnglesHint: {x: 6.804, y: -6.17, z: 0}
+  m_LocalEulerAnglesHint: {x: 9.058, y: 158.305, z: 1.887}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -962.90936, y: -537.85}
+  m_AnchoredPosition: {x: -956.9928, y: -536.31104}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &770674548
@@ -17731,7 +17731,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u041E\u0428\u0418\u0411\u041A\u0410 \u0410\u0412\u0422\u041E\u0420\u0418\u0417\u0410\u0426\u0418\u0418..."
+  m_text: WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 822b4fc90009f064197b8f06b33f09e6, type: 2}
   m_sharedMaterial: {fileID: -3760385980636559934, guid: 822b4fc90009f064197b8f06b33f09e6, type: 2}
@@ -23332,8 +23332,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 483147370}
   m_HandleRect: {fileID: 483147369}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.9999623
+  m_Value: 0
+  m_Size: 0.9999626
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -23759,7 +23759,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.5999985, y: 27}
+  m_AnchoredPosition: {x: -0.099998474, y: 34}
   m_SizeDelta: {x: 60, y: -70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1664280618
@@ -23782,7 +23782,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u041F\u0420\u041E\u0418\u0417\u041E\u0428\u041B\u0410 \u041E\u0428\u0418\u0411\u041A\u0410"
+  m_text: TOY ROBOT
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 822b4fc90009f064197b8f06b33f09e6, type: 2}
   m_sharedMaterial: {fileID: -3760385980636559934, guid: 822b4fc90009f064197b8f06b33f09e6, type: 2}
