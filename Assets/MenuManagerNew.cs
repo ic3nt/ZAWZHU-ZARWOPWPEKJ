@@ -1,3 +1,4 @@
+using EasyTransition;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,12 @@ using UnityEngine.PlayerLoop;
 
 public class MenuManagerNew : MonoBehaviour
 {
+    public DiscordController discordController;
+    public LocalizationManager localizationManager;
+
+    public TransitionSettings transition;
+    public float startDelay;
+
     public Animator animator;
     public Animator animatorSettings;
     public Animator animatorNoConnectionWarning;
@@ -51,6 +58,27 @@ public class MenuManagerNew : MonoBehaviour
         isManual = false;
         isStore = false;
         isCatalog = false;
+
+
+
+        if (localizationManager.CurrentLanguage == "en_US")
+        {
+            discordController.state = "He just sits on the menu and that's it.";
+        }
+        if (localizationManager.CurrentLanguage == "ru_RU")
+        {
+            discordController.state = "Просто сидит в меню и все.";
+        }
+
+        if (localizationManager.CurrentLanguage == "en_US")
+        {
+            discordController.details = "Menu";
+        }
+        if (localizationManager.CurrentLanguage == "ru_RU")
+        {
+            discordController.details = "Меню";
+        }
+
     }
 
     void Update()
@@ -61,6 +89,15 @@ public class MenuManagerNew : MonoBehaviour
             {
                 MenuButton();
                 Debug.Log("Menu");
+
+                if (localizationManager.CurrentLanguage == "en_US")
+                {
+                    discordController.state = "He just sits on the menu and that's it.";
+                }
+                if (localizationManager.CurrentLanguage == "ru_RU")
+                {
+                    discordController.state = "Просто сидит в меню и все.";
+                }
             }
         }
         else
@@ -76,6 +113,15 @@ public class MenuManagerNew : MonoBehaviour
                 isSettingsOpen = true;
                 isSettingsAnimationPlaying = true;
                 Debug.Log("Settings");
+
+                if (localizationManager.CurrentLanguage == "en_US")
+                {
+                    discordController.state = "Sets up Deadly Devastation...";
+                }
+                if (localizationManager.CurrentLanguage == "ru_RU")
+                {
+                    discordController.state = "Настраивает Deadly Devastation...";
+                }
             }
         }
         else
@@ -105,6 +151,15 @@ public class MenuManagerNew : MonoBehaviour
                 isManualOpen = true;
                 isPlayedManualAnimation = true;
                 Debug.Log("Manual");
+
+                if (localizationManager.CurrentLanguage == "en_US")
+                {
+                    discordController.state = "Carefully examines the manual...";
+                }
+                if (localizationManager.CurrentLanguage == "ru_RU")
+                {
+                    discordController.state = "Внимательно изучает справочник...";
+                }
             }
         }
         else
@@ -134,6 +189,15 @@ public class MenuManagerNew : MonoBehaviour
                 isStoreOpen = true;
                 isPlayedStoreAnimation = true;
                 Debug.Log("Store");
+
+                if (localizationManager.CurrentLanguage == "en_US")
+                {
+                    discordController.state = "On a shopping trip...";
+                }
+                if (localizationManager.CurrentLanguage == "ru_RU")
+                {
+                    discordController.state = "На шоппинге...";
+                }
             }
         }
         else
@@ -163,6 +227,15 @@ public class MenuManagerNew : MonoBehaviour
                 isCatalogOpen = true;
                 isPlayedCatalogAnimation = true;
                 Debug.Log("Catalog");
+
+                if (localizationManager.CurrentLanguage == "en_US")
+                {
+                    discordController.state = "Looks at the catalog...";
+                }
+                if (localizationManager.CurrentLanguage == "ru_RU")
+                {
+                    discordController.state = "Рассматривает каталог...";
+                }
             }
         }
         else
@@ -184,6 +257,10 @@ public class MenuManagerNew : MonoBehaviour
             }
         }
     }
+    public void LoadScene(string _sceneName)
+    {
+        TransitionManager.Instance().Transition(_sceneName, transition, startDelay);
+    }
 
     public void MenuButton()
     {
@@ -193,6 +270,24 @@ public class MenuManagerNew : MonoBehaviour
         isStore = false;
         isCatalog = false;
         animator.SetTrigger("DefaultMenu");
+
+        if (localizationManager.CurrentLanguage == "en_US")
+        {
+            discordController.state = "He just sits on the menu and that's it.";
+        }
+        if (localizationManager.CurrentLanguage == "ru_RU")
+        {
+            discordController.state = "Просто сидит в меню и все.";
+        }
+
+        if (localizationManager.CurrentLanguage == "en_US")
+        {
+            discordController.details = "Menu";
+        }
+        if (localizationManager.CurrentLanguage == "ru_RU")
+        {
+            discordController.details = "Меню";
+        }
     }
 
     public void PlayButton()
@@ -203,6 +298,15 @@ public class MenuManagerNew : MonoBehaviour
         isStore = false;
         isCatalog = false;
         animator.SetTrigger("PlayMenu");
+
+        if (localizationManager.CurrentLanguage == "en_US")
+        {
+            discordController.state = "Multiplayer or Single-player? Hmmm.";
+        }
+        if (localizationManager.CurrentLanguage == "ru_RU")
+        {
+            discordController.state = "Мультиплеер или Одиночная игра? Хммм.";
+        }
     }
 
     public void QuitButton()
@@ -213,6 +317,15 @@ public class MenuManagerNew : MonoBehaviour
         isStore = false;
         isCatalog = false;
         animator.SetTrigger("QuitMenu");
+
+        if (localizationManager.CurrentLanguage == "en_US")
+        {
+            discordController.state = "WANTS TO QUIT THE GAME ((((";
+        }
+        if (localizationManager.CurrentLanguage == "ru_RU")
+        {
+            discordController.state = "ХОЧЕТ ВЫЙТИ ИЗ ИГРЫ ((((";
+        }
     }
 
     public void CreditsButton()
@@ -223,6 +336,15 @@ public class MenuManagerNew : MonoBehaviour
         isStore = false;
         isCatalog = false;
         animator.SetTrigger("CreditsMenu");
+
+        if (localizationManager.CurrentLanguage == "en_US")
+        {
+            discordController.state = "Admires the developers ^^";
+        }
+        if (localizationManager.CurrentLanguage == "ru_RU")
+        {
+            discordController.state = "Любуется разработчиками ^^";
+        }
     }
 
     public void SettingsButton()
@@ -316,6 +438,7 @@ public class MenuManagerNew : MonoBehaviour
     public void SingleplayerButton()
     {
         Debug.Log("Single-player mode");
+        LoadScene("TEST");
     }
     public void MultiplayerButton()
     {
@@ -333,4 +456,5 @@ public class MenuManagerNew : MonoBehaviour
         ToyRobotObject.SetActive(false);
         MimicObject.SetActive(true);
     }
+
 }
