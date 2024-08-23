@@ -14,6 +14,7 @@ public class HealthManager : MonoBehaviour
     public Image healthBar;
     public TextMeshProUGUI healthAmountText;
     public Animator animatorHealth;
+    public Animator animatorUI;
     public float healthAmount = 100f;
     public bool timerOn;
 
@@ -33,8 +34,34 @@ public class HealthManager : MonoBehaviour
     void Update()
     {
         healthAmountText.text = healthAmount.ToString("F0") + "%";
+
+        if (healthAmount > 50)
+        {
+            if (!animatorUI.GetCurrentAnimatorStateInfo(0).IsName("Normal"))
+            {
+                Debug.Log("norm");
+                animatorUI.SetTrigger("Normal");
+            }
+        }
+        else if (healthAmount <= 50 && healthAmount > 30)
+        {
+            if (!animatorUI.GetCurrentAnimatorStateInfo(0).IsName("Health50"))
+            {
+                animatorUI.SetTrigger("Health50");
+                Debug.Log("50");
+            }
+        }
+        else if (healthAmount <= 30 && healthAmount > 0)
+        {
+            if (!animatorUI.GetCurrentAnimatorStateInfo(0).IsName("Health30"))
+            {
+                Debug.Log("30");
+                animatorUI.SetTrigger("Health30");
+            }
+        }
         if (healthAmount <= 0)
         {
+            Debug.Log("ded");
             Dead();
         }
         else
@@ -62,6 +89,7 @@ public class HealthManager : MonoBehaviour
             }
         }
     }
+
 
     private IEnumerator DeductHealthOverTime()
     {
@@ -96,6 +124,7 @@ public class HealthManager : MonoBehaviour
         personMovement.GetComponent<FirstPersonMovement>().enabled = false;
         personLook.GetComponent<FirstPersonLook>().enabled = false;
         personAudio.GetComponent<FirstPersonAudio>().enabled = false;
+        animatorUI.SetTrigger("Dead");
     }
 
     public void GoToMenuButton()

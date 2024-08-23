@@ -49,7 +49,7 @@ public class Door : NetworkBehaviour
         {
             if (hit.collider.CompareTag("Door"))
             {
-                if (hit.collider.TryGetComponent<DoorSt>(out var ds) && !ds.islocked)
+                if (hit.collider.TryGetComponent<DoorSt>(out var ds) && !ds.isLocked)
                 {
                    an = hit.collider.transform.GetComponent<Animator>();
 
