@@ -3,14 +3,18 @@ using PlayFab.ClientModels;
 using UnityEngine;
 using TMPro;
 using System.Collections;
+using UnityEngine.ProBuilder.MeshOperations;
 
 public class PlayFabManager : MonoBehaviour
 {
     public TextMeshProUGUI NameText;
     public GameObject ErrorLoginWindow;
     public GameObject BanWindow;
+    public GameObject NotFoundOrDeleteAccountWindow;
     public GameObject Buttons;
     public GameObject DevelopersSegmentObject;
+
+    public ConnectManager ConnectManager;
 
     private string playFabId;
 
@@ -60,6 +64,13 @@ public class PlayFabManager : MonoBehaviour
         Buttons.SetActive(false);
     }
 
+    private void OnAccountNotFoundOrDelete(PlayFabError fabError)
+    {
+        Debug.Log("The player account not found or delete.");
+        StartCoroutine(NotFoundOrDeleteWindowWaitForSecondCoroutine());
+        Buttons.SetActive(false);
+    }
+
     private void OnLoginError(PlayFabError error)
     {
         Debug.LogError("Login failed: " + error.ErrorMessage);
@@ -68,11 +79,24 @@ public class PlayFabManager : MonoBehaviour
         {
             OnBanned(error);
         }
-        else
+        else 
         {
-            StartCoroutine(ErrorWindowWaitForSecondCoroutine());
-            Buttons.SetActive(false);
+            if (ConnectManager.Online == true)
+            {
+                StartCoroutine(ErrorWindowWaitForSecondCoroutine());
+                Buttons.SetActive(false);
+            }
+            else
+            {
+                Buttons.SetActive(true);
+            }
         }
+
+        if (error.Error == PlayFabErrorCode.AccountDeleted && error.Error == PlayFabErrorCode.AccountNotFound)
+        {
+            OnAccountNotFoundOrDelete(error);
+        }
+        
     }
 
     private IEnumerator ErrorWindowWaitForSecondCoroutine()
@@ -85,6 +109,11 @@ public class PlayFabManager : MonoBehaviour
     {
         yield return new WaitForSeconds(0.8f);
         BanWindow.SetActive(true);
+    }
+    private IEnumerator NotFoundOrDeleteWindowWaitForSecondCoroutine()
+    {
+        yield return new WaitForSeconds(0.8f);
+        NotFoundOrDeleteAccountWindow.SetActive(true);
     }
 
     private void GetPlayerSegments()

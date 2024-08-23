@@ -12,6 +12,8 @@ public class ConnectManager : MonoBehaviour
     public BoxCollider boxCollider;
     public GameObject Objects;
 
+    [HideInInspector] public bool Online;
+
     void Start()
     {
         if (Application.internetReachability == NetworkReachability.NotReachable)
@@ -20,6 +22,7 @@ public class ConnectManager : MonoBehaviour
             boxCollider.enabled = false;
             Objects.SetActive(true);
             Debug.Log("Offline");
+            Online = false;
         }
         else
         {
@@ -27,6 +30,7 @@ public class ConnectManager : MonoBehaviour
             boxCollider.enabled = true;
             Objects.SetActive(false);
             Debug.Log("Online");
+            Online = true;
         }
     }
 }

@@ -4,20 +4,16 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class DragRigidbody : MonoBehaviour
 {
-
-
-
-    public float force = 600;
-    public float damping = 6;
-    public float distance = 15;
+    public float force = 1000;
+    public float damping = 100;
+    public float distance = 10;
+    public float rotationSpeed = 150f; // скорость вращени€
 
     Transform jointTrans;
     float dragDepth;
 
     void OnMouseDown()
     {
-
-
         HandleInputBegin(Input.mousePosition);
     }
 
@@ -29,6 +25,11 @@ public class DragRigidbody : MonoBehaviour
     void OnMouseDrag()
     {
         HandleInput(Input.mousePosition);
+    }
+
+    void Update()
+    {
+        HandleRotation();
     }
 
     public void HandleInputBegin(Vector3 screenPosition)
@@ -43,22 +44,20 @@ public class DragRigidbody : MonoBehaviour
                 jointTrans = AttachJoint(hit.rigidbody, hit.point);
             }
         }
-
     }
 
     public void HandleInput(Vector3 screenPosition)
     {
         if (jointTrans == null)
             return;
+
         var worldPos = Camera.main.ScreenToWorldPoint(screenPosition);
         jointTrans.position = CameraPlane.ScreenToWorldPlanePoint(Camera.main, dragDepth, screenPosition);
-
         DrawRope();
     }
 
     public void HandleInputEnd(Vector3 screenPosition)
     {
-
         Destroy(jointTrans.gameObject);
     }
 
@@ -99,11 +98,29 @@ public class DragRigidbody : MonoBehaviour
         {
             return;
         }
-
     }
 
-    internal void HandleInputEnd()
+    private void HandleRotation()
     {
-        throw new NotImplementedException();
+        if (jointTrans == null)
+            return;
+
+        // ѕолучение вращени€ по колесико мыши
+        float scrollInput = Input.GetAxis("Mouse ScrollWheel");
+        if (scrollInput != 0)
+        {
+            jointTrans.Rotate(Vector3.up, scrollInput * rotationSpeed);
+        }
+
+        // ѕолучение вращени€ по клавишам Q и E
+        if (Input.GetKey(KeyCode.Q))
+        {
+            jointTrans.Rotate(Vector3.up, -rotationSpeed * Time.deltaTime);
+        }
+
+        if (Input.GetKey(KeyCode.E))
+        {
+            jointTrans.Rotate(Vector3.up, rotationSpeed * Time.deltaTime);
+        }
     }
 }

@@ -7528,6 +7528,7 @@ GameObject:
   - component: {fileID: 495000531984592037}
   - component: {fileID: 4729290981992345940}
   - component: {fileID: 7145195233837505547}
+  - component: {fileID: -4546272193867825870}
   m_Layer: 0
   m_Name: 5vv
   m_TagString: Player
@@ -7670,6 +7671,8 @@ MonoBehaviour:
   personLook: {fileID: 8533064430002862332}
   personAudio: {fileID: 3120670774816859043}
   healthBar: {fileID: 4870125818495765420}
+  healthAmountText: {fileID: 0}
+  animatorHealth: {fileID: 0}
   healthAmount: 1000000
   timerOn: 1
 --- !u!65 &3877598324045227447
@@ -7822,6 +7825,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 520ffb3b132e948119bdd8525ef3327e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Cheat: {fileID: 0}
 --- !u!114 &4729290981992345940
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7867,6 +7871,18 @@ MonoBehaviour:
   InLocalSpace: 0
   Interpolate: 1
   SlerpPosition: 0
+--- !u!114 &-4546272193867825870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4031086668329526642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5c84f1ad81b66345bf0711afb117bcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4092293485557220891
 GameObject:
   m_ObjectHideFlags: 0
