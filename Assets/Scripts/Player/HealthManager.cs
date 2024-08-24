@@ -51,12 +51,20 @@ public class HealthManager : MonoBehaviour
                 Debug.Log("50");
             }
         }
-        else if (healthAmount <= 30 && healthAmount > 0)
+        else if (healthAmount <= 30 && healthAmount > 15)
         {
             if (!animatorUI.GetCurrentAnimatorStateInfo(0).IsName("Health30"))
             {
                 Debug.Log("30");
                 animatorUI.SetTrigger("Health30");
+            }
+        }
+        else if (healthAmount <= 15 && healthAmount > 0)
+        {
+            if (!animatorUI.GetCurrentAnimatorStateInfo(0).IsName("Health30"))
+            {
+                Debug.Log("15");
+                animatorUI.SetTrigger("Health15");
             }
         }
         if (healthAmount <= 0)

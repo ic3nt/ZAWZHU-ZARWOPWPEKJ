@@ -22,7 +22,7 @@ public class FirstPersonMovement : NetworkBehaviour
     public KeyCode runningKey = KeyCode.LeftShift;
 
     Rigidbody rigidbody;
-    /// <summary> Functions to override movement speed. Will use the last added override. </summary>
+
     public List<System.Func<float>> speedOverrides = new List<System.Func<float>>();
 
     private void Start()
@@ -94,50 +94,28 @@ public class FirstPersonMovement : NetworkBehaviour
     }
     void Awake()
     {
-
-        // Get the rigidbody on this.
         rigidbody = GetComponent<Rigidbody>();
-
     }
 
     void FixedUpdate()
     {
         if (!IsOwner) return;
 
-        // Получаем ввод пользователя.
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
+        IsRunning = canRun && Input.GetKey(KeyCode.LeftShift);
 
-        // Определяем, движется ли игрок вперед или вбок, но не назад.
-        bool isMovingForwardOrSideways = (verticalInput > 0) || (horizontalInput != 0);
-
-        // Обновляем IsRunning в зависимости от ввода.
-        if (canRun && Input.GetKey(KeyCode.LeftShift) && isMovingForwardOrSideways)
-        {
-            IsRunning = true;
-        }
-        else
-        {
-            IsRunning = false;
-        }
-
-        // Получаем целевую скорость движения.
         float targetMovingSpeed = IsRunning ? runSpeed : speed;
         if (speedOverrides.Count > 0)
         {
             targetMovingSpeed = speedOverrides[speedOverrides.Count - 1]();
         }
 
-        // Получаем целевую скорость на основе ввода.
-        Vector2 targetVelocity = new Vector2(horizontalInput * targetMovingSpeed, verticalInput * targetMovingSpeed);
+        Vector2 targetVelocity = new Vector2(Input.GetAxis("Horizontal") * targetMovingSpeed, Input.GetAxis("Vertical") * targetMovingSpeed);
 
-        // Применяем движение.
         rigidbody.velocity = transform.rotation * new Vector3(targetVelocity.x, rigidbody.velocity.y, targetVelocity.y);
-    }
 
+    }
     private void ZoomCamera(float targetZoom)
     {
         camera.fieldOfView = Mathf.Lerp(camera.fieldOfView, targetZoom, zoomSpeed * Time.deltaTime);
-
     }
 }
