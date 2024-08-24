@@ -17,9 +17,10 @@ GameObject:
   - component: {fileID: -2169104076610081510}
   - component: {fileID: -5316953515251061445}
   - component: {fileID: 8336313424867382445}
-  m_Layer: 0
+  - component: {fileID: -4530129357894266428}
+  m_Layer: 9
   m_Name: canned_food_03
-  m_TagString: canPickUp
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -136,7 +137,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!205 &2438749783384224598
 LODGroup:
   m_ObjectHideFlags: 0
@@ -173,7 +174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2174554891
+  GlobalObjectIdHash: 70981364
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -225,3 +226,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6c0be61502bb534f922ebb746851216, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-4530129357894266428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5785366010336307771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1f1cd38c7a6e044394942fbad8bf692, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  force: 1000
+  damping: 100
+  distance: 3
+  rotationSpeed: 150

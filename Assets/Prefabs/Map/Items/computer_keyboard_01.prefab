@@ -15,9 +15,10 @@ GameObject:
   - component: {fileID: -5137582523634407477}
   - component: {fileID: 438339215594624108}
   - component: {fileID: 5056301468667071699}
-  m_Layer: 0
+  - component: {fileID: 1288315628934766288}
+  m_Layer: 9
   m_Name: computer_keyboard_01
-  m_TagString: canPickUp
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -85,7 +86,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!205 &2858868123899534308
 LODGroup:
   m_ObjectHideFlags: 0
@@ -174,6 +175,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6c0be61502bb534f922ebb746851216, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1288315628934766288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6844519328870134274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1f1cd38c7a6e044394942fbad8bf692, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  force: 1000
+  damping: 100
+  distance: 3
+  rotationSpeed: 150
 --- !u!1 &8334654613382091433
 GameObject:
   m_ObjectHideFlags: 0
@@ -185,7 +202,7 @@ GameObject:
   - component: {fileID: 445971484054074538}
   - component: {fileID: 635779782085739902}
   - component: {fileID: 7451236843068403277}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}

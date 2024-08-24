@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class Key : MonoBehaviour
 {
-    public GameObject keyobj;
+    public GameObject KeyObject;
 }

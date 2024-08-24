@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5139642263950543612}
   - component: {fileID: 8087476163054187192}
   - component: {fileID: 5668472500762958391}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: stripe_low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,9 +101,10 @@ GameObject:
   - component: {fileID: -7655991711439412992}
   - component: {fileID: -4934575872065118736}
   - component: {fileID: 7230240860133102231}
-  m_Layer: 0
+  - component: {fileID: 5588576164315945141}
+  m_Layer: 9
   m_Name: radio
-  m_TagString: canPickUp
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -171,7 +172,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!82 &5488048530314880871
 AudioSource:
   m_ObjectHideFlags: 0
@@ -523,6 +524,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6c0be61502bb534f922ebb746851216, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5588576164315945141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4397076294017743965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1f1cd38c7a6e044394942fbad8bf692, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  force: 1000
+  damping: 100
+  distance: 3
+  rotationSpeed: 150
 --- !u!1 &4585849987749332212
 GameObject:
   m_ObjectHideFlags: 0
@@ -534,7 +551,7 @@ GameObject:
   - component: {fileID: 8814719599989678586}
   - component: {fileID: 470312430439052905}
   - component: {fileID: 4479960175981245189}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: antena_low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -617,7 +634,7 @@ GameObject:
   - component: {fileID: 4479965386891549553}
   - component: {fileID: 2042129804982229341}
   - component: {fileID: 3855123866112597929}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sphere_low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -700,7 +717,7 @@ GameObject:
   - component: {fileID: 1827013765107093778}
   - component: {fileID: 6647557594828585578}
   - component: {fileID: 5258728412222796845}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: RadioBase_low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -783,7 +800,7 @@ GameObject:
   - component: {fileID: 7927222558572940635}
   - component: {fileID: 9066584152050783588}
   - component: {fileID: 3093705063565263502}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: RadioVisor_low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -866,7 +883,7 @@ GameObject:
   - component: {fileID: 43986312182054593}
   - component: {fileID: 2732895578947128277}
   - component: {fileID: 5563464676522408948}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Generator_low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -949,7 +966,7 @@ GameObject:
   - component: {fileID: 8252918855699173046}
   - component: {fileID: 5950268488883127409}
   - component: {fileID: 2207695944372327839}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: buttons_low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1030,7 +1047,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7181019297067342476}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Radio_low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1071,7 +1088,7 @@ GameObject:
   - component: {fileID: 9084030167360657918}
   - component: {fileID: 3803584371990280359}
   - component: {fileID: 9004410730517072019}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}

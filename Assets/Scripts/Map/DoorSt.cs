@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DoorSt : MonoBehaviour
 {
-    public AudioSource aus;
+    public AudioSource audioSource;
     public bool isLocked;
 
     [Range(0, 1)]
@@ -15,7 +15,6 @@ public class DoorSt : MonoBehaviour
         if (Random.value > ChanceOfLock)
         {
             isLocked = true;
-
         }
         else
         {
@@ -23,18 +22,17 @@ public class DoorSt : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnCollisionEnter(Collider other)
     {
-        if ((other.CompareTag("canPickUp")) && isLocked )
+        if ((other.CompareTag("Key")) && isLocked)
         {
-            if (other.TryGetComponent<Key>(out var ke))
+            if (other.TryGetComponent<Key>(out var key))
             {
-                aus.Play();
+                audioSource.Play();
                 isLocked = false;
-                Destroy(ke.keyobj);
+                Destroy(key.KeyObject);
             }
         }
-
 
     }
 }

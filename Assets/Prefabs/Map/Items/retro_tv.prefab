@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3145774406180634001}
   - component: {fileID: 6704006111131254897}
   - component: {fileID: 6038816933215566013}
-  m_Layer: 11
+  m_Layer: 9
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -216,7 +216,7 @@ GameObject:
   - component: {fileID: 2923242647312014226}
   - component: {fileID: 2939515268325672200}
   - component: {fileID: -7828174616818997344}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: retro_tv
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -287,7 +287,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!205 &3858171368409411273
 LODGroup:
   m_ObjectHideFlags: 0
@@ -374,7 +374,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 4279231866
+  GlobalObjectIdHash: 3440179026
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -437,7 +437,7 @@ GameObject:
   - component: {fileID: 3905037592909761897}
   - component: {fileID: 5124077314556328906}
   - component: {fileID: 8831806575931621111}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}

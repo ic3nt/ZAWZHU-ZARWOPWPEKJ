@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5982116164619671838}
   - component: {fileID: 4297706470948075608}
   - component: {fileID: 3153652249397716364}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,9 +98,10 @@ GameObject:
   - component: {fileID: -8450934354685758233}
   - component: {fileID: -5878753971702230343}
   - component: {fileID: -1372546254081005370}
-  m_Layer: 0
+  - component: {fileID: -2220982651347968625}
+  m_Layer: 9
   m_Name: Paper
-  m_TagString: canPickUp
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -171,7 +172,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!205 &1102200074935384548
 LODGroup:
   m_ObjectHideFlags: 0
@@ -260,6 +261,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6c0be61502bb534f922ebb746851216, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-2220982651347968625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3095562837521107213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1f1cd38c7a6e044394942fbad8bf692, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  force: 1000
+  damping: 100
+  distance: 3
+  rotationSpeed: 150
 --- !u!1 &8117550451749448989
 GameObject:
   m_ObjectHideFlags: 0
@@ -269,7 +286,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4874461232977948835}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: bandage_roll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
