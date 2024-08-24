@@ -14983,9 +14983,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1f1cd38c7a6e044394942fbad8bf692, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: 600
-  damping: 6
-  distance: 15
+  force: 1000
+  damping: 100
+  distance: 3
+  rotationSpeed: 150
 --- !u!114 &1681381140
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16166,7 +16167,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1851711790}
-  - component: {fileID: 1851711789}
   - component: {fileID: 1851711788}
   - component: {fileID: 1851711791}
   m_Layer: 0
@@ -16203,27 +16203,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
---- !u!65 &1851711789
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1851711787}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.5240078, y: 0.13909544, z: 0.29720736}
-  m_Center: {x: 0.0059552253, y: 0.06240316, z: -0.0042655454}
 --- !u!4 &1851711790
 Transform:
   m_ObjectHideFlags: 0
@@ -16575,8 +16554,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.5, y: 0.125, z: 0.3}
-  m_Center: {x: 0, y: 0.0625, z: 0.00000047683716}
+  m_Size: {x: 0.49999994, y: 0.22285268, z: 0.3}
+  m_Center: {x: 0, y: 0.11142634, z: 0.00000047757214}
 --- !u!43 &1941102667
 Mesh:
   m_ObjectHideFlags: 0

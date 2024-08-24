@@ -6,8 +6,8 @@ public class DragRigidbody : MonoBehaviour
 {
     public float force = 1000;
     public float damping = 100;
-    public float distance = 10;
-    public float rotationSpeed = 150f; // скорость вращени€
+    public float distance = 3;
+    public float rotationSpeed = 150f;
 
     Transform jointTrans;
     float dragDepth;
@@ -105,14 +105,12 @@ public class DragRigidbody : MonoBehaviour
         if (jointTrans == null)
             return;
 
-        // ѕолучение вращени€ по колесико мыши
         float scrollInput = Input.GetAxis("Mouse ScrollWheel");
         if (scrollInput != 0)
         {
             jointTrans.Rotate(Vector3.up, scrollInput * rotationSpeed);
         }
 
-        // ѕолучение вращени€ по клавишам Q и E
         if (Input.GetKey(KeyCode.Q))
         {
             jointTrans.Rotate(Vector3.up, -rotationSpeed * Time.deltaTime);

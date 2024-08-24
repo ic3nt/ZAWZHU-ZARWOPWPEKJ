@@ -100,40 +100,40 @@ public class FirstPersonMovement : NetworkBehaviour
 
     }
 
-   void FixedUpdate()
-{
-    if (!IsOwner) return;
-
-    // Получаем ввод пользователя.
-    float horizontalInput = Input.GetAxis("Horizontal");
-    float verticalInput = Input.GetAxis("Vertical");
-
-    // Определяем, движется ли игрок вперед или вбок, но не назад.
-    bool isMovingForwardOrSideways = (verticalInput > 0) || (horizontalInput != 0);
-
-    // Обновляем IsRunning в зависимости от ввода.
-    if (canRun && Input.GetKey(KeyCode.LeftShift) && isMovingForwardOrSideways)
+    void FixedUpdate()
     {
-        IsRunning = true;
-    }
-    else
-    {
-        IsRunning = false;
-    }
+        if (!IsOwner) return;
 
-    // Получаем целевую скорость движения.
-    float targetMovingSpeed = IsRunning ? runSpeed : speed;
-    if (speedOverrides.Count > 0)
-    {
-        targetMovingSpeed = speedOverrides[speedOverrides.Count - 1]();
+        // Получаем ввод пользователя.
+        float horizontalInput = Input.GetAxis("Horizontal");
+        float verticalInput = Input.GetAxis("Vertical");
+
+        // Определяем, движется ли игрок вперед или вбок, но не назад.
+        bool isMovingForwardOrSideways = (verticalInput > 0) || (horizontalInput != 0);
+
+        // Обновляем IsRunning в зависимости от ввода.
+        if (canRun && Input.GetKey(KeyCode.LeftShift) && isMovingForwardOrSideways)
+        {
+            IsRunning = true;
+        }
+        else
+        {
+            IsRunning = false;
+        }
+
+        // Получаем целевую скорость движения.
+        float targetMovingSpeed = IsRunning ? runSpeed : speed;
+        if (speedOverrides.Count > 0)
+        {
+            targetMovingSpeed = speedOverrides[speedOverrides.Count - 1]();
+        }
+
+        // Получаем целевую скорость на основе ввода.
+        Vector2 targetVelocity = new Vector2(horizontalInput * targetMovingSpeed, verticalInput * targetMovingSpeed);
+
+        // Применяем движение.
+        rigidbody.velocity = transform.rotation * new Vector3(targetVelocity.x, rigidbody.velocity.y, targetVelocity.y);
     }
-
-    // Получаем целевую скорость на основе ввода.
-    Vector2 targetVelocity = new Vector2(horizontalInput * targetMovingSpeed, verticalInput * targetMovingSpeed);
-
-    // Применяем движение.
-    rigidbody.velocity = transform.rotation * new Vector3(targetVelocity.x, rigidbody.velocity.y, targetVelocity.y);
-}
 
     private void ZoomCamera(float targetZoom)
     {
