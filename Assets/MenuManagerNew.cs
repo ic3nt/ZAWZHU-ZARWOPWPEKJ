@@ -56,6 +56,8 @@ public class MenuManagerNew : MonoBehaviour
 
     void Start()
     {
+        Cursor.lockState = CursorLockMode.None;
+
         isPlayedStoreAnimation = false;
         isPlayedManualAnimation = false;
         isPlayedSettingsAnimation = false;
