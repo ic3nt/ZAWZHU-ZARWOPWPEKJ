@@ -14965,7 +14965,7 @@ Transform:
   m_GameObject: {fileID: 1681381133}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.94, y: 1.701, z: 6.76}
+  m_LocalPosition: {x: 3.94, y: 1.22, z: 8.54}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -18214,7 +18214,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53c4aec65476b2949b755d0cf709fd4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ipAddressText: {fileID: 7181451774960836697}
 --- !u!224 &868977978816212286
 RectTransform:
   m_ObjectHideFlags: 0
@@ -18642,7 +18641,6 @@ GameObject:
   - component: {fileID: 8973073259976284561}
   - component: {fileID: 7385628205857566256}
   - component: {fileID: 1374303546341781443}
-  - component: {fileID: 8609441775213137461}
   m_Layer: 0
   m_Name: NetworkManager
   m_TagString: Untagged
@@ -40217,26 +40215,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &8609441775213137461
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1274197820988829733}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76031bbd0fdd64d4bbae7e5792333add, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  firstPersonLook: {fileID: 0}
-  firstPersonMovement: {fileID: 0}
-  NetworkUnstableWindow: {fileID: 0}
-  timeRemaining: 90
-  timerIsRunning: 0
-  startDelay: 0
-  transition: {fileID: 0}
-  timeText: {fileID: 0}
 --- !u!23 &8633541923006424424
 MeshRenderer:
   m_ObjectHideFlags: 0

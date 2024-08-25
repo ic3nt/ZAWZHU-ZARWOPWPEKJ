@@ -1,60 +1,56 @@
 {
    "items":[
       {
-         "key":"SingleplayerText",
-         "value":"ОДИНОЧНАЯ ИГРА"
+         "key":"PlayText",
+         "value":"ИГРАТЬ"
       },
       {
-         "key":"CatalogButton",
-         "value":"Каталог"
+         "key":"SingleplayerText",
+         "value":"ОДИНОЧНАЯ ИГРА"
       },
       {
          "key":"MultiplayerText",
          "value":"МУЛЬТИПЛЕЕР"
       },
       {
-         "key":"SettingsButton",
-         "value":"Настройки"
-      },
-      {
-         "key":"CreditsButton",
-         "value":"Титры"
-      },
-      {
-         "key":"QuitButton",
-         "value":"Выйти из игры"
-      },
-      {
          "key":"ExitToMenuButton",
          "value":"ВЕРНУТСЯ НАЗАД"
       },
       {
-         "key":"MultiplayerWindowText",
-         "value":"МУЛЬТИПЛЕЕР"
-      },
-      {
-         "key":"SinglePlayerWindowText",
+         "key":"SinglePlayerText",
          "value":"ОДИНОЧНАЯ ИГРА"
       },
       {
-         "key":"CatalogWindowText",
+         "key":"CatalogText",
          "value":"КАТАЛОГ"
       },
       {
-         "key":"SettingsWindowText",
+         "key":"SettingsText",
          "value":"НАСТРОЙКИ"
       },
       {
-         "key":"CreditsWindowText",
+         "key":"CreditsText",
          "value":"ТИТРЫ"
+      },
+	  {
+         "key":"QuitText",
+         "value":"ВЫЙТИ"
+      },
+	  {
+         "key":"QuitTheGameDialogText",
+         "value":"ВЫЙТИ ИЗ ИГРЫ?"
+      },
+	  {
+         "key":"QuitTheGameDialogTipText",
+         "value":"[для выхода нажмите на дверь]"
       },
       {
          "key":"SettingsWindowLanguageText",
-         "value":"Язык"
+         "value":"ЯЗЫК"
       },
 	  {
          "key":"SettingsWindowGameplayText",
-         "value":"Игра"
+         "value":"ИГРА"
       },
 	  {
          "key":"SettingsWindowAudioText",
@@ -62,23 +58,31 @@
       },
 	  {
          "key":"SettingsWindowMusicText",
-         "value":"Музыка"
+         "value":"МУЗЫКА"
       },
 	  {
          "key":"SettingsWindowSFXText",
-         "value":"Звуки"
+         "value":"ЗВУКИ"
       },
 	  {
          "key":"SettingsWindowSensitivityText",
-         "value":"Чувствительность"
+         "value":"ЧУВСТВИТЕЛЬНОСТЬ"
+      },
+	  	  {
+         "key":"SettingsWindowGraphicsQualityText",
+         "value":"КАЧЕСТВО ГРАФИКИ"
+      },
+	  {
+         "key":"SettingsWindowScreenResolutionText",
+         "value":"РАЗРЕШЕНИЕ ЭКРАНА"
       },
 	  {
          "key":"SettingsWindowFullscreenText",
-         "value":"Полный экран"
+         "value":"НА ВЕСЬ ЭКРАН"
       },
 	  {
          "key":"PauseWindowResumeText",
-         "value":"Продолжить"
+         "value":"ПРОДОЛЖИТЬ"
       },
 	  {
          "key":"PauseWindowText",
@@ -86,11 +90,11 @@
       },
 	  {
          "key":"PauseWindowExitText",
-         "value":"Выйти"
+         "value":"ВЫЙТИ"
       },
       {
          "key":"CreditsWindowWorkingText",
-         "value":"НАД ИГРОЙ РАБОТАЛИ"
+         "value":"НАД ИГРОЙ РАБОТАЛИ:"
       },
       {
          "key":"CreditsWindowUsedMaterialsText",
@@ -155,6 +159,18 @@
       {
          "key":"FirstOpenGameLetsGoText",
          "value":"ПОГНАЛИ!"
+      },
+	  {
+         "key":"LoadingText",
+         "value":"ЗАГРУЗКА РЕСУРСОВ ИГРЫ..."
+      },
+	  {
+         "key":"YesText",
+         "value":"YES"
+      },
+	  {
+         "key":"NoText",
+         "value":"NO"
       }
    ]
 }

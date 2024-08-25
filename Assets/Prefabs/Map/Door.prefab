@@ -176,8 +176,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.9827606, y: 1.8548815, z: 0.14526558}
-  m_Center: {x: -0.4943482, y: 0.04302323, z: 0.0046482086}
+  m_Size: {x: 0.9827606, y: 1.8548815, z: 0.4644022}
+  m_Center: {x: -0.4943482, y: 0.04302323, z: 0.0013051033}
 --- !u!205 &7195698031399336818
 LODGroup:
   m_ObjectHideFlags: 0
@@ -214,8 +214,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2e8af7b1feab457bbd48d90fe15a7f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aus: {fileID: 5203425557786763021}
-  islocked: 0
+  audioSource: {fileID: 776831136932425165}
+  isLocked: 0
   ChanceOfLock: 0.5
 --- !u!82 &5203425557786763021
 AudioSource:
@@ -325,7 +325,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1142436568
+  GlobalObjectIdHash: 687611909
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1

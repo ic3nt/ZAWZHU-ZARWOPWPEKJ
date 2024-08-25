@@ -1,68 +1,64 @@
 {
    "items":[
       {
-         "key":"SingleplayerText",
-         "value":"SINGLE-PLAYER"
+         "key":"PlayText",
+         "value":"PLAY"
       },
       {
-         "key":"CatalogButton",
-         "value":"Catalog"
+         "key":"SingleplayerText",
+         "value":"SINGLE-PLAYER"
       },
       {
          "key":"MultiplayerText",
          "value":"MULTIPLAYER"
       },
       {
-         "key":"SettingsButton",
-         "value":"Settings"
-      },
-      {
-         "key":"CreditsButton",
-         "value":"Credits"
-      },
-      {
-         "key":"QuitButton",
-         "value":"Quit"
-      },
-      {
          "key":"ExitToMenuButton",
-         "value":"EXIT"
+         "value":"EXIT TO MENU"
       },
       {
-         "key":"MultiplayerWindowText",
-         "value":"MULTIPLAYER"
-      },
-      {
-         "key":"SinglePlayerWindowText",
+         "key":"SinglePlayerText",
          "value":"SINGLE PLAYER"
       },
       {
-         "key":"CatalogWindowText",
+         "key":"CatalogText",
          "value":"CATALOG"
       },
       {
-         "key":"SettingsWindowText",
+         "key":"SettingsText",
          "value":"SETTINGS"
       },
       {
-         "key":"CreditsWindowText",
+         "key":"CreditsText",
          "value":"CREDITS"
+      },
+	  {
+         "key":"QuitText",
+         "value":"QUIT"
+      },
+	  {
+         "key":"QuitTheGameDialogText",
+         "value":"QUIT THE GAME?"
+      },
+	  {
+         "key":"QuitTheGameDialogTipText",
+         "value":"[click on the door to quit]"
       },
       {
          "key":"SettingsWindowLanguageText",
-         "value":"Language"
+         "value":"LANGUAGE"
       },
 	  {
          "key":"SettingsWindowGameplayText",
-         "value":"Gameplay"
+         "value":"GAMEPLAY"
       },
 	  {
          "key":"SettingsWindowAudioText",
-         "value":"Audio"
+         "value":"AUDIO"
       },
 	  {
          "key":"SettingsWindowMusicText",
-         "value":"Music"
+         "value":"MUSIC"
       },
 	  {
          "key":"SettingsWindowSFXText",
@@ -70,15 +66,24 @@
       },
 	  {
          "key":"SettingsWindowSensitivityText",
-         "value":"Sensitivity"
+         "value":"SENSITIVITY"
       },
 	  {
+         "key":"SettingsWindowGraphicsQualityText",
+         "value":"GRAPHICS QUALITY"
+      },
+	  {
+         "key":"SettingsWindowScreenResolutionText",
+         "value":"SCREEN RESOLUTION"
+      },
+	  
+	  {
          "key":"SettingsWindowFullscreenText",
-         "value":"Fullscreen"
+         "value":"FULLSCREEN"
       },
 	  {
          "key":"PauseWindowResumeText",
-         "value":"Resume"
+         "value":"RESUME"
       },
 	  {
          "key":"PauseWindowText",
@@ -86,11 +91,11 @@
       },
       {
          "key":"PauseWindowExitText",
-         "value":"Exit"
+         "value":"EXIT"
       },
       {
          "key":"CreditsWindowWorkingText",
-         "value":"WE WERE WORKING ON THE GAME"
+         "value":"WE WERE WORKING ON THE GAME:"
       },
       {
          "key":"CreditsWindowSpecialThanksText",
@@ -155,6 +160,18 @@
       {
          "key":"FirstOpenGameLetsGoText",
          "value":"LET'S GO!"
+      },
+	  {
+         "key":"LoadingText",
+         "value":"LOADING GAME RESOURCES..."
+      },
+	  {
+         "key":"YesText",
+         "value":"YES"
+      },
+	  {
+         "key":"NoText",
+         "value":"NO"
       }
    ]
 }

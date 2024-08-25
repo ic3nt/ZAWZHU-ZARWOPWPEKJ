@@ -22,7 +22,7 @@ public class DoorSt : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         if ((other.CompareTag("Key")) && isLocked)
         {
@@ -31,6 +31,7 @@ public class DoorSt : MonoBehaviour
                 audioSource.Play();
                 isLocked = false;
                 Destroy(key.KeyObject);
+                Debug.Log("Key");
             }
         }
 
