@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 874462658083008128}
   - component: {fileID: 5180170901061033999}
   - component: {fileID: 4074896290924485801}
-  - component: {fileID: 915889693278514946}
   - component: {fileID: 7487998224082578652}
   - component: {fileID: 7991041793280119373}
   - component: {fileID: 265234939373311264}
@@ -23,6 +22,7 @@ GameObject:
   - component: {fileID: 7601599034886407777}
   - component: {fileID: 4199001734257639568}
   - component: {fileID: 1058461763076380356}
+  - component: {fileID: 5624368129212488429}
   m_Layer: 0
   m_Name: First Person Camera
   m_TagString: MainCamera
@@ -136,22 +136,6 @@ MonoBehaviour:
   smoothing: 1.5
   enableCameraShake: 0
   shakeAmount: 0.3
---- !u!114 &915889693278514946
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 49894168643017583}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aba6c7c0e594c41cc91894d5923575a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  character: {fileID: 5193859935782295756}
-  Head: {fileID: 8019915723301141008}
-  sensitivity: 2
-  smoothing: 1.5
 --- !u!114 &7487998224082578652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -517,6 +501,18 @@ MonoBehaviour:
   InLocalSpace: 0
   Interpolate: 1
   SlerpPosition: 0
+--- !u!114 &5624368129212488429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 49894168643017583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00552ee2b3dd04025986c376bc99a1a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &67322977848972581
 GameObject:
   m_ObjectHideFlags: 0
@@ -13550,7 +13546,7 @@ Light:
   m_RenderMode: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 6400
+    m_Bits: 6912
   m_RenderingLayerMask: 1
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
