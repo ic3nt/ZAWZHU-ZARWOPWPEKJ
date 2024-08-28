@@ -7,6 +7,15 @@ using Unity.Burst.CompilerServices;
 public class OutlineRender : NetworkBehaviour
 {
     public float rayDistance = 3f; // Длина луча
+ 
+    public bool IsObjSaw;
+
+   
+
+    void Start()
+    {
+        IsObjSaw = PlayerPrefs.GetInt("IsObjSaw") != 0;
+    }
 
     void Update()
     {
@@ -23,7 +32,18 @@ public class OutlineRender : NetworkBehaviour
                 Outline sdvg = hit.collider.gameObject.GetComponent<Outline>();
                 if (sdvg != null)
                 {
+
                     sdvg.enabled = true;
+
+                   
+
+                    if (IsObjSaw == false)
+                    {
+                        Debug.Log("ANATOLY");
+                        PlayerPrefs.SetInt("IsObjSaw", (IsObjSaw ? 0 : 1));
+                        IsObjSaw = true;
+                    //тут пиши логику и добавляй куратину и умри урод
+                    }
                 }
             }
             else
@@ -56,4 +76,13 @@ public class OutlineRender : NetworkBehaviour
             outline.enabled = false;
         }
     }
+
+
+  
+
+   
+
+    
+   
+
 }
