@@ -1,3 +1,4 @@
+using Discord;
 using EasyTransition;
 using System.Collections;
 using System.Collections.Generic;
@@ -54,8 +55,11 @@ public class MenuManagerNew : MonoBehaviour
     private bool isCatalogOpen = false;
     private bool isCatalogAnimationPlaying = false;
 
+
     void Start()
     {
+        // делаем все чё надо
+
         Cursor.lockState = CursorLockMode.None;
 
         isPlayedStoreAnimation = false;
@@ -69,7 +73,7 @@ public class MenuManagerNew : MonoBehaviour
         isCatalog = false;
         isNotSelect = true;
 
-
+        // статус в дискорде дефолтный
 
         if (localizationManager.CurrentLanguage == "en_US")
         {
@@ -93,11 +97,15 @@ public class MenuManagerNew : MonoBehaviour
 
     void Update()
     {
+        // справочник
+
         if (isNotSelect == false)
         {
             ManualMonsterToyRobotWindow.SetActive(false);
             ManualMonsterMimicWindow.SetActive(false);
         }
+
+        // стадия - меню
 
         if (!isMenu)
         {
@@ -120,6 +128,8 @@ public class MenuManagerNew : MonoBehaviour
         {
             isMenu = true;
         }
+
+        // стадия - настройки
 
         if (isSettings)
         {
@@ -159,6 +169,8 @@ public class MenuManagerNew : MonoBehaviour
             }
         }
 
+        // стадия - справочник
+
         if (isManual)
         {
             if (!isManualOpen && !isPlayedManualAnimation)
@@ -196,6 +208,8 @@ public class MenuManagerNew : MonoBehaviour
                 isPlayedManualAnimation = false;
             }
         }
+
+        // стадия - магазин
 
         if (isStore)
         {
@@ -235,6 +249,8 @@ public class MenuManagerNew : MonoBehaviour
             }
         }
 
+        // стадия - каталог
+
         if (isCatalog)
         {
             if (!isCatalogOpen && !isPlayedCatalogAnimation)
@@ -273,10 +289,18 @@ public class MenuManagerNew : MonoBehaviour
             }
         }
     }
+
+    private void OnDestroy()
+    {
+       discordController.discord.Dispose();
+    }
+
     public void LoadScene(string _sceneName)
     {
         TransitionManager.Instance().Transition(_sceneName, transition, startDelay);
     }
+
+    // далее идут методы кнопок и.т.д
 
     public void MenuButton()
     {
@@ -468,6 +492,9 @@ public class MenuManagerNew : MonoBehaviour
     {
         Debug.Log("Multiplayer mode");
     }
+
+    // справочник
+
     public void ManualToyRobot()
     {
         isNotSelect = false;
