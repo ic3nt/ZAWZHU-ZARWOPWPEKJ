@@ -22,6 +22,7 @@ public class Door : NetworkBehaviour
     private AudioSource doorSound;
 
     // синхронизация состояния двери
+
     private NetworkVariable<DoorState> doorState = new NetworkVariable<DoorState>(DoorState.Closed);
 
     private void Awake()
