@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -14,6 +14,8 @@ public class AnimationOnMouseEnter : MonoBehaviour
 
     
     public UnityEvent OnMouseDownEvent;
+
+    // тут вообще все просто, думаю объяснения не нужны, мне вот еще интересно для кого я все это пишу ¯\_(ツ)_/¯
 
     void Start()
     {

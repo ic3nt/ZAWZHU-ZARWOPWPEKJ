@@ -25,6 +25,8 @@ public class PlayFabManager : MonoBehaviour
 
     private void LoginWithAnonymous()
     {
+        // логиним игрока 
+
         string customId = SystemInfo.deviceUniqueIdentifier;
         var request = new LoginWithCustomIDRequest
         {
@@ -37,6 +39,8 @@ public class PlayFabManager : MonoBehaviour
 
     private void OnLoginSuccess(LoginResult result)
     {
+        // метод вызывается при успешном логине
+
         playFabId = result.PlayFabId;
         NameText.text = playFabId;
         Debug.Log("Successful login: " + playFabId);
@@ -47,6 +51,8 @@ public class PlayFabManager : MonoBehaviour
 
     private void OnGetAccountInfoSuccess(GetAccountInfoResult result)
     {
+        // чекаем акк и проверяем забанен ли игрок или нет
+
         if (result.AccountInfo.TitleInfo.isBanned == true)
         {
             Debug.Log("The player is banned.");
@@ -73,6 +79,8 @@ public class PlayFabManager : MonoBehaviour
 
     private void OnLoginError(PlayFabError error)
     {
+        // метод вызывается когда произошла ошибка логина
+
         Debug.LogError("Login failed: " + error.ErrorMessage);
 
         if (error.Error == PlayFabErrorCode.AccountBanned)
@@ -118,6 +126,8 @@ public class PlayFabManager : MonoBehaviour
 
     private void GetPlayerSegments()
     {
+        // тут чекаем акк и смотрим в каких сегментах состоит игрок
+
         var request = new GetPlayerSegmentsRequest
         {
             PlayFabId = playFabId
@@ -128,6 +138,8 @@ public class PlayFabManager : MonoBehaviour
 
     private void OnGetPlayerSegmentsSuccess(GetPlayerSegmentsResult result)
     {
+        // успешная проверка сегментов игрока
+
         Debug.Log("Segments for the player: " + playFabId);
 
         if (result.Segments != null && result.Segments.Count > 0)
@@ -137,6 +149,8 @@ public class PlayFabManager : MonoBehaviour
                 Debug.Log("Segment name: " + segment.Name);
                 if (segment.Name == "Developers")
                 {
+                    // это короч когда ты разраб то включается объект
+
                     DevelopersSegmentObject.SetActive(true);
                 }
             }
@@ -149,6 +163,8 @@ public class PlayFabManager : MonoBehaviour
 
     private void OnGetPlayerSegmentsFailure(PlayFabError error)
     {
+        // не успешная проверка сегментов игрока
+
         Debug.LogError("Error receiving segments: " + error.GenerateErrorReport());
     }
 }

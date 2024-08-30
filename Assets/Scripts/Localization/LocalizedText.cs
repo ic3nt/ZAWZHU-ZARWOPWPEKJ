@@ -14,6 +14,8 @@ public class LocalizedText : MonoBehaviour
 
     void Awake()
     {
+        // ищем объект с тегом LocalizationManager и берем у него компонент LocalizationManager
+
         if (localizationManager == null)
         {
             localizationManager = GameObject.FindGameObjectWithTag("LocalizationManager").GetComponent<LocalizationManager>();
@@ -27,16 +29,22 @@ public class LocalizedText : MonoBehaviour
 
     void Start()
     {
+        // обновляем текст
+
         UpdateText();
     }
 
     private void OnDestroy()
     {
+        // вызывается при удалении объекта LocalizationManager
+
         localizationManager.OnLanguageChanged -= UpdateText;
     }
 
     virtual protected void UpdateText()
     {
+        // метод для обновления текста
+
         if (gameObject == null) return;
 
         if(localizationManager == null)

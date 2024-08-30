@@ -11,6 +11,8 @@ public class EnemyDamage : MonoBehaviour
 
     void OnTriggerStay(Collider other)
     {
+        // тупо отбираем у игрока хп 
+
         if (Time.time >= nextAttackTime && other.CompareTag("Player"))
         {
             if (other.TryGetComponent<HealthManager>(out var hp))

@@ -35,9 +35,13 @@ public class NetworkUnstable : MonoBehaviour
 
     void FixedUpdate()
     {
+        // проверка инета, далее будут добавлены другие типы проверки
+
         if (Application.internetReachability == NetworkReachability.NotReachable)
         {
-       //     animatorUI.SetTrigger("UnstableNetwork");
+            // инета нет, либо он ужасен
+
+            // animatorUI.SetTrigger("UnstableNetwork");
             NetworkUnstableWindow.SetActive(true);
             firstPersonMovement.GetComponent<FirstPersonMovement>().enabled = false;
             firstPersonLook.GetComponent<FirstPersonLook>().enabled = false;
@@ -69,6 +73,8 @@ public class NetworkUnstable : MonoBehaviour
         }
         else
         {
+            // инет норм
+
             NetworkUnstableWindow.SetActive(false);
             Debug.Log("The network connection is normal!");
             firstPersonMovement.GetComponent<FirstPersonMovement>().enabled = true;

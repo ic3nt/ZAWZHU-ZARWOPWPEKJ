@@ -6,11 +6,9 @@ using Unity.Burst.CompilerServices;
 
 public class OutlineRender : NetworkBehaviour
 {
-    public float rayDistance = 3f; // Длина луча
+    public float rayDistance = 3f;
  
     public bool IsObjSaw;
-
-   
 
     void Start()
     {
@@ -22,43 +20,41 @@ public class OutlineRender : NetworkBehaviour
         Ray ray = new Ray(transform.position, transform.forward);
         RaycastHit hit;
 
-        // Проверяем, попадает ли луч в объект
+        // проверяем, попадает ли луч в объект
         if (Physics.Raycast(ray, out hit, rayDistance))
         {
-            // Проверяем тег объекта
+            // проверяем тег объекта
             if (hit.collider.CompareTag("canPickUp"))
             {
-                // Если объект с тегом canPickUp, включаем Outline
-                Outline sdvg = hit.collider.gameObject.GetComponent<Outline>();
-                if (sdvg != null)
+                // если объект с тегом canPickUp, включаем обводку
+                Outline outline = hit.collider.gameObject.GetComponent<Outline>();
+                if (outline != null)
                 {
 
-                    sdvg.enabled = true;
-
-                   
+                    outline.enabled = true;
 
                     if (IsObjSaw == false)
                     {
-                        Debug.Log("ANATOLY");
+                        Debug.Log("Is Object Saw");
                         PlayerPrefs.SetInt("IsObjSaw", (IsObjSaw ? 0 : 1));
                         IsObjSaw = true;
-                    //тут пиши логику и добавляй куратину и умри урод
                     }
                 }
             }
             else
             {
-                // Если объект не с тегом canPickUp, отключаем Outline
-                Outline sdvg = hit.collider.gameObject.GetComponent<Outline>();
-                if (sdvg != null)
+                // если объект не с тегом canPickUp, отключаем обводку
+                Outline outline = hit.collider.gameObject.GetComponent<Outline>();
+                if (outline != null)
                 {
-                    sdvg.enabled = false;
+                    outline.enabled = false;
                 }
             }
         }
         else
         {
-            // Если луч не попадает в объекты, отключаем Outline у всех объектов
+            // вот тута вот вызываем метод отключения обводки
+
             DisableOutlines();
         }
 
@@ -66,10 +62,10 @@ public class OutlineRender : NetworkBehaviour
         
     }
 
-   
     private void DisableOutlines()
     {
-        // Можно добавить логику для отключения Outline на всех объектах, если необходимо
+        // метод отключения обводки
+
         Outline[] outlines = FindObjectsOfType<Outline>();
         foreach (Outline outline in outlines)
         {

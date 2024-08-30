@@ -25,6 +25,8 @@ public class BrokenMimic : MonoBehaviour
 
     private NavMeshAgent aiAgent;
 
+    // тут страшно
+
     void FindClosestPlayer()
     {
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");

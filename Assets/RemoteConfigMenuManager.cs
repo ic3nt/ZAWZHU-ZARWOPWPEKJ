@@ -11,6 +11,8 @@ public class RemoteConfigMenuManager : MonoBehaviour
 
     public GameObject[] multiplayerGameObjects;
 
+    // нигде не используется, пока что, потому что скрипт не рабочий 
+
     async void Start()
     {
         await InitializeRemoteConfig();

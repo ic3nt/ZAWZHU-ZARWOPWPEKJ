@@ -24,6 +24,8 @@ public class HealthManager : MonoBehaviour
 
     void Start()
     {
+        // делаем в старте все что нужно
+
         animatorDead.GetComponent<Animator>().enabled = false;
         personMovement.GetComponent<FirstPersonMovement>().enabled = true;
         personLook.GetComponent<FirstPersonLook>().enabled = true;
@@ -33,7 +35,11 @@ public class HealthManager : MonoBehaviour
 
     void Update()
     {
+        // текст будет всегда равен значению healthAmount, все выводим в процентах целым числом
+
         healthAmountText.text = healthAmount.ToString("F0") + "%";
+
+        // стадии анимации
 
         if (healthAmount > 50)
         {
@@ -69,6 +75,8 @@ public class HealthManager : MonoBehaviour
         }
         if (healthAmount <= 0)
         {
+            // игрок сдох (
+
             Debug.Log("ded");
             Dead();
         }

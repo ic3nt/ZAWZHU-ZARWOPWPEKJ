@@ -34,6 +34,8 @@ public class DragRigidbody : MonoBehaviour
 
     public void HandleInputBegin(Vector3 screenPosition)
     {
+        // простым языком чекаем положение камеры в мире, кидая рэйкаст, если он попадаем на объект с слоем Interactive, то мы можем брать этот объект (если что это пояснение ко всей работе скрипта, сорри мне лень пояснять все методы)
+
         var ray = Camera.main.ScreenPointToRay(screenPosition);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, distance))

@@ -9,8 +9,13 @@ public class UpdateManager : MonoBehaviour
     [SerializeField]
     public GameObject UpdateWindow;
     public GameObject DisableWindow;
+
+    // тут все просто если уметь работать с remote config, скрипт для проверки обновлений
+
     void Awake()
     {
+        // отключаем некоторые объекты на сцене и проверяем remote config
+
         UpdateWindow.SetActive(false);
         DisableWindow.SetActive(true);
         ConfigManager.FetchCompleted += AppyRemoteSettings;
@@ -19,9 +24,13 @@ public class UpdateManager : MonoBehaviour
 
     private void AppyRemoteSettings(ConfigResponse configResponse)
     {
+        // присваиваем newAppVersion стрингу newAppVersion в remote config
+
         string newAppVersion = ConfigManager.appConfig.GetString("newAppVersion");
 
-        if(!string.IsNullOrEmpty(newAppVersion) && Application.version != newAppVersion)
+        // если newAppVersion, не та которая нужна, то (вся логика действий написана и понятна)
+
+        if (!string.IsNullOrEmpty(newAppVersion) && Application.version != newAppVersion)
         {
             DisableWindow.SetActive(false);
             StartCoroutine(UpdateWindowWaitForSecondCoroutine());

@@ -7,6 +7,8 @@ public class PingDisplay : MonoBehaviour
     private float pingTime;
     private bool isPinging;
 
+    // скрипт для отоброжения пинга
+
     void Start()
     {
         if (NetworkManager.Singleton.IsHost)

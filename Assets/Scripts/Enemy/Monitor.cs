@@ -15,6 +15,8 @@ public class Monitor : MonoBehaviour
 
     public EnemyDamage dmg;
 
+    // тут страшно, серьёзно
+
     void Start()
     {
         aiAgent = gameObject.GetComponent<NavMeshAgent>();

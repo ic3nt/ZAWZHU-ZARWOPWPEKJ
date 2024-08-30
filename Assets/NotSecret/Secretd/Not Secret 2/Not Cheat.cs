@@ -20,16 +20,10 @@ public class NotCheat : NetworkBehaviour
     public float smoothing = 1.5f;
     Vector2 velocity;
     Vector2 frameVelocity;
-
    
     public AudioSource aus;
-   
-    
- 
 
     private bool canSh;
-
-  
 
     public GameObject bullet;
     public Camera mainCamera;
@@ -38,8 +32,7 @@ public class NotCheat : NetworkBehaviour
     public float shootForce;
     public float spread;
 
-  
-
+    // тут для разрабов
 
     private void Start()
     {

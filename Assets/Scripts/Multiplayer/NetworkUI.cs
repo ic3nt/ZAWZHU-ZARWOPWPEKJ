@@ -14,9 +14,8 @@ public class NetworkUI : MonoBehaviour
     [SerializeField] private GameObject buttonsPanel;
     [SerializeField] private GameObject menuCamera;
 
-    [SerializeField] private TMP_InputField ipAddressInputField; // Поле для ввода IP-адреса
+    [SerializeField] private TMP_InputField ipAddressInputField; 
 
-    // Start is called before the first frame update
     void Start()
     {
         startClientButton.onClick.AddListener(StartClient);
@@ -26,6 +25,8 @@ public class NetworkUI : MonoBehaviour
 
     private void StartClient()
     {
+        // подключение за клиента
+
         string ipAddress = ipAddressInputField.text;
         if (NetworkManager.Singleton.StartClient())
         {
@@ -40,6 +41,8 @@ public class NetworkUI : MonoBehaviour
 
     private void StartServer()
     {
+        // подключение за сервер
+
         if (NetworkManager.Singleton.StartServer())
         {
             OnSuccessConnection();
@@ -53,6 +56,8 @@ public class NetworkUI : MonoBehaviour
 
     private void StartHost()
     {
+        // подключение за хост
+
         if (NetworkManager.Singleton.StartHost())
         {
             OnSuccessConnection();
@@ -66,6 +71,8 @@ public class NetworkUI : MonoBehaviour
 
     private void OnSuccessConnection()
     {
+        // вызывается когда все норм
+
         buttonsPanel.SetActive(false);
         menuCamera.SetActive(false);
     }

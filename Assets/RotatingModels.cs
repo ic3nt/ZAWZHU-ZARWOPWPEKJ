@@ -11,10 +11,14 @@ public class RotatingModels : MonoBehaviour
     private float currentRotationX;
     private float currentRotationSpeed;
 
+    // скрипт для вращения объектов
+
     void Update()
     {
         if (isRotating)
         {
+            // вращение мышкой
+
             float currentMousePosition = Input.mousePosition.x;
             float mouseMovement = currentMousePosition - startMousePosition;
             startMousePosition = currentMousePosition;
@@ -40,6 +44,8 @@ public class RotatingModels : MonoBehaviour
 
         if (Input.GetKey(KeyCode.A))
         {
+            // вращение на A
+
             Debug.Log("A");
             currentRotationSpeed -= rotatingSpeed * Time.deltaTime;
             currentRotationX -= currentRotationSpeed * Time.deltaTime;
@@ -48,6 +54,8 @@ public class RotatingModels : MonoBehaviour
         }
         else if (Input.GetKey(KeyCode.D))
         {
+            // вращение на D
+
             Debug.Log("D");
             currentRotationSpeed += rotatingSpeed * Time.deltaTime;
             currentRotationX += currentRotationSpeed * Time.deltaTime;
@@ -82,6 +90,8 @@ public class RotatingModels : MonoBehaviour
 
     private void RotateModel()
     {
+        // само вращение 
+
         Quaternion targetRotation = Quaternion.Euler(0, currentRotationX, 0);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 10f);
     }

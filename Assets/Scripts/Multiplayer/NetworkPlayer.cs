@@ -5,10 +5,9 @@ using UnityEngine;
 
 public class NetworkPlayer : NetworkBehaviour
 {
-
     [SerializeField] private GameObject playerCamera;
 
-
+    // скрипт что бы короче игроки нормально смотрели, ходили и.т.д. ( без него все будет не очень, мы проверяли )
 
     public override void OnNetworkSpawn()
     {

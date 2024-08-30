@@ -22,6 +22,7 @@ public class ToyRobot : MonoBehaviour
 
     public EnemyDamage dmg;
 
+    // тут страшно, очень очень
 
     void Start()
     {

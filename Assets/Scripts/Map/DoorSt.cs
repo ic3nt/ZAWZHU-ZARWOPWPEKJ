@@ -12,6 +12,8 @@ public class DoorSt : MonoBehaviour
 
     private void Start()
     {
+        // тута значит при старте мы чекаем флоат с шансами и с помощью рандома дверь блокается или не блокается
+
         if (Random.value > ChanceOfLock)
         {
             isLocked = true;
@@ -24,6 +26,8 @@ public class DoorSt : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        // если объект с тегом Key и одноименным компонентом соприкасается с дверью, при этом дверь закрыта, то мы открываем дверь удаляем объект ключа и.т.д, ну ты понял. тут программистом не надо быть что бы понять че тут делается
+
         if ((other.CompareTag("Key")) && isLocked)
         {
             if (other.TryGetComponent<Key>(out var key))

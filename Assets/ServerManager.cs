@@ -6,6 +6,7 @@ public class ServerManager : MonoBehaviour
 {
     public GameObject UI;
 
+    // тут все очень просто, да и тем более этот скрипт уже похож на один, поэтому смысла в объ€снени€х нет
     public void StartHost()
     {
         if (NetworkManager.Singleton == null)

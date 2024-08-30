@@ -16,6 +16,8 @@ public class DiscordController : MonoBehaviour
     private static bool instanceExists;
     public Discord.Discord discord;
 
+    // а тут значит DD работает с дискордом
+
     void Awake()
     {
         if (!instanceExists)
@@ -30,6 +32,8 @@ public class DiscordController : MonoBehaviour
 
     void Start()
     {
+        // при старте начинаем отображать статус в дс
+
         discord = new Discord.Discord(applicationID, (System.UInt64)Discord.CreateFlags.NoRequireDiscord);
 
         time = System.DateTimeOffset.Now.ToUnixTimeMilliseconds();
@@ -52,6 +56,8 @@ public class DiscordController : MonoBehaviour
 
     void UpdateStatus()
     {
+        // все че надо отображаем в статусе дс, обновляя его, если DD не может подключится к сервисам дискорда то выводим ошибку в консоль
+
         try
         {
             var activityManager = discord.GetActivityManager();
