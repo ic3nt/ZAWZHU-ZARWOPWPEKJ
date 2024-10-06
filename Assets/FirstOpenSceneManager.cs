@@ -13,13 +13,36 @@ public class FirstOpenSceneManager : MonoBehaviour
     public Toggle toggleAgree;
     public Button buttonAgree;
 
+    [Space]
     public DemoLoadScene loadScene;
     public Animator animator;
 
+    [Space]
     public float middleTogglePosX, rightTogglePosX;
     public float downButtonPosY, topButtonPosY;
     public float tweenDuration;
 
+    [Space]
+    private Camera cameraToRotate;
+    public float rotationSpeed = 10.0f; 
+
+    private float rotationY = 0f;
+    private float originalY;
+
+    void Update()
+    {
+        rotationY += rotationSpeed * Time.deltaTime;
+
+        if (rotationY >= 360f)
+        {
+            rotationY -= 360f;
+        }
+
+        cameraToRotate.transform.rotation = Quaternion.Euler(0, rotationY, 0);
+
+        Vector3 newPosition = cameraToRotate.transform.position;
+        cameraToRotate.transform.position = newPosition;
+    }
     void Start()
     {
         toggleAgreeRectTransform.DOAnchorPosX(middleTogglePosX, tweenDuration);
@@ -27,6 +50,9 @@ public class FirstOpenSceneManager : MonoBehaviour
         buttonAgree.interactable = false;
 
         toggleAgree.onValueChanged.AddListener(OnToggleValueChanged);
+
+        cameraToRotate = Camera.main;
+        originalY = cameraToRotate.transform.position.y;
     }
 
     private void OnToggleValueChanged(bool isOn)

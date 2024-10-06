@@ -391,6 +391,7 @@ MonoBehaviour:
   downButtonPosY: -800
   topButtonPosY: -595
   tweenDuration: 1
+  rotationSpeed: 10
 --- !u!114 &265401966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -546,7 +547,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f68d384e4cbf5b4b9dd24409ca80a5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  key: PlayText
+  key: FirstOpenGameReadyToPlayText
 --- !u!114 &285528348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -712,6 +713,7 @@ MonoBehaviour:
   downButtonPosY: 0
   topButtonPosY: 0
   tweenDuration: 0
+  rotationSpeed: 30
 --- !u!114 &307519846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -944,7 +946,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &314983816
 RectTransform:
   m_ObjectHideFlags: 0
@@ -977,7 +979,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3784,7 +3786,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: fbb61e4181a9bd041962cd1de20b4a9a, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 7a99307af8d464359ad4c0d2e49ff173, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -4073,7 +4075,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6342818694086216714, guid: e65bc5bb05a13498a982bf300ffe884b, type: 3}
       propertyPath: weight
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6342818694086216714, guid: e65bc5bb05a13498a982bf300ffe884b, type: 3}
       propertyPath: sharedProfile
@@ -4590,6 +4592,7 @@ MonoBehaviour:
   downButtonPosY: 0
   topButtonPosY: 0
   tweenDuration: 0
+  rotationSpeed: 30
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
