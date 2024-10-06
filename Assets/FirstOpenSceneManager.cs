@@ -62,12 +62,16 @@ public class FirstOpenSceneManager : MonoBehaviour
             buttonAgree.interactable = true;
             toggleAgreeRectTransform.DOAnchorPosX(rightTogglePosX, tweenDuration);
             buttonAgreeRectTransform.DOAnchorPosY(topButtonPosY, tweenDuration);
+            PlayerPrefs.SetInt("isPlayerAgreedPlay", 1);
+            PlayerPrefs.Save();
         }
         else
         {
             buttonAgree.interactable = false;
             toggleAgreeRectTransform.DOAnchorPosX(middleTogglePosX, tweenDuration);
             buttonAgreeRectTransform.DOAnchorPosY(downButtonPosY, tweenDuration);
+            PlayerPrefs.SetInt("isPlayerAgreedPlay", 0);
+            PlayerPrefs.Save();
         }
     }
 
