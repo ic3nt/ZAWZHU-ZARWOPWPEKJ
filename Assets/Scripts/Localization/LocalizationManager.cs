@@ -16,7 +16,7 @@ public class LocalizationManager : MonoBehaviour
     {
         if (!PlayerPrefs.HasKey("Language"))
         {
-            if (Application.systemLanguage == SystemLanguage.Russian || Application.systemLanguage == SystemLanguage.Ukrainian || Application.systemLanguage == SystemLanguage.Belarusian)
+            if (Application.systemLanguage == SystemLanguage.Russian || Application.systemLanguage == SystemLanguage.Ukrainian || Application.systemLanguage == SystemLanguage.Belarusian || Application.systemLanguage == SystemLanguage.SerboCroatian || Application.systemLanguage == SystemLanguage.Lithuanian || Application.systemLanguage == SystemLanguage.Latvian || Application.systemLanguage == SystemLanguage.Bulgarian || Application.systemLanguage == SystemLanguage.Estonian)
             {
                 PlayerPrefs.SetString("Language", "ru_RU");
             }   
