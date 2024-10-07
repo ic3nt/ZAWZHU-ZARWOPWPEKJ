@@ -20,13 +20,17 @@ public class LocalizationManager : MonoBehaviour
             {
                 PlayerPrefs.SetString("Language", "ru_RU");
             }
-            else if (Application.systemLanguage == SystemLanguage.Swedish || Application.systemLanguage == SystemLanguage.Czech || Application.systemLanguage == SystemLanguage.Spanish || Application.systemLanguage == SystemLanguage.Slovenian || Application.systemLanguage == SystemLanguage.Unknown || Application.systemLanguage == SystemLanguage.Slovak || Application.systemLanguage == SystemLanguage.Romanian || Application.systemLanguage == SystemLanguage.Portuguese || Application.systemLanguage == SystemLanguage.Polish || Application.systemLanguage == SystemLanguage.Norwegian || Application.systemLanguage == SystemLanguage.Korean || Application.systemLanguage == SystemLanguage.Japanese || Application.systemLanguage == SystemLanguage.Italian || Application.systemLanguage == SystemLanguage.Indonesian || Application.systemLanguage == SystemLanguage.Icelandic || Application.systemLanguage == SystemLanguage.Hungarian || Application.systemLanguage == SystemLanguage.Greek)
+            else if (Application.systemLanguage == SystemLanguage.Swedish || Application.systemLanguage == SystemLanguage.Czech || Application.systemLanguage == SystemLanguage.Slovenian || Application.systemLanguage == SystemLanguage.Unknown || Application.systemLanguage == SystemLanguage.Slovak || Application.systemLanguage == SystemLanguage.Romanian || Application.systemLanguage == SystemLanguage.Portuguese || Application.systemLanguage == SystemLanguage.Polish || Application.systemLanguage == SystemLanguage.Norwegian || Application.systemLanguage == SystemLanguage.Korean || Application.systemLanguage == SystemLanguage.Japanese || Application.systemLanguage == SystemLanguage.Italian || Application.systemLanguage == SystemLanguage.Indonesian || Application.systemLanguage == SystemLanguage.Icelandic || Application.systemLanguage == SystemLanguage.Hungarian || Application.systemLanguage == SystemLanguage.Greek)
             {
                 PlayerPrefs.SetString("Language", "en_US");
             }
             else if (Application.systemLanguage == SystemLanguage.German)
             {
                 PlayerPrefs.SetString("Language", "de_DE");
+            }
+            else if (Application.systemLanguage == SystemLanguage.Spanish)
+            {
+                PlayerPrefs.SetString("Language", "es_ES");
             }
         }
         currentLanguage = PlayerPrefs.GetString("Language");
