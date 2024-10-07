@@ -1,43 +1,50 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
-public class DoorSt : MonoBehaviour
+public class DoorSt : NetworkBehaviour
 {
     public AudioSource audioSource;
-    public bool isLocked;
+
+    [HideInInspector]
+    public NetworkVariable<bool> IsLocked = new NetworkVariable<bool>(true); // РќР°С‡Р°Р»СЊРЅРѕРµ СЃРѕСЃС‚РѕСЏРЅРёРµ - Р·Р°Р±Р»РѕРєРёСЂРѕРІР°РЅРѕ
 
     [Range(0, 1)]
     public float ChanceOfLock = 0.5f;
 
     private void Start()
     {
-        // тута значит при старте мы чекаем флоат с шансами и с помощью рандома дверь блокается или не блокается
-
-        if (Random.value > ChanceOfLock)
-        {
-            isLocked = true;
-        }
-        else
-        {
-            isLocked = false;
-        }
+        if (!IsOwner) return; // Р’С‹РїРѕР»РЅСЏРµРј С‚РѕР»СЊРєРѕ РґР»СЏ РІР»Р°РґРµР»СЊС†Р°/РєР»РёРµРЅС‚Р°
+        // РћРїСЂРµРґРµР»СЏРµРј, Р·Р°Р±Р»РѕРєРёСЂРѕРІР°РЅР° Р»Рё РґРІРµСЂСЊ РІ Р·Р°РІРёСЃРёРјРѕСЃС‚Рё РѕС‚ ChanceOfLock
+        IsLocked.Value = Random.value > ChanceOfLock;
     }
 
-    void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        // если объект с тегом Key и одноименным компонентом соприкасается с дверью, при этом дверь закрыта, то мы открываем дверь удаляем объект ключа и.т.д, ну ты понял. тут программистом не надо быть что бы понять че тут делается
-
-        if ((other.CompareTag("Key")) && isLocked)
+        if (other.CompareTag("Key") && IsLocked.Value)
         {
             if (other.TryGetComponent<Key>(out var key))
             {
-                audioSource.Play();
-                isLocked = false;
+                UnlockDoorServerRpc();  // РР·РјРµРЅРµРЅРѕ РЅР° РїСЂР°РІРёР»СЊРЅС‹Р№ РІС‹Р·РѕРІ РјРµС‚РѕРґР°
                 Destroy(key.KeyObject);
-                Debug.Log("Key");
+                Debug.Log("РљР»СЋС‡ РёСЃРїРѕР»СЊР·РѕРІР°РЅ РґР»СЏ СЂР°Р·Р±Р»РѕРєРёСЂРѕРІРєРё РґРІРµСЂРё");
             }
         }
+    }
 
+    [ServerRpc]
+    private void UnlockDoorServerRpc() // РСЃРїСЂР°РІР»РµРЅРѕ РёРјСЏ РјРµС‚РѕРґР°
+    {
+        IsLocked.Value = false; // Р Р°Р·Р±Р»РѕРєРёСЂСѓРµРј РґРІРµСЂСЊ
+        audioSource.Play(); // РџСЂРѕРёРіСЂС‹РІР°РµРј Р·РІСѓРє СЂР°Р·Р±Р»РѕРєРёСЂРѕРІРєРё
+        UpdateClientsClientRpc(); // РЈРІРµРґРѕРјР»СЏРµРј РІСЃРµС… РєР»РёРµРЅС‚РѕРІ РѕР±РЅРѕРІРёС‚СЊ СЃРІРѕРµ СЃРѕСЃС‚РѕСЏРЅРёРµ
+    }
+
+    [ClientRpc]
+    private void UpdateClientsClientRpc() // РСЃРїСЂР°РІР»РµРЅРѕ РёРјСЏ РјРµС‚РѕРґР°
+    {
+        IsLocked.Value = false;
+        audioSource.Play(); // РћРїС†РёРѕРЅР°Р»СЊРЅРѕ РїСЂРѕРёРіСЂС‹РІР°РµРј Р·РІСѓРє РґР»СЏ РІСЃРµС… РєР»РёРµРЅС‚РѕРІ
     }
 }

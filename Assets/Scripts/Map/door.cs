@@ -21,8 +21,6 @@ public class Door : NetworkBehaviour
     private Animator an;
     private AudioSource doorSound;
 
-    // синхронизация состояния двери
-
     private NetworkVariable<DoorState> doorState = new NetworkVariable<DoorState>(DoorState.Closed);
 
     private void Awake()
@@ -50,23 +48,20 @@ public class Door : NetworkBehaviour
         {
             if (hit.collider.CompareTag("Door"))
             {
-                if (hit.collider.TryGetComponent<DoorSt>(out var ds) && !ds.isLocked)
+                if (hit.collider.TryGetComponent<DoorSt>(out var ds) && !ds.IsLocked.Value)
                 {
-                   an = hit.collider.transform.GetComponent<Animator>();
-
-
+                    an = hit.collider.transform.GetComponent<Animator>();
                     doorSound = hit.collider.gameObject.GetComponent<AudioSource>();
-
                     intText.SetActive(true);
 
                     if (Input.GetKey(KeyCode.E) && fill < maxFill && canOpen)
                     {
-                        fill += Time.deltaTime * 160f; // заполнить
+                        fill += Time.deltaTime * 160f;
                         progressBar.fillAmount = fill / maxFill;
                     }
                     else
                     {
-                        fill -= Time.deltaTime * 160f; // уменьшить
+                        fill -= Time.deltaTime * 160f;
                         progressBar.fillAmount = fill / maxFill;
                     }
 
@@ -77,14 +72,10 @@ public class Door : NetworkBehaviour
 
                         if (an.GetCurrentAnimatorStateInfo(0).IsName(doorOpenAnimName))
                         {
-                            // когда дверь закрыта отправляем на сервер, с него на клиент туда сюда ну ты понял наверно
-
                             CloseDoorServerRpc();
                         }
                         else if (an.GetCurrentAnimatorStateInfo(0).IsName(doorCloseAnimName))
                         {
-                            // тоже самое что и выше, однако для открытой двери
-
                             OpenDoorServerRpc();
                         }
 
@@ -115,11 +106,8 @@ public class Door : NetworkBehaviour
             fill = 0;
             progressBar.fillAmount = fill;
         }
-
-       
     }
 
-    // rpc для открытия двери
     [ServerRpc(RequireOwnership = false)]
     public void OpenDoorServerRpc()
     {
@@ -127,7 +115,6 @@ public class Door : NetworkBehaviour
         NotifyDoorStateChange(DoorState.Opened);
     }
 
-    // rpc для закрытия двери
     [ServerRpc(RequireOwnership = false)]
     public void CloseDoorServerRpc()
     {
@@ -137,8 +124,6 @@ public class Door : NetworkBehaviour
 
     private void OpenDoor()
     {
-        // метод открытия двери
-
         doorSound.clip = doorOpen;
         doorSound.Play();
         an.ResetTrigger("Close");
@@ -148,8 +133,6 @@ public class Door : NetworkBehaviour
 
     private void CloseDoor()
     {
-        // метод закрытия двери
-
         doorSound.clip = doorClose;
         doorSound.Play();
         an.ResetTrigger("Open");
@@ -160,8 +143,5 @@ public class Door : NetworkBehaviour
     private void NotifyDoorStateChange(DoorState newState)
     {
         doorState.Value = newState;
-
     }
-
-
 }
