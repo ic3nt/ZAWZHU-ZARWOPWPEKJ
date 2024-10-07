@@ -86,13 +86,12 @@ public class DiscordController : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-    private void OnDestroy()
-    {
-        if (discord != null)
-        {
-            discord.Dispose();
-            discord = null;
-        }
-    }
+  //  private void OnDestroy()
+ //   {
+  //      if (discord != null)
+  //      {
+  //          discord.Dispose();
+  //          discord = null;
+   //      }
+  //  }
 }
