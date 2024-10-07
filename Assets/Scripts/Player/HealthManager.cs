@@ -7,7 +7,6 @@ using EasyTransition;
 public class HealthManager : MonoBehaviour
 {
     public DemoLoadScene loadScene;
-    public Animator animatorDead;
     public FirstPersonMovement personMovement;
     public FirstPersonLook personLook;
     public FirstPersonAudio personAudio;
@@ -26,7 +25,6 @@ public class HealthManager : MonoBehaviour
     {
         // делаем в старте все что нужно
 
-        animatorDead.GetComponent<Animator>().enabled = false;
         personMovement.GetComponent<FirstPersonMovement>().enabled = true;
         personLook.GetComponent<FirstPersonLook>().enabled = true;
         personAudio.GetComponent<FirstPersonAudio>().enabled = true;
@@ -136,7 +134,6 @@ public class HealthManager : MonoBehaviour
     {
         timerOn = false;
         Cursor.lockState = CursorLockMode.None;
-        animatorDead.GetComponent<Animator>().enabled = true;
         personMovement.GetComponent<FirstPersonMovement>().enabled = false;
         personLook.GetComponent<FirstPersonLook>().enabled = false;
         personAudio.GetComponent<FirstPersonAudio>().enabled = false;

@@ -89,6 +89,10 @@ public class DiscordController : MonoBehaviour
 
     private void OnDestroy()
     {
-        discord.Dispose();
+        if (discord != null)
+        {
+            discord.Dispose();
+            discord = null;
+        }
     }
 }

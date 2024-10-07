@@ -14,7 +14,7 @@ public class LocalizedText : MonoBehaviour
 
     void Awake()
     {
-        // ищем объект с тегом LocalizationManager и берем у него компонент LocalizationManager
+        // ищем объект с тегом LocalizationManager и берем у него компонент LocalizationManager, потом ищем текстмешпро у объекта к которому прикреплен данный скрипт и обновляем текст
 
         if (localizationManager == null)
         {

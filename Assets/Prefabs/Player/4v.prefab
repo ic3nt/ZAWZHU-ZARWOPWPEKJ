@@ -704,8 +704,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 1829687640598998248}
+  Head: {fileID: 0}
   sensitivity: 2
   smoothing: 1.5
+  enableCameraShake: 0
+  shakeAmount: 0.3
 --- !u!114 &4076249006910492926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -772,6 +775,7 @@ MonoBehaviour:
   progressBar: {fileID: 1677995170462668246}
   Bar: {fileID: 7367091451209762082}
   canOpen: 1
+  LockText: {fileID: 0}
 --- !u!114 &8799314724422461954
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -822,6 +826,7 @@ MonoBehaviour:
   TextTimer: {fileID: 0}
   HealthWindow: {fileID: 0}
   IsPauseActive: 0
+  loadScene: {fileID: 0}
 --- !u!1 &845093890213571679
 GameObject:
   m_ObjectHideFlags: 0
@@ -6895,6 +6900,7 @@ GameObject:
   - component: {fileID: 1829687640598998248}
   - component: {fileID: 1013290989475937698}
   - component: {fileID: 8239170921746922690}
+  - component: {fileID: 2323013131532103574}
   - component: {fileID: 1403785954447539203}
   - component: {fileID: 1894670971921716050}
   - component: {fileID: 3273532413164174056}
@@ -6983,6 +6989,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!114 &2323013131532103574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5713187768516363233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 4139141343
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!114 &1403785954447539203
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6997,6 +7024,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   animator: {fileID: 0}
+  camera: {fileID: 0}
+  zoomSpeed: 1
+  returnSpeed: 1
   canRun: 1
   runSpeed: 9
   runningKey: 304
@@ -7045,11 +7075,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadScene: {fileID: 7258280385847378753}
-  animatorDead: {fileID: 1936505010451973096}
   personMovement: {fileID: 1403785954447539203}
   personLook: {fileID: 5332843947507320978}
   personAudio: {fileID: 3627048809143000901}
   healthBar: {fileID: 4192114504532400703}
+  healthAmountText: {fileID: 0}
+  animatorHealth: {fileID: 0}
+  animatorUI: {fileID: 0}
   healthAmount: 100
   timerOn: 1
 --- !u!65 &4263121144180960352
