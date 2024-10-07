@@ -138,9 +138,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2650981630932455084}
+  - component: {fileID: 767549886115684357}
   - component: {fileID: 7479931358086203721}
   - component: {fileID: 2676912089571323664}
-  - component: {fileID: 767549886115684357}
   m_Layer: 7
   m_Name: Floor
   m_TagString: Untagged
@@ -183,6 +183,27 @@ Transform:
   - {fileID: 1088812157713388135}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &767549886115684357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1036704651778809454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 1556145844
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!114 &7479931358086203721
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -231,27 +252,6 @@ MonoBehaviour:
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 8b8cf5a87c437974b884974bcc3f8f3f, type: 2}
   m_BuildHeightMesh: 0
---- !u!114 &767549886115684357
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1036704651778809454}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 0
-  InScenePlacedSourceGlobalObjectIdHash: 0
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
 --- !u!1 &1346122584682888059
 GameObject:
   m_ObjectHideFlags: 0
@@ -318,7 +318,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 9
+  m_VersionIndex: 12
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -3054,7 +3054,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 5813
+  m_VersionIndex: 5816
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -5831,7 +5831,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 5493
+  m_VersionIndex: 5496
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -17353,7 +17353,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 17141
+  m_VersionIndex: 17144
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -17544,6 +17544,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2650981630932455084}
     m_Modifications:
+    - target: {fileID: 1406188314120671283, guid: da63b51b69e663f4e8d9dddca4f71450, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1850871838296987598, guid: da63b51b69e663f4e8d9dddca4f71450, type: 3}
       propertyPath: m_Name
       value: Door
@@ -17620,6 +17624,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2650981630932455084}
     m_Modifications:
+    - target: {fileID: 1406188314120671283, guid: da63b51b69e663f4e8d9dddca4f71450, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1850871838296987598, guid: da63b51b69e663f4e8d9dddca4f71450, type: 3}
       propertyPath: m_Name
       value: Door (1)
