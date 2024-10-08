@@ -1,4 +1,4 @@
-using Discord;
+п»їusing Discord;
 using EasyTransition;
 using System.Collections;
 using System.Collections.Generic;
@@ -58,7 +58,7 @@ public class MenuManagerNew : MonoBehaviour
 
     void Start()
     {
-        // делаем все чё надо
+        // РґРµР»Р°РµРј РІСЃРµ С‡С‘ РЅР°РґРѕ
 
         Cursor.lockState = CursorLockMode.None;
 
@@ -73,7 +73,7 @@ public class MenuManagerNew : MonoBehaviour
         isCatalog = false;
         isNotSelect = true;
 
-        // статус в дискорде дефолтный
+        // СЃС‚Р°С‚СѓСЃ РІ РґРёСЃРєРѕСЂРґРµ РґРµС„РѕР»С‚РЅС‹Р№
 
         if (localizationManager.CurrentLanguage == "en_US")
         {
@@ -81,7 +81,15 @@ public class MenuManagerNew : MonoBehaviour
         }
         if (localizationManager.CurrentLanguage == "ru_RU")
         {
-            discordController.state = "Просто сидит в меню и все.";
+            discordController.state = "РџСЂРѕСЃС‚Рѕ СЃРёРґРёС‚ РІ РјРµРЅСЋ Рё РІСЃРµ.";
+        }
+        if (localizationManager.CurrentLanguage == "de_DE")
+        {
+            discordController.state = "Es steht einfach auf der Speisekarte und das warвЂ™s.";
+        }
+        if (localizationManager.CurrentLanguage == "es_ES")
+        {
+            discordController.state = "SГіlo se sienta en el menГє y eso es todo.";
         }
 
         if (localizationManager.CurrentLanguage == "en_US")
@@ -90,14 +98,22 @@ public class MenuManagerNew : MonoBehaviour
         }
         if (localizationManager.CurrentLanguage == "ru_RU")
         {
-            discordController.details = "Меню";
+            discordController.details = "РњРµРЅСЋ";
+        }
+        if (localizationManager.CurrentLanguage == "de_DE")
+        {
+            discordController.details = "Speisekarte";
+        }
+        if (localizationManager.CurrentLanguage == "es_ES")
+        {
+            discordController.details = "MenГє";
         }
 
     }
 
     void Update()
     {
-        // справочник
+        // СЃРїСЂР°РІРѕС‡РЅРёРє
 
         if (isNotSelect == false)
         {
@@ -105,7 +121,7 @@ public class MenuManagerNew : MonoBehaviour
             ManualMonsterMimicWindow.SetActive(false);
         }
 
-        // стадия - меню
+        // СЃС‚Р°РґРёСЏ - РјРµРЅСЋ
 
         if (!isMenu)
         {
@@ -120,7 +136,15 @@ public class MenuManagerNew : MonoBehaviour
                 }
                 if (localizationManager.CurrentLanguage == "ru_RU")
                 {
-                    discordController.state = "Просто сидит в меню и все.";
+                    discordController.state = "РџСЂРѕСЃС‚Рѕ СЃРёРґРёС‚ РІ РјРµРЅСЋ Рё РІСЃРµ.";
+                }
+                if (localizationManager.CurrentLanguage == "de_DE")
+                {
+                    discordController.state = "Es steht einfach auf der Speisekarte und das warвЂ™s.";
+                }
+                if (localizationManager.CurrentLanguage == "es_ES")
+                {
+                    discordController.state = "SГіlo se sienta en el menГє y eso es todo.";
                 }
             }
         }
@@ -129,7 +153,7 @@ public class MenuManagerNew : MonoBehaviour
             isMenu = true;
         }
 
-        // стадия - настройки
+        // СЃС‚Р°РґРёСЏ - РЅР°СЃС‚СЂРѕР№РєРё
 
         if (isSettings)
         {
@@ -146,7 +170,15 @@ public class MenuManagerNew : MonoBehaviour
                 }
                 if (localizationManager.CurrentLanguage == "ru_RU")
                 {
-                    discordController.state = "Настраивает Deadly Devastation...";
+                    discordController.state = "РќР°СЃС‚СЂР°РёРІР°РµС‚ Deadly Devastation...";
+                }
+                if (localizationManager.CurrentLanguage == "es_ES")
+                {
+                    discordController.state = "Configura Deadly Devastation...";
+                }
+                if (localizationManager.CurrentLanguage == "de_DE")
+                {
+                    discordController.state = "Konfiguriert Deadly Devastation...";
                 }
             }
         }
@@ -169,7 +201,7 @@ public class MenuManagerNew : MonoBehaviour
             }
         }
 
-        // стадия - справочник
+        // СЃС‚Р°РґРёСЏ - СЃРїСЂР°РІРѕС‡РЅРёРє
 
         if (isManual)
         {
@@ -186,7 +218,15 @@ public class MenuManagerNew : MonoBehaviour
                 }
                 if (localizationManager.CurrentLanguage == "ru_RU")
                 {
-                    discordController.state = "Внимательно изучает справочник...";
+                    discordController.state = "Р’РЅРёРјР°С‚РµР»СЊРЅРѕ РёР·СѓС‡Р°РµС‚ СЃРїСЂР°РІРѕС‡РЅРёРє...";
+                }
+                if (localizationManager.CurrentLanguage == "es_ES")
+                {
+                    discordController.state = "Estudiando atentamente el libro de referencia...";
+                }
+                if (localizationManager.CurrentLanguage == "de_DE")
+                {
+                    discordController.state = "Das Nachschlagewerk sorgfГ¤ltig studieren...";
                 }
             }
         }
@@ -209,7 +249,7 @@ public class MenuManagerNew : MonoBehaviour
             }
         }
 
-        // стадия - магазин
+        // СЃС‚Р°РґРёСЏ - РјР°РіР°Р·РёРЅ
 
         if (isStore)
         {
@@ -226,7 +266,7 @@ public class MenuManagerNew : MonoBehaviour
                 }
                 if (localizationManager.CurrentLanguage == "ru_RU")
                 {
-                    discordController.state = "На шоппинге...";
+                    discordController.state = "РќР° С€РѕРїРїРёРЅРіРµ...";
                 }
             }
         }
@@ -249,7 +289,7 @@ public class MenuManagerNew : MonoBehaviour
             }
         }
 
-        // стадия - каталог
+        // СЃС‚Р°РґРёСЏ - РєР°С‚Р°Р»РѕРі
 
         if (isCatalog)
         {
@@ -266,7 +306,15 @@ public class MenuManagerNew : MonoBehaviour
                 }
                 if (localizationManager.CurrentLanguage == "ru_RU")
                 {
-                    discordController.state = "Рассматривает каталог...";
+                    discordController.state = "Р Р°СЃСЃРјР°С‚СЂРёРІР°РµС‚ РєР°С‚Р°Р»РѕРі...";
+                }
+                if (localizationManager.CurrentLanguage == "es_ES")
+                {
+                    discordController.state = "Mirando el catГЎlogo...";
+                }
+                if (localizationManager.CurrentLanguage == "de_DE")
+                {
+                    discordController.state = "Blick in den Katalog...";
                 }
             }
         }
@@ -300,7 +348,7 @@ public class MenuManagerNew : MonoBehaviour
         TransitionManager.Instance().Transition(_sceneName, transition, startDelay);
     }
 
-    // далее идут методы кнопок и.т.д
+    // РґР°Р»РµРµ РёРґСѓС‚ РјРµС‚РѕРґС‹ РєРЅРѕРїРѕРє Рё.С‚.Рґ
 
     public void MenuButton()
     {
@@ -318,8 +366,17 @@ public class MenuManagerNew : MonoBehaviour
         }
         if (localizationManager.CurrentLanguage == "ru_RU")
         {
-            discordController.state = "Просто сидит в меню и все.";
+            discordController.state = "РџСЂРѕСЃС‚Рѕ СЃРёРґРёС‚ РІ РјРµРЅСЋ Рё РІСЃРµ.";
         }
+        if (localizationManager.CurrentLanguage == "de_DE")
+        {
+            discordController.state = "Es steht einfach auf der Speisekarte und das warвЂ™s.";
+        }
+        if (localizationManager.CurrentLanguage == "es_ES")
+        {
+            discordController.state = "SГіlo se sienta en el menГє y eso es todo.";
+        }
+
 
         if (localizationManager.CurrentLanguage == "en_US")
         {
@@ -327,7 +384,15 @@ public class MenuManagerNew : MonoBehaviour
         }
         if (localizationManager.CurrentLanguage == "ru_RU")
         {
-            discordController.details = "Меню";
+            discordController.details = "РњРµРЅСЋ";
+        }
+        if (localizationManager.CurrentLanguage == "de_DE")
+        {
+            discordController.details = "Speisekarte";
+        }
+        if (localizationManager.CurrentLanguage == "es_ES")
+        {
+            discordController.details = "MenГє";
         }
     }
 
@@ -347,7 +412,15 @@ public class MenuManagerNew : MonoBehaviour
         }
         if (localizationManager.CurrentLanguage == "ru_RU")
         {
-            discordController.state = "Мультиплеер или Одиночная игра? Хммм.";
+            discordController.state = "РњСѓР»СЊС‚РёРїР»РµРµСЂ РёР»Рё РћРґРёРЅРѕС‡РЅР°СЏ РёРіСЂР°? РҐРјРјРј.";
+        }
+        if (localizationManager.CurrentLanguage == "es_ES")
+        {
+            discordController.state = "ВїMultijugador o un jugador? Mmm.";
+        }
+        if (localizationManager.CurrentLanguage == "de_DE")
+        {
+            discordController.state = "Mehrspieler oder Einzelspieler? Hmmm.";
         }
     }
 
@@ -367,7 +440,15 @@ public class MenuManagerNew : MonoBehaviour
         }
         if (localizationManager.CurrentLanguage == "ru_RU")
         {
-            discordController.state = "ХОЧЕТ ВЫЙТИ ИЗ ИГРЫ ((((";
+            discordController.state = "РҐРћР§Р•Рў Р’Р«Р™РўР РР— РР“Р Р« ((((";
+        }
+        if (localizationManager.CurrentLanguage == "es_ES")
+        {
+            discordController.state = "QUIERE SALIR DEL JUEGO ((((";
+        }
+        if (localizationManager.CurrentLanguage == "de_DE")
+        {
+            discordController.state = "WILL DAS SPIEL VERLASSEN ((((";
         }
     }
 
@@ -387,7 +468,15 @@ public class MenuManagerNew : MonoBehaviour
         }
         if (localizationManager.CurrentLanguage == "ru_RU")
         {
-            discordController.state = "Любуется разработчиками ^^";
+            discordController.state = "Р›СЋР±СѓРµС‚СЃСЏ СЂР°Р·СЂР°Р±РѕС‚С‡РёРєР°РјРё ^^";
+        }
+        if (localizationManager.CurrentLanguage == "es_ES")
+        {
+            discordController.state = "Amado por los desarrolladores ^^";
+        }
+        if (localizationManager.CurrentLanguage == "de_DE")
+        {
+            discordController.state = "Von den Entwicklern geliebt ^^";
         }
     }
 
@@ -493,7 +582,7 @@ public class MenuManagerNew : MonoBehaviour
         Debug.Log("Multiplayer mode");
     }
 
-    // справочник
+    // СЃРїСЂР°РІРѕС‡РЅРёРє
 
     public void ManualToyRobot()
     {
