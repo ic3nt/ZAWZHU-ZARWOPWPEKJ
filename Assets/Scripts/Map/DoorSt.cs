@@ -13,11 +13,13 @@ public class DoorSt : NetworkBehaviour
     [Range(0, 1)]
     public float ChanceOfLock = 0.5f;
 
-    private void Start()
+    public override void OnNetworkSpawn()
     {
-        if (!IsOwner) return; // Выполняем только для владельца/клиента
-        // Определяем, заблокирована ли дверь в зависимости от ChanceOfLock
-        IsLocked.Value = Random.value > ChanceOfLock;
+        // Выполняется только для сервера
+        if (IsOwner)
+        {
+            IsLocked.Value = Random.value > ChanceOfLock;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -26,25 +28,33 @@ public class DoorSt : NetworkBehaviour
         {
             if (other.TryGetComponent<Key>(out var key))
             {
-                UnlockDoorServerRpc();  // Изменено на правильный вызов метода
+                // Вызываем RPC для разблокировки двери
+                UnlockDoorServerRpc();
+
+                // Уничтожаем объект ключа
                 Destroy(key.KeyObject);
                 Debug.Log("Ключ использован для разблокировки двери");
             }
         }
     }
 
-    [ServerRpc]
-    private void UnlockDoorServerRpc() // Исправлено имя метода
+    [ServerRpc(RequireOwnership = true)]
+    private void UnlockDoorServerRpc()
     {
-        IsLocked.Value = false; // Разблокируем дверь
-        audioSource.Play(); // Проигрываем звук разблокировки
-        UpdateClientsClientRpc(); // Уведомляем всех клиентов обновить свое состояние
+        if (IsLocked.Value)
+        {
+            Debug.Log("UnlockDoorServerRpc вызван");
+            IsLocked.Value = false; // Разблокируем дверь на сервере
+            audioSource?.Play(); // Проигрываем звук разблокировки
+            UpdateClientsClientRpc(); // Уведомляем всех клиентов о разблокировке
+            Debug.Log("Дверь разблокирована");
+        }
     }
 
     [ClientRpc]
-    private void UpdateClientsClientRpc() // Исправлено имя метода
+    private void UpdateClientsClientRpc()
     {
-        IsLocked.Value = false;
-        audioSource.Play(); // Опционально проигрываем звук для всех клиентов
+        IsLocked.Value = false; // Разблокируем дверь на клиентах
+        audioSource?.Play(); // Проигрываем звук для всех клиентов
     }
 }
