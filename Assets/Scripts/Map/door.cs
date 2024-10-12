@@ -48,7 +48,7 @@ public class Door : NetworkBehaviour
         {
             if (hit.collider.CompareTag("Door"))
             {
-                if (hit.collider.TryGetComponent<DoorSt>(out var ds) && !ds.IsLocked.Value)
+                if (hit.collider.TryGetComponent<DoorSt>(out var ds) && !ds.IsLocked)
                 {
                     an = hit.collider.transform.GetComponent<Animator>();
                     doorSound = hit.collider.gameObject.GetComponent<AudioSource>();
