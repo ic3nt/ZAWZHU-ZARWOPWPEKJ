@@ -7,7 +7,7 @@ public class DoorSt : NetworkBehaviour
 {
     public AudioSource audioSource;
 
-    [HideInInspector]
+    // Изменяем HideInInspector на public
     public NetworkVariable<bool> IsLocked = new NetworkVariable<bool>(true); // Начальное состояние - заблокировано
 
     [Range(0, 1)]
@@ -38,7 +38,7 @@ public class DoorSt : NetworkBehaviour
         }
     }
 
-    [ServerRpc(RequireOwnership = true)]
+    [ServerRpc(RequireOwnership = false)]
     private void UnlockDoorServerRpc()
     {
         if (IsLocked.Value)
@@ -48,6 +48,10 @@ public class DoorSt : NetworkBehaviour
             audioSource?.Play(); // Проигрываем звук разблокировки
             UpdateClientsClientRpc(); // Уведомляем всех клиентов о разблокировке
             Debug.Log("Дверь разблокирована");
+        }
+        else
+        {
+            Debug.Log("Дверь уже разблокирована. RPC не будет выполнен.");
         }
     }
 
