@@ -7,7 +7,7 @@ public class DoorSt : NetworkBehaviour
 {
     public AudioSource audioSource;
 
-    // Изменяем HideInInspector на public
+    [HideInInspector]
     public NetworkVariable<bool> IsLocked = new NetworkVariable<bool>(true); // Начальное состояние - заблокировано
 
     [Range(0, 1)]
@@ -24,16 +24,23 @@ public class DoorSt : NetworkBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+       
+
         if (other.CompareTag("Key") && IsLocked.Value)
         {
             if (other.TryGetComponent<Key>(out var key))
             {
-                // Вызываем RPC для разблокировки двери
-                UnlockDoorServerRpc();
+                // Проверяем, является ли объект сервером
+                
 
                 // Уничтожаем объект ключа
                 Destroy(key.KeyObject);
                 Debug.Log("Ключ использован для разблокировки двери");
+
+
+                if (!IsServer) return;
+                // Вызываем RPC для разблокировки двери
+                UnlockDoorServerRpc();
             }
         }
     }
