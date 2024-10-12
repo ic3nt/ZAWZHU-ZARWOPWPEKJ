@@ -28,7 +28,7 @@ public class DoorSt : NetworkBehaviour
             if (other.TryGetComponent<Key>(out var key))
             {
                 // Проверяем, является ли объект сервером
-                if (!IsServer) return;
+                
 
                 // Уничтожаем объект ключа
                 Destroy(key.KeyObject);
