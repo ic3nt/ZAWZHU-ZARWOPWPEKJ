@@ -12,7 +12,7 @@ public class HealthManager : MonoBehaviour
     public FirstPersonAudio personAudio;
     public Image healthBar;
     public TextMeshProUGUI healthAmountText;
-    public Animator animatorHealth;
+ //   public Animator animatorHealth;
     public Animator animatorUI;
     public float healthAmount = 100f;
     public bool timerOn;
@@ -99,7 +99,7 @@ public class HealthManager : MonoBehaviour
 
             if (Time.time - lastDamageTime >= damageCooldown)
             {
-                animatorHealth.SetTrigger("Normal");
+       //         animatorHealth.SetTrigger("Normal");
             }
         }
     }
@@ -116,7 +116,7 @@ public class HealthManager : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        animatorHealth.SetTrigger("Damage");
+  //      animatorHealth.SetTrigger("Damage");
         healthAmount -= damage;
         healthBar.fillAmount = healthAmount / 100f;
         lastDamageTime = Time.time;
