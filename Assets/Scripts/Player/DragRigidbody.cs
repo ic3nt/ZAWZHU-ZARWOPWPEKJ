@@ -44,6 +44,7 @@ public class DragRigidbody : MonoBehaviour
             {
                 dragDepth = CameraPlane.CameraToPointDepth(Camera.main, hit.point);
                 jointTrans = AttachJoint(hit.rigidbody, hit.point);
+                GetComponent<Outline>().enabled = true;
             }
         }
     }

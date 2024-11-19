@@ -77,7 +77,6 @@ GameObject:
   - component: {fileID: 3614165001876365204}
   - component: {fileID: 381189309685131871}
   - component: {fileID: 6727265869472434813}
-  - component: {fileID: 7173928828740819448}
   m_Layer: 8
   m_Name: ToyRobot
   m_TagString: Enemy
@@ -323,20 +322,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &7173928828740819448
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 274569623656201373}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3088f1744a22b4505883ee568089846e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DestTime: 30
-  DestObj: {fileID: 274569623656201373}
 --- !u!1 &620102503879770599
 GameObject:
   m_ObjectHideFlags: 0

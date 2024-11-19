@@ -9143,6 +9143,7 @@ GameObject:
   - component: {fileID: 4168546120899995241}
   - component: {fileID: 5165477256753562299}
   - component: {fileID: 3597612903368359265}
+  - component: {fileID: 8345841660816236375}
   m_Layer: 0
   m_Name: 5v
   m_TagString: Player
@@ -9192,10 +9193,10 @@ CapsuleCollider:
   m_ProvidesContacts: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.45
+  m_Radius: 0.66689223
   m_Height: 1.7397724
   m_Direction: 1
-  m_Center: {x: 0.00071817636, y: 0.95827705, z: 0}
+  m_Center: {x: -0.009373665, y: 0.95827705, z: 2.2185513e-17}
 --- !u!54 &8759172915904957214
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -9521,6 +9522,24 @@ MonoBehaviour:
   startDelay: 0
   transition: {fileID: 11400000, guid: 3ad3e86dc386e60458fda4c93a2c3d62, type: 2}
   timeText: {fileID: 8424293495202502268}
+--- !u!114 &8345841660816236375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4283364824617576930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 3
+  outlineColor: {r: 0.972549, g: 1, b: 0, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &4341190546390473430
 GameObject:
   m_ObjectHideFlags: 0
@@ -15027,7 +15046,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1949818851032078789
 Transform:
   m_ObjectHideFlags: 0
@@ -15037,7 +15056,7 @@ Transform:
   m_GameObject: {fileID: 9123668215114565360}
   serializedVersion: 2
   m_LocalRotation: {x: -5.042444e-15, y: 0.709661, z: 0.70454335, w: -5.0060816e-15}
-  m_LocalPosition: {x: -0.3813, y: 0.3505, z: -0.137}
+  m_LocalPosition: {x: -0.3782, y: 0.3505, z: -0.137}
   m_LocalScale: {x: -0.15608357, y: -0.0010908014, z: -0.15608355}
   m_ConstrainProportionsScale: 0
   m_Children: []
