@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 4199001734257639568}
   - component: {fileID: 1058461763076380356}
   - component: {fileID: 5624368129212488429}
+  - component: {fileID: 1161205722216859319}
   m_Layer: 0
   m_Name: First Person Camera
   m_TagString: MainCamera
@@ -515,6 +516,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rayDistance: 3
   IsObjSaw: 0
+--- !u!114 &1161205722216859319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 49894168643017583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0d2ad107353638438be2b77df2d5453, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TerrainScannerPrefab: {fileID: 5829387580687154407, guid: 1aba4cc33ae3bdd4c9a9ca7c665cf5e5, type: 3}
+  duration: 5
+  size: 35
 --- !u!1 &67322977848972581
 GameObject:
   m_ObjectHideFlags: 0
@@ -4762,9 +4778,9 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
+  m_VertexColorAlwaysGammaSpace: 1
   m_AdditionalShaderChannelsFlag: 25
-  m_UpdateRectTransformForStandalone: 1
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -9143,7 +9159,6 @@ GameObject:
   - component: {fileID: 4168546120899995241}
   - component: {fileID: 5165477256753562299}
   - component: {fileID: 3597612903368359265}
-  - component: {fileID: 8345841660816236375}
   m_Layer: 0
   m_Name: 5v
   m_TagString: Player
@@ -9193,10 +9208,10 @@ CapsuleCollider:
   m_ProvidesContacts: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.66689223
+  m_Radius: 0.44008
   m_Height: 1.7397724
   m_Direction: 1
-  m_Center: {x: -0.009373665, y: 0.95827705, z: 2.2185513e-17}
+  m_Center: {x: -0.010853827, y: 0.95827705, z: 4.3219883e-17}
 --- !u!54 &8759172915904957214
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -9522,24 +9537,6 @@ MonoBehaviour:
   startDelay: 0
   transition: {fileID: 11400000, guid: 3ad3e86dc386e60458fda4c93a2c3d62, type: 2}
   timeText: {fileID: 8424293495202502268}
---- !u!114 &8345841660816236375
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4283364824617576930}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineMode: 3
-  outlineColor: {r: 0.972549, g: 1, b: 0, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
 --- !u!1 &4341190546390473430
 GameObject:
   m_ObjectHideFlags: 0
@@ -11294,6 +11291,7 @@ GameObject:
   m_Component:
   - component: {fileID: 664584273604343661}
   - component: {fileID: 2737415266982774124}
+  - component: {fileID: 757466769260933412}
   m_Layer: 0
   m_Name: Kail
   m_TagString: Untagged
@@ -11335,6 +11333,24 @@ MonoBehaviour:
   swayAm: 0.02
   maxswayAm: 0.1
   swaySm: 10
+--- !u!114 &757466769260933412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5645413962632055686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 4
+  outlineColor: {r: 0.972549, g: 1, b: 0, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &5671541661562111639
 GameObject:
   m_ObjectHideFlags: 0
