@@ -45,7 +45,7 @@ public class NetworkUnstable : MonoBehaviour
             NetworkUnstableWindow.SetActive(true);
             firstPersonMovement.GetComponent<FirstPersonMovement>().enabled = false;
             firstPersonLook.GetComponent<FirstPersonLook>().enabled = false;
-            Debug.Log("Unstable network connecting!");
+         //   Debug.Log("Unstable network connecting!");
 
             if (!timerIsRunning)
             {
@@ -63,7 +63,7 @@ public class NetworkUnstable : MonoBehaviour
                 {
                     timeRemaining = 0;
                     timerIsRunning = false;
-                    Debug.Log("Timer end!");
+            //        Debug.Log("Timer end!");
                     LoadScene("IsMenuScene");
                 }
             }
@@ -76,7 +76,7 @@ public class NetworkUnstable : MonoBehaviour
             // инет норм
 
             NetworkUnstableWindow.SetActive(false);
-            Debug.Log("The network connection is normal!");
+        //    Debug.Log("The network connection is normal!");
             firstPersonMovement.GetComponent<FirstPersonMovement>().enabled = true;
             firstPersonLook.GetComponent<FirstPersonLook>().enabled = true;
             timerIsRunning = false;

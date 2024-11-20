@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 1161205722216859319}
   - component: {fileID: 3661717238940617345}
   - component: {fileID: 2249984881235193453}
+  - component: {fileID: 3679392313734949210}
   m_Layer: 0
   m_Name: First Person Camera
   m_TagString: MainCamera
@@ -87,7 +88,7 @@ Camera:
     height: 1
   near clip plane: 0.01
   far clip plane: 100
-  field of view: 15
+  field of view: 60
   orthographic: 0
   orthographic size: 90
   m_Depth: 1
@@ -561,7 +562,7 @@ AudioSource:
   m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 534c3177143290644bcb8312902c8685, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 7a99307af8d464359ad4c0d2e49ff173, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -647,6 +648,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &3679392313734949210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 49894168643017583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d77ac108e2ff18f438bdd0aafe85ec18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCamera: {fileID: 8004034715669064260}
+  targetFOV: 40
+  originalFOV: 60
+  duration: 2
 --- !u!1 &67322977848972581
 GameObject:
   m_ObjectHideFlags: 0
@@ -11407,7 +11424,6 @@ GameObject:
   m_Component:
   - component: {fileID: 664584273604343661}
   - component: {fileID: 2737415266982774124}
-  - component: {fileID: 757466769260933412}
   m_Layer: 0
   m_Name: Kail
   m_TagString: Untagged
@@ -11449,24 +11465,6 @@ MonoBehaviour:
   swayAm: 0.02
   maxswayAm: 0.1
   swaySm: 10
---- !u!114 &757466769260933412
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5645413962632055686}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineMode: 4
-  outlineColor: {r: 0.972549, g: 1, b: 0, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
 --- !u!1 &5671541661562111639
 GameObject:
   m_ObjectHideFlags: 0
