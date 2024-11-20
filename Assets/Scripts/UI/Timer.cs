@@ -1,43 +1,54 @@
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
+using Unity.Netcode;
 
-public class Timer : MonoBehaviour
+public class Timer : NetworkBehaviour
 {
-    public TextMeshProUGUI timer;
+    public TMP_Text timerText;
+    private float timeElapsed;
+    private bool isTimerRunning = true;
 
-    public TextMeshProUGUI totaltimer;
-
-    public HealthManager hp;
-
-   
+    public override void OnNetworkSpawn()
+    {
+        if (IsServer)
+        {
+            timeElapsed = 0f;
+            UpdateTimerTextClientRpc(timeElapsed);
+        }
+    }
 
     void Update()
     {
-        timer.text = FormatTime(Time.time);
-        totaltimer.text = FormatTime(Time.time);
-
-        if (hp.timerOn == false)
+        if (IsServer && isTimerRunning)
         {
-            StopTimer();
+            timeElapsed += Time.deltaTime;
+            UpdateTimerTextClientRpc(timeElapsed);
         }
-
     }
 
-    string FormatTime(float time)
+    [ClientRpc]
+    void UpdateTimerTextClientRpc(float time)
     {
-       
-        int intTime = (int)time;
-        int minutes = intTime / 60;
-        int seconds = intTime % 60;
-        float fraction = time * 1000;
-        fraction = (fraction % 1000);
-        string timeText = string.Format("{0:00}:{1:00}:{2:000}", minutes, seconds, fraction);
-        return timeText;
+        int minutes = Mathf.FloorToInt(time / 60);
+        int seconds = Mathf.FloorToInt(time % 60);
+        timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
     public void StopTimer()
     {
-        enabled = false;
+        if (IsServer)
+        {
+            isTimerRunning = false;
+        }
     }
 
+    public void StartTimer()
+    {
+        if (IsServer)
+        {
+            isTimerRunning = true;
+            timeElapsed = 0f;
+        }
+    }
 }
