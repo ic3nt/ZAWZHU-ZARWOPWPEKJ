@@ -7,6 +7,7 @@ using DG.Tweening;
 
 public class FirstOpenSceneManager : MonoBehaviour
 {
+
     public RectTransform toggleAgreeRectTransform;
     public RectTransform buttonAgreeRectTransform;
 

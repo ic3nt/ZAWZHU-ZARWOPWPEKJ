@@ -9,6 +9,7 @@ public class FirstPersonMovement : NetworkBehaviour
 
     public Animator animator;
 
+
     public Camera camera;
     private float defaultZoom;
     public float zoomSpeed = 1f;
@@ -33,6 +34,7 @@ public class FirstPersonMovement : NetworkBehaviour
         {
             camera.enabled = false;
         }
+
     }
 
 
