@@ -270,7 +270,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.2121, y: 1.2121, z: 1.2121}
+  m_LocalScale: {x: 1.4263994, y: 1.4263994, z: 1.4263994}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 162109692842291074}
@@ -644,9 +644,10 @@ GameObject:
   - component: {fileID: 4059528469899715663}
   - component: {fileID: 1151105351210904554}
   - component: {fileID: 2890602318010179360}
+  - component: {fileID: 834712442221932913}
   m_Layer: 0
   m_Name: DoorController
-  m_TagString: Door
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -717,6 +718,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &834712442221932913
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3683248564613775093}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.023566514, y: 0.019999998, z: 0.019999998}
+  m_Center: {x: -0.0017832585, y: -0.000000007450581, z: 0}
 --- !u!1 &9035108242839636089
 GameObject:
   m_ObjectHideFlags: 0
@@ -728,6 +750,7 @@ GameObject:
   - component: {fileID: 4404193039550386628}
   - component: {fileID: 2951368447185122281}
   - component: {fileID: 7930049824495266424}
+  - component: {fileID: 6214502615939100178}
   m_Layer: 0
   m_Name: Cube.001
   m_TagString: Untagged
@@ -800,3 +823,25 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &6214502615939100178
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9035108242839636089}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4493585093827132993, guid: 2bbe9e3c54c95b5419ff7e617bbe3d76, type: 3}

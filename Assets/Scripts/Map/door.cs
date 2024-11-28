@@ -77,6 +77,7 @@ public class Door : NetworkBehaviour
                         else if (an.GetCurrentAnimatorStateInfo(0).IsName(doorCloseAnimName))
                         {
                             OpenDoorServerRpc();
+                            
                         }
 
                         fill = 0;
@@ -129,6 +130,7 @@ public class Door : NetworkBehaviour
         an.ResetTrigger("Close");
         an.SetTrigger("Open");
         doorState.Value = DoorState.Opened;
+
     }
 
     private void CloseDoor()
@@ -143,5 +145,6 @@ public class Door : NetworkBehaviour
     private void NotifyDoorStateChange(DoorState newState)
     {
         doorState.Value = newState;
+        
     }
 }

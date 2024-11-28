@@ -63,10 +63,9 @@ public class DoorSt : NetworkBehaviour
         IsLocked = false;
         audioSource?.Play();
         UpdateControllerDoorColor();
-
     }
 
-    private void UpdateControllerDoorColor()
+    public void UpdateControllerDoorColor()
     {
         if (doorMaterial != null)
         {
