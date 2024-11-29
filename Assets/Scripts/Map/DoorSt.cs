@@ -6,10 +6,6 @@ using Unity.Netcode;
 public class DoorSt : NetworkBehaviour
 {
     public AudioSource audioSource;
-    public Material doorMaterial;
-
-    public Color lockedColor = Color.red;
-    public Color unlockedColor = Color.green;
 
     public bool IsLocked;
 
@@ -22,8 +18,6 @@ public class DoorSt : NetworkBehaviour
         {
             IsLocked = Random.value > ChanceOfLock;
         }
-
-        UpdateControllerDoorColor();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -62,19 +56,5 @@ public class DoorSt : NetworkBehaviour
     {
         IsLocked = false;
         audioSource?.Play();
-        UpdateControllerDoorColor();
-    }
-
-    public void UpdateControllerDoorColor()
-    {
-        if (doorMaterial != null)
-        {
-            Color targetColor = IsLocked ? lockedColor : unlockedColor;
-
-            doorMaterial.SetColor("_Color", targetColor);
-
-            doorMaterial.EnableKeyword("_EMISSION");
-            doorMaterial.SetColor("_EmissionColor", targetColor);
-        }
     }
 }
