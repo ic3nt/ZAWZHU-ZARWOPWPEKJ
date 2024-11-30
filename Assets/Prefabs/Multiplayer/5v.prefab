@@ -11689,7 +11689,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 80
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &5757891465360934014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15206,7 +15206,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distanceThreshold: 0.15
-  isGrounded: 1
+  isGrounded: 0
 --- !u!1 &5926550268211336253
 GameObject:
   m_ObjectHideFlags: 0

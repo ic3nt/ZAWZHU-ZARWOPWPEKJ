@@ -1,3 +1,4 @@
+using Unity.Netcode;
 using UnityEngine;
 
 public class RandomItems : MonoBehaviour
@@ -9,25 +10,29 @@ public class RandomItems : MonoBehaviour
       
     void Start()
     {
-
         CurTr = GetComponent<Transform>();
         SpawnObject();
     }
 
-    void SpawnObject()
+    private void SpawnObject()
     {
-        if (Items.Length == 0) // Проверка на наличие предметов
+        int randomIndex = Random.Range(0, Items.Length);
+        GameObject randomObject = Items[randomIndex];
+
+        GameObject spawnedObject = Instantiate(randomObject, CurTr.position, CurTr.rotation, parentTransform);
+
+        NetworkObject networkObject = spawnedObject.GetComponent<NetworkObject>();
+
+        if (networkObject != null)
         {
-            Debug.LogError("Нет предметов для спавна!");
-            return;
+            networkObject.Spawn();
+            Rigidbody rb = spawnedObject.GetComponent<Rigidbody>();
+
+            if (rb != null)
+            {
+                rb.isKinematic = false;
+            }
         }
-
-        int randomIndex = Random.Range(0, Items.Length); // Генерация случайного индекса
-        GameObject randomObject = Items[randomIndex]; // Выбор случайного объекта из массива
-
-        GameObject spawnedObject = Instantiate(randomObject, CurTr.position, CurTr.rotation, parentTransform); // Спавн объекта как дочернего
-
-
-       
     }
+
 }
