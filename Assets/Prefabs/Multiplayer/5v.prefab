@@ -11600,9 +11600,7 @@ GameObject:
   - component: {fileID: 356079694662189859}
   - component: {fileID: 3942757692964247748}
   - component: {fileID: 6920849563193250811}
-  - component: {fileID: 7196441747582490019}
   - component: {fileID: 2677285607070497927}
-  - component: {fileID: 2491876297519365255}
   - component: {fileID: 3987038691154467540}
   - component: {fileID: 52474603443714170}
   - component: {fileID: 1727781559324161334}
@@ -11794,85 +11792,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &7196441747582490019
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4283364824617576930}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5388122b12b859a4bb7282fc586c4f9b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PostProcessVolume: {fileID: 3411293794766253375}
-  LensDistorationAnimationCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: -1
-      outSlope: -1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.5
-      value: -0.5
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  ChromaticAberrationAnimationCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: -1
-      outSlope: -1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.5
-      value: -0.5
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!114 &2677285607070497927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11890,26 +11809,6 @@ MonoBehaviour:
   currfloor: 0
   textPoint: {fileID: 6542743714637039620}
   textflr: {fileID: 8477220270255581899}
---- !u!114 &2491876297519365255
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4283364824617576930}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f72d345cbfc9a4f0fb209a188fd5c9d8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 4
-  animator: {fileID: 6920849563193250811}
-  camera: {fileID: 8004034715669064260}
-  zoomSpeed: 4
-  returnSpeed: 4
-  canRun: 1
-  runSpeed: 7
-  runningKey: 304
 --- !u!114 &3987038691154467540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16717,7 +16616,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f45facc01772ba47a9ae17bb7061b71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: {fileID: 0}
+  character: {fileID: 6387213999055437123}
   groundCheck: {fileID: 2898666627761000992}
   stepAudio: {fileID: 1942540277996573769}
   runningAudio: {fileID: 3834721261227852619}
