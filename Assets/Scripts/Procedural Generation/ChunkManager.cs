@@ -4,15 +4,15 @@ using Unity.Netcode;
 using UnityEngine;
 
 
-public class Chunkk : NetworkBehaviour
+public class ChunkManager : NetworkBehaviour
 {
     public TextMeshPro floorCounterText;
 
     public Transform Begin;
     public Transform End;
-    public int currentenflr;
+    public int currentFloor;
 
-    public int floor;
+    public int Floor;
 
     public int GetPrefabIndex()
     {
@@ -33,6 +33,6 @@ public class Chunkk : NetworkBehaviour
 
     void Start()
     {
-        floorCounterText.text = (floor - 1) + " ↓";
+        floorCounterText.text = (Floor - 1) + " ↓";
     }
 }

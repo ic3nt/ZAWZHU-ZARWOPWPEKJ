@@ -6,18 +6,18 @@ using Unity.Netcode;
 public class ChunksPlacer : NetworkBehaviour
 {
     private Transform lowestPlayer;
-    public Chunkk[] ChunkPrefabs;
-    public Chunkk TenthFloorPrefab;
-    public Chunkk FirstChunk;
+    public ChunkManager[] ChunkPrefabs;
+    public ChunkManager TenthFloorPrefab;
+    public ChunkManager FirstChunk;
     public int totalFloors; // Переименовано в totalFloors для ясности
     private int currentFloor = 0; // Изменено имя переменной на currentFloor
 
-    private List<Chunkk> spawnedChunks = new List<Chunkk>();
+    private List<ChunkManager> spawnedChunks = new List<ChunkManager>();
 
     private void Start()
     {
         // Добавить первый кусок (chunk) и обновить текущее значение этажа
-        Chunkk firstChunk = Instantiate(FirstChunk);
+        ChunkManager firstChunk = Instantiate(FirstChunk);
         spawnedChunks.Add(firstChunk);
         currentFloor = 1; // Первый этаж создан
     }
@@ -67,7 +67,7 @@ public class ChunksPlacer : NetworkBehaviour
     private void SpawnChunk()
     {
         int newChunkIndex = UnityEngine.Random.Range(0, ChunkPrefabs.Length);
-        Chunkk newChunk;
+        ChunkManager newChunk;
 
         // Определяем, какой кусок (chunk) спавнить
         if (currentFloor % 10 == 0) // Если текущий этаж кратен 10, используем TenthFloorPrefab
@@ -86,8 +86,8 @@ public class ChunksPlacer : NetworkBehaviour
         newChunk.transform.rotation = (currentFloor % 2 == 0) ? Quaternion.Euler(0f, 180f, 0f) : Quaternion.Euler(0f, 0f, 0f);
 
         // Обновляем значения текущего этажа куска (chunk)
-        newChunk.currentenflr = currentFloor;
-        newChunk.floor = totalFloors - currentFloor;
+        newChunk.currentFloor = currentFloor;
+        newChunk.Floor = totalFloors - currentFloor;
 
         // Добавление нового куска (chunk) в список
         spawnedChunks.Add(newChunk);

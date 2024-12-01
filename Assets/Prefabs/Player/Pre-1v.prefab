@@ -533,11 +533,12 @@ GameObject:
   - component: {fileID: 6717051655492139393}
   - component: {fileID: 663366608470845007}
   - component: {fileID: 1009204277972028225}
+  - component: {fileID: -3804155944625899006}
   - component: {fileID: 3552072857804818377}
   - component: {fileID: 5478894896641290978}
   - component: {fileID: 2763940116986960617}
   m_Layer: 0
-  m_Name: 1v
+  m_Name: Pre-1v
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -612,6 +613,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 1
+--- !u!114 &-3804155944625899006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1414052746733639014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 3936847399
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!114 &3552072857804818377
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -625,12 +647,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  animator: {fileID: 0}
+  camera: {fileID: 3035772464603501539}
+  zoomSpeed: 5
+  returnSpeed: 5
   canRun: 1
   runSpeed: 9
   runningKey: 304
-  zoomSpeed: 5
-  returnSpeed: 5
-  camera: {fileID: 3035772464603501539}
 --- !u!114 &5478894896641290978
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1842,8 +1865,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 6717051655492139393}
+  Head: {fileID: 0}
   sensitivity: 2
   smoothing: 1.5
+  enableCameraShake: 0
+  shakeAmount: 0.3
 --- !u!114 &1284600688668699471
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -4,43 +4,42 @@ using UnityEngine;
 
 public class PlusPoints : MonoBehaviour
 {
-    public Chunkk ch;
+    public ChunkManager chunkManager;
 
-    public EnemySpawner es;
+    public EnemySpawner enemySpawner;
 
+    public Collider collider;
 
-    public Collider coll;
-
-    public GameObject doorwork;
+    public GameObject doorWork;
 
     public GameObject doorLock;
 
-    private int plusp;
+    private int plusPoints;
 
     void Start()
     {
         doorLock.SetActive(false);
-        doorwork.SetActive(true);
+        doorWork.SetActive(true);
 
-        if (ch.currentenflr > 0)
+        if (chunkManager.currentFloor > 0)
         {
-            plusp = Random.Range(4, 25);
+            plusPoints = Random.Range(4, 25);
 
-            if (ch.currentenflr > 10)
+            if (chunkManager.currentFloor > 10)
             {
-                plusp = Random.Range(28, 43);
+                plusPoints = Random.Range(28, 43);
 
-                if (ch.currentenflr > 20)
+                if (chunkManager.currentFloor > 20)
                 {
-                    plusp = Random.Range(45, 59);
+                    plusPoints = Random.Range(45, 59);
 
-                    if (ch.currentenflr > 30)
+                    if (chunkManager.currentFloor > 30)
                     {
-                        plusp = Random.Range(60, 74);
+                        plusPoints = Random.Range(60, 74);
 
-                        if (ch.currentenflr > 40)
+                        if (chunkManager.currentFloor > 40)
                         {
-                            plusp = Random.Range(88, 160);
+                            plusPoints = Random.Range(88, 160);
 
                         }
                     }
@@ -62,18 +61,18 @@ public class PlusPoints : MonoBehaviour
             if (other.TryGetComponent<PlayerPointsInRound>(out var pp))
             {
                 pp.currfloor += 1;
-                pp.points += plusp;
+                pp.points += plusPoints;
                
 
             }
 
             doorLock.SetActive(true);
-            doorwork.SetActive(false);
+            doorWork.SetActive(false);
 
-            coll.enabled = false;
+            collider.enabled = false;
            
 
-            es.SpawnEnemies();
+            enemySpawner.SpawnEnemies();
 
 
         }
