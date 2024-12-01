@@ -673,7 +673,7 @@ GameObject:
   - component: {fileID: 2650981630932455084}
   - component: {fileID: -2465856191999418266}
   - component: {fileID: 7479931358086203721}
-  - component: {fileID: -5232785058918146900}
+  - component: {fileID: 3067220969378359280}
   m_Layer: 7
   m_Name: Floor 1
   m_TagString: Untagged
@@ -813,7 +813,7 @@ MonoBehaviour:
   End: {fileID: 6403932103061963271}
   currentenflr: 0
   floor: 0
---- !u!114 &-5232785058918146900
+--- !u!114 &3067220969378359280
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -822,28 +822,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 1036704651778809454}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df2868252ab5c4d1da357e8f11f1b524, type: 3}
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UseUnreliableDeltas: 0
-  SyncPositionX: 1
-  SyncPositionY: 1
-  SyncPositionZ: 1
-  SyncRotAngleX: 1
-  SyncRotAngleY: 1
-  SyncRotAngleZ: 1
-  SyncScaleX: 1
-  SyncScaleY: 1
-  SyncScaleZ: 1
-  PositionThreshold: 0.001
-  RotAngleThreshold: 0.01
-  ScaleThreshold: 0.01
-  UseQuaternionSynchronization: 0
-  UseQuaternionCompression: 0
-  UseHalfFloatPrecision: 0
-  InLocalSpace: 0
-  Interpolate: 1
-  SlerpPosition: 0
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_GenerateLinks: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.16666667
+  m_MinRegionArea: 2
+  m_NavMeshData: {fileID: 0}
+  m_BuildHeightMesh: 0
 --- !u!1 &1564460757519438617
 GameObject:
   m_ObjectHideFlags: 0
@@ -28112,6 +28112,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2650981630932455084}
     m_Modifications:
+    - target: {fileID: -4182130680742807138, guid: 21bbffb4b5bd1425fb3e4dc7dfa95ea7, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 4225222182
+      objectReference: {fileID: 0}
     - target: {fileID: 3763547691520736317, guid: 21bbffb4b5bd1425fb3e4dc7dfa95ea7, type: 3}
       propertyPath: m_Name
       value: "\_key (3)"
@@ -28310,6 +28314,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2650981630932455084}
     m_Modifications:
+    - target: {fileID: -4182130680742807138, guid: 21bbffb4b5bd1425fb3e4dc7dfa95ea7, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 684037210
+      objectReference: {fileID: 0}
     - target: {fileID: 3763547691520736317, guid: 21bbffb4b5bd1425fb3e4dc7dfa95ea7, type: 3}
       propertyPath: m_Name
       value: "\_key (1)"
@@ -28704,6 +28712,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2650981630932455084}
     m_Modifications:
+    - target: {fileID: -4182130680742807138, guid: 21bbffb4b5bd1425fb3e4dc7dfa95ea7, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1909474330
+      objectReference: {fileID: 0}
     - target: {fileID: 3763547691520736317, guid: 21bbffb4b5bd1425fb3e4dc7dfa95ea7, type: 3}
       propertyPath: m_Name
       value: "\_key"
@@ -29221,6 +29233,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2650981630932455084}
     m_Modifications:
+    - target: {fileID: -4182130680742807138, guid: 21bbffb4b5bd1425fb3e4dc7dfa95ea7, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2574080493
+      objectReference: {fileID: 0}
     - target: {fileID: 3763547691520736317, guid: 21bbffb4b5bd1425fb3e4dc7dfa95ea7, type: 3}
       propertyPath: m_Name
       value: "\_key (2)"

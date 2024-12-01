@@ -250,8 +250,8 @@ GameObject:
   - component: {fileID: 4090943154261884239}
   - component: {fileID: 1406188314120671283}
   - component: {fileID: 5203425557786763021}
-  - component: {fileID: -3144981402634100290}
-  - component: {fileID: 24626807744168337}
+  - component: {fileID: 2042441222834771307}
+  - component: {fileID: 4742686491321650090}
   - component: {fileID: 8453697384229020122}
   m_Layer: 0
   m_Name: Door
@@ -550,7 +550,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &-3144981402634100290
+--- !u!114 &2042441222834771307
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -559,35 +559,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1850871838296987598}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad8deae8091111f4eb30a56c1f4e0d3e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TransitionStateInfoList:
-  - IsCrossFadeExit: 0
-    Layer: 0
-    OriginatingState: -356658476
-    DestinationState: 1128938921
-    TransitionDuration: 0.25
-    TriggerNameHash: -759124288
-    TransitionIndex: 0
-  - IsCrossFadeExit: 0
-    Layer: 0
-    OriginatingState: 1128938921
-    DestinationState: -356658476
-    TransitionDuration: 0.25
-    TriggerNameHash: 71445658
-    TransitionIndex: 0
-  m_Animator: {fileID: 6293081456198053949}
---- !u!114 &24626807744168337
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1850871838296987598}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df2868252ab5c4d1da357e8f11f1b524, type: 3}
+  m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   UseUnreliableDeltas: 0
@@ -609,6 +581,34 @@ MonoBehaviour:
   InLocalSpace: 0
   Interpolate: 1
   SlerpPosition: 0
+--- !u!114 &4742686491321650090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1850871838296987598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8d0727d5ae3244e3b569694d3912374, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TransitionStateInfoList:
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: -356658476
+    DestinationState: 1128938921
+    TransitionDuration: 0.25
+    TriggerNameHash: -759124288
+    TransitionIndex: 0
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: 1128938921
+    DestinationState: -356658476
+    TransitionDuration: 0.25
+    TriggerNameHash: 71445658
+    TransitionIndex: 0
+  m_Animator: {fileID: 6293081456198053949}
 --- !u!65 &8453697384229020122
 BoxCollider:
   m_ObjectHideFlags: 0

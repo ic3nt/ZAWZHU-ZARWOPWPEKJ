@@ -4341,9 +4341,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6278dcf6ce3cb8244876372d193d3457, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: {fileID: 6107859865089802949}
-  totaltimer: {fileID: 8507117139071422289}
-  hp: {fileID: 1160911614595322015}
+  timerText: {fileID: 0}
 --- !u!1 &6652133247967486528
 GameObject:
   m_ObjectHideFlags: 0
@@ -5411,8 +5409,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 6040345941917343126}
+  Head: {fileID: 0}
   sensitivity: 2
   smoothing: 1.5
+  enableCameraShake: 0
+  shakeAmount: 0.3
 --- !u!114 &3743497419750210158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5479,6 +5480,7 @@ MonoBehaviour:
   progressBar: {fileID: 7620279275560005514}
   Bar: {fileID: 0}
   canOpen: 1
+  LockText: {fileID: 0}
 --- !u!114 &7009174935582634238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5505,6 +5507,7 @@ GameObject:
   - component: {fileID: 6040345941917343126}
   - component: {fileID: 72248812613660688}
   - component: {fileID: 4912953647221898353}
+  - component: {fileID: -6573455163860809134}
   - component: {fileID: 7527041025857474944}
   - component: {fileID: 7643812972870124321}
   - component: {fileID: 3646645737963074040}
@@ -5592,6 +5595,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 1
+--- !u!114 &-6573455163860809134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7925227763710806233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 4121638842
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!114 &7527041025857474944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5606,6 +5630,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   animator: {fileID: 0}
+  camera: {fileID: 0}
+  zoomSpeed: 1
+  returnSpeed: 1
   canRun: 1
   runSpeed: 9
   runningKey: 304
@@ -5654,11 +5681,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadScene: {fileID: 5176935974011904121}
-  animatorDead: {fileID: 4510201022086055017}
   personMovement: {fileID: 7527041025857474944}
   personLook: {fileID: 2304073760266072827}
   personAudio: {fileID: 2149764669166755733}
   healthBar: {fileID: 1812426354925003169}
+  healthAmountText: {fileID: 0}
+  animatorUI: {fileID: 0}
   healthAmount: 100
   timerOn: 1
 --- !u!65 &1909964653399902434
