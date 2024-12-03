@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 8004034715669064260}
   - component: {fileID: 874462658083008128}
   - component: {fileID: 5180170901061033999}
-  - component: {fileID: 4074896290924485801}
   - component: {fileID: 7487998224082578652}
+  - component: {fileID: 4074896290924485801}
   - component: {fileID: 7991041793280119373}
   - component: {fileID: 265234939373311264}
   - component: {fileID: 7380053322634563743}
@@ -121,24 +121,6 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 49894168643017583}
   m_Enabled: 1
---- !u!114 &4074896290924485801
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 49894168643017583}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec72980442fddac4d86e75ab24b4d027, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  character: {fileID: 5193859935782295756}
-  Head: {fileID: 8019915723301141008}
-  sensitivity: 2
-  smoothing: 1.5
-  enableCameraShake: 0
-  shakeAmount: 0.3
 --- !u!114 &7487998224082578652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,6 +165,22 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
+--- !u!114 &4074896290924485801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 49894168643017583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec72980442fddac4d86e75ab24b4d027, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  character: {fileID: 5193859935782295756}
+  Head: {fileID: 8019915723301141008}
+  sensitivity: 2
+  smoothing: 1.5
 --- !u!114 &7991041793280119373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11726,6 +11724,9 @@ MonoBehaviour:
   camera: {fileID: 8004034715669064260}
   zoomSpeed: 4
   returnSpeed: 4
+  pulseCameraSpeed: 1
+  minFOV: 60
+  maxFOV: 65
   canRun: 1
   runSpeed: 7
   runningKey: 304

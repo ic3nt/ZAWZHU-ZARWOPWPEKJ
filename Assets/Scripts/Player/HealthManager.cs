@@ -37,13 +37,21 @@ public class HealthManager : MonoBehaviour
 
         healthAmountText.text = healthAmount.ToString("F0") + "%";
 
+    //    if (healthAmount > 15)
+    //    {
+            StopCoroutine(personMovement.PulseCameraFOV());
+      //  }
+   //     else
+   //     {
+   //         personMovement.PulseCameraFOV();
+     //   }
+
         // стадии анимации
 
         if (healthAmount > 50)
         {
             if (!animatorUI.GetCurrentAnimatorStateInfo(0).IsName("Normal"))
             {
-                Debug.Log("norm");
                 animatorUI.SetTrigger("Normal");
             }
         }
@@ -52,14 +60,12 @@ public class HealthManager : MonoBehaviour
             if (!animatorUI.GetCurrentAnimatorStateInfo(0).IsName("Health50"))
             {
                 animatorUI.SetTrigger("Health50");
-                Debug.Log("50");
             }
         }
         else if (healthAmount <= 30 && healthAmount > 15)
         {
             if (!animatorUI.GetCurrentAnimatorStateInfo(0).IsName("Health30"))
             {
-                Debug.Log("30");
                 animatorUI.SetTrigger("Health30");
             }
         }
@@ -67,15 +73,14 @@ public class HealthManager : MonoBehaviour
         {
             if (!animatorUI.GetCurrentAnimatorStateInfo(0).IsName("Health30"))
             {
-                Debug.Log("15");
+                personMovement.pulseCameraSpeed = 10f;
+                personMovement.PulseCameraFOV();
                 animatorUI.SetTrigger("Health15");
             }
         }
         if (healthAmount <= 0)
         {
             // игрок сдох (
-
-            Debug.Log("ded");
             Dead();
         }
         else

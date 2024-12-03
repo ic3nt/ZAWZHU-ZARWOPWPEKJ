@@ -2,6 +2,7 @@
 using System.Globalization;
 using UnityEngine;
 using Unity.Netcode;
+using System.Collections;
 
 public class FirstPersonMovement : NetworkBehaviour
 {
@@ -9,12 +10,14 @@ public class FirstPersonMovement : NetworkBehaviour
 
     public Animator animator;
 
-
     public Camera camera;
     private float defaultZoom;
     public float zoomSpeed = 1f;
     public float returnSpeed = 1f;
 
+    public float pulseCameraSpeed = 1f;
+    public float minFOV = 60f;
+    public float maxFOV = 70f;
 
     [Header("Running")]
     public bool canRun = true;
@@ -40,7 +43,6 @@ public class FirstPersonMovement : NetworkBehaviour
 
     private void Update()
     {
-
         if (!IsOwner) return;
         if ((Input.GetKey(KeyCode.LeftShift)) && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)))
         {
@@ -116,8 +118,22 @@ public class FirstPersonMovement : NetworkBehaviour
         rigidbody.velocity = transform.rotation * new Vector3(targetVelocity.x, rigidbody.velocity.y, targetVelocity.y);
 
     }
-    private void ZoomCamera(float targetZoom)
+    public void ZoomCamera(float targetZoom)
     {
         camera.fieldOfView = Mathf.Lerp(camera.fieldOfView, targetZoom, zoomSpeed * Time.deltaTime);
+    }
+
+    public IEnumerator PulseCameraFOV()
+    {
+        float time = 0f;
+
+        while (true)
+        {
+            float fov = Mathf.Lerp(minFOV, maxFOV, (Mathf.Sin(time * pulseCameraSpeed) + 1f) / 2f);
+            camera.fieldOfView = fov;
+
+            time += Time.deltaTime;
+            yield return null;
+        }
     }
 }
