@@ -10,7 +10,7 @@ public class FirstPersonAudio : MonoBehaviour
     public AudioSource stepAudio;
     public AudioSource runningAudio;
     [Tooltip("Minimum velocity for moving audio to play")]
-    /// <summary> "Minimum velocity for moving audio to play" </summary>
+
     public float velocityThreshold = .01f;
     Vector2 lastCharacterPosition;
     Vector2 CurrentCharacterPosition => new Vector2(character.transform.position.x, character.transform.position.z);
@@ -24,6 +24,14 @@ public class FirstPersonAudio : MonoBehaviour
     public AudioSource jumpAudio;
     public AudioClip[] jumpSFX;
 
+    [Header("Camera Rotate")]
+    public AudioSource cameraRotateAudio;
+    public Transform cameraTransform;
+    public float volumeMultiplier = 0.01f;
+    public float maxVolume = 0.5f;
+
+    private Vector3 lastRotation;
+
     [Header("Crouch")]
     public Crouch crouch;
     public AudioSource crouchStartAudio, crouchedAudio, crouchEndAudio;
@@ -31,6 +39,35 @@ public class FirstPersonAudio : MonoBehaviour
 
     AudioSource[] MovingAudios => new AudioSource[] { stepAudio, runningAudio, crouchedAudio };
 
+
+    void Start()
+    {
+        lastRotation = cameraTransform.eulerAngles;
+    }
+
+    void Update()
+    {
+        Vector3 rotationDelta = new Vector3(
+            Mathf.DeltaAngle(lastRotation.x, cameraTransform.eulerAngles.x),
+            Mathf.DeltaAngle(lastRotation.y, cameraTransform.eulerAngles.y),
+            Mathf.DeltaAngle(lastRotation.z, cameraTransform.eulerAngles.z)
+        );
+
+        float angularSpeed = rotationDelta.magnitude;
+
+        cameraRotateAudio.volume = Mathf.Clamp(angularSpeed * volumeMultiplier, 0f, maxVolume);
+
+        if (angularSpeed > 0.1f && !cameraRotateAudio.isPlaying)
+        {
+            cameraRotateAudio.Play();
+        }
+        else if (angularSpeed <= 0.1f && cameraRotateAudio.isPlaying)
+        {
+            cameraRotateAudio.Pause();
+        }
+
+        lastRotation = cameraTransform.eulerAngles;
+    }
 
     void Reset()
     {
