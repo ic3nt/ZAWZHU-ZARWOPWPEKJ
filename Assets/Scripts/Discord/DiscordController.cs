@@ -3,20 +3,25 @@ using UnityEngine;
 
 public class DiscordController : MonoBehaviour
 {
+    [Header("Discord Application Settings")]
+    [Space(10)]
     public long applicationID;
-    [Space]
+
+    [Header("Rich Presence Details")]
+    [Space(10)]
     public string details = "";
+
     public string state = "";
-    [Space]
+
     public string largeImage = "";
+
     public string largeText = "";
+
 
     private long time;
 
     private static bool instanceExists;
     public Discord.Discord discord;
-
-    // а тут значит DD работает с дискордом
 
     void Awake()
     {
@@ -32,18 +37,20 @@ public class DiscordController : MonoBehaviour
 
     void Start()
     {
-        // при старте начинаем отображать статус в дс
-
+        // Initialize Discord connection
         discord = new Discord.Discord(applicationID, (System.UInt64)Discord.CreateFlags.NoRequireDiscord);
 
         time = System.DateTimeOffset.Now.ToUnixTimeMilliseconds();
 
+        // Update the Discord Rich Presence status
         UpdateStatus();
     }
 
     void Update()
     {
+        // Regularly update Discord Rich Presence status
         UpdateStatus();
+
         try
         {
             discord.RunCallbacks();
@@ -56,8 +63,7 @@ public class DiscordController : MonoBehaviour
 
     void UpdateStatus()
     {
-        // все че надо отображаем в статусе дс, обновляя его, если DD не может подключится к сервисам дискорда то выводим ошибку в консоль
-
+        // Attempt to update the Discord status
         try
         {
             var activityManager = discord.GetActivityManager();
@@ -78,7 +84,8 @@ public class DiscordController : MonoBehaviour
 
             activityManager.UpdateActivity(activity, (res) =>
             {
-                if (res != Discord.Result.Ok) Debug.LogWarning("Failed connecting to Discord!");
+                if (res != Discord.Result.Ok)
+                    Debug.LogWarning("Failed connecting to Discord!");
             });
         }
         catch
@@ -86,12 +93,13 @@ public class DiscordController : MonoBehaviour
             Destroy(gameObject);
         }
     }
-  //  private void OnDestroy()
- //   {
-  //      if (discord != null)
-  //      {
-  //          discord.Dispose();
-  //          discord = null;
-   //      }
-  //  }
+
+     private void OnDestroy()
+     {
+         if (discord != null)
+         {
+             discord.Dispose();
+             discord = null;
+         }
+     }
 }

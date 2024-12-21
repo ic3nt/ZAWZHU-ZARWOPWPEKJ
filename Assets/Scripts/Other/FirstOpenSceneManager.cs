@@ -15,7 +15,7 @@ public class FirstOpenSceneManager : MonoBehaviour
     public Button buttonAgree;
 
     [Space]
-    public DemoLoadScene loadScene;
+    public DemoLoadScene transitionManager;
     public Animator animator;
 
     [Space]
@@ -54,6 +54,20 @@ public class FirstOpenSceneManager : MonoBehaviour
 
         cameraToRotate = Camera.main;
         originalY = cameraToRotate.transform.position.y;
+
+        if (transitionManager == null)
+        {
+            GameObject managerObject = GameObject.FindWithTag("TransitionManager");
+            if (managerObject != null)
+            {
+                transitionManager = managerObject.GetComponent<DemoLoadScene>();
+                Debug.Log("TransitionManager automatically assigned.");
+            }
+            else
+            {
+                Debug.LogError("No object with tag 'TransitionManager' found in the scene!");
+            }
+        }
     }
 
     private void OnToggleValueChanged(bool isOn)
@@ -88,6 +102,6 @@ public class FirstOpenSceneManager : MonoBehaviour
 
     public void GoToMenuScene()
     {
-        loadScene.LoadScene("IsMenuScene");
+        transitionManager.LoadScene("IsMenuScene");
     }
 }

@@ -5,14 +5,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 
-public class MenuManagerNew : MonoBehaviour
+public class MenuManager : MonoBehaviour
 {
+    [Header("Game Manager")]
     public DiscordController discordController;
     public LocalizationManager localizationManager;
+    public GameObject transitionManager;
 
+    [Header("Transition Settings")]
     public TransitionSettings transition;
     public float startDelay;
 
+    [Header("Animators")]
     public Animator animator;
     public Animator animatorSettings;
     public Animator animatorNoConnectionWarning;
@@ -22,16 +26,19 @@ public class MenuManagerNew : MonoBehaviour
     public Animator animatorStore;
     public Animator animatorCatalog;
 
+    [Header("Menu States")]
+    [Space(10)]
     private bool isMenu;
     private bool isSettings;
     private bool isManual;
     private bool isStore;
     private bool isCatalog;
-
+    [Space(10)]
     private bool isNotSelect;
     private bool isToyRobot;
     private bool isMimic;
 
+    [Header("Manual")]
     public GameObject ManualMonsterButton;
     public GameObject ManualMonsterToyRobotWindow;
     public GameObject ManualMonsterMimicWindow;
@@ -39,6 +46,8 @@ public class MenuManagerNew : MonoBehaviour
     public GameObject ToyRobotObject;
     public GameObject MimicObject;
 
+    [Header("Animation States")]
+    [Space(10)]
     private bool isPlayedSettingsAnimation;
     private bool isSettingsOpen = false;
     private bool isSettingsAnimationPlaying = false;
@@ -54,7 +63,6 @@ public class MenuManagerNew : MonoBehaviour
     private bool isPlayedCatalogAnimation;
     private bool isCatalogOpen = false;
     private bool isCatalogAnimationPlaying = false;
-
 
     void Start()
     {
@@ -109,6 +117,35 @@ public class MenuManagerNew : MonoBehaviour
             discordController.details = "Menú";
         }
 
+    }
+    private void OnValidate()
+    {
+        if (transitionManager == null)
+        {
+            GameObject transitionManagerObject = GameObject.FindWithTag("TransitionManager");
+            if (transitionManagerObject != null)
+            {
+                transitionManager = transitionManagerObject;
+                Debug.Log("TransitionManager automatically assigned.");
+            }
+            else
+            {
+                Debug.LogError("No object with tag 'TransitionManager' found in the scene!");
+            }
+        }
+        if (localizationManager == null)
+        {
+            GameObject localizationManagerObject = GameObject.FindWithTag("LocalizationManager");
+            if (localizationManagerObject != null)
+            {
+                localizationManager = localizationManagerObject.GetComponent<LocalizationManager>();
+                Debug.Log("LocalizationManager automatically assigned.");
+            }
+            else
+            {
+                Debug.LogError("No object with tag 'LocalizationManager' found in the scene!");
+            }
+        }
     }
 
     void Update()
@@ -338,16 +375,6 @@ public class MenuManagerNew : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
-    {
-       discordController.discord.Dispose();
-    }
-
-    public void LoadScene(string _sceneName)
-    {
-        TransitionManager.Instance().Transition(_sceneName, transition, startDelay);
-    }
-
     // далее идут методы кнопок и.т.д
 
     public void MenuButton()
@@ -575,7 +602,7 @@ public class MenuManagerNew : MonoBehaviour
     public void SingleplayerButton()
     {
         Debug.Log("Single-player mode");
-        LoadScene("TEST");
+        transitionManager.GetComponent<DemoLoadScene>().LoadScene("TEST");
     }
     public void MultiplayerButton()
     {
