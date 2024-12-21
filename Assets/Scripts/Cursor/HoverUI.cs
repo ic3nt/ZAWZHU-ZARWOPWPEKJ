@@ -5,11 +5,11 @@ using UnityEngine.EventSystems;
 
 public class HoverUI : MonoBehaviour , IPointerEnterHandler, IPointerExitHandler
 {
-    public Texture2D customeCursor;
+    public Texture2D customCursor;
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Cursor.SetCursor(customeCursor, Vector2.zero, CursorMode.Auto);
+        Cursor.SetCursor(customCursor, Vector2.zero, CursorMode.Auto);
     }
 
     public void OnPointerExit(PointerEventData eventData)

@@ -602,7 +602,7 @@ public class MenuManager : MonoBehaviour
     public void SingleplayerButton()
     {
         Debug.Log("Single-player mode");
-        transitionManager.GetComponent<DemoLoadScene>().LoadScene("TEST");
+        transitionManager.GetComponent<DemoLoadScene>().LoadScene("IsIntroScene");
     }
     public void MultiplayerButton()
     {
