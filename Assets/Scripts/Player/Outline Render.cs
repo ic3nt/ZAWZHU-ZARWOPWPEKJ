@@ -27,7 +27,7 @@ public class OutlineRender : NetworkBehaviour
             if (hit.collider.CompareTag("canPickUp"))
             {
                 // если объект с тегом canPickUp, включаем обводку
-                Outline outline = hit.collider.gameObject.GetComponent<Outline>();
+                OutlineScript outline = hit.collider.gameObject.GetComponent<OutlineScript>();
                 if (outline != null)
                 {
 
@@ -44,7 +44,7 @@ public class OutlineRender : NetworkBehaviour
             else
             {
                 // если объект не с тегом canPickUp, отключаем обводку
-                Outline outline = hit.collider.gameObject.GetComponent<Outline>();
+                OutlineScript outline = hit.collider.gameObject.GetComponent<OutlineScript>();
                 if (outline != null)
                 {
                     outline.enabled = false;
@@ -66,8 +66,8 @@ public class OutlineRender : NetworkBehaviour
     {
         // метод отключения обводки
 
-        Outline[] outlines = FindObjectsOfType<Outline>();
-        foreach (Outline outline in outlines)
+        OutlineScript[] outlines = FindObjectsOfType<OutlineScript>();
+        foreach (OutlineScript outline in outlines)
         {
             outline.enabled = false;
         }
