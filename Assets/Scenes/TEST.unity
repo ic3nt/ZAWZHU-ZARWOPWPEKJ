@@ -15206,7 +15206,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u043A\u043E\u0434 \u043B\u043E\u0431\u0431\u0438..."
+  m_text: "\u0412\u0432\u0435\u0434\u0438\u0442\u0435 IP-\u0430\u0434\u0440\u0435\u0441..."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 822b4fc90009f064197b8f06b33f09e6, type: 2}
   m_sharedMaterial: {fileID: -3760385980636559934, guid: 822b4fc90009f064197b8f06b33f09e6, type: 2}
@@ -19455,7 +19455,7 @@ GameObject:
   - component: {fileID: 2100877260}
   - component: {fileID: 2100877259}
   m_Layer: 5
-  m_Name: CodeLobbyText
+  m_Name: IPLobbyText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19520,7 +19520,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: LABEL:CODE_LOBBY | ROLE
+  m_text: LABEL:IP_LOBBY | ROLE
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 822b4fc90009f064197b8f06b33f09e6, type: 2}
   m_sharedMaterial: {fileID: -3760385980636559934, guid: 822b4fc90009f064197b8f06b33f09e6, type: 2}
@@ -29010,10 +29010,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -29030,17 +29030,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 4744317614242116282}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2885bcd87f1c1e447a67ab59474756ad, type: 3}
+  m_Script: {fileID: 11500000, guid: 7a5ea5e73f52e5d419595c89d4504c22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  joinCodeInputField: {fileID: 1549046641}
-  connectButton: {fileID: 8679562221184444213}
-  statusText: {fileID: 1095069261}
-  lobbyCodeText: {fileID: 2100877260}
-  playersCountText: {fileID: 400504148}
+  ipInputField: {fileID: 1549046641}
   hostButton: {fileID: 5993768512874344551}
-  ConnectionWindow: {fileID: 2133873660}
-  GameWindow: {fileID: 1193935044}
+  clientButton: {fileID: 8679562221184444213}
+  serverButton: {fileID: 2926048563916776666}
+  connectionUI: {fileID: 2133873660}
+  gameUI: {fileID: 1193935044}
+  debugText: {fileID: 1095069261}
+  ipLobbyText: {fileID: 2100877260}
 --- !u!1 &6477735593565839897
 GameObject:
   m_ObjectHideFlags: 0
@@ -42709,7 +42709,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6960e84d07fb87f47956e7a81d71c4e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ProtocolType: 1
+  m_ProtocolType: 0
   m_MaxPacketQueueSize: 128
   m_MaxPayloadSize: 6144
   m_HeartbeatTimeoutMS: 500
