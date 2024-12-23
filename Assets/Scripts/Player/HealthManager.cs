@@ -118,11 +118,12 @@ public class HealthManager : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-  //      animatorHealth.SetTrigger("Damage");
         healthAmount -= damage;
+        healthAmount = Mathf.Clamp(healthAmount, 0, 100);
         healthBar.fillAmount = healthAmount / 100f;
         lastDamageTime = Time.time;
     }
+
 
     public void Heal(float healingAmount)
     {
