@@ -39,7 +39,6 @@ public class HealthManager : MonoBehaviour
 
     //    if (healthAmount > 15)
     //    {
-            StopCoroutine(personMovement.PulseCameraFOV());
       //  }
    //     else
    //     {
@@ -73,8 +72,6 @@ public class HealthManager : MonoBehaviour
         {
             if (!animatorUI.GetCurrentAnimatorStateInfo(0).IsName("Health30"))
             {
-                personMovement.pulseCameraSpeed = 10f;
-                personMovement.PulseCameraFOV();
                 animatorUI.SetTrigger("Health15");
             }
         }

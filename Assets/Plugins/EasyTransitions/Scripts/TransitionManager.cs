@@ -6,7 +6,6 @@ using UnityEngine.Events;
 
 namespace EasyTransition
 {
-
     public class TransitionManager : MonoBehaviour
     {        
         [SerializeField] private GameObject transitionTemplate;
@@ -111,12 +110,13 @@ namespace EasyTransition
 
             onTransitionCutPointReached?.Invoke();
 
-
             SceneManager.LoadScene(sceneName);
 
             yield return new WaitForSecondsRealtime(transitionSettings.destroyTime);
 
             onTransitionEnd?.Invoke();
+
+            runningTransition = false; 
         }
 
         IEnumerator Timer(int sceneIndex, float startDelay, TransitionSettings transitionSettings)
@@ -141,6 +141,8 @@ namespace EasyTransition
             yield return new WaitForSecondsRealtime(transitionSettings.destroyTime);
 
             onTransitionEnd?.Invoke();
+
+            runningTransition = false;
         }
 
         IEnumerator Timer(float delay, TransitionSettings transitionSettings)
@@ -166,8 +168,9 @@ namespace EasyTransition
 
             onTransitionEnd?.Invoke();
 
-            runningTransition = false;
+            runningTransition = false; 
         }
+
 
         private IEnumerator Start()
         {

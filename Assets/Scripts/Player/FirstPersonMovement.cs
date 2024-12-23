@@ -15,14 +15,11 @@ public class FirstPersonMovement : NetworkBehaviour
     public float zoomSpeed = 1f;
     public float returnSpeed = 1f;
 
-    public float pulseCameraSpeed = 1f;
-    public float minFOV = 60f;
-    public float maxFOV = 70f;
-
     [Header("Running")]
     public bool canRun = true;
+
     public bool IsRunning { get; private set; }
-    public float runSpeed = 9;
+    public float runSpeed = 7;
     public KeyCode runningKey = KeyCode.LeftShift;
 
     Rigidbody rigidbody;
@@ -37,9 +34,7 @@ public class FirstPersonMovement : NetworkBehaviour
         {
             camera.enabled = false;
         }
-
     }
-
 
     private void Update()
     {
@@ -121,19 +116,5 @@ public class FirstPersonMovement : NetworkBehaviour
     public void ZoomCamera(float targetZoom)
     {
         camera.fieldOfView = Mathf.Lerp(camera.fieldOfView, targetZoom, zoomSpeed * Time.deltaTime);
-    }
-
-    public IEnumerator PulseCameraFOV()
-    {
-        float time = 0f;
-
-        while (true)
-        {
-            float fov = Mathf.Lerp(minFOV, maxFOV, (Mathf.Sin(time * pulseCameraSpeed) + 1f) / 2f);
-            camera.fieldOfView = fov;
-
-            time += Time.deltaTime;
-            yield return null;
-        }
     }
 }

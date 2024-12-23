@@ -7,8 +7,8 @@ using System;
 public class UpdateManager : MonoBehaviour
 {
     [SerializeField]
-    public GameObject UpdateWindow;
-    public GameObject DisableWindow;
+    public GameObject updateWindow;
+    public GameObject mainButtonsGroup;
 
     // тут все просто если уметь работать с remote config, скрипт для проверки обновлений
 
@@ -16,8 +16,7 @@ public class UpdateManager : MonoBehaviour
     {
         // отключаем некоторые объекты на сцене и проверяем remote config
 
-        UpdateWindow.SetActive(false);
-        DisableWindow.SetActive(true);
+        updateWindow.SetActive(false);
         ConfigManager.FetchCompleted += AppyRemoteSettings;
         ConfigManager.FetchConfigs(new usersAttributes(), new appAttributes());
     }
@@ -32,7 +31,7 @@ public class UpdateManager : MonoBehaviour
 
         if (!string.IsNullOrEmpty(newAppVersion) && Application.version != newAppVersion)
         {
-            DisableWindow.SetActive(false);
+            mainButtonsGroup.SetActive(false);
             StartCoroutine(UpdateWindowWaitForSecondCoroutine());
         }
 
@@ -53,6 +52,6 @@ public class UpdateManager : MonoBehaviour
     private IEnumerator UpdateWindowWaitForSecondCoroutine()
     {
         yield return new WaitForSeconds(0.8f);
-        UpdateWindow.SetActive(true);
+        mainButtonsGroup.SetActive(true);
     }
 }

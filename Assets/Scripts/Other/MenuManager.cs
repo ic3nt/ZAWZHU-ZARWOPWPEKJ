@@ -7,6 +7,9 @@ using UnityEngine.PlayerLoop;
 
 public class MenuManager : MonoBehaviour
 {
+    [Header("Menu Objects")]
+    public GameObject mainButtonsGroup;
+
     [Header("Game Manager")]
     public DiscordController discordController;
     public LocalizationManager localizationManager;
@@ -38,6 +41,9 @@ public class MenuManager : MonoBehaviour
     private bool isToyRobot;
     private bool isMimic;
 
+    [Header("Errors Window")]
+    public GameObject InitErrorWindow;
+
     [Header("Manual")]
     public GameObject ManualMonsterButton;
     public GameObject ManualMonsterToyRobotWindow;
@@ -51,15 +57,12 @@ public class MenuManager : MonoBehaviour
     private bool isPlayedSettingsAnimation;
     private bool isSettingsOpen = false;
     private bool isSettingsAnimationPlaying = false;
-
     private bool isPlayedManualAnimation;
     private bool isManualOpen = false;
     private bool isManualAnimationPlaying = false;
-
     private bool isPlayedStoreAnimation;
     private bool isStoreOpen = false;
     private bool isStoreAnimationPlaying = false;
-
     private bool isPlayedCatalogAnimation;
     private bool isCatalogOpen = false;
     private bool isCatalogAnimationPlaying = false;
@@ -118,32 +121,49 @@ public class MenuManager : MonoBehaviour
         }
 
     }
-    private void OnValidate()
+
+    public void Awake()
     {
-        if (transitionManager == null)
+        InitCheck();
+        transitionManager.GetComponent<DemoLoadScene>().transition = transition;
+        transitionManager.GetComponent<DemoLoadScene>().startDelay = startDelay;
+    }
+
+    private void InitCheck()
+    {
+        if (Application.isPlaying)
         {
-            GameObject transitionManagerObject = GameObject.FindWithTag("TransitionManager");
-            if (transitionManagerObject != null)
+            if (transitionManager == null)
             {
-                transitionManager = transitionManagerObject;
-                Debug.Log("TransitionManager automatically assigned.");
+                GameObject transitionManagerObject = GameObject.FindWithTag("TransitionManager");
+                if (transitionManagerObject != null)
+                {
+                    InitErrorWindow.SetActive(false);
+                    transitionManager = transitionManagerObject;
+                    Debug.Log("TransitionManager automatically assigned.");
+                }
+                else
+                {
+                    mainButtonsGroup.SetActive(false);
+                    InitErrorWindow.SetActive(true);
+                    Debug.LogError("No object with tag 'TransitionManager' found in the scene!");
+                }
             }
-            else
+            if (localizationManager == null)
             {
-                Debug.LogError("No object with tag 'TransitionManager' found in the scene!");
-            }
-        }
-        if (localizationManager == null)
-        {
-            GameObject localizationManagerObject = GameObject.FindWithTag("LocalizationManager");
-            if (localizationManagerObject != null)
-            {
-                localizationManager = localizationManagerObject.GetComponent<LocalizationManager>();
-                Debug.Log("LocalizationManager automatically assigned.");
-            }
-            else
-            {
-                Debug.LogError("No object with tag 'LocalizationManager' found in the scene!");
+                GameObject localizationManagerObject = GameObject.FindWithTag("LocalizationManager");
+                if (localizationManagerObject != null)
+                {
+                    InitErrorWindow.SetActive(false);
+                    localizationManager = localizationManagerObject.GetComponent<LocalizationManager>();
+                    Debug.Log("LocalizationManager automatically assigned.");
+                }
+                else
+                {
+                    mainButtonsGroup.SetActive(false);
+                    InitErrorWindow.SetActive(true);
+                    Debug.LogError("No object with tag 'LocalizationManager' found in the scene!");
+                }
             }
         }
     }
@@ -602,7 +622,7 @@ public class MenuManager : MonoBehaviour
     public void SingleplayerButton()
     {
         Debug.Log("Single-player mode");
-        transitionManager.GetComponent<DemoLoadScene>().LoadScene("IsIntroScene");
+        transitionManager.GetComponent<DemoLoadScene>().LoadScene("TEST");
     }
     public void MultiplayerButton()
     {
