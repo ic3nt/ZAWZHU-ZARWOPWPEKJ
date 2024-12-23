@@ -6,7 +6,7 @@ using EasyTransition;
 
 public class HealthManager : MonoBehaviour
 {
-    public DemoLoadScene loadScene;
+   // public DemoLoadScene loadScene;
     public FirstPersonMovement personMovement;
     public FirstPersonLook personLook;
     public FirstPersonAudio personAudio;
@@ -145,8 +145,8 @@ public class HealthManager : MonoBehaviour
         animatorUI.SetTrigger("Dead");
     }
 
-    public void GoToMenuButton()
-    {
-        loadScene.LoadScene("IsMenuScene");
-    }
+   // public void GoToMenuButton()
+  //  {
+        //loadScene.LoadScene("IsMenuScene");
+  //  }
 }
