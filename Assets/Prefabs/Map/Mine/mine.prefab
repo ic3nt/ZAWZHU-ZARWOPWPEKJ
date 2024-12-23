@@ -12,9 +12,8 @@ GameObject:
   - component: {fileID: 2490774491602744549}
   - component: {fileID: 212224349116245815}
   - component: {fileID: 7451517953702883021}
-  - component: {fileID: 6510999312956952889}
   m_Layer: 0
-  m_Name: Mine
+  m_Name: mine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -72,6 +71,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aus: {fileID: 7451517953702883021}
   damageB: 5
+  part: {fileID: 0}
+  vac: {fileID: 0}
 --- !u!82 &7451517953702883021
 AudioSource:
   m_ObjectHideFlags: 0
@@ -195,19 +196,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &6510999312956952889
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 401150348872120276}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c336f192c18c423f8c636e0de00970d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ChanceOfStaying: 0.5
 --- !u!1 &6259005101914070153
 GameObject:
   m_ObjectHideFlags: 0
