@@ -129,6 +129,8 @@ public class MenuManager : MonoBehaviour
         transitionManager.GetComponent<DemoLoadScene>().startDelay = startDelay;
     }
 
+    //инициализация
+
     private void InitCheck()
     {
         if (Application.isPlaying)
@@ -145,7 +147,7 @@ public class MenuManager : MonoBehaviour
                 else
                 {
                     mainButtonsGroup.SetActive(false);
-                    InitErrorWindow.SetActive(true);
+                    StartCoroutine(ErrorInitWindowWaitForSecondCoroutine());
                     Debug.LogError("No object with tag 'TransitionManager' found in the scene!");
                 }
             }
@@ -161,11 +163,17 @@ public class MenuManager : MonoBehaviour
                 else
                 {
                     mainButtonsGroup.SetActive(false);
-                    InitErrorWindow.SetActive(true);
+                    StartCoroutine(ErrorInitWindowWaitForSecondCoroutine());
                     Debug.LogError("No object with tag 'LocalizationManager' found in the scene!");
                 }
             }
         }
+    }
+
+    private IEnumerator ErrorInitWindowWaitForSecondCoroutine()
+    {
+        yield return new WaitForSeconds(0.8f);
+        InitErrorWindow.SetActive(true);
     }
 
     void Update()
@@ -442,6 +450,8 @@ public class MenuManager : MonoBehaviour
             discordController.details = "Menú";
         }
     }
+
+
 
     public void PlayButton()
     {
