@@ -151,6 +151,7 @@ public class MenuManager : MonoBehaviour
                     Debug.LogError("No object with tag 'TransitionManager' found in the scene!");
                 }
             }
+
             if (localizationManager == null)
             {
                 GameObject localizationManagerObject = GameObject.FindWithTag("LocalizationManager");
@@ -165,6 +166,20 @@ public class MenuManager : MonoBehaviour
                     mainButtonsGroup.SetActive(false);
                     StartCoroutine(ErrorInitWindowWaitForSecondCoroutine());
                     Debug.LogError("No object with tag 'LocalizationManager' found in the scene!");
+                }
+            }
+            if (discordController == null)
+            {
+                GameObject discordManagerObject = GameObject.FindWithTag("DiscordManager");
+                if (discordManagerObject != null)
+                {
+                    InitErrorWindow.SetActive(false);
+                    discordController = discordManagerObject.GetComponent<DiscordController>();
+                    Debug.Log("DiscordController automatically assigned.");
+                }
+                else
+                {
+                    Debug.LogError("No object with tag 'DiscordManager' found in the scene!");
                 }
             }
         }

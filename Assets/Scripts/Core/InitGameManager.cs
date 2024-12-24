@@ -22,6 +22,29 @@ public class InitGameManager : MonoBehaviour
     [SerializeField]
     public GameObject transitionManager;
 
+    [SerializeField]
+    public DiscordController discordController;
+
+    private void Start()
+    {
+        if (localizationManager.CurrentLanguage == "en_US")
+        {
+            discordController.details = "Initialization...";
+        }
+        if (localizationManager.CurrentLanguage == "ru_RU")
+        {
+            discordController.details = "Инициализация...";
+        }
+        if (localizationManager.CurrentLanguage == "de_DE")
+        {
+            discordController.details = "Initialization...";
+        }
+        if (localizationManager.CurrentLanguage == "es_ES")
+        {
+            discordController.details = "Initialization...";
+        }
+    }
+
     private void Awake()
     {
         InitializeSystems();
@@ -47,6 +70,16 @@ public class InitGameManager : MonoBehaviour
         else
         {
             Debug.LogWarning("TransitionManager is not assigned in InitGameManager.");
+        }
+
+        if (discordController != null)
+        {
+            DontDestroyOnLoad(discordController);
+            Debug.Log($"DiscordController '{discordController.name}' is now persistent.");
+        }
+        else
+        {
+            Debug.LogWarning("DiscordController is not assigned in InitGameManager.");
         }
     }
 

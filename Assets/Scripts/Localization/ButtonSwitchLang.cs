@@ -13,7 +13,6 @@ public class ButtonSwitchLang : MonoBehaviour
             if (managerObject != null)
             {
                 localizationManager = managerObject.GetComponent<LocalizationManager>();
-                Debug.Log("LocalizationManager automatically assigned.");
             }
             else
             {
