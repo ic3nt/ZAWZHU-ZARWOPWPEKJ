@@ -17,7 +17,8 @@ public class FirstOpenSceneManager : MonoBehaviour
     [Space]
     public DemoLoadScene transitionManager;
     public SaveManager saveManager; 
-    private GameData.Data gameData; 
+    private GameData.Data Data; 
+
     public Animator animator;
 
     [Space]
@@ -72,12 +73,12 @@ public class FirstOpenSceneManager : MonoBehaviour
             }
         }
 
-        gameData = saveManager.Load();
+        Data = saveManager.Load();
 
-        if (gameData == null)
+        if (Data == null)
         {
-            gameData = new GameData.Data();
-            saveManager.Save(gameData);
+            Data = new GameData.Data();
+            saveManager.Save(Data);
         }
 
         if (transitionManager == null)
@@ -103,8 +104,8 @@ public class FirstOpenSceneManager : MonoBehaviour
             toggleAgreeRectTransform.DOAnchorPosX(rightTogglePosX, tweenDuration);
             buttonAgreeRectTransform.DOAnchorPosY(topButtonPosY, tweenDuration);
 
-            gameData.isPlayerAgreedPlay = true;
-            saveManager.Save(gameData);
+            Data.isPlayerAgreedPlay = true;
+            saveManager.Save(Data);
         }
         else
         {
@@ -112,8 +113,8 @@ public class FirstOpenSceneManager : MonoBehaviour
             toggleAgreeRectTransform.DOAnchorPosX(middleTogglePosX, tweenDuration);
             buttonAgreeRectTransform.DOAnchorPosY(downButtonPosY, tweenDuration);
 
-            gameData.isPlayerAgreedPlay = false;
-            saveManager.Save(gameData);
+            Data.isPlayerAgreedPlay = false;
+            saveManager.Save(Data);
         }
     }
 
@@ -130,5 +131,7 @@ public class FirstOpenSceneManager : MonoBehaviour
     public void GoToMenuScene()
     {
         transitionManager.LoadScene("IsMenuScene");
+        Data.isPlayerAgreedPlay = true;
+        saveManager.Save(Data);
     }
 }

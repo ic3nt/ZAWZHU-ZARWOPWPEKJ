@@ -14,5 +14,5 @@ public class GameData : MonoBehaviour
         public bool isVisualMoverEnabled;
     }
 
-    public Data settingsData = new Data();
+    public Data gameData = new Data();
 }

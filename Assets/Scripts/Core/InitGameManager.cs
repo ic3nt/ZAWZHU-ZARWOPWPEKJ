@@ -6,14 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class InitGameManager : MonoBehaviour
 {
-    [Header("Initialization Settings")]
-    [Space]
-    [SerializeField]
-    public bool IsFirstGameRun = true;
-
-    [SerializeField]
-    public bool isPlayerAgreedPlay = false;
-
     [Header("Initialization Managers")]
     [Space]
     [SerializeField]

@@ -21,6 +21,7 @@ public class SaveManager : MonoBehaviour
     {
         if (File.Exists(settingsFilePath))
         {
+            // Если файл существует, загружаем его
             string json = File.ReadAllText(settingsFilePath);
             GameData.Data settings = JsonUtility.FromJson<GameData.Data>(json);
             Debug.Log("Data loaded from: " + settingsFilePath);
@@ -28,8 +29,11 @@ public class SaveManager : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("Data file not found.");
-            return new GameData.Data();
+            // Если файл не существует, создаем новый с дефолтными значениями
+            Debug.LogWarning("Data file not found. Creating a new file with default settings.");
+            GameData.Data defaultSettings = new GameData.Data(); // Здесь вы можете настроить дефолтные значения, если нужно
+            Save(defaultSettings); // Сохраняем новый файл с дефолтными значениями
+            return defaultSettings; // Возвращаем дефолтные данные
         }
     }
 

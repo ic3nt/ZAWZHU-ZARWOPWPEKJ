@@ -3197,18 +3197,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1532457421}
-        m_TargetAssemblyTypeName: SettingsManager, Assembly-CSharp
-        m_MethodName: SaveSettings
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &159756205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3717,7 +3705,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.0055294037}
+  m_AnchoredPosition: {x: 0, y: -0.0015678406}
   m_SizeDelta: {x: 0, y: 28}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &219644931
@@ -12598,7 +12586,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.00374794}
+  m_AnchoredPosition: {x: 0, y: -0.0037574768}
   m_SizeDelta: {x: 0, y: 28}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &718719391
@@ -26740,6 +26728,7 @@ MonoBehaviour:
   gammaSlider: {fileID: 1444704569}
   visualMoverToggle: {fileID: 399545129}
   visualMover: {fileID: 1655642068}
+  saveManager: {fileID: 0}
 --- !u!1 &1532978176
 GameObject:
   m_ObjectHideFlags: 0
@@ -27482,7 +27471,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 483147369}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.81329733
+  m_Size: 0.99999326
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

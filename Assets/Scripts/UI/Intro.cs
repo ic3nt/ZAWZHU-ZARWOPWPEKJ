@@ -25,11 +25,7 @@ public class Intro : MonoBehaviour
 
         if (Data == null)
         {
-            Data = new GameData.Data
-            {
-                isFirstRun = true,
-                isPlayerAgreedPlay = false
-            };
+            Data = new GameData.Data();
             saveManager.Save(Data);
         }
 
@@ -57,9 +53,7 @@ public class Intro : MonoBehaviour
     private void HandleFirstRun()
     {
         Debug.Log("First run detected.");
-        initGameManager.IsFirstGameRun = true;
 
-        // Обновляем данные и сохраняем их
         Data.isFirstRun = false;
         saveManager.Save(Data);
 
@@ -69,7 +63,6 @@ public class Intro : MonoBehaviour
     private void HandlePlayerNotAgreed()
     {
         Debug.Log("Player has not agreed to play.");
-        initGameManager.isPlayerAgreedPlay = false;
 
         SceneManager.LoadScene("IsFirstGameOpenScene");
     }
@@ -80,10 +73,6 @@ public class Intro : MonoBehaviour
 
         if (initGameManager.transitionManager != null)
         {
-            initGameManager.IsFirstGameRun = false;
-            initGameManager.isPlayerAgreedPlay = true;
-
-
             initGameManager.transitionManager.GetComponent<DemoLoadScene>().LoadScene("IsMenuScene");
         }
         else

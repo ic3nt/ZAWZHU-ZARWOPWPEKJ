@@ -5,35 +5,43 @@ using UnityEngine;
 
 public class LocalizationManager : MonoBehaviour
 {
-    private string currentLanguage;
+    public string currentLanguage;
     private Dictionary<string, string> localizedText;
     public static bool isReady = false;
 
-	public delegate void ChangeLangText();
+    public SaveManager saveManager;  // Менеджер для сохранения и загрузки данных
+    private GameData.Data Data;  // Данные игры, включая язык
+
+    public delegate void ChangeLangText();
     public event ChangeLangText OnLanguageChanged;
 
-    void Awake()
+    void Start()
     {
-        if (!PlayerPrefs.HasKey("Language"))
+        // Загружаем данные, включая язык, из файла
+        Data = saveManager.Load();
+
+        if (string.IsNullOrEmpty(Data.language))
         {
-            if (Application.systemLanguage == SystemLanguage.Russian || Application.systemLanguage == SystemLanguage.Ukrainian || Application.systemLanguage == SystemLanguage.Belarusian || Application.systemLanguage == SystemLanguage.SerboCroatian || Application.systemLanguage == SystemLanguage.Lithuanian || Application.systemLanguage == SystemLanguage.Latvian || Application.systemLanguage == SystemLanguage.Bulgarian || Application.systemLanguage == SystemLanguage.Estonian)
+            // Если язык не установлен, определяем язык по умолчанию
+            if (Application.systemLanguage == SystemLanguage.Russian || Application.systemLanguage == SystemLanguage.Ukrainian || Application.systemLanguage == SystemLanguage.Belarusian)
             {
-                PlayerPrefs.SetString("Language", "ru_RU");
+                Data.language = "ru_RU";
             }
-            else if (Application.systemLanguage == SystemLanguage.Swedish || Application.systemLanguage == SystemLanguage.Czech || Application.systemLanguage == SystemLanguage.Slovenian || Application.systemLanguage == SystemLanguage.Unknown || Application.systemLanguage == SystemLanguage.Slovak || Application.systemLanguage == SystemLanguage.Romanian || Application.systemLanguage == SystemLanguage.Portuguese || Application.systemLanguage == SystemLanguage.Polish || Application.systemLanguage == SystemLanguage.Norwegian || Application.systemLanguage == SystemLanguage.Korean || Application.systemLanguage == SystemLanguage.Japanese || Application.systemLanguage == SystemLanguage.Italian || Application.systemLanguage == SystemLanguage.Indonesian || Application.systemLanguage == SystemLanguage.Icelandic || Application.systemLanguage == SystemLanguage.Hungarian || Application.systemLanguage == SystemLanguage.Greek)
+            else if (Application.systemLanguage == SystemLanguage.English)
             {
-                PlayerPrefs.SetString("Language", "en_US");
+                Data.language = "en_US";
             }
             else if (Application.systemLanguage == SystemLanguage.German)
             {
-                PlayerPrefs.SetString("Language", "de_DE");
+                Data.language = "de_DE";
             }
             else if (Application.systemLanguage == SystemLanguage.Spanish)
             {
-                PlayerPrefs.SetString("Language", "es_ES");
+                Data.language = "es_ES";
             }
         }
-        currentLanguage = PlayerPrefs.GetString("Language");
+
+        currentLanguage = Data.language;
 
         LoadLocalizedText(currentLanguage);
     }
@@ -41,14 +49,12 @@ public class LocalizationManager : MonoBehaviour
     public void LoadLocalizedText(string langName)
     {
         string path = Application.streamingAssetsPath + "/Languages/" + langName + ".json";
-
         string dataAsJson;
 
         if (Application.platform == RuntimePlatform.Android)
         {
             WWW reader = new WWW(path);
             while (!reader.isDone) { }
-
             dataAsJson = reader.text;
         }
         else
@@ -64,8 +70,11 @@ public class LocalizationManager : MonoBehaviour
             localizedText.Add(loadedData.items[i].key, loadedData.items[i].value);
         }
 
-        PlayerPrefs.SetString("Language", langName);
-        currentLanguage = PlayerPrefs.GetString("Language");
+        // Обновляем язык в данных
+        Data.language = langName;
+        saveManager.Save(Data);  // Сохраняем обновленный язык в файл
+
+        currentLanguage = langName;
         isReady = true;
 
         OnLanguageChanged?.Invoke();
@@ -85,15 +94,16 @@ public class LocalizationManager : MonoBehaviour
 
     public string CurrentLanguage
     {
-        get 
+        get
         {
             return currentLanguage;
         }
         set
         {
-			LoadLocalizedText(value);			
+            LoadLocalizedText(value);
         }
     }
+
     public bool IsReady
     {
         get

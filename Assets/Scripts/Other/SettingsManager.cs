@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using DG.Tweening.Core.Easing;
 using EasyTransition;
+using PlayFab.AdminModels;
 
 public class SettingsManager : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class SettingsManager : MonoBehaviour
     public GameObject saveManager; 
 
     private GameData.Data Data;
+
+    public LocalizationManager localizationManager;
 
     private void Start()
     {
@@ -33,12 +36,27 @@ public class SettingsManager : MonoBehaviour
             }
         }
 
+        if (localizationManager == null)
+        {
+            GameObject localizationManagerObject = GameObject.FindWithTag("LocalizationManager");
+            if (localizationManagerObject != null)
+            {
+                localizationManager = localizationManagerObject.GetComponent<LocalizationManager>();
+                Debug.Log("LocalizationManager automatically assigned.");
+            }
+            else
+            {
+                Debug.LogError("No object with tag 'LocalizationManager' found in the scene!");
+            }
+        }
+
         LoadSettings();
 
         frameRateDropdown.onValueChanged.AddListener(delegate { UpdateFrameRate(); });
         windowModeDropdown.onValueChanged.AddListener(delegate { UpdateWindowMode(); });
         gammaSlider.onValueChanged.AddListener(delegate { UpdateGamma(); });
         visualMoverToggle.onValueChanged.AddListener(delegate { UpdateVisualMover(); });
+
     }
 
     public void SaveSettings()
@@ -47,6 +65,9 @@ public class SettingsManager : MonoBehaviour
 
         Data = new GameData.Data
         {
+            isFirstRun = false,
+            isPlayerAgreedPlay = true,
+            language = localizationManager.currentLanguage,
             frameRateIndex = frameRateDropdown.value,
             windowModeIndex = windowModeDropdown.value,
             gammaValue = gammaSlider.value,
