@@ -16,6 +16,8 @@ public class FirstOpenSceneManager : MonoBehaviour
 
     [Space]
     public DemoLoadScene transitionManager;
+    public SaveManager saveManager; 
+    private GameData.Data gameData; 
     public Animator animator;
 
     [Space]
@@ -44,6 +46,7 @@ public class FirstOpenSceneManager : MonoBehaviour
         Vector3 newPosition = cameraToRotate.transform.position;
         cameraToRotate.transform.position = newPosition;
     }
+
     void Start()
     {
         toggleAgreeRectTransform.DOAnchorPosX(middleTogglePosX, tweenDuration);
@@ -54,6 +57,28 @@ public class FirstOpenSceneManager : MonoBehaviour
 
         cameraToRotate = Camera.main;
         originalY = cameraToRotate.transform.position.y;
+
+        if (saveManager == null)
+        {
+            GameObject saveManagerObject = GameObject.FindWithTag("GameManager");
+            if (saveManagerObject != null)
+            {
+                saveManager = saveManagerObject.GetComponent<SaveManager>();
+                Debug.Log("GameManager automatically assigned.");
+            }
+            else
+            {
+                Debug.LogError("No object with tag 'GameManager' found in the scene!");
+            }
+        }
+
+        gameData = saveManager.Load();
+
+        if (gameData == null)
+        {
+            gameData = new GameData.Data();
+            saveManager.Save(gameData);
+        }
 
         if (transitionManager == null)
         {
@@ -77,16 +102,18 @@ public class FirstOpenSceneManager : MonoBehaviour
             buttonAgree.interactable = true;
             toggleAgreeRectTransform.DOAnchorPosX(rightTogglePosX, tweenDuration);
             buttonAgreeRectTransform.DOAnchorPosY(topButtonPosY, tweenDuration);
-            PlayerPrefs.SetInt("isPlayerAgreedPlay", 1);
-            PlayerPrefs.Save();
+
+            gameData.isPlayerAgreedPlay = true;
+            saveManager.Save(gameData);
         }
         else
         {
             buttonAgree.interactable = false;
             toggleAgreeRectTransform.DOAnchorPosX(middleTogglePosX, tweenDuration);
             buttonAgreeRectTransform.DOAnchorPosY(downButtonPosY, tweenDuration);
-            PlayerPrefs.SetInt("isPlayerAgreedPlay", 0);
-            PlayerPrefs.Save();
+
+            gameData.isPlayerAgreedPlay = false;
+            saveManager.Save(gameData);
         }
     }
 
@@ -94,7 +121,7 @@ public class FirstOpenSceneManager : MonoBehaviour
     {
         animator.SetTrigger("IsSelectLocalizationTrigger");
     }
-    
+
     public void EndAnimation()
     {
         animator.SetTrigger("IsEndTrigger");

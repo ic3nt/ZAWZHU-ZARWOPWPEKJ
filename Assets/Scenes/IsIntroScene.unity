@@ -132,26 +132,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 367773419}
-  - component: {fileID: 367773418}
+  - component: {fileID: 367773421}
+  - component: {fileID: 367773420}
   m_Layer: 0
   m_Name: '[GameManager]'
-  m_TagString: Untagged
+  m_TagString: GameManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &367773418
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 367773417}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3191244fde70b024b80581e818f810e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &367773419
 Transform:
   m_ObjectHideFlags: 0
@@ -167,6 +156,38 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &367773420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 367773417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6efa64aed859a8b40af66783d1eb0bf1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  settingsData:
+    isFirstRun: 0
+    isPlayerAgreedPlay: 0
+    language: 
+    frameRateIndex: 0
+    windowModeIndex: 0
+    gammaValue: 0
+    isVisualMoverEnabled: 0
+--- !u!114 &367773421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 367773417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 559904bc42f9aa7478d4e3c301c3721d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &551548961
 GameObject:
   m_ObjectHideFlags: 0
@@ -444,6 +465,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsFirstGameRun: 0
   isPlayerAgreedPlay: 0
+  gameManager: {fileID: 367773417}
   localizationManager: {fileID: 1101282458}
   transitionManager: {fileID: 828788834}
   discordController: {fileID: 551548962}
@@ -741,6 +763,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waitTime: 1.2
   initGameManager: {fileID: 1077377566}
+  saveManager: {fileID: 367773421}
 --- !u!114 &2113004489
 MonoBehaviour:
   m_ObjectHideFlags: 0

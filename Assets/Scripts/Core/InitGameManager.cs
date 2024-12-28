@@ -17,6 +17,9 @@ public class InitGameManager : MonoBehaviour
     [Header("Initialization Managers")]
     [Space]
     [SerializeField]
+    public GameObject gameManager;
+
+    [SerializeField]
     public LocalizationManager localizationManager;
 
     [SerializeField]
@@ -52,6 +55,16 @@ public class InitGameManager : MonoBehaviour
 
     private void InitializeSystems()
     {
+        if (gameManager != null)
+        {
+            DontDestroyOnLoad(gameManager.gameObject);
+            Debug.Log($"GameManager '{gameManager.name}' is now persistent.");
+        }
+        else
+        {
+            Debug.LogWarning("GameManager is not assigned in InitGameManager.");
+        }
+
         if (localizationManager != null)
         {
             DontDestroyOnLoad(localizationManager.gameObject);

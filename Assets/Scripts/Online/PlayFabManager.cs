@@ -7,7 +7,7 @@ using UnityEngine.ProBuilder.MeshOperations;
 
 public class PlayFabManager : MonoBehaviour
 {
-    public TextMeshProUGUI NameText;
+  //public TextMeshProUGUI NameText;
     public GameObject ErrorLoginWindow;
     public GameObject BanWindow;
     public GameObject NotFoundOrDeleteAccountWindow;
@@ -42,7 +42,7 @@ public class PlayFabManager : MonoBehaviour
         // метод вызывается при успешном логине
 
         playFabId = result.PlayFabId;
-        NameText.text = playFabId;
+      //NameText.text = playFabId;
         Debug.Log("Successful login: " + playFabId);
 
         PlayFabClientAPI.GetAccountInfo(new GetAccountInfoRequest(), OnGetAccountInfoSuccess, OnBanned);

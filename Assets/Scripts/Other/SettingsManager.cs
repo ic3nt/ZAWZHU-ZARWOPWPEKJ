@@ -1,126 +1,179 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using DG.Tweening.Core.Easing;
+using EasyTransition;
 
-[System.Serializable]
 public class SettingsManager : MonoBehaviour
 {
     [Header("UI Elements")]
-    [Space(10)]
-    public TMP_Dropdown resolutionDropdown;
-    public TMP_Dropdown qualityDropdown;
-    public Toggle fullScreenToggle;
-    public Toggle vSyncToggle;
+    public TMP_Dropdown frameRateDropdown;
+    public TMP_Dropdown windowModeDropdown;
+    public Slider gammaSlider;
+    public Toggle visualMoverToggle;
+    public VisualMover visualMover;
 
-    private Resolution[] resolutions;
+    public GameObject saveManager; 
+
+    private GameData.Data Data;
 
     private void Start()
     {
-        // Получаем доступные разрешения экрана
-        resolutions = Screen.resolutions;
-        resolutionDropdown.ClearOptions();
-
-        int currentResolutionIndex = 0;
-        for (int i = 0; i < resolutions.Length; i++)
+        if (saveManager == null)
         {
-            string option = resolutions[i].width + " x " + resolutions[i].height;
-            resolutionDropdown.options.Add(new TMP_Dropdown.OptionData(option));
-
-            // Определяем текущее разрешение
-            if (resolutions[i].width == Screen.currentResolution.width &&
-                resolutions[i].height == Screen.currentResolution.height)
+            GameObject saveManagerObject = GameObject.FindWithTag("GameManager");
+            if (saveManagerObject != null)
             {
-                currentResolutionIndex = i;
+                saveManager = saveManagerObject;
+                Debug.Log("GameManager automatically assigned.");
+            }
+            else
+            {
+                Debug.LogError("No object with tag 'GameManager' found in the scene!");
             }
         }
 
-        resolutionDropdown.value = currentResolutionIndex;
-        resolutionDropdown.RefreshShownValue();
-
-        // Подписываемся на события изменения параметров
-        resolutionDropdown.onValueChanged.AddListener(delegate { UpdateResolution(); });
-        qualityDropdown.onValueChanged.AddListener(delegate { UpdateGraphicsQuality(); });
-        fullScreenToggle.onValueChanged.AddListener(delegate { UpdateFullScreen(); });
-        vSyncToggle.onValueChanged.AddListener(delegate { UpdateVSync(); });
-
-        // Загружаем настройки
         LoadSettings();
+
+        frameRateDropdown.onValueChanged.AddListener(delegate { UpdateFrameRate(); });
+        windowModeDropdown.onValueChanged.AddListener(delegate { UpdateWindowMode(); });
+        gammaSlider.onValueChanged.AddListener(delegate { UpdateGamma(); });
+        visualMoverToggle.onValueChanged.AddListener(delegate { UpdateVisualMover(); });
     }
 
     public void SaveSettings()
     {
-        PlayerPrefs.SetInt("resolutionIndex", resolutionDropdown.value);
-        PlayerPrefs.SetInt("graphicsQuality", qualityDropdown.value);
-        PlayerPrefs.SetInt("isFullScreen", fullScreenToggle.isOn ? 1 : 0);
-        PlayerPrefs.SetInt("vSync", vSyncToggle.isOn ? 1 : 0);
+        Debug.Log("Saving settings...");
 
-        PlayerPrefs.Save();
-        Debug.Log("Settings saved");
+        Data = new GameData.Data
+        {
+            frameRateIndex = frameRateDropdown.value,
+            windowModeIndex = windowModeDropdown.value,
+            gammaValue = gammaSlider.value,
+            isVisualMoverEnabled = visualMoverToggle.isOn
+        };
+
+        saveManager.GetComponent<SaveManager>().Save(Data);
     }
 
     public void LoadSettings()
     {
-        Debug.Log("Loaded resolutionIndex: " + PlayerPrefs.GetInt("resolutionIndex", -1));
-        Debug.Log("Loaded graphicsQuality: " + PlayerPrefs.GetInt("graphicsQuality", -1));
-        Debug.Log("Loaded isFullScreen: " + PlayerPrefs.GetInt("isFullScreen", -1));
-        Debug.Log("Loaded vSync: " + PlayerPrefs.GetInt("vSync", -1));
+        Debug.Log("Loading settings...");
 
+        Data = saveManager.GetComponent<SaveManager>().Load();
+        ApplySettings(Data);
+    }
 
-        // Загружаем индекс разрешения и проверяем его корректность
-        int resolutionIndex = PlayerPrefs.GetInt("resolutionIndex", resolutions.Length - 1);
-        if (resolutionIndex < 0 || resolutionIndex >= resolutions.Length)
+    private void ApplySettings(GameData.Data settings)
+    {
+
+        frameRateDropdown.value = settings.frameRateIndex;
+        frameRateDropdown.RefreshShownValue();
+        UpdateFrameRate();
+
+        windowModeDropdown.value = settings.windowModeIndex;
+        windowModeDropdown.RefreshShownValue();
+        UpdateWindowMode();
+
+        gammaSlider.value = settings.gammaValue;
+        UpdateGamma();
+
+        visualMoverToggle.isOn = settings.isVisualMoverEnabled;
+        UpdateVisualMover();
+    }
+
+    private void LoadDefaultSettings()
+    {
+        frameRateDropdown.value = 1;
+        windowModeDropdown.value = 0;
+        gammaSlider.value = 1.0f;
+        visualMoverToggle.isOn = false;
+
+        UpdateFrameRate();
+        UpdateWindowMode();
+        UpdateGamma();
+        UpdateVisualMover();
+    }
+
+    public void UpdateFrameRate()
+    {
+        int frameRateIndex = frameRateDropdown.value;
+        Debug.Log("Applying FrameRate: " + frameRateIndex);
+
+        switch (frameRateIndex)
         {
-            Debug.LogWarning("Invalid resolution index. Using default.");
-            resolutionIndex = resolutions.Length - 1; // Используем последнее разрешение
+            case 0: // V-Sync
+                QualitySettings.vSyncCount = 1;
+                Application.targetFrameRate = -1;
+                break;
+            case 1: // Unlimited
+                QualitySettings.vSyncCount = 0;
+                Application.targetFrameRate = -1;
+                break;
+            case 2: // 144 FPS
+                QualitySettings.vSyncCount = 0;
+                Application.targetFrameRate = 144;
+                break;
+            case 3: // 120 FPS
+                QualitySettings.vSyncCount = 0;
+                Application.targetFrameRate = 120;
+                break;
+            case 4: // 60 FPS
+                QualitySettings.vSyncCount = 0;
+                Application.targetFrameRate = 60;
+                break;
+            case 5: // 30 FPS
+                QualitySettings.vSyncCount = 0;
+                Application.targetFrameRate = 30;
+                break;
         }
 
-        resolutionDropdown.value = resolutionIndex;
-        resolutionDropdown.RefreshShownValue();
-
-        Resolution resolution = resolutions[resolutionIndex];
-        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
-
-        // Загружаем качество графики
-        int qualityIndex = PlayerPrefs.GetInt("graphicsQuality", 3);
-        qualityDropdown.value = qualityIndex;
-        qualityDropdown.RefreshShownValue();
-        QualitySettings.SetQualityLevel(qualityIndex);
-
-        // Загружаем настройку полноэкранного режима
-        bool isFullScreen = PlayerPrefs.GetInt("isFullScreen", 1) == 1;
-        fullScreenToggle.isOn = isFullScreen;
-        Screen.fullScreen = isFullScreen;
-
-        // Загружаем настройку VSync
-        bool vSync = PlayerPrefs.GetInt("vSync", 1) == 1;
-        vSyncToggle.isOn = vSync;
-        QualitySettings.vSyncCount = vSync ? 1 : 0;
-
-        Debug.Log("Settings loaded successfully");
-    }
-
-    public void UpdateResolution()
-    {
-        Resolution resolution = resolutions[resolutionDropdown.value];
-        Screen.SetResolution(resolution.width, resolution.height, fullScreenToggle.isOn);
         SaveSettings();
     }
 
-    public void UpdateGraphicsQuality()
+    public void UpdateWindowMode()
     {
-        QualitySettings.SetQualityLevel(qualityDropdown.value);
+        int windowModeIndex = windowModeDropdown.value;
+        Debug.Log("Applying WindowMode: " + windowModeIndex);
+
+        switch (windowModeIndex)
+        {
+            case 0: // Fullscreen
+                Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
+                break;
+            case 1: // Windowed (no border)
+                Screen.fullScreenMode = FullScreenMode.MaximizedWindow;
+                break;
+            case 2: // Maximized
+                Screen.fullScreenMode = FullScreenMode.MaximizedWindow;
+                break;
+            case 3: // Windowed
+                Screen.fullScreenMode = FullScreenMode.Windowed;
+                break;
+        }
+
         SaveSettings();
     }
 
-    public void UpdateFullScreen()
+    public void UpdateGamma()
     {
-        Screen.fullScreen = fullScreenToggle.isOn;
+        float gamma = gammaSlider.value;
+        Debug.Log("Applying Gamma: " + gamma);
+
+        RenderSettings.ambientLight = new Color(gamma, gamma, gamma);
         SaveSettings();
     }
 
-    public void UpdateVSync()
+    public void UpdateVisualMover()
     {
-        QualitySettings.vSyncCount = vSyncToggle.isOn ? 1 : 0;
+        bool isEnabled = visualMoverToggle.isOn;
+        Debug.Log("Applying VisualMover: " + (isEnabled ? "Enabled" : "Disabled"));
+
+        if (visualMover != null)
+        {
+            visualMover.enabled = isEnabled;
+        }
+
         SaveSettings();
     }
 }
