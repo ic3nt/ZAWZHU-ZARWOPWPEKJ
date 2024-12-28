@@ -17,12 +17,10 @@ public class LocalizationManager : MonoBehaviour
 
     void Start()
     {
-        // Загружаем данные, включая язык, из файла
         Data = saveManager.Load();
 
         if (string.IsNullOrEmpty(Data.language))
         {
-            // Если язык не установлен, определяем язык по умолчанию
             if (Application.systemLanguage == SystemLanguage.Russian || Application.systemLanguage == SystemLanguage.Ukrainian || Application.systemLanguage == SystemLanguage.Belarusian)
             {
                 Data.language = "ru_RU";
@@ -70,9 +68,8 @@ public class LocalizationManager : MonoBehaviour
             localizedText.Add(loadedData.items[i].key, loadedData.items[i].value);
         }
 
-        // Обновляем язык в данных
         Data.language = langName;
-        saveManager.Save(Data);  // Сохраняем обновленный язык в файл
+        saveManager.Save(Data);
 
         currentLanguage = langName;
         isReady = true;
