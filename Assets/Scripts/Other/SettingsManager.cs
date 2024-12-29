@@ -1,20 +1,21 @@
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.UI;
 using TMPro;
-using DG.Tweening.Core.Easing;
-using EasyTransition;
-using PlayFab.AdminModels;
+using UnityEngine.EventSystems;
 
 public class SettingsManager : MonoBehaviour
 {
     [Header("UI Elements")]
     public TMP_Dropdown frameRateDropdown;
     public TMP_Dropdown windowModeDropdown;
-    public Slider gammaSlider;
+    public Slider volumeSlider;
     public Toggle visualMoverToggle;
     public VisualMover visualMover;
 
-    public GameObject saveManager; 
+    public AudioMixer audioMixer;
+
+    public GameObject saveManager;
 
     private GameData.Data Data;
 
@@ -54,9 +55,18 @@ public class SettingsManager : MonoBehaviour
 
         frameRateDropdown.onValueChanged.AddListener(delegate { UpdateFrameRate(); });
         windowModeDropdown.onValueChanged.AddListener(delegate { UpdateWindowMode(); });
-        gammaSlider.onValueChanged.AddListener(delegate { UpdateGamma(); });
-        visualMoverToggle.onValueChanged.AddListener(delegate { UpdateVisualMover(); });
 
+        //volumeSlider.onValueChanged.AddListener(delegate { UpdateVolume(); });
+
+        EventTrigger trigger = volumeSlider.gameObject.AddComponent<EventTrigger>();
+        EventTrigger.Entry entry = new EventTrigger.Entry
+        {
+            eventID = EventTriggerType.PointerUp
+        };
+        entry.callback.AddListener((eventData) => UpdateVolume());
+        trigger.triggers.Add(entry);
+
+        visualMoverToggle.onValueChanged.AddListener(delegate { UpdateVisualMover(); });
     }
 
     public void SaveSettings()
@@ -70,7 +80,7 @@ public class SettingsManager : MonoBehaviour
             language = localizationManager.currentLanguage,
             frameRateIndex = frameRateDropdown.value,
             windowModeIndex = windowModeDropdown.value,
-            gammaValue = gammaSlider.value,
+            volumeValue = volumeSlider.value, // Сохранение уровня громкости
             isVisualMoverEnabled = visualMoverToggle.isOn
         };
 
@@ -87,7 +97,6 @@ public class SettingsManager : MonoBehaviour
 
     private void ApplySettings(GameData.Data settings)
     {
-
         frameRateDropdown.value = settings.frameRateIndex;
         frameRateDropdown.RefreshShownValue();
         UpdateFrameRate();
@@ -96,8 +105,8 @@ public class SettingsManager : MonoBehaviour
         windowModeDropdown.RefreshShownValue();
         UpdateWindowMode();
 
-        gammaSlider.value = settings.gammaValue;
-        UpdateGamma();
+        volumeSlider.value = settings.volumeValue; // Загрузка громкости
+        UpdateVolume(); // Применяем громкость
 
         visualMoverToggle.isOn = settings.isVisualMoverEnabled;
         UpdateVisualMover();
@@ -163,12 +172,23 @@ public class SettingsManager : MonoBehaviour
         SaveSettings();
     }
 
-    public void UpdateGamma()
+    public void UpdateVolume()
     {
-        float gamma = gammaSlider.value;
-        //Debug.Log("Applying Gamma: " + gamma);
-        RenderSettings.ambientLight = new Color(gamma, gamma, gamma);
-        //SaveSettings();
+        float volume = volumeSlider.value;
+
+        if (volume <= 0.01f) // Условие для обработки почти 0
+        {
+            audioMixer.SetFloat("MasterVolume", -80f); // Минимальная громкость в дБ
+            Debug.Log("Applying Volume: Muted");
+        }
+        else
+        {
+            float dbVolume = Mathf.Log10(volume) * 30;
+            audioMixer.SetFloat("MasterVolume", dbVolume);
+            Debug.Log($"Applying Volume: {volume}, in dB: {dbVolume}");
+        }
+
+        SaveSettings();
     }
 
     public void UpdateVisualMover()

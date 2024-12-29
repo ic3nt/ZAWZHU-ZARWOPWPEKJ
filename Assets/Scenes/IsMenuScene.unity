@@ -1940,7 +1940,7 @@ AudioSource:
   m_GameObject: {fileID: 112352207}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: bd32e8e9e8da1d24b9be0f95f4691ea7, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -12114,7 +12114,7 @@ AudioSource:
   m_GameObject: {fileID: 672294372}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: bd32e8e9e8da1d24b9be0f95f4691ea7, type: 2}
   m_audioClip: {fileID: 8300000, guid: dd428b50ce4652743b1c53bb243a0176, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -15955,7 +15955,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u0413\u0410\u041C\u041C\u0410"
+  m_text: "\u0413\u0420\u041E\u041C\u041A\u041E\u0421\u0422\u042C \u0418\u0413\u0420\u042B"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 822b4fc90009f064197b8f06b33f09e6, type: 2}
   m_sharedMaterial: {fileID: -3760385980636559934, guid: 822b4fc90009f064197b8f06b33f09e6, type: 2}
@@ -25174,7 +25174,7 @@ GameObject:
   - component: {fileID: 1444704568}
   - component: {fileID: 1444704569}
   m_Layer: 5
-  m_Name: SliderGamma
+  m_Name: SliderVolume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25250,22 +25250,10 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.5
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1532457421}
-        m_TargetAssemblyTypeName: SettingsManager, Assembly-CSharp
-        m_MethodName: UpdateGamma
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &1447764077
 GameObject:
   m_ObjectHideFlags: 0
@@ -26726,9 +26714,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   frameRateDropdown: {fileID: 668082043}
   windowModeDropdown: {fileID: 924372866}
-  gammaSlider: {fileID: 1444704569}
+  volumeSlider: {fileID: 1444704569}
   visualMoverToggle: {fileID: 399545129}
   visualMover: {fileID: 1655642068}
+  audioMixer: {fileID: 24100000, guid: bd32e8e9e8da1d24b9be0f95f4691ea7, type: 2}
   saveManager: {fileID: 0}
   localizationManager: {fileID: 0}
 --- !u!1 &1532978176

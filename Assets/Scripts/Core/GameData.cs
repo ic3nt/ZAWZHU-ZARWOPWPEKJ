@@ -10,7 +10,7 @@ public class GameData : MonoBehaviour
         public string language;
         public int frameRateIndex = 1;
         public int windowModeIndex = 0;
-        public float gammaValue = 1.0f;
+        public float volumeValue = 1.0f;
         public bool isVisualMoverEnabled = true;
     }
 
