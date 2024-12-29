@@ -2,23 +2,36 @@ using System;
 using System.IO;
 using System.Text;
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public class SaveManager : MonoBehaviour
 {
+    [Header("File Configuration")]
+    [Tooltip("The name of the save file.")]
+    [SerializeField, ReadOnly] private string fileName = "DD_Data.rkst";
+
     private string settingsFilePath;
 
     private readonly char[] rechAlphabet = { 'R', 'E', 'C', 'H' };
 
     void Start()
     {
-        settingsFilePath = Path.Combine(Application.persistentDataPath, "DD_Data.rkst");
+        settingsFilePath = Path.Combine(Application.persistentDataPath, fileName);
     }
 
     public void Save(GameData.Data settings)
     {
         string json = JsonUtility.ToJson(settings, true);
         string rechData = ConvertJsonToRech(json);
-        File.WriteAllText(settingsFilePath, rechData);
+
+        StringBuilder fileContent = new StringBuilder();
+        fileContent.AppendLine("\n\n$$$$$$$\\  $$$$$$$$\\  $$$$$$\\  $$$$$$$\\  $$\\   $$\\     $$\\       $$$$$$$\\  $$$$$$$$\\ $$\\    $$\\  $$$$$$\\   $$$$$$\\ $$$$$$$$\\  $$$$$$\\ $$$$$$$$\\ $$$$$$\\  $$$$$$\\  $$\\   $$\\ \r\n$$  __$$\\ $$  _____|$$  __$$\\ $$  __$$\\ $$ |  \\$$\\   $$  |      $$  __$$\\ $$  _____|$$ |   $$ |$$  __$$\\ $$  __$$\\\\__$$  __|$$  __$$\\\\__$$  __|\\_$$  _|$$  __$$\\ $$$\\  $$ |\r\n$$ |  $$ |$$ |      $$ /  $$ |$$ |  $$ |$$ |   \\$$\\ $$  /       $$ |  $$ |$$ |      $$ |   $$ |$$ /  $$ |$$ /  \\__|  $$ |   $$ /  $$ |  $$ |     $$ |  $$ /  $$ |$$$$\\ $$ |\r\n$$ |  $$ |$$$$$\\    $$$$$$$$ |$$ |  $$ |$$ |    \\$$$$  /        $$ |  $$ |$$$$$\\    \\$$\\  $$  |$$$$$$$$ |\\$$$$$$\\    $$ |   $$$$$$$$ |  $$ |     $$ |  $$ |  $$ |$$ $$\\$$ |\r\n$$ |  $$ |$$  __|   $$  __$$ |$$ |  $$ |$$ |     \\$$  /         $$ |  $$ |$$  __|    \\$$\\$$  / $$  __$$ | \\____$$\\   $$ |   $$  __$$ |  $$ |     $$ |  $$ |  $$ |$$ \\$$$$ |\r\n$$ |  $$ |$$ |      $$ |  $$ |$$ |  $$ |$$ |      $$ |          $$ |  $$ |$$ |        \\$$$  /  $$ |  $$ |$$\\   $$ |  $$ |   $$ |  $$ |  $$ |     $$ |  $$ |  $$ |$$ |\\$$$ |\r\n$$$$$$$  |$$$$$$$$\\ $$ |  $$ |$$$$$$$  |$$$$$$$$\\ $$ |          $$$$$$$  |$$$$$$$$\\    \\$  /   $$ |  $$ |\\$$$$$$  |  $$ |   $$ |  $$ |  $$ |   $$$$$$\\  $$$$$$  |$$ | \\$$ |\r\n\\_______/ \\________|\\__|  \\__|\\_______/ \\________|\\__|          \\_______/ \\________|    \\_/    \\__|  \\__| \\______/   \\__|   \\__|  \\__|  \\__|   \\______| \\______/ \\__|  \\__|\n\n");
+        fileContent.AppendLine("==== Data ====");
+        fileContent.AppendLine(rechData);
+
+        File.WriteAllText(settingsFilePath, fileContent.ToString());
         Debug.Log("Data saved in RECH format to: " + settingsFilePath);
     }
 
@@ -28,15 +41,31 @@ public class SaveManager : MonoBehaviour
         {
             try
             {
-                string rechData = File.ReadAllText(settingsFilePath);
-                string json = ConvertRechToJson(rechData);
-                GameData.Data settings = JsonUtility.FromJson<GameData.Data>(json);
-                Debug.Log("Data loaded and converted from RECH format: " + settingsFilePath);
-                return settings;
+                string fileContent = File.ReadAllText(settingsFilePath);
+                int rechDataStartIndex = fileContent.IndexOf("==== Data ====") + "==== Data ====\n".Length;
+
+                if (rechDataStartIndex >= 0)
+                {
+                    string rechData = fileContent.Substring(rechDataStartIndex).Trim();
+                    if (rechData.Length % 4 != 0)
+                    {
+                        throw new FormatException("Invalid RECH data format: Length is not divisible by 4.");
+                    }
+                    string json = ConvertRechToJson(rechData);
+                    GameData.Data settings = JsonUtility.FromJson<GameData.Data>(json);
+
+                    Debug.Log("Data loaded from file: " + settingsFilePath);
+                    return settings;
+                }
+                else
+                {
+                    Debug.LogError("File format is incorrect. Missing RECH Data section.");
+                    return new GameData.Data();
+                }
             }
             catch (Exception ex)
             {
-                Debug.LogError("Failed to load RECH data: " + ex.Message);
+                Debug.LogError("Failed to load data: " + ex.Message);
                 return new GameData.Data();
             }
         }
@@ -62,6 +91,13 @@ public class SaveManager : MonoBehaviour
         }
     }
 
+    public void ResetToDefault()
+    {
+        GameData.Data defaultSettings = new GameData.Data();
+        Save(defaultSettings);
+        Debug.Log("Data reset to default settings.");
+    }
+
     private string ConvertJsonToRech(string json)
     {
         byte[] jsonBytes = Encoding.UTF8.GetBytes(json);
@@ -72,7 +108,7 @@ public class SaveManager : MonoBehaviour
         foreach (byte b in jsonBytes)
         {
             int highBits = (b >> 6) & 0b11;
-            int midBits = (b >> 4) & 0b11; 
+            int midBits = (b >> 4) & 0b11;
             int lowBits1 = (b >> 2) & 0b11;
             int lowBits2 = b & 0b11;
 
@@ -87,7 +123,6 @@ public class SaveManager : MonoBehaviour
 
         return rechString;
     }
-
 
     private string ConvertRechToJson(string rechData)
     {
@@ -121,4 +156,44 @@ public class SaveManager : MonoBehaviour
 
         return json;
     }
+
+#if UNITY_EDITOR
+    [CustomEditor(typeof(SaveManager))]
+    public class SaveManagerEditor : Editor
+    {
+        public override void OnInspectorGUI()
+        {
+            SaveManager saveManager = (SaveManager)target;
+
+            GUILayout.Space(10);
+            GUILayout.Label("Save Manager Controls", EditorStyles.boldLabel);
+
+            if (GUILayout.Button("Delete Save File"))
+            {
+                saveManager.DeleteDataFile();
+            }
+
+            if (GUILayout.Button("Reset to Default"))
+            {
+                saveManager.ResetToDefault();
+            }
+
+            GUILayout.Space(10);
+            DrawDefaultInspector();
+        }
+    }
+
+    [CustomPropertyDrawer(typeof(ReadOnlyAttribute))]
+    public class ReadOnlyDrawer : PropertyDrawer
+    {
+        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+        {
+            GUI.enabled = false;
+            EditorGUI.PropertyField(position, property, label);
+            GUI.enabled = true;
+        }
+    }
+
+    public class ReadOnlyAttribute : PropertyAttribute { }
+#endif
 }

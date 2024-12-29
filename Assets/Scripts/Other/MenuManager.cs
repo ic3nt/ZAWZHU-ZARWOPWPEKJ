@@ -8,6 +8,7 @@ using UnityEngine.PlayerLoop;
 public class MenuManager : MonoBehaviour
 {
     [Header("Menu Objects")]
+    public GameObject Kail;
     public GameObject mainButtonsGroup;
 
     [Header("Game Manager")]
@@ -430,6 +431,8 @@ public class MenuManager : MonoBehaviour
         isNotSelect = true;
         animator.SetTrigger("DefaultMenu");
 
+        Kail.GetComponent<RotatingModel>().enabled = true;
+
         if (localizationManager.CurrentLanguage == "en_US")
         {
             discordController.state = "He just sits on the menu and that's it.";
@@ -561,6 +564,8 @@ public class MenuManager : MonoBehaviour
         isCatalog = false;
         isNotSelect = true;
         animator.SetTrigger("SettingsMenu");
+
+        Kail.GetComponent<RotatingModel>().enabled = false;
     }
     public void CatalogButton()
     {

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RotatingModels : MonoBehaviour
+public class RotatingModel : MonoBehaviour
 {
     public float rotatingSpeed = 10f;
     public float deceleration = 0.95f;

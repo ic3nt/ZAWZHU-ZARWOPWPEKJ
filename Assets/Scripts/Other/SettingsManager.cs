@@ -103,19 +103,6 @@ public class SettingsManager : MonoBehaviour
         UpdateVisualMover();
     }
 
-    private void LoadDefaultSettings()
-    {
-        frameRateDropdown.value = 1;
-        windowModeDropdown.value = 0;
-        gammaSlider.value = 1.0f;
-        visualMoverToggle.isOn = true;
-
-        UpdateFrameRate();
-        UpdateWindowMode();
-        UpdateGamma();
-        UpdateVisualMover();
-    }
-
     public void UpdateFrameRate()
     {
         int frameRateIndex = frameRateDropdown.value;

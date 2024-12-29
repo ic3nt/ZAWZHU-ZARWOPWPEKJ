@@ -9,8 +9,8 @@ public class LocalizationManager : MonoBehaviour
     private Dictionary<string, string> localizedText;
     public static bool isReady = false;
 
-    public SaveManager saveManager;  // Менеджер для сохранения и загрузки данных
-    private GameData.Data Data;  // Данные игры, включая язык
+    public SaveManager saveManager; 
+    private GameData.Data Data; 
 
     public delegate void ChangeLangText();
     public event ChangeLangText OnLanguageChanged;

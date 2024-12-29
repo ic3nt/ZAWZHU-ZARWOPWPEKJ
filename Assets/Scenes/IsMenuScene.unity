@@ -3705,7 +3705,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.0015678406}
+  m_AnchoredPosition: {x: 0, y: -0.0010719299}
   m_SizeDelta: {x: 0, y: 28}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &219644931
@@ -12586,7 +12586,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.0037574768}
+  m_AnchoredPosition: {x: 0, y: -0.0037670135}
   m_SizeDelta: {x: 0, y: 28}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &718719391
@@ -25977,7 +25977,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 618812212}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.99999326
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -26669,6 +26669,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b17222df5723eb4b86273010ede5838, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Kail: {fileID: 7058559230009732334}
   mainButtonsGroup: {fileID: 477637034}
   discordController: {fileID: 0}
   localizationManager: {fileID: 0}
@@ -26729,6 +26730,7 @@ MonoBehaviour:
   visualMoverToggle: {fileID: 399545129}
   visualMover: {fileID: 1655642068}
   saveManager: {fileID: 0}
+  localizationManager: {fileID: 0}
 --- !u!1 &1532978176
 GameObject:
   m_ObjectHideFlags: 0
@@ -27471,7 +27473,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 483147369}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.99999326
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
