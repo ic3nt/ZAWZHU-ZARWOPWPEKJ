@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class Intro : MonoBehaviour
 {
     [SerializeField]
-    public float waitTime = 2f; // Время ожидания перед загрузкой сцены
+    public float waitTime = 2f;
 
     public InitGameManager initGameManager;
     public SaveManager saveManager;

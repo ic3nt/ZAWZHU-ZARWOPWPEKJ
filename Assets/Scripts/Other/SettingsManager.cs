@@ -108,7 +108,7 @@ public class SettingsManager : MonoBehaviour
         frameRateDropdown.value = 1;
         windowModeDropdown.value = 0;
         gammaSlider.value = 1.0f;
-        visualMoverToggle.isOn = false;
+        visualMoverToggle.isOn = true;
 
         UpdateFrameRate();
         UpdateWindowMode();
