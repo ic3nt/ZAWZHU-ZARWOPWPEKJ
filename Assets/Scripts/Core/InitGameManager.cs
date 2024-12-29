@@ -20,6 +20,9 @@ public class InitGameManager : MonoBehaviour
     [SerializeField]
     public DiscordController discordController;
 
+    [SerializeField]
+    public GameObject console;
+
     private void Start()
     {
         if (localizationManager.CurrentLanguage == "en_US")
@@ -85,6 +88,16 @@ public class InitGameManager : MonoBehaviour
         else
         {
             Debug.LogWarning("DiscordController is not assigned in InitGameManager.");
+        }
+
+        if (console != null)
+        {
+            DontDestroyOnLoad(console);
+            Debug.Log($"Console '{console.name}' is now persistent.");
+        }
+        else
+        {
+            Debug.LogWarning("Console is not assigned in InitGameManager.");
         }
     }
 

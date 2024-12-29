@@ -166,10 +166,9 @@ public class SettingsManager : MonoBehaviour
     public void UpdateGamma()
     {
         float gamma = gammaSlider.value;
-        Debug.Log("Applying Gamma: " + gamma);
-
+        //Debug.Log("Applying Gamma: " + gamma);
         RenderSettings.ambientLight = new Color(gamma, gamma, gamma);
-        SaveSettings();
+        //SaveSettings();
     }
 
     public void UpdateVisualMover()

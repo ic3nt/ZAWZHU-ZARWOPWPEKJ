@@ -46,7 +46,7 @@ public class RotatingModel : MonoBehaviour
         {
             // вращение на A
 
-            Debug.Log("A");
+            //Debug.Log("A");
             currentRotationSpeed -= rotatingSpeed * Time.deltaTime;
             currentRotationX -= currentRotationSpeed * Time.deltaTime;
 
@@ -56,7 +56,7 @@ public class RotatingModel : MonoBehaviour
         {
             // вращение на D
 
-            Debug.Log("D");
+            //Debug.Log("D");
             currentRotationSpeed += rotatingSpeed * Time.deltaTime;
             currentRotationX += currentRotationSpeed * Time.deltaTime;
 
@@ -66,12 +66,12 @@ public class RotatingModel : MonoBehaviour
 
     public void OnMouseEnter()
     {
-        Debug.Log("Mouse Entered");
+        //Debug.Log("Mouse Entered");
     }
 
     public void OnMouseExit()
     {
-        Debug.Log("Mouse Exited");
+        //Debug.Log("Mouse Exited");
         isRotating = false;
         currentRotationSpeed *= deceleration;
     }
