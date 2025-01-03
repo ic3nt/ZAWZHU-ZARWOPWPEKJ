@@ -10856,7 +10856,6 @@ GameObject:
   - component: {fileID: 1727781559324161334}
   - component: {fileID: 3597612903368359265}
   - component: {fileID: 3848684157070873759}
-  - component: {fileID: 8589434941827421539}
   m_Layer: 0
   m_Name: 5v
   m_TagString: Player
@@ -11157,21 +11156,6 @@ LODGroup:
     fadeTransitionWidth: 0
     renderers: []
   m_Enabled: 1
---- !u!114 &8589434941827421539
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4283364824617576930}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 930e5b5c1a0021844b0cacbfa9d9f37b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Skills:
-  - {fileID: 11400000, guid: a583d1fd78dc84b4b9342ecb4d36a1be, type: 2}
-  - {fileID: 11400000, guid: 15731312cd0d6c7459b63ef876c1dd0a, type: 2}
 --- !u!1 &4341190546390473430
 GameObject:
   m_ObjectHideFlags: 0
@@ -14351,7 +14335,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distanceThreshold: 0.15
-  isGrounded: 0
+  isGrounded: 1
 --- !u!1 &5926550268211336253
 GameObject:
   m_ObjectHideFlags: 0
@@ -19292,7 +19276,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5704560932117848596
 RectTransform:
   m_ObjectHideFlags: 0
@@ -19626,7 +19610,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1949818851032078789
 Transform:
   m_ObjectHideFlags: 0
