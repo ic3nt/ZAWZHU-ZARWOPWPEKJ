@@ -15,7 +15,7 @@ MonoBehaviour:
   active: 0
   shadows:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 0.51138735, z: 0, w: 0}
+    m_Value: {x: 1, y: 0.82378924, z: 0.33381695, w: 0}
   midtones:
     m_OverrideState: 1
     m_Value: {x: 0.577579, y: 0, z: 1, w: 0}
@@ -62,6 +62,56 @@ MonoBehaviour:
   rounded:
     m_OverrideState: 1
     m_Value: 1
+--- !u!114 &-6632269810332719859
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 012d3263da3d1234bb848967c99084f1, type: 3}
+  m_Name: GlitchVolume
+  m_EditorClassIdentifier: 
+  active: 0
+  Speed:
+    m_OverrideState: 1
+    m_Value: 11.5
+  BlockSize:
+    m_OverrideState: 1
+    m_Value: 3.5
+  BlockSizeJitter:
+    m_OverrideState: 1
+    m_Value: 2
+  MaxRGBSplitX:
+    m_OverrideState: 1
+    m_Value: 1.5
+  MaxRGBSplitY:
+    m_OverrideState: 1
+    m_Value: 1.5
+--- !u!114 &-6327845295233093146
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f21f170b640032a4ba47bfe9e6497f01, type: 3}
+  m_Name: WorldPositionVolume
+  m_EditorClassIdentifier: 
+  active: 1
+  ColorAddMode:
+    m_OverrideState: 1
+    m_Value: 1
+  GridSize:
+    m_OverrideState: 1
+    m_Value: 24.7
+  GridLineWidth:
+    m_OverrideState: 1
+    m_Value: 131.27
 --- !u!114 &-6159180872904702317
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -84,6 +134,34 @@ MonoBehaviour:
   balance:
     m_OverrideState: 1
     m_Value: 100
+--- !u!114 &-5785643576883396600
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 012d3263da3d1234bb848967c99084f1, type: 3}
+  m_Name: GlitchVolume
+  m_EditorClassIdentifier: 
+  active: 1
+  Speed:
+    m_OverrideState: 1
+    m_Value: 10.69
+  BlockSize:
+    m_OverrideState: 1
+    m_Value: 5.1
+  BlockSizeJitter:
+    m_OverrideState: 1
+    m_Value: 3.92
+  MaxRGBSplitX:
+    m_OverrideState: 1
+    m_Value: 21.47
+  MaxRGBSplitY:
+    m_OverrideState: 1
+    m_Value: 23.23
 --- !u!114 &-4555264239558290783
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -131,6 +209,65 @@ MonoBehaviour:
   dirtIntensity:
     m_OverrideState: 0
     m_Value: 0
+--- !u!114 &-705293947297883896
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4fd7d3882af82046b3945e7a77b5ef3, type: 3}
+  m_Name: CloudShadowVolume
+  m_EditorClassIdentifier: 
+  active: 1
+  ShadowStrength:
+    m_OverrideState: 1
+    m_Value: 3.46
+  SmoothStepRange:
+    m_OverrideState: 1
+    m_Value: {x: 0.9, y: 1}
+  NoiseScale1:
+    m_OverrideState: 1
+    m_Value: {x: 1, y: 1}
+  NoiseTime1:
+    m_OverrideState: 1
+    m_Value: 1
+  DebugMode:
+    m_OverrideState: 1
+    m_Value: 0
+--- !u!114 &-671552329535150000
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: GlitchVolume
+  m_EditorClassIdentifier: SleeplessOwl.URPPostProcessing:SleeplessOwl.URPPostProcessing:GlitchVolume
+  active: 1
+  <displayName>k__BackingField: GlitchVolume
+  isInitialized: 0
+  Speed:
+    m_OverrideState: 1
+    m_Value: 10.68
+  BlockSize:
+    m_OverrideState: 1
+    m_Value: 15.12
+  BlockSizeJitter:
+    m_OverrideState: 1
+    m_Value: 2.1
+  MaxRGBSplitX:
+    m_OverrideState: 1
+    m_Value: 5.71
+  MaxRGBSplitY:
+    m_OverrideState: 1
+    m_Value: 9.1
+  _material: {fileID: 0}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,6 +290,7 @@ MonoBehaviour:
   - {fileID: 5953441683958930471}
   - {fileID: -6159180872904702317}
   - {fileID: -8978400730504178424}
+  - {fileID: -671552329535150000}
 --- !u!114 &1844499790903139595
 MonoBehaviour:
   m_ObjectHideFlags: 3
