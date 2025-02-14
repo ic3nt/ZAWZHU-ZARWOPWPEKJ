@@ -278,8 +278,6 @@ MonoBehaviour:
   m_Name: GlitchVolume
   m_EditorClassIdentifier: SleeplessOwl.URPPostProcessing:SleeplessOwl.URPPostProcessing:GlitchVolume
   active: 1
-  <displayName>k__BackingField: GlitchVolume
-  isInitialized: 0
   Speed:
     m_OverrideState: 1
     m_Value: 10.68
@@ -295,7 +293,6 @@ MonoBehaviour:
   MaxRGBSplitY:
     m_OverrideState: 1
     m_Value: 9.1
-  _material: {fileID: 0}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -318,7 +315,8 @@ MonoBehaviour:
   - {fileID: 5953441683958930471}
   - {fileID: -6159180872904702317}
   - {fileID: -8978400730504178424}
-  - {fileID: -6642176084379277688}
+  - {fileID: 7588340389624359362}
+  - {fileID: 8193634346479762908}
 --- !u!114 &1844499790903139595
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -447,3 +445,60 @@ MonoBehaviour:
   clamp:
     m_OverrideState: 1
     m_Value: 0.098
+--- !u!114 &7588340389624359362
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9552dc531ee036d499efc8422245ab19, type: 3}
+  m_Name: GlitchVolume
+  m_EditorClassIdentifier: 
+  active: 0
+  Active:
+    m_OverrideState: 1
+    m_Value: 1
+  When:
+    m_OverrideState: 1
+    m_Value: 500
+  Noise:
+    m_OverrideState: 1
+    m_Value: {fileID: 2800000, guid: eb54ec7bd827f2b46a27e16a8822b6c0, type: 3}
+    dimension: 1
+  Size:
+    m_OverrideState: 1
+    m_Value: 5.3
+  BlockDensity:
+    m_OverrideState: 1
+    m_Value: 0.24
+  LineDensity:
+    m_OverrideState: 1
+    m_Value: 0.26
+  Speed:
+    m_OverrideState: 1
+    m_Value: 4.6
+--- !u!114 &8193634346479762908
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e164acabf378b54fb9216ba720815f9, type: 3}
+  m_Name: DrunkVolume
+  m_EditorClassIdentifier: 
+  active: 0
+  Active:
+    m_OverrideState: 1
+    m_Value: 0
+  When:
+    m_OverrideState: 1
+    m_Value: 500
+  Speed:
+    m_OverrideState: 1
+    m_Value: 1
