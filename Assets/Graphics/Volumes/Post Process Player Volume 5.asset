@@ -317,6 +317,7 @@ MonoBehaviour:
   - {fileID: -8978400730504178424}
   - {fileID: 7588340389624359362}
   - {fileID: 8193634346479762908}
+  - {fileID: 9218193776172206330}
 --- !u!114 &1844499790903139595
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -369,7 +370,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5e1dc532bcb41949b58bc4f2abfbb7e, type: 3}
   m_Name: LensDistortion
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   intensity:
     m_OverrideState: 1
     m_Value: -0.1
@@ -470,16 +471,16 @@ MonoBehaviour:
     dimension: 1
   Size:
     m_OverrideState: 1
-    m_Value: 5.3
+    m_Value: 9.9
   BlockDensity:
     m_OverrideState: 1
-    m_Value: 0.24
+    m_Value: 0.099
   LineDensity:
     m_OverrideState: 1
-    m_Value: 0.26
+    m_Value: 0.279
   Speed:
     m_OverrideState: 1
-    m_Value: 4.6
+    m_Value: 0
 --- !u!114 &8193634346479762908
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -495,10 +496,38 @@ MonoBehaviour:
   active: 0
   Active:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 1
   When:
     m_OverrideState: 1
     m_Value: 500
   Speed:
     m_OverrideState: 1
+    m_Value: 1.1
+  Zoom:
+    m_OverrideState: 1
+    m_Value: 0.59
+--- !u!114 &9218193776172206330
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cb6dc478310fc144ac9072909814967, type: 3}
+  m_Name: CameraShakeVolume
+  m_EditorClassIdentifier: 
+  active: 1
+  Active:
+    m_OverrideState: 1
     m_Value: 1
+  When:
+    m_OverrideState: 1
+    m_Value: 600
+  ShakeIntensity:
+    m_OverrideState: 1
+    m_Value: 0
+  ShakeSpeed:
+    m_OverrideState: 1
+    m_Value: 21.7

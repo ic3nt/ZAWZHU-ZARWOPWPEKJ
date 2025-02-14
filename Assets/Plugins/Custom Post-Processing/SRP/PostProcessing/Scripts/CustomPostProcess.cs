@@ -39,6 +39,7 @@ namespace SRP.PostProcessing
             private Material _sketchMat;
             private Material _glitchMat;
             private Material _drunkMat;
+            private Material _cameraShakeMat;
             private Material _crtMat;
             private Material _monochromeMat;
             private Material _edgeGlowMat;
@@ -114,9 +115,23 @@ namespace SRP.PostProcessing
                     {
                         if (_drunkMat == null)
                             _drunkMat = new Material(Shader.Find("Custom Post-Processing/SRP/Drunk"));
+
                         _drunkMat.SetFloat("_Speed", dVolume.Speed.value);
+                        _drunkMat.SetFloat("_Zoom", dVolume.Zoom.value);
+
                         _activeMat = _drunkMat;
                     }
+                    else if (_volume is CameraShakeVolume csVolume && _volume != null)
+                    {
+                        if (_cameraShakeMat == null)
+                            _cameraShakeMat = new Material(Shader.Find("Custom Post-Processing/SRP/CameraShake"));
+
+                        _cameraShakeMat.SetFloat("_ShakeIntensity", csVolume.ShakeIntensity.value);
+                        _cameraShakeMat.SetFloat("_ShakeSpeed", csVolume.ShakeSpeed.value);
+
+                        _activeMat = _cameraShakeMat;
+                    }
+
                     else if (_volume is CRTVolume crtVolume && _volume != null)
                     {
                         if (_crtMat == null)
@@ -174,6 +189,7 @@ namespace SRP.PostProcessing
         private CustomRenderPass _chromaticPass;
         private CustomRenderPass _simpleEdgePass;
         private CustomRenderPass _drunkPass;
+        private CustomRenderPass _cameraShakePass;
         private CustomRenderPass _monochromePass;
         private CustomRenderPass _edgeGlowPass;
         private CustomRenderPass _sketchPass;
@@ -186,6 +202,7 @@ namespace SRP.PostProcessing
         private ChromaticVolume _chromaticVolume;
         private SimpleEdgeVolume _simpleEdgeVolume;
         private DrunkVolume _drunkVolume;
+        private CameraShakeVolume _cameraShakeVolume;
         private MonochromeVolume _monochromeVolume;
         private EdgeGlowVolume _edgeGlowVolume;
         private SketchVolume _sketchVolume;
@@ -200,6 +217,7 @@ namespace SRP.PostProcessing
             _chromaticVolume = VolumeManager.instance.stack.GetComponent<ChromaticVolume>();
             _simpleEdgeVolume = VolumeManager.instance.stack.GetComponent<SimpleEdgeVolume>();
             _drunkVolume = VolumeManager.instance.stack.GetComponent<DrunkVolume>();
+            _cameraShakeVolume = VolumeManager.instance.stack.GetComponent<CameraShakeVolume>();
             _monochromeVolume = VolumeManager.instance.stack.GetComponent<MonochromeVolume>();
             _edgeGlowVolume = VolumeManager.instance.stack.GetComponent<EdgeGlowVolume>();
             _sketchVolume = VolumeManager.instance.stack.GetComponent<SketchVolume>();
@@ -212,6 +230,7 @@ namespace SRP.PostProcessing
             _chromaticPass = new CustomRenderPass(_chromaticVolume);
             _simpleEdgePass = new CustomRenderPass(_simpleEdgeVolume);
             _drunkPass = new CustomRenderPass(_drunkVolume);
+            _cameraShakePass = new CustomRenderPass(_cameraShakeVolume);
             _monochromePass = new CustomRenderPass(_monochromeVolume);
             _edgeGlowPass = new CustomRenderPass(_edgeGlowVolume);
             _sketchPass = new CustomRenderPass(_sketchVolume);
@@ -224,6 +243,7 @@ namespace SRP.PostProcessing
             _chromaticPass.renderPassEvent = _chromaticVolume?.When?.value ?? RenderPassEvent.AfterRenderingTransparents;
             _simpleEdgePass.renderPassEvent = _simpleEdgeVolume?.When?.value ?? RenderPassEvent.AfterRenderingTransparents;
             _drunkPass.renderPassEvent = _drunkVolume?.When?.value ?? RenderPassEvent.AfterRenderingTransparents;
+            _cameraShakePass.renderPassEvent = _cameraShakeVolume?.When?.value ?? RenderPassEvent.AfterRenderingTransparents;
             _monochromePass.renderPassEvent = _monochromeVolume?.When?.value ?? RenderPassEvent.AfterRenderingTransparents;
             _edgeGlowPass.renderPassEvent = _edgeGlowVolume?.When?.value ?? RenderPassEvent.AfterRenderingTransparents;
             _sketchPass.renderPassEvent = _sketchVolume?.When?.value ?? RenderPassEvent.AfterRenderingTransparents;
@@ -240,6 +260,7 @@ namespace SRP.PostProcessing
             renderer.EnqueuePass(_chromaticPass);
             renderer.EnqueuePass(_simpleEdgePass);
             renderer.EnqueuePass(_drunkPass);
+            renderer.EnqueuePass(_cameraShakePass);
             renderer.EnqueuePass(_monochromePass);
             renderer.EnqueuePass(_edgeGlowPass);
             renderer.EnqueuePass(_sketchPass);
