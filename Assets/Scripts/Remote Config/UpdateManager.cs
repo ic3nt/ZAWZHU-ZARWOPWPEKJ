@@ -15,7 +15,6 @@ public class UpdateManager : MonoBehaviour
     void Awake()
     {
         // отключаем некоторые объекты на сцене и проверяем remote config
-
         updateWindow.SetActive(false);
         ConfigManager.FetchCompleted += AppyRemoteSettings;
         ConfigManager.FetchConfigs(new usersAttributes(), new appAttributes());
@@ -32,11 +31,15 @@ public class UpdateManager : MonoBehaviour
         if (!string.IsNullOrEmpty(newAppVersion) && Application.version != newAppVersion)
         {
             mainButtonsGroup.SetActive(false);
-            StartCoroutine(UpdateWindowWaitForSecondCoroutine());
+            updateWindow.SetActive(true);
+        }
+        else
+        {
+            mainButtonsGroup.SetActive(true);
         }
 
 #if DEBUG
-        print("Version : " + Application.version + " - " + "remote version : " + newAppVersion);
+        print("Game client version : " + Application.version + " - " + "Remote version : " + newAppVersion);
 #endif 
     }
 
@@ -48,10 +51,4 @@ public class UpdateManager : MonoBehaviour
     struct usersAttributes { }
 
     struct appAttributes { }
-
-    private IEnumerator UpdateWindowWaitForSecondCoroutine()
-    {
-        yield return new WaitForSeconds(0.8f);
-        mainButtonsGroup.SetActive(true);
-    }
 }
