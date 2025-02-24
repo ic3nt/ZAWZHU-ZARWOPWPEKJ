@@ -1,14 +1,16 @@
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(Manual))]
-public class ManualEditor : Editor
+[CustomEditor(typeof(MenuManager))]
+public class MenuManagerEditor : Editor
 {
     public override void OnInspectorGUI()
     {
         base.OnInspectorGUI();
 
-        Manual script = (Manual)target;
+        MenuManager script = (MenuManager)target;
+
+        GUILayout.Space(10);
 
         if (GUILayout.Button("Записать верхние координаты объекта"))
         {

@@ -1,4 +1,5 @@
-﻿using Discord;
+﻿using DG.Tweening;
+using Discord;
 using EasyTransition;
 using System.Collections;
 using System.Collections.Generic;
@@ -46,15 +47,35 @@ public class MenuManager : MonoBehaviour
     public GameObject InitErrorWindow;
 
     [Header("Manual")]
-    public GameObject ManualMonsterButton;
-    public GameObject ManualMonsterToyRobotWindow;
-    public GameObject ManualMonsterMimicWindow;
-    public GameObject ManualMonstersObjects;
-    public GameObject ToyRobotObject;
-    public GameObject MimicObject;
+
+    public RectTransform manualLabel;
+    public RectTransform backgroundManual;
+    public RectTransform mainWindow;
+    public RectTransform infoWindow;
+
+    public Transform target3D;
+
+    public float shakeStrength = 10f;
+    public int shakeVibrato = 10;
+    public float shakeDuration = 0.3f;
+
+    public Vector3 upPosition;
+    public Vector3 bottomPosition;
+
+    public Vector3 upRotation;
+    public Vector3 bottomRotation;
+
+    [Space(10)]
+
+    public float moveDuration = 1f;
+    public float rotationDuration = 1f;
+
+    public float shakeStrength3D = 10f;
+    public int shakeVibrato3D = 10;
+    public float shakeDuration3D = 0.3f;
 
     [Header("Animation States")]
-    [Space(10)]
+
     private bool isPlayedSettingsAnimation;
     private bool isSettingsOpen = false;
     private bool isSettingsAnimationPlaying = false;
@@ -128,6 +149,11 @@ public class MenuManager : MonoBehaviour
         InitCheck();
         transitionManager.GetComponent<DemoLoadScene>().transition = transition;
         transitionManager.GetComponent<DemoLoadScene>().startDelay = startDelay;
+        
+        // справочник
+
+        target3D.position = bottomPosition;
+        target3D.rotation = Quaternion.Euler(bottomRotation);
     }
 
     //инициализация
@@ -194,14 +220,6 @@ public class MenuManager : MonoBehaviour
 
     void Update()
     {
-        // справочник
-
-        if (isNotSelect == false)
-        {
-            ManualMonsterToyRobotWindow.SetActive(false);
-            ManualMonsterMimicWindow.SetActive(false);
-        }
-
         // стадия - меню
 
         if (!isMenu)
@@ -578,7 +596,6 @@ public class MenuManager : MonoBehaviour
         animator.SetTrigger("CatalogMenu");
         animatorManual.SetTrigger("CloseManual"); 
         animatorStore.SetTrigger("CloseStore");
-        ManualMonstersObjects.SetActive(false);
     }
     public void ManualButton()
     {
@@ -590,7 +607,6 @@ public class MenuManager : MonoBehaviour
         isNotSelect = true;
         animator.SetTrigger("ManualMenu");
         animatorManual.SetTrigger("OpenManual");
-        ManualMonstersObjects.SetActive(true);
     }
     public void StoreButton()
     {
@@ -620,12 +636,10 @@ public class MenuManager : MonoBehaviour
     void ManualOpen()
     {
         animatorManual.SetTrigger("OpenManual");
-        ManualMonstersObjects.SetActive(true);
     }
     void ManualClose()
     {
         animatorManual.SetTrigger("CloseManual");
-        ManualMonstersObjects.SetActive(false);
     }
     void StoreOpen()
     {
@@ -638,7 +652,6 @@ public class MenuManager : MonoBehaviour
     void CatalogOpen()
     {
         animatorCatalog.SetTrigger("Open");
-        ManualMonstersObjects.SetActive(false);
     }
     void CatalogDefault()
     {
@@ -661,39 +674,79 @@ public class MenuManager : MonoBehaviour
 
     // справочник
 
-    public void ManualToyRobot()
+    public void WindowInfoOpen()
     {
-        isNotSelect = false;
-        isMimic = false;
-        isToyRobot = true;
-        ManualMonsterMimicWindow.SetActive(false);
-        ManualMonsterToyRobotWindow.SetActive(true);
-        ManualMonstersObjects.SetActive(true);
-        ToyRobotObject.SetActive(true);
-        MimicObject.SetActive(false);
+        float screenHeight = Screen.height;
+        MoveUp();
+        mainWindow.DOAnchorPosY(-screenHeight, 0.3f)
+            .SetEase(Ease.InOutQuad)
+            .OnComplete(() =>
+            {
+                mainWindow.gameObject.SetActive(false);
+                infoWindow.gameObject.SetActive(true);
+                infoWindow.anchoredPosition = new Vector2(infoWindow.anchoredPosition.x, -screenHeight);
+
+                infoWindow.DOAnchorPosY(0f, 0.3f)
+                    .SetEase(Ease.InOutQuad)
+                    .OnComplete(() =>
+                    {
+                        manualLabel.DOShakeAnchorPos(shakeDuration, shakeStrength, shakeVibrato);
+                        infoWindow.DOShakeAnchorPos(shakeDuration, shakeStrength, shakeVibrato);
+                        backgroundManual.DOShakeAnchorPos(shakeDuration, shakeStrength, shakeVibrato);
+                    });
+            });
     }
-    public void ManualMimic()
+
+    public void WindowInfoClose()
     {
-        isNotSelect = false;
-        isToyRobot = false;
-        isMimic = true;
-        ManualMonsterMimicWindow.SetActive(true);
-        ManualMonsterToyRobotWindow.SetActive(false);
-        ManualMonstersObjects.SetActive(true);
-        ToyRobotObject.SetActive(false);
-        MimicObject.SetActive(true);
+        float screenHeight = Screen.height;
+        MoveDown();
+        infoWindow.DOAnchorPosY(-screenHeight, 0.3f)
+            .SetEase(Ease.InOutQuad)
+            .OnComplete(() =>
+            {
+                infoWindow.gameObject.SetActive(false);
+                mainWindow.gameObject.SetActive(true);
+                mainWindow.anchoredPosition = new Vector2(infoWindow.anchoredPosition.x, -screenHeight);
+
+                mainWindow.DOAnchorPosY(0f, 0.3f)
+                    .SetEase(Ease.InOutQuad)
+                    .OnComplete(() =>
+                    {
+                        manualLabel.DOShakeAnchorPos(shakeDuration, shakeStrength, shakeVibrato);
+                        mainWindow.DOShakeAnchorPos(shakeDuration, shakeStrength, shakeVibrato);
+                        backgroundManual.DOShakeAnchorPos(shakeDuration, shakeStrength, shakeVibrato);
+                    });
+            });
     }
-    public void ManualInfoButton()
+
+    private void MoveUp()
     {
-        if (isMimic == true) 
-        {
-            ManualMonsterMimicWindow.SetActive(true);
-            Debug.Log("Mimic Info");
-        }
-        if (isMimic == true)
-        {
-            ManualMonsterMimicWindow.SetActive(true);
-            Debug.Log("Mimic Info");
-        }
+        target3D.DOMove(upPosition, moveDuration).SetEase(Ease.InOutSine)
+            .OnComplete(() =>
+            {
+                target3D.DOShakePosition(shakeDuration3D, shakeStrength3D, shakeVibrato3D);
+            });
+
+        target3D.DORotate(upRotation, rotationDuration).SetEase(Ease.InOutSine)
+            .OnComplete(() =>
+            {
+                target3D.DOShakeRotation(shakeDuration3D, shakeStrength3D, shakeVibrato3D);
+            });
+    }
+
+    private void MoveDown()
+    {
+        target3D.DOMove(bottomPosition, moveDuration).SetEase(Ease.InOutSine)
+            .OnComplete(() =>
+            {
+                target3D.DOShakePosition(shakeDuration3D, shakeStrength3D, shakeVibrato3D);
+            });
+
+        target3D.DORotate(bottomRotation, rotationDuration).SetEase(Ease.InOutSine)
+            .OnComplete(() =>
+            {
+                target3D.DOShakeRotation(shakeDuration3D, shakeStrength3D, shakeVibrato3D);
+            });
     }
 }
