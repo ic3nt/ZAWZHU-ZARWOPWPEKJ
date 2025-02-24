@@ -149,11 +149,6 @@ public class MenuManager : MonoBehaviour
         InitCheck();
         transitionManager.GetComponent<DemoLoadScene>().transition = transition;
         transitionManager.GetComponent<DemoLoadScene>().startDelay = startDelay;
-        
-        // справочник
-
-        target3D.position = bottomPosition;
-        target3D.rotation = Quaternion.Euler(bottomRotation);
     }
 
     //инициализация
