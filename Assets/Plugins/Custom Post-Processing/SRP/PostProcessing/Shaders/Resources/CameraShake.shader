@@ -28,6 +28,11 @@ Shader "Custom Post-Processing/SRP/CameraShake"
             float _ShakeIntensity;
             float _ShakeSpeed;
 
+            float RandomNoise(float2 uv)
+            {
+                return frac(sin(dot(uv, float2(12.9898, 78.233))) * 43758.5453);
+            }
+
             struct Attributes
             {
                 float4 positionOS   : POSITION;
@@ -54,10 +59,15 @@ Shader "Custom Post-Processing/SRP/CameraShake"
                 float2 uv = input.uv;
 
                 float time = _Time.y * _ShakeSpeed;
+                float timeScaled = floor(time * 10.0) * 0.1;
 
+                float shakeIntensity = lerp(0.01, 1.5, _ShakeIntensity * 0.02);  // 0.1 - минимальная, 1.5 - максимальная интенсивность
+                float shakeSpeed = lerp(0.01, 2.0, _ShakeSpeed * 0.02);  // 0.1 - медленно, 2.0 - быстро
+
+                float2 noiseInput = float2(timeScaled, timeScaled * 1.3);
                 float2 shakeOffset;
-                shakeOffset.x = (sin(time) + sin(time * 1.5)) * _ShakeIntensity;
-                shakeOffset.y = (cos(time * 1.2) + cos(time * 0.8)) * _ShakeIntensity;
+                shakeOffset.x = (RandomNoise(noiseInput) - 0.5) * 2.0 * shakeIntensity * shakeSpeed;
+                shakeOffset.y = (RandomNoise(noiseInput.yx) - 0.5) * 2.0 * shakeIntensity * shakeSpeed;
 
                 uv += shakeOffset;
 

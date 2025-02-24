@@ -518,10 +518,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cb6dc478310fc144ac9072909814967, type: 3}
   m_Name: CameraShakeVolume
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   Active:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0
   When:
     m_OverrideState: 1
     m_Value: 600
@@ -530,4 +530,4 @@ MonoBehaviour:
     m_Value: 0
   ShakeSpeed:
     m_OverrideState: 1
-    m_Value: 21.7
+    m_Value: 2.5
