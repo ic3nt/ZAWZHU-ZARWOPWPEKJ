@@ -236,7 +236,7 @@ public class MenuManager : MonoBehaviour
         InitErrorWindow.SetActive(true);
     }
 
-    void FixedUpdate()
+    void Update()
     {
         // стадия - меню
 
