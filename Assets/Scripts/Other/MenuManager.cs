@@ -1,10 +1,24 @@
 ﻿using DG.Tweening;
 using Discord;
 using EasyTransition;
+using System;
+using TMPro;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
+
+[System.Serializable]
+public class ManualEntry
+{
+    public string Name;
+    public string Description;
+    public Transform Target;
+    public Vector3 UpPosition;
+    public Vector3 BottomPosition;
+    public Vector3 UpRotation;
+    public Vector3 BottomRotation;
+}
 
 public class MenuManager : MonoBehaviour
 {
@@ -48,22 +62,27 @@ public class MenuManager : MonoBehaviour
 
     [Header("Manual")]
 
+    public List<ManualEntry> manualEntries = new List<ManualEntry>();
+
+    private ManualEntry selectedEntry = null;
+
+    public TextMeshProUGUI currentSelectionText;
+    public TextMeshProUGUI currentSelectionDescription;
     public RectTransform manualLabel;
     public RectTransform backgroundManual;
     public RectTransform mainWindow;
     public RectTransform infoWindow;
 
-    public Transform target3D;
+    private Transform target3D;
+
+    private Vector3 UpPositionTarget;
+    private Vector3 BottomPositionTarget;
+    private Vector3 UpRotationTarget;
+    private Vector3 BottomRotationTarget;
 
     public float shakeStrength = 10f;
     public int shakeVibrato = 10;
     public float shakeDuration = 0.3f;
-
-    public Vector3 upPosition;
-    public Vector3 bottomPosition;
-
-    public Vector3 upRotation;
-    public Vector3 bottomRotation;
 
     [Space(10)]
 
@@ -669,10 +688,67 @@ public class MenuManager : MonoBehaviour
 
     // справочник
 
+    public void SelectObject(string name)
+    {
+        selectedEntry = manualEntries.Find(entry => entry.Name == name);
+
+        if (selectedEntry != null)
+        {
+            target3D = selectedEntry.Target;
+            Debug.Log($"Выбран объект: {selectedEntry.Name}, target3D обновлен!");
+
+            UpPositionTarget = selectedEntry.UpPosition;
+            UpRotationTarget = selectedEntry.UpRotation;
+            BottomPositionTarget = selectedEntry.BottomPosition;
+            BottomRotationTarget = selectedEntry.BottomRotation;
+
+            UpdateSelectionText();
+            WindowInfoOpen();
+            MoveUp();
+        }
+        else
+        {
+            Debug.LogWarning($"Объект с именем {name} не найден в списке!");
+        }
+    }
+
+
+    // Обновление UI
+    private void UpdateSelectionText()
+    {
+        if (currentSelectionText != null)
+        {
+            currentSelectionText.text = selectedEntry != null ? $"{selectedEntry.Name}" : "???";
+            currentSelectionDescription.text = selectedEntry != null ? $"{selectedEntry.Description}" : "???";
+        }
+        Debug.Log($"Обновлен target3D: {(target3D != null ? target3D.name : "null")}");
+    }
+
+
+    public void SetUpPosition(string name, Vector3 position, Vector3 rotation)
+    {
+        ManualEntry entry = manualEntries.Find(e => e.Name == name);
+        if (entry != null)
+        {
+            entry.UpPosition = position;
+            entry.UpRotation = rotation;
+        }
+    }
+
+    public void SetBottomPosition(string name, Vector3 position, Vector3 rotation)
+    {
+        ManualEntry entry = manualEntries.Find(e => e.Name == name);
+        if (entry != null)
+        {
+            entry.BottomPosition = position;
+            entry.BottomRotation = rotation;
+        }
+    }
+
+
     public void WindowInfoOpen()
     {
         float screenHeight = Screen.height;
-        MoveUp();
         mainWindow.DOAnchorPosY(-screenHeight, 0.3f)
             .SetEase(Ease.InOutQuad)
             .OnComplete(() =>
@@ -717,13 +793,13 @@ public class MenuManager : MonoBehaviour
 
     private void MoveUp()
     {
-        target3D.DOMove(upPosition, moveDuration).SetEase(Ease.InOutSine)
+        target3D.DOMove(UpPositionTarget, moveDuration).SetEase(Ease.InOutSine)
             .OnComplete(() =>
             {
                 target3D.DOShakePosition(shakeDuration3D, shakeStrength3D, shakeVibrato3D);
             });
 
-        target3D.DORotate(upRotation, rotationDuration).SetEase(Ease.InOutSine)
+        target3D.DORotate(UpRotationTarget, rotationDuration).SetEase(Ease.InOutSine)
             .OnComplete(() =>
             {
                 target3D.DOShakeRotation(shakeDuration3D, shakeStrength3D, shakeVibrato3D);
@@ -732,16 +808,17 @@ public class MenuManager : MonoBehaviour
 
     private void MoveDown()
     {
-        target3D.DOMove(bottomPosition, moveDuration).SetEase(Ease.InOutSine)
+        target3D.DOMove(BottomPositionTarget, moveDuration).SetEase(Ease.InOutSine)
             .OnComplete(() =>
             {
                 target3D.DOShakePosition(shakeDuration3D, shakeStrength3D, shakeVibrato3D);
             });
 
-        target3D.DORotate(bottomRotation, rotationDuration).SetEase(Ease.InOutSine)
+        target3D.DORotate(BottomRotationTarget, rotationDuration).SetEase(Ease.InOutSine)
             .OnComplete(() =>
             {
                 target3D.DOShakeRotation(shakeDuration3D, shakeStrength3D, shakeVibrato3D);
             });
     }
 }
+

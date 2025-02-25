@@ -4929,7 +4929,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 4
+  m_fontStyle: 20
   m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -5103,7 +5103,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &257197859
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7019,7 +7019,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &342336169
 Transform:
   m_ObjectHideFlags: 0
@@ -7034,6 +7034,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2114556365}
+  - {fileID: 1076698047}
   m_Father: {fileID: 1482352106}
   m_LocalEulerAnglesHint: {x: 0, y: -382.42, z: 0}
 --- !u!95 &342336170
@@ -15063,14 +15064,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1532457419}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: WindowInfoOpen
-        m_Mode: 1
+        m_MethodName: SelectObject
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 2
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Mimic ////////////
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &680674529
@@ -23427,6 +23428,124 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1076698046
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1076698047}
+  - component: {fileID: 1076698049}
+  - component: {fileID: 1076698048}
+  m_Layer: 8
+  m_Name: Point Light (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1076698047
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1076698046}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.0007999148, y: -0.10770127, z: -0.0688017, w: -0.9917995}
+  m_LocalPosition: {x: 3.39, y: 14.09, z: 3.49}
+  m_LocalScale: {x: 4.131087, y: 4.131086, z: 4.131086}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 342336169}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1076698048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1076698046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
+--- !u!108 &1076698049
+Light:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1076698046}
+  m_Enabled: 1
+  serializedVersion: 10
+  m_Type: 2
+  m_Shape: 0
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 3.89
+  m_Range: 18.45
+  m_SpotAngle: 30
+  m_InnerSpotAngle: 21.80208
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingLayerMask: 1
+  m_Lightmapping: 4
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
 --- !u!1 &1078616994
 GameObject:
   m_ObjectHideFlags: 0
@@ -25023,7 +25142,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1139389245}
-  - component: {fileID: 1139389247}
   - component: {fileID: 1139389246}
   m_Layer: 0
   m_Name: TurretBottom
@@ -25031,7 +25149,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1139389245
 Transform:
   m_ObjectHideFlags: 0
@@ -25073,19 +25191,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1139389247
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1139389244}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b039e1c9621c747f99644c0c0aa06a10, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  an: {fileID: 1139389246}
 --- !u!1 &1145404516
 GameObject:
   m_ObjectHideFlags: 0
@@ -26589,14 +26694,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1532457419}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: WindowInfoOpen
-        m_Mode: 1
+        m_MethodName: SelectObject
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Toy Robot /////
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!4 &1255145148 stripped
@@ -29597,9 +29702,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1355403107}
-  - component: {fileID: 1355403110}
-  - component: {fileID: 1355403109}
-  - component: {fileID: 1355403108}
   m_Layer: 0
   m_Name: Head
   m_TagString: Untagged
@@ -29630,133 +29732,6 @@ Transform:
   - {fileID: 1907570045}
   m_Father: {fileID: 1139389245}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!82 &1355403108
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1355403106}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: b9bf59205b233415bab7e64ef0c47ef1, type: 3}
-  m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 12
-  Pan2D: 0
-  rolloffMode: 2
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: -3.1846795
-      outSlope: -3.1846795
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.048632216
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1.1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
---- !u!114 &1355403109
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1355403106}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 200fc6dac23d9481f9368805706b14b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioSource: {fileID: 0}
-  spawnPoint: {fileID: 1490386333}
-  throwForce: 40
-  bombObject: {fileID: 0}
-  partialExplosion: {fileID: 0}
---- !u!114 &1355403110
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1355403106}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cdc3743b602cb43fabc218df53866c55, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Target: {fileID: 1355403106}
-  rotationSpeed: 3
 --- !u!1 &1355684588
 GameObject:
   m_ObjectHideFlags: 0
@@ -34050,18 +34025,61 @@ MonoBehaviour:
   animatorStore: {fileID: 3570065}
   animatorCatalog: {fileID: 1443126478}
   InitErrorWindow: {fileID: 81264438}
+  manualEntries:
+  - Name: Toy Robot /////
+    Description: "\u0410\u043D\u0438\u043C\u0430\u0442\u0440\u043E\u043D\u043D\u044B\u0439
+      \u0440\u043E\u0431\u043E\u0442, \u0441\u043E\u0437\u0434\u0430\u043D\u043D\u044B\u0439
+      \u041A\u043E\u043C\u043F\u0430\u043D\u0438\u0435\u0439 \u0432 \u0440\u0430\u043C\u043A\u0430\u0445
+      \u044D\u043A\u0441\u043F\u0435\u0440\u0438\u043C\u0435\u043D\u0442\u0430. \u0418\u0437\u043D\u0430\u0447\u0430\u043B\u044C\u043D\u043E
+      \u043F\u0440\u0435\u0434\u043D\u0430\u0437\u043D\u0430\u0447\u0435\u043D\u043D\u044B\u0439
+      \u0434\u043B\u044F \u0440\u0430\u0437\u0432\u043B\u0435\u0447\u0435\u043D\u0438\u044F,
+      \u043E\u043D \u043F\u043E\u0434\u0432\u0435\u0440\u0433\u0441\u044F \u043F\u0440\u043E\u0433\u0440\u0430\u043C\u043C\u043D\u043E\u043C\u0443
+      \u0441\u0431\u043E\u044E, \u043A\u043E\u0442\u043E\u0440\u044B\u0439 \u043F\u0440\u0435\u0432\u0440\u0430\u0442\u0438\u043B
+      \u0435\u0433\u043E \u0432 \u043E\u043F\u0430\u0441\u043D\u043E\u0433\u043E
+      \u043C\u043E\u043D\u0441\u0442\u0440\u0430. \u041A\u043E\u043C\u043F\u0430\u043D\u0438\u044F
+      \u043D\u0435 \u0440\u0435\u043A\u043E\u043C\u0435\u043D\u0434\u0443\u0435\u0442
+      \u043F\u0440\u0438\u0431\u043B\u0438\u0436\u0430\u0442\u044C\u0441\u044F \u043A
+      \u043D\u0435\u043C\u0443, \u0434\u0430\u043D\u043D\u0430\u044F \u043C\u043E\u0434\u0435\u043B\u044C
+      \u0432\u043E\u0441\u043F\u0440\u0438\u043D\u0438\u043C\u0430\u0435\u0442 \u043B\u044E\u0434\u0435\u0439,
+      \u0430 \u0442\u0430\u043A\u0436\u0435 \u0434\u0440\u0443\u0433\u0438\u0445
+      \u0440\u043E\u0431\u043E\u0442\u043E\u0432, \u043A\u0430\u043A \u0443\u0433\u0440\u043E\u0437\u0443.
+      \u041B\u0443\u0447\u0448\u0435 \u0443\u043D\u043E\u0441\u0438\u0442\u0435 \u043D\u043E\u0433\u0438,
+      \u0435\u0441\u043B\u0438 \u0432\u0441\u0442\u0440\u0435\u0442\u0438\u0442\u0435
+      \u0435\u0433\u043E."
+    Target: {fileID: 208038979}
+    UpPosition: {x: -2.0999994, y: -5.7, z: 15.57}
+    BottomPosition: {x: 0.30204868, y: -10.455864, z: 14.517176}
+    UpRotation: {x: 359.05994, y: 151.64737, z: 7.8350134}
+    BottomRotation: {x: 359.0599, y: 349.91025, z: 7.8350153}
+  - Name: Mimic ////////////
+    Description: "\u0415\u0449\u0451 \u043E\u0434\u0438\u043D \u0430\u043D\u0438\u043C\u0430\u0442\u0440\u043E\u043D\u043D\u044B\u0439
+      \u043F\u0438\u0437\u0434\u044E\u043A \u0442\u043E\u043B\u044C\u043A\u043E \u043F\u043E\u0445\u043E\u0436
+      \u043D\u0430 \u0438\u0433\u0440\u043E\u043A\u0430 \u0438 \u0431\u0435\u0433\u0430\u0435\u0442
+      \u0442\u0443\u0434\u0430 \u0441\u044E\u0434\u0430 \u043A\u0440\u0447"
+    Target: {fileID: 342336169}
+    UpPosition: {x: 0.7310486, y: -7.665864, z: 16.774921}
+    BottomPosition: {x: -2.1179514, y: -12.555863, z: 13.947176}
+    UpRotation: {x: 0, y: 184.96288, z: 0}
+    BottomRotation: {x: -0, y: 337.5795, z: 0}
+  - Name: Turret //////////
+    Description: "\u0445\u0443\u0439\u044F\u043D\u044F \u043D\u0430 \u043D\u043E\u0436\u043A\u0430\u0445
+      \u043A\u043E\u0442\u043E\u0440\u0430\u044F \u0431\u0435\u0433\u0430\u0435\u0442
+      \u0437\u0430 \u0442\u043E\u0431\u043E\u0439 \u0445\u0430\u0433\u0438 \u0432\u0430\u0433\u0438
+      \u0433\u043E\u0432\u043D\u043E "
+    Target: {fileID: 1139389245}
+    UpPosition: {x: -1.0479517, y: -2.2758636, z: 15.459213}
+    BottomPosition: {x: -0.7955179, y: -6.115864, z: 14.677117}
+    UpRotation: {x: -0, y: 159.19304, z: -0}
+    BottomRotation: {x: -0, y: 314.76605, z: 0}
+  currentSelectionText: {fileID: 1737547732}
+  currentSelectionDescription: {fileID: 1682083845}
   manualLabel: {fileID: 2032731705}
   backgroundManual: {fileID: 633383334}
   mainWindow: {fileID: 1110892696}
   infoWindow: {fileID: 1401652632}
-  target3D: {fileID: 208038979}
   shakeStrength: 15
   shakeVibrato: 15
   shakeDuration: 0.5
-  upPosition: {x: -2.0999994, y: -5.7, z: 15.57}
-  bottomPosition: {x: 0.30204868, y: -10.455864, z: 14.517176}
-  upRotation: {x: 359.05994, y: 151.64737, z: 7.8350134}
-  bottomRotation: {x: 359.0599, y: 349.91025, z: 7.8350153}
   moveDuration: 0.6
   rotationDuration: 0.6
   shakeStrength3D: 0.4
@@ -36164,7 +36182,7 @@ GameObject:
   - component: {fileID: 1682083846}
   - component: {fileID: 1682083845}
   m_Layer: 5
-  m_Name: MonsterInfoText
+  m_Name: MonsterDescriptionText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36209,23 +36227,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u0410\u043D\u0438\u043C\u0430\u0442\u0440\u043E\u043D\u043D\u044B\u0439
-    \u0440\u043E\u0431\u043E\u0442, \u0441\u043E\u0437\u0434\u0430\u043D\u043D\u044B\u0439
-    \u041A\u043E\u043C\u043F\u0430\u043D\u0438\u0435\u0439 \u0432 \u0440\u0430\u043C\u043A\u0430\u0445
-    \u044D\u043A\u0441\u043F\u0435\u0440\u0438\u043C\u0435\u043D\u0442\u0430. \u0418\u0437\u043D\u0430\u0447\u0430\u043B\u044C\u043D\u043E
-    \u043F\u0440\u0435\u0434\u043D\u0430\u0437\u043D\u0430\u0447\u0435\u043D\u043D\u044B\u0439
-    \u0434\u043B\u044F \u0440\u0430\u0437\u0432\u043B\u0435\u0447\u0435\u043D\u0438\u044F,
-    \u043E\u043D \u043F\u043E\u0434\u0432\u0435\u0440\u0433\u0441\u044F \u043F\u0440\u043E\u0433\u0440\u0430\u043C\u043C\u043D\u043E\u043C\u0443
-    \u0441\u0431\u043E\u044E, \u043A\u043E\u0442\u043E\u0440\u044B\u0439 \u043F\u0440\u0435\u0432\u0440\u0430\u0442\u0438\u043B
-    \u0435\u0433\u043E \u0432 \u043E\u043F\u0430\u0441\u043D\u043E\u0433\u043E \u043C\u043E\u043D\u0441\u0442\u0440\u0430.
-    \u041A\u043E\u043C\u043F\u0430\u043D\u0438\u044F \u043D\u0435 \u0440\u0435\u043A\u043E\u043C\u0435\u043D\u0434\u0443\u0435\u0442
-    \u043F\u0440\u0438\u0431\u043B\u0438\u0436\u0430\u0442\u044C\u0441\u044F \u043A
-    \u043D\u0435\u043C\u0443, \u0434\u0430\u043D\u043D\u0430\u044F \u043C\u043E\u0434\u0435\u043B\u044C
-    \u0432\u043E\u0441\u043F\u0440\u0438\u043D\u0438\u043C\u0430\u0435\u0442 \u043B\u044E\u0434\u0435\u0439,
-    \u0430 \u0442\u0430\u043A\u0436\u0435 \u0434\u0440\u0443\u0433\u0438\u0445 \u0440\u043E\u0431\u043E\u0442\u043E\u0432,
-    \u043A\u0430\u043A \u0443\u0433\u0440\u043E\u0437\u0443. \u041B\u0443\u0447\u0448\u0435
-    \u0443\u043D\u043E\u0441\u0438\u0442\u0435 \u043D\u043E\u0433\u0438, \u0435\u0441\u043B\u0438
-    \u0432\u0441\u0442\u0440\u0435\u0442\u0438\u0442\u0435 \u0435\u0433\u043E."
+  m_text: "\u0434\u044D\u0434\u043B\u0438 \u0434\u044D\u0432\u0430\u0441\u0442\u0430\u043D\u0446\u0438\u044F
+    \u0442\u043E\u043F"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e92344fbdb6da594f97030117e2de162, type: 2}
   m_sharedMaterial: {fileID: 9172693613803592548, guid: e92344fbdb6da594f97030117e2de162, type: 2}
@@ -37113,14 +37116,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1532457419}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: WindowInfoOpen
-        m_Mode: 1
+        m_MethodName: SelectObject
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Turret //////////
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1726594196
@@ -37736,7 +37739,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: TOY ROBOT /////
+  m_text: TURRET //////////
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e92344fbdb6da594f97030117e2de162, type: 2}
   m_sharedMaterial: {fileID: 9172693613803592548, guid: e92344fbdb6da594f97030117e2de162, type: 2}
@@ -37769,7 +37772,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 4
+  m_fontStyle: 20
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535

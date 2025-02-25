@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using DG.Tweening;
 using PlayFab.Public;
 using PlayFab.SharedModels;
 using UnityEngine;
