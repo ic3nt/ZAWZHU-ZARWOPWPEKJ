@@ -8,8 +8,7 @@ using UnityEngine;
 [CustomEditor(typeof(MenuManager))]
 public class ManualManagerEditor : Editor
 {
-    private string selectedName = ""; // Имя выбранного объекта
-
+    private string selectedName = "";
     public override void OnInspectorGUI()
     {
         base.OnInspectorGUI();
@@ -25,13 +24,12 @@ public class ManualManagerEditor : Editor
             return;
         }
 
-        // Составляем список имен объектов для отображения
         List<string> options = new List<string>();
         foreach (var entry in script.manualEntries)
         {
             if (entry.Target != null)
             {
-                options.Add(entry.Target.name); // Добавляем имя объекта
+                options.Add(entry.Target.name);
             }
         }
 
@@ -41,12 +39,10 @@ public class ManualManagerEditor : Editor
             return;
         }
 
-        // Выбор объекта по имени
-        int selectedIndex = options.IndexOf(selectedName); // Индекс выбранного объекта
+        int selectedIndex = options.IndexOf(selectedName);
         selectedIndex = EditorGUILayout.Popup("Select Object:", selectedIndex, options.ToArray());
         selectedName = selectedIndex >= 0 ? options[selectedIndex] : selectedName;
 
-        // Находим выбранный объект по имени
         ManualEntry selectedEntry = script.manualEntries.Find(entry => entry.Target != null && entry.Target.name == selectedName);
 
         if (selectedEntry == null || selectedEntry.Target == null)
@@ -55,17 +51,17 @@ public class ManualManagerEditor : Editor
             return;
         }
 
-        if (GUILayout.Button("Write the top coordinates of the object"))
+        if (GUILayout.Button("Record coordinates in the screen area"))
         {
-            selectedEntry.UpPosition = selectedEntry.Target.position;
-            selectedEntry.UpRotation = selectedEntry.Target.rotation.eulerAngles;
+            selectedEntry.onScreenPosition = selectedEntry.Target.position;
+            selectedEntry.onScreenRotation = selectedEntry.Target.rotation.eulerAngles;
             EditorUtility.SetDirty(script);
         }
 
-        if (GUILayout.Button("Write the lower coordinates of the object"))
+        if (GUILayout.Button("Record coordinates in outside the screen area"))
         {
-            selectedEntry.BottomPosition = selectedEntry.Target.position;
-            selectedEntry.BottomRotation = selectedEntry.Target.rotation.eulerAngles;
+            selectedEntry.offScreenPosition = selectedEntry.Target.position;
+            selectedEntry.offScreenRotation = selectedEntry.Target.rotation.eulerAngles;
             EditorUtility.SetDirty(script);
         }
     }

@@ -15,10 +15,10 @@ public class ManualEntry
     public string Description;
     public string Type;
     public Transform Target;
-    public Vector3 UpPosition;
-    public Vector3 BottomPosition;
-    public Vector3 UpRotation;
-    public Vector3 BottomRotation;
+    public Vector3 onScreenPosition;
+    public Vector3 offScreenPosition;
+    public Vector3 onScreenRotation;
+    public Vector3 offScreenRotation;
 }
 
 public class MenuManager : MonoBehaviour
@@ -79,10 +79,10 @@ public class MenuManager : MonoBehaviour
 
     private Transform target3D;
 
-    private Vector3 UpPositionTarget;
-    private Vector3 BottomPositionTarget;
-    private Vector3 UpRotationTarget;
-    private Vector3 BottomRotationTarget;
+    private Vector3 onScreenPositionTarget;
+    private Vector3 offScreenPositionTarget;
+    private Vector3 onScreenRotationTarget;
+    private Vector3 offScreenRotationTarget;
 
     public float shakeStrength = 10f;
     public int shakeVibrato = 10;
@@ -236,7 +236,7 @@ public class MenuManager : MonoBehaviour
         InitErrorWindow.SetActive(true);
     }
 
-    void Update()
+    void FixedUpdate()
     {
         // стадия - меню
 
@@ -707,10 +707,10 @@ public class MenuManager : MonoBehaviour
             target3D = selectedEntry.Target;
             Debug.Log($"Выбран объект: {selectedEntry.Name}, target3D обновлен!");
 
-            UpPositionTarget = selectedEntry.UpPosition;
-            UpRotationTarget = selectedEntry.UpRotation;
-            BottomPositionTarget = selectedEntry.BottomPosition;
-            BottomRotationTarget = selectedEntry.BottomRotation;
+            onScreenPositionTarget = selectedEntry.onScreenPosition;
+            onScreenRotationTarget = selectedEntry.onScreenRotation;
+            offScreenPositionTarget = selectedEntry.offScreenPosition;
+            offScreenRotationTarget = selectedEntry.offScreenRotation;
 
             UpdateSelectionText();
             WindowInfoOpen();
@@ -740,8 +740,8 @@ public class MenuManager : MonoBehaviour
         ManualEntry entry = manualEntries.Find(e => e.Name == name);
         if (entry != null)
         {
-            entry.UpPosition = position;
-            entry.UpRotation = rotation;
+            entry.onScreenPosition = position;
+            entry.onScreenRotation = rotation;
         }
     }
 
@@ -750,8 +750,8 @@ public class MenuManager : MonoBehaviour
         ManualEntry entry = manualEntries.Find(e => e.Name == name);
         if (entry != null)
         {
-            entry.BottomPosition = position;
-            entry.BottomRotation = rotation;
+            entry.offScreenPosition = position;
+            entry.offScreenRotation = rotation;
         }
     }
 
@@ -803,13 +803,13 @@ public class MenuManager : MonoBehaviour
 
     private void MoveUp()
     {
-        target3D.DOMove(UpPositionTarget, moveDuration).SetEase(Ease.InOutSine)
+        target3D.DOMove(onScreenPositionTarget, moveDuration).SetEase(Ease.InOutSine)
             .OnComplete(() =>
             {
                 target3D.DOShakePosition(shakeDuration3D, shakeStrength3D, shakeVibrato3D);
             });
 
-        target3D.DORotate(UpRotationTarget, rotationDuration).SetEase(Ease.InOutSine)
+        target3D.DORotate(onScreenRotationTarget, rotationDuration).SetEase(Ease.InOutSine)
             .OnComplete(() =>
             {
                 target3D.DOShakeRotation(shakeDuration3D, shakeStrength3D, shakeVibrato3D);
@@ -818,13 +818,13 @@ public class MenuManager : MonoBehaviour
 
     private void MoveDown()
     {
-        target3D.DOMove(BottomPositionTarget, moveDuration).SetEase(Ease.InOutSine)
+        target3D.DOMove(offScreenPositionTarget, moveDuration).SetEase(Ease.InOutSine)
             .OnComplete(() =>
             {
                 target3D.DOShakePosition(shakeDuration3D, shakeStrength3D, shakeVibrato3D);
             });
 
-        target3D.DORotate(BottomRotationTarget, rotationDuration).SetEase(Ease.InOutSine)
+        target3D.DORotate(offScreenRotationTarget, rotationDuration).SetEase(Ease.InOutSine)
             .OnComplete(() =>
             {
                 target3D.DOShakeRotation(shakeDuration3D, shakeStrength3D, shakeVibrato3D);
