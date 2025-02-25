@@ -13,6 +13,7 @@ public class ManualEntry
 {
     public string Name;
     public string Description;
+    public string Type;
     public Transform Target;
     public Vector3 UpPosition;
     public Vector3 BottomPosition;
@@ -25,6 +26,9 @@ public class MenuManager : MonoBehaviour
     [Header("Menu Objects")]
     public GameObject Kail;
     public GameObject mainButtonsGroup;
+    public GameObject world;
+    public GameObject manualObjects;
+    public GameObject mainCamera;
 
     [Header("Game Manager")]
     public DiscordController discordController;
@@ -649,11 +653,17 @@ public class MenuManager : MonoBehaviour
     }
     void ManualOpen()
     {
-        animatorManual.SetTrigger("OpenManual");
+        //  animatorManual.SetTrigger("OpenManual");
+        mainCamera.SetActive(false);
+        world.SetActive(false);
+        manualObjects.SetActive(true);
     }
-    void ManualClose()
+    public void ManualClose()
     {
-        animatorManual.SetTrigger("CloseManual");
+        // animatorManual.SetTrigger("CloseManual");
+        mainCamera.SetActive(true);
+        world.SetActive(true);
+        manualObjects.SetActive(false);
     }
     void StoreOpen()
     {
