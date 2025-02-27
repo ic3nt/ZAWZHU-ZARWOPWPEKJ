@@ -12,7 +12,7 @@ using UnityEngine.PlayerLoop;
 public class ManualEntry
 {
     public string Name;
-    public string Description;
+    public string DescriptionLocalizationKey;
     public string Type;
     public Transform Target;
     public Vector3 onScreenPosition;
@@ -729,9 +729,10 @@ public class MenuManager : MonoBehaviour
         if (currentSelectionText != null)
         {
             currentSelectionText.text = selectedEntry != null ? $"{selectedEntry.Name}" : "???";
-            currentSelectionDescription.text = selectedEntry != null ? $"{selectedEntry.Description}" : "???";
+            currentSelectionDescription.GetComponent<LocalizedText>().key = selectedEntry != null ? $"{selectedEntry.DescriptionLocalizationKey}" : "???";
+            currentSelectionDescription.GetComponent<LocalizedText>().UpdateText();
         }
-        Debug.Log($"Обновлен target3D: {(target3D != null ? target3D.name : "null")}");
+        Debug.Log($"Обновлен Target: {(target3D != null ? target3D.name : "null")}");
     }
 
 

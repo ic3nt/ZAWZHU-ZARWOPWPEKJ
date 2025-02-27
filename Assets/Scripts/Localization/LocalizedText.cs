@@ -7,7 +7,7 @@ using TMPro;
 public class LocalizedText : MonoBehaviour
 {
     [SerializeField]
-    private string key;
+    public string key;
 
     private LocalizationManager localizationManager;
     private TMP_Text text;
@@ -29,12 +29,6 @@ public class LocalizedText : MonoBehaviour
         localizationManager.OnLanguageChanged += UpdateText;
     }
 
- //   void OnValidate()
- //   {
- //       // обновляем текст
- //      UpdateText();
- //   }
-
     private void OnDestroy()
     {
         // вызывается при удалении объекта LocalizationManager
@@ -42,7 +36,7 @@ public class LocalizedText : MonoBehaviour
         localizationManager.OnLanguageChanged -= UpdateText;
     }
 
-    virtual protected void UpdateText()
+    public virtual void UpdateText()
     {
         // метод для обновления текста
 
