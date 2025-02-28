@@ -6,7 +6,7 @@ using System;
 
 public class UpdateManager : MonoBehaviour
 {
-    [SerializeField]
+    public MenuManager menuManager;
     public GameObject updateWindow;
     public GameObject mainButtonsGroup;
 
@@ -35,7 +35,10 @@ public class UpdateManager : MonoBehaviour
         }
         else
         {
-            mainButtonsGroup.SetActive(true);
+            if (menuManager.initSuccessful == true)
+            {
+                mainButtonsGroup.SetActive(true);
+            }
         }
 
 #if DEBUG

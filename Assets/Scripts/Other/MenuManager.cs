@@ -7,6 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class ManualEntry
@@ -34,6 +35,8 @@ public class MenuManager : MonoBehaviour
     public DiscordController discordController;
     public LocalizationManager localizationManager;
     public GameObject transitionManager;
+
+    [HideInInspector] public bool initSuccessful;
 
     [Header("Transition Settings")]
     public TransitionSettings transition;
@@ -188,12 +191,14 @@ public class MenuManager : MonoBehaviour
                     InitErrorWindow.SetActive(false);
                     transitionManager = transitionManagerObject;
                     Debug.Log("TransitionManager automatically assigned.");
+                    initSuccessful = true;
                 }
                 else
                 {
                     mainButtonsGroup.SetActive(false);
                     StartCoroutine(ErrorInitWindowWaitForSecondCoroutine());
                     Debug.LogError("No object with tag 'TransitionManager' found in the scene!");
+                    initSuccessful = false;
                 }
             }
 
@@ -205,12 +210,14 @@ public class MenuManager : MonoBehaviour
                     InitErrorWindow.SetActive(false);
                     localizationManager = localizationManagerObject.GetComponent<LocalizationManager>();
                     Debug.Log("LocalizationManager automatically assigned.");
+                    initSuccessful = true;
                 }
                 else
                 {
                     mainButtonsGroup.SetActive(false);
                     StartCoroutine(ErrorInitWindowWaitForSecondCoroutine());
                     Debug.LogError("No object with tag 'LocalizationManager' found in the scene!");
+                    initSuccessful = false;
                 }
             }
             if (discordController == null)
@@ -221,6 +228,7 @@ public class MenuManager : MonoBehaviour
                     InitErrorWindow.SetActive(false);
                     discordController = discordManagerObject.GetComponent<DiscordController>();
                     Debug.Log("DiscordController automatically assigned.");
+                    initSuccessful = true;
                 }
                 else
                 {
