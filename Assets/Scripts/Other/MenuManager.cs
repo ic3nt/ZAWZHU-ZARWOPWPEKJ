@@ -134,40 +134,25 @@ public class MenuManager : MonoBehaviour
 
         // статус в дискорде дефолтный
 
-        if (localizationManager.CurrentLanguage == "en_US")
+        switch (localizationManager.CurrentLanguage)
         {
-            discordController.state = "He just sits on the menu and that's it.";
+            case "en_US":
+                discordController.state = "He just sits on the menu and that's it.";
+                discordController.details = "Menu";
+                break;
+            case "ru_RU":
+                discordController.state = "Просто сидит в меню и все.";
+                discordController.details = "Меню";
+                break;
+            case "de_DE":
+                discordController.state = "Es steht einfach auf der Speisekarte und das war’s.";
+                discordController.details = "Speisekarte";
+                break;
+            case "es_ES":
+                discordController.state = "Sólo se sienta en el menú y eso es todo.";
+                discordController.details = "Menú";
+                break;
         }
-        if (localizationManager.CurrentLanguage == "ru_RU")
-        {
-            discordController.state = "Просто сидит в меню и все.";
-        }
-        if (localizationManager.CurrentLanguage == "de_DE")
-        {
-            discordController.state = "Es steht einfach auf der Speisekarte und das war’s.";
-        }
-        if (localizationManager.CurrentLanguage == "es_ES")
-        {
-            discordController.state = "Sólo se sienta en el menú y eso es todo.";
-        }
-
-        if (localizationManager.CurrentLanguage == "en_US")
-        {
-            discordController.details = "Menu";
-        }
-        if (localizationManager.CurrentLanguage == "ru_RU")
-        {
-            discordController.details = "Меню";
-        }
-        if (localizationManager.CurrentLanguage == "de_DE")
-        {
-            discordController.details = "Speisekarte";
-        }
-        if (localizationManager.CurrentLanguage == "es_ES")
-        {
-            discordController.details = "Menú";
-        }
-
     }
 
     public void Awake()
@@ -244,7 +229,7 @@ public class MenuManager : MonoBehaviour
         InitErrorWindow.SetActive(true);
     }
 
-    void FixedUpdate()
+    void Update()
     {
         // стадия - меню
 
@@ -255,22 +240,26 @@ public class MenuManager : MonoBehaviour
                 MenuButton();
                 Debug.Log("Menu");
 
-                if (localizationManager.CurrentLanguage == "en_US")
+                switch (localizationManager.CurrentLanguage)
                 {
-                    discordController.state = "He just sits on the menu and that's it.";
+                    case "en_US":
+                        discordController.state = "He just sits on the menu and that's it.";
+                        discordController.details = "Menu";
+                        break;
+                    case "ru_RU":
+                        discordController.state = "Просто сидит в меню и все.";
+                        discordController.details = "Меню";
+                        break;
+                    case "de_DE":
+                        discordController.state = "Es steht einfach auf der Speisekarte und das war’s.";
+                        discordController.details = "Speisekarte";
+                        break;
+                    case "es_ES":
+                        discordController.state = "Sólo se sienta en el menú y eso es todo.";
+                        discordController.details = "Menú";
+                        break;
                 }
-                if (localizationManager.CurrentLanguage == "ru_RU")
-                {
-                    discordController.state = "Просто сидит в меню и все.";
-                }
-                if (localizationManager.CurrentLanguage == "de_DE")
-                {
-                    discordController.state = "Es steht einfach auf der Speisekarte und das war’s.";
-                }
-                if (localizationManager.CurrentLanguage == "es_ES")
-                {
-                    discordController.state = "Sólo se sienta en el menú y eso es todo.";
-                }
+
             }
         }
         else
@@ -289,22 +278,22 @@ public class MenuManager : MonoBehaviour
                 isSettingsAnimationPlaying = true;
                 Debug.Log("Settings");
 
-                if (localizationManager.CurrentLanguage == "en_US")
+                switch (localizationManager.CurrentLanguage)
                 {
-                    discordController.state = "Sets up Deadly Devastation...";
+                    case "en_US":
+                        discordController.state = "Sets up Deadly Devastation...";
+                        break;
+                    case "ru_RU":
+                        discordController.state = "Настраивает Deadly Devastation...";
+                        break;
+                    case "es_ES":
+                        discordController.state = "Configura Deadly Devastation...";
+                        break;
+                    case "de_DE":
+                        discordController.state = "Konfiguriert Deadly Devastation...";
+                        break;
                 }
-                if (localizationManager.CurrentLanguage == "ru_RU")
-                {
-                    discordController.state = "Настраивает Deadly Devastation...";
-                }
-                if (localizationManager.CurrentLanguage == "es_ES")
-                {
-                    discordController.state = "Configura Deadly Devastation...";
-                }
-                if (localizationManager.CurrentLanguage == "de_DE")
-                {
-                    discordController.state = "Konfiguriert Deadly Devastation...";
-                }
+
             }
         }
         else
