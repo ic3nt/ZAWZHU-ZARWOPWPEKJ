@@ -4,11 +4,15 @@ using UnityEngine;
 public class DiscordController : MonoBehaviour
 {
     [Header("Discord Application Settings")]
+
     [Space(10)]
+
     public long applicationID;
 
     [Header("Rich Presence Details")]
+
     [Space(10)]
+
     public string details = "";
 
     public string state = "";
@@ -37,18 +41,15 @@ public class DiscordController : MonoBehaviour
 
     void Start()
     {
-        // Initialize Discord connection
         discord = new Discord.Discord(applicationID, (System.UInt64)Discord.CreateFlags.NoRequireDiscord);
 
         time = System.DateTimeOffset.Now.ToUnixTimeMilliseconds();
 
-        // Update the Discord Rich Presence status
         UpdateStatus();
     }
 
     void Update()
     {
-        // Regularly update Discord Rich Presence status
         UpdateStatus();
 
         try
@@ -63,7 +64,6 @@ public class DiscordController : MonoBehaviour
 
     void UpdateStatus()
     {
-        // Attempt to update the Discord status
         try
         {
             var activityManager = discord.GetActivityManager();

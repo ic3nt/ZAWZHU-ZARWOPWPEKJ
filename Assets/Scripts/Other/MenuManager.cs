@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 using UnityEngine.SceneManagement;
+using UnityEngine.Diagnostics;
 
 [System.Serializable]
 public class ManualEntry
@@ -40,8 +41,8 @@ public class MenuManager : MonoBehaviour
 
     [Header("Transition Settings")]
     public TransitionSettings transition;
-    public float startDelay;
-
+    [HideInInspector] public float startDelay;
+    
     [Header("Animators")]
     public Animator animator;
     public Animator animatorSettings;
