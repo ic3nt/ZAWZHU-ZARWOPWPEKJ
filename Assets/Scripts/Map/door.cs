@@ -2,6 +2,7 @@ using System.Collections;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public enum DoorState { Opened, Closed }
 
@@ -77,7 +78,6 @@ public class Door : NetworkBehaviour
                         else if (an.GetCurrentAnimatorStateInfo(0).IsName(doorCloseAnimName))
                         {
                             OpenDoorServerRpc();
-                            
                         }
 
                         fill = 0;
@@ -90,6 +90,7 @@ public class Door : NetworkBehaviour
                     intText.SetActive(false);
                     fill = 0;
                     progressBar.fillAmount = fill;
+                    ShakeUI(LockText);  // Тряска для LockText
                 }
             }
             else
@@ -145,6 +146,25 @@ public class Door : NetworkBehaviour
     private void NotifyDoorStateChange(DoorState newState)
     {
         doorState.Value = newState;
-        
     }
+
+    private void ShakeUI(GameObject uiElement)
+    {
+        // Если это текст или LockText
+        if (uiElement == intText || uiElement == LockText)
+        {
+            uiElement.transform.DOKill();  // Убиваем предыдущие анимации
+                                           // Уменьшаем радиус тряски для текста
+            uiElement.transform.DOShakePosition(0.3f, 2f, 10, 90, false, true).SetEase(Ease.InOutQuad);
+        }
+
+        // Для progressBar можно добавить легкую тряску
+        if (uiElement == progressBar.gameObject)
+        {
+            progressBar.transform.DOKill();  // Убиваем предыдущие анимации
+                                             // Уменьшаем радиус тряски для progressBar
+            progressBar.transform.DOShakePosition(0.3f, 2f, 10, 90, false, true).SetEase(Ease.InOutQuad);  // Используем DOShakePosition вместо DOShakeRotation
+        }
+    }
+
 }

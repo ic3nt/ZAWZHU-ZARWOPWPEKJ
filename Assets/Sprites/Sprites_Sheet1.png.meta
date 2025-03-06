@@ -278,7 +278,7 @@ TextureImporter:
         width: 168
         height: 82
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -299,7 +299,7 @@ TextureImporter:
         width: 21
         height: 41
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -307,6 +307,69 @@ TextureImporter:
       bones: []
       spriteID: 23fd2c05071eb8348b2ff9c8829a90e1
       internalID: 1107124394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprites_Sheet1_0
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 444
+        width: 128
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c53afb1773fb2ee499b27d2c6d08323b
+      internalID: 1686034648
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprites_Sheet1_1
+      rect:
+        serializedVersion: 2
+        x: 166
+        y: 444
+        width: 121
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5837b84ac330dde4ab716c7014f5c40b
+      internalID: -1463177530
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprites_Sheet1_2
+      rect:
+        serializedVersion: 2
+        x: 304
+        y: 445
+        width: 121
+        height: 76
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8bfd4e1ae91b2e045998c8e3490633da
+      internalID: -935852597
       vertices: []
       indices: 
       edges: []
@@ -331,6 +394,9 @@ TextureImporter:
       Sprites_6: 756309931
       Sprites_7: -61517126
       Sprites_8: 1107124394
+      Sprites_Sheet1_0: 1686034648
+      Sprites_Sheet1_1: -1463177530
+      Sprites_Sheet1_2: -935852597
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
