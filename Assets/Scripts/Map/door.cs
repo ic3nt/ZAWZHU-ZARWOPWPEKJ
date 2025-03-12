@@ -53,16 +53,16 @@ public class Door : NetworkBehaviour
                 {
                     an = hit.collider.transform.GetComponent<Animator>();
                     doorSound = hit.collider.gameObject.GetComponent<AudioSource>();
-                    intText.SetActive(true);
+                    ShowUI(intText);
 
                     if (Input.GetKey(KeyCode.E) && fill < maxFill && canOpen)
                     {
-                        fill += Time.deltaTime * 160f;
+                        fill += Time.deltaTime * 60f;
                         progressBar.fillAmount = fill / maxFill;
                     }
                     else
                     {
-                        fill -= Time.deltaTime * 160f;
+                        fill -= Time.deltaTime * 60f;
                         progressBar.fillAmount = fill / maxFill;
                     }
 
@@ -86,25 +86,24 @@ public class Door : NetworkBehaviour
                 }
                 else
                 {
-                    LockText.SetActive(true);
-                    intText.SetActive(false);
+                    ShowUI(LockText);
+                    HideUI(intText);
                     fill = 0;
                     progressBar.fillAmount = fill;
-                    ShakeUI(LockText);  // Тряска для LockText
                 }
             }
             else
             {
-                LockText.SetActive(false);
-                intText.SetActive(false);
+                HideUI(intText);
+                HideUI(LockText);
                 fill = 0;
                 progressBar.fillAmount = fill;
             }
         }
         else
         {
-            LockText.SetActive(false);
-            intText.SetActive(false);
+            HideUI(intText);
+            HideUI(LockText);
             fill = 0;
             progressBar.fillAmount = fill;
         }
@@ -131,7 +130,6 @@ public class Door : NetworkBehaviour
         an.ResetTrigger("Close");
         an.SetTrigger("Open");
         doorState.Value = DoorState.Opened;
-
     }
 
     private void CloseDoor()
@@ -148,22 +146,40 @@ public class Door : NetworkBehaviour
         doorState.Value = newState;
     }
 
+    private void ShowUI(GameObject uiElement)
+    {
+        if (!uiElement.activeSelf)
+        {
+            ShakeUI(intText);
+            uiElement.SetActive(true);
+            uiElement.transform.DOKill();
+            uiElement.transform.localScale = Vector3.one * 0.8f;
+            uiElement.transform.DOScale(Vector3.one, 0.3f).SetEase(Ease.OutBack);
+        }
+    }
+
+    private void HideUI(GameObject uiElement)
+    {
+        if (uiElement.activeSelf)
+        {
+            ShakeUI(intText);
+            uiElement.transform.DOKill();
+            uiElement.transform.DOScale(Vector3.one * 0.0f, 0.3f).SetEase(Ease.OutBack)
+                .OnComplete(() =>
+                {
+                    uiElement.transform.DOScale(Vector3.zero, 0.1f).SetEase(Ease.InBack)
+                        .OnComplete(() => uiElement.SetActive(false));
+                });
+        }
+    }
+
     private void ShakeUI(GameObject uiElement)
     {
-        // Если это текст или LockText
-        if (uiElement == intText || uiElement == LockText)
+        if (uiElement.activeSelf)
         {
-            uiElement.transform.DOKill();  // Убиваем предыдущие анимации
-                                           // Уменьшаем радиус тряски для текста
-            uiElement.transform.DOShakePosition(0.3f, 2f, 10, 90, false, true).SetEase(Ease.InOutQuad);
-        }
-
-        // Для progressBar можно добавить легкую тряску
-        if (uiElement == progressBar.gameObject)
-        {
-            progressBar.transform.DOKill();  // Убиваем предыдущие анимации
-                                             // Уменьшаем радиус тряски для progressBar
-            progressBar.transform.DOShakePosition(0.3f, 2f, 10, 90, false, true).SetEase(Ease.InOutQuad);  // Используем DOShakePosition вместо DOShakeRotation
+            uiElement.transform.DOKill();
+            RectTransform rectTransform = uiElement.GetComponent<RectTransform>();
+            rectTransform.DOShakeAnchorPos(0.3f, 5f, 20, 90, false, true);
         }
     }
 

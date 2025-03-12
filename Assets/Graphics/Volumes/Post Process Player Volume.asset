@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9552dc531ee036d499efc8422245ab19, type: 3}
   m_Name: GlitchVolume
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   Active:
     m_OverrideState: 1
     m_Value: 1
@@ -201,6 +201,7 @@ MonoBehaviour:
   - {fileID: -3798105432496941948}
   - {fileID: -5902293506633011770}
   - {fileID: -47171727086445920}
+  - {fileID: 2697414670221754447}
 --- !u!114 &2015385211036035894
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -247,6 +248,31 @@ MonoBehaviour:
     dimension: 1
   dirtIntensity:
     m_OverrideState: 0
+    m_Value: 0
+--- !u!114 &2697414670221754447
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cb6dc478310fc144ac9072909814967, type: 3}
+  m_Name: CameraShakeVolume
+  m_EditorClassIdentifier: 
+  active: 0
+  Active:
+    m_OverrideState: 1
+    m_Value: 1
+  When:
+    m_OverrideState: 1
+    m_Value: 500
+  ShakeIntensity:
+    m_OverrideState: 1
+    m_Value: 0
+  ShakeSpeed:
+    m_OverrideState: 1
     m_Value: 0
 --- !u!114 &2819524454515015698
 MonoBehaviour:
