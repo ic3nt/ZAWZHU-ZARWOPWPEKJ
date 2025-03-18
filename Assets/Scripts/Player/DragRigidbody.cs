@@ -4,63 +4,76 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class DragRigidbody : MonoBehaviour
 {
+    [Header("Capture options")]
     public float force = 1000;
     public float damping = 100;
-    public float distance = 3;
+    public float distance = 3f;
+    public float minDistance = 1f;
+    public float maxDistance = 10f;
+    public float distanceStep = 0.5f;
+
+    [Header("Rotate an object")]
     public float rotationSpeed = 150f;
 
-    Transform jointTrans;
-    float dragDepth;
-
+    private Transform jointTrans;
+    private float dragDepth;
+    public static GameObject grabbedObject;
     void OnMouseDown()
     {
         HandleInputBegin(Input.mousePosition);
     }
-
-    public void OnMouseUp()
+    void OnMouseUp()
     {
-        HandleInputEnd(Input.mousePosition);
+        HandleInputEnd();
     }
-
     void OnMouseDrag()
     {
         HandleInput(Input.mousePosition);
     }
-
-    void Update()
+    void FixedUpdate()
     {
         HandleRotation();
+        HandleDistanceChange();
     }
-
     public void HandleInputBegin(Vector3 screenPosition)
     {
-        // простым языком чекаем положение камеры в мире, кидая рэйкаст, если он попадаем на объект с слоем Interactive, то мы можем брать этот объект (если что это пояснение ко всей работе скрипта, сорри мне лень пояснять все методы)
-
         var ray = Camera.main.ScreenPointToRay(screenPosition);
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, distance))
+        if (Physics.Raycast(ray, out RaycastHit hit, distance))
         {
             if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Interactive"))
             {
                 dragDepth = CameraPlane.CameraToPointDepth(Camera.main, hit.point);
                 jointTrans = AttachJoint(hit.rigidbody, hit.point);
+                grabbedObject = hit.transform.gameObject;
+
+                ApplyOutline(grabbedObject, true);
             }
         }
     }
-
     public void HandleInput(Vector3 screenPosition)
     {
         if (jointTrans == null)
             return;
 
-        var worldPos = Camera.main.ScreenToWorldPoint(screenPosition);
-        jointTrans.position = CameraPlane.ScreenToWorldPlanePoint(Camera.main, dragDepth, screenPosition);
-        DrawRope();
+        Vector3 worldPos = Camera.main.ScreenToWorldPoint(new Vector3(screenPosition.x, screenPosition.y, distance));
+        jointTrans.position = worldPos;
     }
-
-    public void HandleInputEnd(Vector3 screenPosition)
+    public void HandleInputEnd()
     {
-        Destroy(jointTrans.gameObject);
+        if (jointTrans != null)
+        {
+            ApplyOutline(grabbedObject, false);
+            grabbedObject = null;
+            Destroy(jointTrans.gameObject);
+        }
+    }
+    private void HandleDistanceChange()
+    {
+        float scroll = Input.GetAxis("Mouse ScrollWheel");
+        if (scroll != 0)
+        {
+            distance = Mathf.Clamp(distance + scroll * distanceStep, minDistance, maxDistance);
+        }
     }
 
     Transform AttachJoint(Rigidbody rb, Vector3 attachmentPosition)
@@ -86,32 +99,19 @@ public class DragRigidbody : MonoBehaviour
 
     private JointDrive NewJointDrive(float force, float damping)
     {
-        JointDrive drive = new JointDrive();
-        drive.mode = JointDriveMode.Position;
-        drive.positionSpring = force;
-        drive.positionDamper = damping;
-        drive.maximumForce = Mathf.Infinity;
-        return drive;
-    }
-
-    private void DrawRope()
-    {
-        if (jointTrans == null)
+        return new JointDrive
         {
-            return;
-        }
+            mode = JointDriveMode.Position,
+            positionSpring = force,
+            positionDamper = damping,
+            maximumForce = Mathf.Infinity
+        };
     }
 
     private void HandleRotation()
     {
         if (jointTrans == null)
             return;
-
-        float scrollInput = Input.GetAxis("Mouse ScrollWheel");
-        if (scrollInput != 0)
-        {
-            jointTrans.Rotate(Vector3.up, scrollInput * rotationSpeed);
-        }
 
         if (Input.GetKey(KeyCode.Q))
         {
@@ -121,6 +121,28 @@ public class DragRigidbody : MonoBehaviour
         if (Input.GetKey(KeyCode.E))
         {
             jointTrans.Rotate(Vector3.up, rotationSpeed * Time.deltaTime);
+        }
+    }
+
+    private void ApplyOutline(GameObject obj, bool enable)
+    {
+        if (obj == null) return;
+
+        OutlineScript outline = obj.GetComponent<OutlineScript>();
+        if (enable)
+        {
+            if (!outline)
+            {
+                outline = obj.AddComponent<OutlineScript>();
+            }
+            outline.enabled = true;
+        }
+        else
+        {
+            if (outline)
+            {
+                outline.enabled = false;
+            }
         }
     }
 }

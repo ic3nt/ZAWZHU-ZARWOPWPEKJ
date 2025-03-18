@@ -943,6 +943,9 @@ MonoBehaviour:
   force: 1000
   damping: 100
   distance: 10
+  minDistance: 1
+  maxDistance: 10
+  distanceStep: 0.5
   rotationSpeed: 100
 --- !u!54 &191538381
 Rigidbody:
@@ -1448,7 +1451,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4278255608
-  m_fontColor: {r: 0.972549, g: 1, b: 0, a: 1}
+  m_fontColor: {r: 0.972549, g: 1, b: 0, a: 0}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -10380,8 +10383,10 @@ GameObject:
   - component: {fileID: 1681381135}
   - component: {fileID: 1681381134}
   - component: {fileID: 1681381139}
+  - component: {fileID: 1681381142}
   - component: {fileID: 1681381140}
   - component: {fileID: 1681381141}
+  - component: {fileID: 1681381143}
   m_Layer: 9
   m_Name: Cube (2)
   m_TagString: canPickUp
@@ -10517,6 +10522,9 @@ MonoBehaviour:
   force: 1000
   damping: 100
   distance: 3
+  minDistance: 1
+  maxDistance: 5
+  distanceStep: 3
   rotationSpeed: 150
 --- !u!114 &1681381140
 MonoBehaviour:
@@ -10567,6 +10575,39 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &1681381142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1681381133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 2294683403
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!114 &1681381143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1681381133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6c0be61502bb534f922ebb746851216, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1727831920
 GameObject:
   m_ObjectHideFlags: 0
@@ -11294,6 +11335,63 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1813033185
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 274569623656201373, guid: dcb6bf050057c4fbf833ae26d6bafbbc, type: 3}
+      propertyPath: m_Name
+      value: ToyRobot
+      objectReference: {fileID: 0}
+    - target: {fileID: 5620401314896923603, guid: dcb6bf050057c4fbf833ae26d6bafbbc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 8.707106
+      objectReference: {fileID: 0}
+    - target: {fileID: 5620401314896923603, guid: dcb6bf050057c4fbf833ae26d6bafbbc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.612
+      objectReference: {fileID: 0}
+    - target: {fileID: 5620401314896923603, guid: dcb6bf050057c4fbf833ae26d6bafbbc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 4.7648706
+      objectReference: {fileID: 0}
+    - target: {fileID: 5620401314896923603, guid: dcb6bf050057c4fbf833ae26d6bafbbc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5620401314896923603, guid: dcb6bf050057c4fbf833ae26d6bafbbc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5620401314896923603, guid: dcb6bf050057c4fbf833ae26d6bafbbc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5620401314896923603, guid: dcb6bf050057c4fbf833ae26d6bafbbc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5620401314896923603, guid: dcb6bf050057c4fbf833ae26d6bafbbc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5620401314896923603, guid: dcb6bf050057c4fbf833ae26d6bafbbc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5620401314896923603, guid: dcb6bf050057c4fbf833ae26d6bafbbc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: dcb6bf050057c4fbf833ae26d6bafbbc, type: 3}
 --- !u!1 &1829937374
 GameObject:
   m_ObjectHideFlags: 0
@@ -11884,6 +11982,9 @@ MonoBehaviour:
   force: 1000
   damping: 100
   distance: 10
+  minDistance: 1
+  maxDistance: 10
+  distanceStep: 0.5
   rotationSpeed: 150
 --- !u!54 &1933854354
 Rigidbody:
@@ -12747,7 +12848,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4278255608
-  m_fontColor: {r: 0.972549, g: 1, b: 0, a: 1}
+  m_fontColor: {r: 0.972549, g: 1, b: 0, a: 0}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -35387,3 +35488,4 @@ SceneRoots:
   - {fileID: 1681381138}
   - {fileID: 937028846}
   - {fileID: 453849479}
+  - {fileID: 1813033185}

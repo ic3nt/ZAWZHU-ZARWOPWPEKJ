@@ -11010,17 +11010,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 414c89690d97e554b9bba378f0b7e074, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCamera: {fileID: 8004034715669064260}
   interactiveLayer:
     serializedVersion: 2
     m_Bits: 512
+  monsterLayer:
+    serializedVersion: 2
+    m_Bits: 256
   obstacleLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 129
   boundingBoxPrefab: {fileID: 4449640973450854898, guid: 8159a17695dc27e4f8f25011096e4b9d, type: 3}
   playerCanvas: {fileID: 3008223755684936308}
   showDuration: 5
   highlightSound: {fileID: 8300000, guid: 1f755ec9860855b42ab3a59c43f409c4, type: 3}
+  monsterHighlightSound: {fileID: 8300000, guid: 20c59a2bba895f843946fc361a88eaed, type: 3}
+  interactiveColor: {r: 0.972549, g: 1, b: 0, a: 1}
+  monsterColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &4341190546390473430
 GameObject:
   m_ObjectHideFlags: 0

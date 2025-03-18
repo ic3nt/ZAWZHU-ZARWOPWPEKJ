@@ -2,83 +2,66 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
-using Unity.Burst.CompilerServices;
 
 public class OutlineRender : NetworkBehaviour
 {
     public float rayDistance = 3f;
- 
-    public bool IsObjSaw;
-
-    void Start()
-    {
-        IsObjSaw = PlayerPrefs.GetInt("IsObjSaw") != 0;
-    }
+    private GameObject currentObject;
 
     void Update()
     {
         Ray ray = new Ray(transform.position, transform.forward);
         RaycastHit hit;
 
-        // проверяем, попадает ли луч в объект
         if (Physics.Raycast(ray, out hit, rayDistance))
         {
-            // проверяем тег объекта
-            if (hit.collider.CompareTag("canPickUp"))
+            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Interactive"))
             {
-                // если объект с тегом canPickUp, включаем обводку
-                OutlineScript outline = hit.collider.gameObject.GetComponent<OutlineScript>();
-                if (outline != null)
+                if (hit.collider.gameObject != DragRigidbody.grabbedObject)
                 {
-
-                    outline.enabled = true;
-
-                    if (IsObjSaw == false)
-                    {
-                        Debug.Log("Is Object Saw");
-                        PlayerPrefs.SetInt("IsObjSaw", (IsObjSaw ? 0 : 1));
-                        IsObjSaw = true;
-                    }
+                    ApplyOutline(hit.collider.gameObject, true);
+                    currentObject = hit.collider.gameObject;
                 }
             }
             else
             {
-                // если объект не с тегом canPickUp, отключаем обводку
-                OutlineScript outline = hit.collider.gameObject.GetComponent<OutlineScript>();
-                if (outline != null)
-                {
-                    outline.enabled = false;
-                }
+                RemoveOutline(currentObject);
             }
         }
         else
         {
-            // вот тута вот вызываем метод отключения обводки
-
-            DisableOutlines();
+            RemoveOutline(currentObject);
         }
 
-      
-        
+        if (DragRigidbody.grabbedObject != null)
+        {
+            ApplyOutline(DragRigidbody.grabbedObject, true);
+        }
     }
 
-    private void DisableOutlines()
+    private void ApplyOutline(GameObject obj, bool enable)
     {
-        // метод отключения обводки
+        if (obj == null) return;
 
-        OutlineScript[] outlines = FindObjectsOfType<OutlineScript>();
-        foreach (OutlineScript outline in outlines)
+        OutlineScript outline = obj.GetComponent<OutlineScript>();
+        if (enable)
+        {
+            if (!outline)
+            {
+                outline = obj.AddComponent<OutlineScript>();
+            }
+            outline.enabled = true;
+        }
+    }
+
+    private void RemoveOutline(GameObject obj)
+    {
+        if (obj == null) return;
+
+        OutlineScript outline = obj.GetComponent<OutlineScript>();
+        if (outline && obj != DragRigidbody.grabbedObject)
         {
             outline.enabled = false;
         }
     }
-
-
-  
-
-   
-
-    
-   
-
 }

@@ -72,8 +72,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5620401314896923603}
   - component: {fileID: 5015365634892424002}
-  - component: {fileID: 6832098824977971956}
   - component: {fileID: 8782536875464480332}
+  - component: {fileID: 6832098824977971956}
   - component: {fileID: 3614165001876365204}
   - component: {fileID: 381189309685131871}
   - component: {fileID: 6727265869472434813}
@@ -126,22 +126,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &6832098824977971956
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 274569623656201373}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d63ebb0f99a0469b96d7baaa1bf88a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  aud1: {fileID: 7019416438302873491}
-  aud2: {fileID: 169808435147466385}
-  aud3: {fileID: 6727265869472434813}
-  dmg: {fileID: 6045522001286116994}
 --- !u!136 &8782536875464480332
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -165,6 +149,22 @@ CapsuleCollider:
   m_Height: 2.845198
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 1.3422107, z: -0.00000011920929}
+--- !u!114 &6832098824977971956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 274569623656201373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d63ebb0f99a0469b96d7baaa1bf88a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aud1: {fileID: 7019416438302873491}
+  aud2: {fileID: 169808435147466385}
+  aud3: {fileID: 6727265869472434813}
+  dmg: {fileID: 6045522001286116994}
 --- !u!95 &3614165001876365204
 Animator:
   serializedVersion: 5
@@ -937,7 +937,7 @@ GameObject:
   - component: {fileID: 9221130063165600880}
   - component: {fileID: 304352463289765945}
   - component: {fileID: 6045522001286116994}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HitColl
   m_TagString: Untagged
   m_Icon: {fileID: 0}
