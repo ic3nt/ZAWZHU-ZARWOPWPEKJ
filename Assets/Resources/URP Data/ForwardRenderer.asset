@@ -31,7 +31,8 @@ MonoBehaviour:
   m_RendererFeatures:
   - {fileID: 3291175150166513613}
   - {fileID: -8477138897372753431}
-  m_RendererFeatureMap: cd9744975c9aac2de951732e16275b8a
+  - {fileID: 0}
+  m_RendererFeatureMap: cd9744975c9aac2de951732e16275b8ab0e0245849370d30
   m_UseNativeRenderPass: 0
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
@@ -86,10 +87,26 @@ MonoBehaviour:
   injectionPoint: 600
   fetchColorBuffer: 1
   requirements: 0
-  passMaterial: {fileID: 2100000, guid: 41a5774954b5cc748934ceb1fabb660e, type: 2}
+  passMaterial: {fileID: -876546973899608171, guid: 89f7e41bff1404b73af4b88041564d91, type: 3}
   passIndex: 0
   bindDepthStencilAttachment: 0
   m_Version: 1
+--- !u!114 &3462484476668731568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1206989c941d5014fb7870da318f8273, type: 3}
+  m_Name: PixelizeFeature
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  settings:
+    renderPassEvent: 550
+    screenHeight: 1000
 --- !u!114 &4177205894734865881
 MonoBehaviour:
   m_ObjectHideFlags: 0
