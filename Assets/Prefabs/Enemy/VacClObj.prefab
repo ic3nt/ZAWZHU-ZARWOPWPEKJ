@@ -1045,6 +1045,7 @@ GameObject:
   - component: {fileID: 8302672575362585566}
   - component: {fileID: 7275503977291142311}
   - component: {fileID: 5460309572854678437}
+  - component: {fileID: 8157809103995262722}
   m_Layer: 0
   m_Name: HitColl
   m_TagString: Untagged
@@ -1200,6 +1201,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8157809103995262722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8044652345952512516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03f876808ab059b45981c640453cae22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitboxType: 2
 --- !u!1 &8367805216888932479
 GameObject:
   m_ObjectHideFlags: 0
@@ -1341,7 +1355,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7fb6a35f9a78470d82e7cf0ee2d3cb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ch: {fileID: 0}
+  chunkManager: {fileID: 0}
   VacuumCl: {fileID: 0}
   ChanceOfStaying: 0
 --- !u!1 &8960177451371397051

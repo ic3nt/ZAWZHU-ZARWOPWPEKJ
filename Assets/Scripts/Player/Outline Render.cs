@@ -48,7 +48,7 @@ public class OutlineRender : NetworkBehaviour
         {
             if (!outline)
             {
-                outline = obj.AddComponent<OutlineScript>();
+            //    outline = obj.AddComponent<OutlineScript>();
             }
             outline.enabled = true;
         }

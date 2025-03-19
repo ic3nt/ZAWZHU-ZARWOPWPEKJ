@@ -68,6 +68,8 @@ public class ObjectDetectorUI : MonoBehaviour
 
         bool isMonster = ((1 << col.gameObject.layer) & monsterLayer.value) != 0;
         GameObject newBox = Instantiate(boundingBoxPrefab, playerCanvas);
+        newBox.name = $"Bounding Box UI [{col.gameObject.name}]";
+
         RectTransform box = newBox.GetComponent<RectTransform>();
 
         activeBoxes[col] = box;

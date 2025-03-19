@@ -52,7 +52,7 @@ public class DoorSt : NetworkBehaviour
             Debug.Log("UnlockDoorServerRpc вызван");
             IsLocked = false;
             UpdateDoorAppearance();
-            ShakeSprite();
+            AnimateSprite();
             audioSource?.Play();
             UpdateClientsClientRpc();
             Debug.Log("Дверь разблокирована");
@@ -67,7 +67,7 @@ public class DoorSt : NetworkBehaviour
     private void UpdateClientsClientRpc()
     {
         UpdateDoorAppearance();
-        ShakeSprite();
+        AnimateSprite();
     }
 
     private void UpdateDoorAppearance()
@@ -87,8 +87,12 @@ public class DoorSt : NetworkBehaviour
         stateSpriteRenderer.sprite = IsLocked ? lockedSprite : unlockedSprite;
     }
 
-    private void ShakeSprite()
+    private void AnimateSprite()
     {
-        stateSpriteRenderer.transform.DOShakePosition(0.5f, 0.1f, 10, 90, false, true);
+        Vector3 initialScale = stateSpriteRenderer.transform.localScale;
+
+        stateSpriteRenderer.transform.DOScale(initialScale * 1.2f, 0.2f)
+            .SetLoops(2, LoopType.Yoyo)
+            .OnComplete(() => stateSpriteRenderer.transform.localScale = initialScale);
     }
 }

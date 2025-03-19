@@ -49,7 +49,6 @@ public class PauseManager : MonoBehaviour
         HealthWindow.SetActive(false);
         TextTimer.SetActive(false);
         IsPauseActive = true;
-        this.GetComponent<MouseLook>().enabled = false;
         Cursor.lockState = CursorLockMode.None;
     }
 
@@ -64,7 +63,6 @@ public class PauseManager : MonoBehaviour
         HealthWindow.SetActive(true);
         TextTimer.SetActive(true);
         IsPauseActive = false;
-        this.GetComponent<MouseLook>().enabled = true;
         Cursor.lockState = CursorLockMode.Locked;
     }
 

@@ -6,19 +6,19 @@ using UnityEditor;
 
 public class HitboxVisualizer : MonoBehaviour
 {
-    public enum HitboxType { Wall, Trigger, DeathZone, Player }
+    public enum HitboxType { Wall, Trigger, Hurt, Player }
     public HitboxType hitboxType = HitboxType.Wall;
 
     private Color GetColor()
     {
-        switch (hitboxType)
+        return hitboxType switch
         {
-            case HitboxType.Wall: return Color.green;
-            case HitboxType.Trigger: return Color.blue;
-            case HitboxType.DeathZone: return Color.red;
-            case HitboxType.Player: return Color.yellow;
-            default: return Color.white;
-        }
+            HitboxType.Wall => new Color(0, 1, 0, 0.3f),      // Зелёный
+            HitboxType.Trigger => new Color(0, 0, 1, 0.2f),   // Глубокий синий (более полупрозрачный)
+            HitboxType.Hurt => new Color(1, 0, 0, 0.3f),      // Красный (чуть менее прозрачный)
+            HitboxType.Player => new Color(1, 1, 0, 0.3f),    // Жёлтый
+            _ => Color.white,
+        };
     }
 
     private void OnDrawGizmos()
@@ -26,20 +26,57 @@ public class HitboxVisualizer : MonoBehaviour
         Gizmos.color = GetColor();
         Gizmos.matrix = transform.localToWorldMatrix;
 
-        Collider collider = GetComponent<Collider>();
-        if (collider is BoxCollider box)
+        if (TryGetComponent(out Collider collider))
         {
-            Gizmos.DrawWireCube(box.center, box.size);
-        }
-        else if (collider is SphereCollider sphere)
-        {
-            Gizmos.DrawWireSphere(sphere.center, sphere.radius);
-        }
-        else if (collider is CapsuleCollider capsule)
-        {
-            Gizmos.DrawWireSphere(capsule.center, capsule.radius);
+            if (collider is BoxCollider box) DrawBox(box);
+            else if (collider is SphereCollider sphere) DrawSphere(sphere);
+            else if (collider is CapsuleCollider capsule) DrawCapsule(capsule);
         }
     }
+
+    private void DrawBox(BoxCollider box)
+    {
+        DrawSolidAndWire(box.center, box.size);
+
+#if UNITY_EDITOR
+        DrawStripesIfNeeded(box.center, box.size);
+#endif
+    }
+
+    private void DrawSphere(SphereCollider sphere)
+    {
+        DrawSolidAndWire(sphere.center, Vector3.one * sphere.radius * 2);
+    }
+
+    private void DrawCapsule(CapsuleCollider capsule)
+    {
+        DrawSolidAndWire(capsule.center, Vector3.one * capsule.radius * 2);
+    }
+
+    private void DrawSolidAndWire(Vector3 center, Vector3 size)
+    {
+        Gizmos.DrawCube(center, size);
+        Gizmos.color = GetColor() * 1.5f;
+        Gizmos.DrawWireCube(center, size);
+    }
+
+#if UNITY_EDITOR
+    private void DrawStripesIfNeeded(Vector3 center, Vector3 size)
+    {
+        if (hitboxType != HitboxType.Hurt && hitboxType != HitboxType.Trigger) return;
+
+        Color stripeColor = hitboxType == HitboxType.Hurt ? new Color(1, 0, 0, 0.8f) : new Color(0, 0, 1, 0.8f);
+        Handles.color = stripeColor;
+
+        float step = 0.2f;
+        for (float x = -size.x / 2; x < size.x / 2; x += step)
+        {
+            Vector3 start = center + new Vector3(x, -size.y / 2, 0);
+            Vector3 end = center + new Vector3(x + size.y, size.y / 2, 0);
+            Handles.DrawAAPolyLine(3, start, end);
+        }
+    }
+#endif
 }
 
 #if UNITY_EDITOR
@@ -49,13 +86,9 @@ public class HitboxVisualizerEditor : Editor
     public override void OnInspectorGUI()
     {
         HitboxVisualizer script = (HitboxVisualizer)target;
-
         script.hitboxType = (HitboxVisualizer.HitboxType)EditorGUILayout.EnumPopup("Hitbox Type", script.hitboxType);
 
-        if (GUI.changed)
-        {
-            EditorUtility.SetDirty(script);
-        }
+        if (GUI.changed) EditorUtility.SetDirty(script);
     }
 }
 #endif

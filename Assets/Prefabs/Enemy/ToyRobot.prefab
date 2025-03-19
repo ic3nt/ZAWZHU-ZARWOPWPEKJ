@@ -937,6 +937,7 @@ GameObject:
   - component: {fileID: 9221130063165600880}
   - component: {fileID: 304352463289765945}
   - component: {fileID: 6045522001286116994}
+  - component: {fileID: 8062451597849508488}
   m_Layer: 0
   m_Name: HitColl
   m_TagString: Untagged
@@ -995,6 +996,19 @@ MonoBehaviour:
   damageEn: 10
   cooldownTime: 0.3
   HitColl: {fileID: 304352463289765945}
+--- !u!114 &8062451597849508488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6427180892929180140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03f876808ab059b45981c640453cae22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitboxType: 2
 --- !u!1 &6674226190034247444
 GameObject:
   m_ObjectHideFlags: 0
