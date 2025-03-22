@@ -10,13 +10,13 @@ GameObject:
   m_Component:
   - component: {fileID: 7154040966238449516}
   - component: {fileID: 6995447989479227429}
-  - component: {fileID: 7991041793280119373}
   - component: {fileID: 5624368129212488429}
   - component: {fileID: 8004034715669064260}
   - component: {fileID: 7487998224082578652}
   - component: {fileID: 5180170901061033999}
   - component: {fileID: 6917495368009645262}
   - component: {fileID: 1161205722216859319}
+  - component: {fileID: 1526173846901625913}
   m_Layer: 0
   m_Name: FirstPersonCamera
   m_TagString: MainCamera
@@ -72,29 +72,6 @@ MonoBehaviour:
   zoomSpeed: 1
   sensitivity: 2
   smoothing: 1.5
---- !u!114 &7991041793280119373
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 49894168643017583}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e5a6aa5758be4e6ebee77545f2ddc56, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactionDistance: 1.5
-  intText: {fileID: 6898805767440156147}
-  doorOpenAnimName: DoorOpen
-  doorCloseAnimName: DoorClose
-  doorOpen: {fileID: 8300000, guid: 213d8ed48108b4c0a8b20a40f756f08d, type: 3}
-  doorClose: {fileID: 8300000, guid: dd5f54f3e55274e259584316ac0768c9, type: 3}
-  fill: 0
-  progressBar: {fileID: 4554316959959565476}
-  Bar: {fileID: 521991492321760058}
-  canOpen: 1
-  LockText: {fileID: 4591889126049679010}
 --- !u!114 &5624368129212488429
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -257,6 +234,29 @@ MonoBehaviour:
   terrainScannerPrefab: {fileID: 5829387580687154407, guid: 1aba4cc33ae3bdd4c9a9ca7c665cf5e5, type: 3}
   duration: 10
   size: 500
+--- !u!114 &1526173846901625913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 49894168643017583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89cb1784d1741c34f8c3e8a3f748f51f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionDistance: 5
+  intText: {fileID: 0}
+  doorOpenAnimName: 
+  doorCloseAnimName: 
+  doorOpen: {fileID: 0}
+  doorClose: {fileID: 0}
+  fill: 0
+  progressBar: {fileID: 0}
+  Bar: {fileID: 0}
+  canOpen: 1
+  LockText: {fileID: 0}
 --- !u!1 &67322977848972581
 GameObject:
   m_ObjectHideFlags: 0

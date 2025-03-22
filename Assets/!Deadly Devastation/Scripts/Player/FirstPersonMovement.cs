@@ -1,5 +1,8 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Globalization;
+using UnityEngine;
 using Unity.Netcode;
+using System.Collections;
 
 public class FirstPersonMovement : NetworkBehaviour
 {
@@ -16,38 +19,83 @@ public class FirstPersonMovement : NetworkBehaviour
 
     private bool wasRunning = false;
 
+    public List<System.Func<float>> speedOverrides = new List<System.Func<float>>();
+
     private void Start()
     {
         if (!IsOwner) return;
-
         rigidbody = GetComponent<Rigidbody>();
     }
 
-    private void FixedUpdate()
+    private void Update()
+    {
+        if (!IsOwner) return;
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+
+        {
+            animator.SetBool("IsDanceOne", false);
+
+            animator.SetBool("IsWalk", true);
+            animator.SetBool("IsRun", false);
+            animator.SetBool("IsIdle", false);
+
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                animator.SetBool("IsRun", true);
+                animator.SetBool("IsWalk", false);
+                animator.SetBool("IsIdle", false);
+            }
+        }
+        if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D))
+        {
+            animator.SetBool("IsIdle", true);
+            animator.SetBool("IsRun", false);
+            animator.SetBool("IsWalk", false);
+            if (Input.GetKey(KeyCode.Alpha1))
+            {
+                animator.SetBool("IsDanceOne", true);
+            }
+        }
+
+        if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.RightArrow))
+        {
+            animator.SetBool("IsWalk", true);
+            animator.SetBool("IsRun", false);
+            animator.SetBool("IsIdle", false);
+
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                animator.SetBool("IsRun", true);
+                animator.SetBool("IsWalk", false);
+                animator.SetBool("IsIdle", false);
+            }
+        }
+    }
+    void Awake()
+    {
+        rigidbody = GetComponent<Rigidbody>();
+    }
+
+    void FixedUpdate()
     {
         if (!IsOwner) return;
 
         IsRunning = canRun && Input.GetKey(runningKey);
 
-        // Если только что начали или резко прекратили бег - включаем shake
         if (IsRunning && !wasRunning || !IsRunning && wasRunning)
         {
             wasRunning = IsRunning;
         }
 
         float targetMovingSpeed = IsRunning ? runSpeed : speed;
+        if (speedOverrides.Count > 0)
+        {
+            targetMovingSpeed = speedOverrides[speedOverrides.Count - 1]();
+        }
 
         Vector2 targetVelocity = new Vector2(Input.GetAxis("Horizontal") * targetMovingSpeed, Input.GetAxis("Vertical") * targetMovingSpeed);
+
         rigidbody.velocity = transform.rotation * new Vector3(targetVelocity.x, rigidbody.velocity.y, targetVelocity.y);
-    }
 
-    void HandleAnimations()
-    {
-        bool moving = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D);
-        bool running = Input.GetKey(runningKey);
-
-        animator.SetBool("IsWalk", moving && !running);
-        animator.SetBool("IsRun", moving && running);
-        animator.SetBool("IsIdle", !moving);
     }
 }
