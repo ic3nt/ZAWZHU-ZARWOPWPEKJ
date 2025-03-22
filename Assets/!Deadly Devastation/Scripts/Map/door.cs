@@ -1,186 +1,98 @@
 using System.Collections;
-using Unity.Netcode;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using Unity.Netcode;
 using DG.Tweening;
-
-public enum DoorState { Opened, Closed }
 
 public class Door : NetworkBehaviour
 {
-    public float interactionDistance;
-    public GameObject intText;
-    public string doorOpenAnimName, doorCloseAnimName;
-    public AudioClip doorOpen, doorClose;
-    public float fill = 0f;
-    float maxFill = 100f;
-    public Image progressBar;
-    public GameObject Bar;
-    public bool canOpen = true;
-    public GameObject LockText;
+    public AudioSource audioSource;
 
-    private Animator an;
-    private AudioSource doorSound;
+    public bool IsLocked;
 
-    private NetworkVariable<DoorState> doorState = new NetworkVariable<DoorState>(DoorState.Closed);
+    [Range(0, 1)]
+    public float ChanceOfLock = 0.5f;
 
-    private void Awake()
+    public Renderer doorControllerRenderer;
+    public Material lockedMaterial;
+    public Material unlockedMaterial;
+
+    public SpriteRenderer stateSpriteRenderer;
+    public Sprite lockedSprite;
+    public Sprite unlockedSprite;
+
+    public override void OnNetworkSpawn()
     {
-        fill = progressBar.fillAmount;
-    }
-
-    public IEnumerator WaitSec()
-    {
-        yield return new WaitForSeconds(1);
-        canOpen = true;
-    }
-
-    void Update()
-    {
-        Ray ray = new Ray(transform.position, transform.forward);
-        RaycastHit hit;
-
-        if (fill < 0)
+        if (IsOwner)
         {
-            fill = 0;
+            IsLocked = Random.value > ChanceOfLock;
+            UpdateDoorAppearance();
         }
+    }
 
-        if (Physics.Raycast(ray, out hit, interactionDistance))
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Key") && IsLocked)
         {
-            if (hit.collider.CompareTag("Door"))
+            if (other.TryGetComponent<Key>(out var key))
             {
-                if (hit.collider.TryGetComponent<DoorSt>(out var ds) && !ds.IsLocked)
-                {
-                    an = hit.collider.transform.GetComponent<Animator>();
-                    doorSound = hit.collider.gameObject.GetComponent<AudioSource>();
-                    ShowUI(intText);
+                Destroy(key.KeyObject);
+                Debug.Log("Ключ использован для разблокировки двери");
 
-                    if (Input.GetKey(KeyCode.E) && fill < maxFill && canOpen)
-                    {
-                        fill += Time.deltaTime * 60f;
-                        progressBar.fillAmount = fill / maxFill;
-                    }
-                    else
-                    {
-                        fill -= Time.deltaTime * 60f;
-                        progressBar.fillAmount = fill / maxFill;
-                    }
-
-                    if (fill >= maxFill)
-                    {
-                        canOpen = false;
-                        StartCoroutine(WaitSec());
-
-                        if (an.GetCurrentAnimatorStateInfo(0).IsName(doorOpenAnimName))
-                        {
-                            CloseDoorServerRpc();
-                        }
-                        else if (an.GetCurrentAnimatorStateInfo(0).IsName(doorCloseAnimName))
-                        {
-                            OpenDoorServerRpc();
-                        }
-
-                        fill = 0;
-                        progressBar.fillAmount = fill;
-                    }
-                }
-                else
-                {
-                    ShowUI(LockText);
-                    HideUI(intText);
-                    fill = 0;
-                    progressBar.fillAmount = fill;
-                }
+                UnlockDoorServerRpc();
             }
-            else
-            {
-                HideUI(intText);
-                HideUI(LockText);
-                fill = 0;
-                progressBar.fillAmount = fill;
-            }
+        }
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void UnlockDoorServerRpc()
+    {
+        if (IsLocked)
+        {
+            Debug.Log("UnlockDoorServerRpc вызван");
+            IsLocked = false;
+            UpdateDoorAppearance();
+            AnimateSprite();
+            audioSource?.Play();
+            UpdateClientsClientRpc();
+            Debug.Log("Дверь разблокирована");
         }
         else
         {
-            HideUI(intText);
-            HideUI(LockText);
-            fill = 0;
-            progressBar.fillAmount = fill;
+            Debug.Log("Дверь уже разблокирована. RPC не будет выполнен.");
         }
     }
 
-    [ServerRpc(RequireOwnership = false)]
-    public void OpenDoorServerRpc()
+    [ClientRpc]
+    private void UpdateClientsClientRpc()
     {
-        OpenDoor();
-        NotifyDoorStateChange(DoorState.Opened);
+        UpdateDoorAppearance();
+        AnimateSprite();
     }
 
-    [ServerRpc(RequireOwnership = false)]
-    public void CloseDoorServerRpc()
+    private void UpdateDoorAppearance()
     {
-        CloseDoor();
-        NotifyDoorStateChange(DoorState.Closed);
-    }
+        Material[] materials = doorControllerRenderer.materials;
 
-    private void OpenDoor()
-    {
-        doorSound.clip = doorOpen;
-        doorSound.Play();
-        an.ResetTrigger("Close");
-        an.SetTrigger("Open");
-        doorState.Value = DoorState.Opened;
-    }
-
-    private void CloseDoor()
-    {
-        doorSound.clip = doorClose;
-        doorSound.Play();
-        an.ResetTrigger("Open");
-        an.SetTrigger("Close");
-        doorState.Value = DoorState.Closed;
-    }
-
-    private void NotifyDoorStateChange(DoorState newState)
-    {
-        doorState.Value = newState;
-    }
-
-    private void ShowUI(GameObject uiElement)
-    {
-        if (!uiElement.activeSelf)
+        if (materials.Length > 1)
         {
-            ShakeUI(intText);
-            uiElement.SetActive(true);
-            uiElement.transform.DOKill();
-            uiElement.transform.localScale = Vector3.one * 0.8f;
-            uiElement.transform.DOScale(Vector3.one, 0.3f).SetEase(Ease.OutBack);
+            materials[1] = IsLocked ? lockedMaterial : unlockedMaterial;
+            doorControllerRenderer.materials = materials;
         }
-    }
-
-    private void HideUI(GameObject uiElement)
-    {
-        if (uiElement.activeSelf)
+        else
         {
-            ShakeUI(intText);
-            uiElement.transform.DOKill();
-            uiElement.transform.DOScale(Vector3.one * 0.0f, 0.3f).SetEase(Ease.OutBack)
-                .OnComplete(() =>
-                {
-                    uiElement.transform.DOScale(Vector3.zero, 0.1f).SetEase(Ease.InBack)
-                        .OnComplete(() => uiElement.SetActive(false));
-                });
+            Debug.LogWarning("У объекта DoorRenderer установлено недостаточно материалов!");
         }
+
+        stateSpriteRenderer.sprite = IsLocked ? lockedSprite : unlockedSprite;
     }
 
-    private void ShakeUI(GameObject uiElement)
+    private void AnimateSprite()
     {
-        if (uiElement.activeSelf)
-        {
-            uiElement.transform.DOKill();
-            RectTransform rectTransform = uiElement.GetComponent<RectTransform>();
-            rectTransform.DOShakeAnchorPos(0.3f, 5f, 20, 90, false, true);
-        }
-    }
+        Vector3 initialScale = stateSpriteRenderer.transform.localScale;
 
+        stateSpriteRenderer.transform.DOScale(initialScale * 1.2f, 0.2f)
+            .SetLoops(2, LoopType.Yoyo)
+            .OnComplete(() => stateSpriteRenderer.transform.localScale = initialScale);
+    }
 }

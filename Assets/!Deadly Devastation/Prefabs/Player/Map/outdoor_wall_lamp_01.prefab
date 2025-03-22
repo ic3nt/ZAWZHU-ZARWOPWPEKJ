@@ -92,7 +92,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6916511519070211199}
-  - component: {fileID: 5644181661049525167}
   m_Layer: 0
   m_Name: outdoor_wall_lamp_01
   m_TagString: Untagged
@@ -118,19 +117,6 @@ Transform:
   - {fileID: 6298196823370761424}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5644181661049525167
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5317722388373624681}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c336f192c18c423f8c636e0de00970d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ChanceOfStaying: 0.7
 --- !u!1 &7925845795422080237
 GameObject:
   m_ObjectHideFlags: 0
