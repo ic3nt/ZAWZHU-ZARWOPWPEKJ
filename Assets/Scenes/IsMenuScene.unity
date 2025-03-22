@@ -10494,7 +10494,6 @@ GameObject:
   - component: {fileID: 498434105}
   - component: {fileID: 498434104}
   - component: {fileID: 498434108}
-  - component: {fileID: 498434110}
   - component: {fileID: 498434107}
   m_Layer: 0
   m_Name: '[MAIN CAMERA]'
@@ -10598,7 +10597,7 @@ MonoBehaviour:
   m_VolumeLayerMask:
     serializedVersion: 2
     m_Bits: 1
-  m_VolumeTrigger: {fileID: 242420760}
+  m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 0
   m_RenderPostProcessing: 1
   m_Antialiasing: 0
@@ -10642,40 +10641,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &498434110
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 498434103}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ShowDebugText: 0
-  m_ShowCameraFrustum: 1
-  m_IgnoreTimeScale: 0
-  m_WorldUpOverride: {fileID: 0}
-  m_UpdateMethod: 2
-  m_BlendUpdateMethod: 1
-  m_DefaultBlend:
-    m_Style: 1
-    m_Time: 2
-    m_CustomCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-  m_CustomBlends: {fileID: 0}
-  m_CameraCutEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_CameraActivatedEvent:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &513857132
 GameObject:
   m_ObjectHideFlags: 0
@@ -18354,7 +18319,7 @@ PlayableDirector:
   m_InitialTime: 0
   m_SceneBindings:
   - key: {fileID: 3698140626803983588, guid: c082304cfadfa450f9a70353d5a7d847, type: 2}
-    value: {fileID: 498434110}
+    value: {fileID: 0}
   - key: {fileID: -8244622393006361720, guid: c082304cfadfa450f9a70353d5a7d847, type: 2}
     value: {fileID: 498434108}
   - key: {fileID: 6250663626922032459, guid: c082304cfadfa450f9a70353d5a7d847, type: 2}
@@ -29624,7 +29589,7 @@ PlayableDirector:
   m_InitialTime: 0
   m_SceneBindings:
   - key: {fileID: 3698140626803983588, guid: c082304cfadfa450f9a70353d5a7d847, type: 2}
-    value: {fileID: 498434110}
+    value: {fileID: 0}
   - key: {fileID: 0}
     value: {fileID: 7058559230009732337}
   - key: {fileID: 0}
