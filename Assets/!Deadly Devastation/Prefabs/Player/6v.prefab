@@ -61,13 +61,13 @@ MonoBehaviour:
   cameraHolder: {fileID: 7850416220995802057}
   character: {fileID: 5193859935782295756}
   Head: {fileID: 8019915723301141008}
-  walkBobSpeed: 8
+  walkBobSpeed: 10
   walkBobAmount: 0.1
   runBobSpeed: 12
   runBobAmount: 0.2
   tiltAngle: 3
   tiltSpeed: 5
-  shakeIntensity: 0.05
+  shakeIntensity: 0.07
   shakeDuration: 0.2
   zoomSpeed: 1
   sensitivity: 2
@@ -246,17 +246,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89cb1784d1741c34f8c3e8a3f748f51f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionDistance: 5
-  intText: {fileID: 0}
-  doorOpenAnimName: 
-  doorCloseAnimName: 
-  doorOpen: {fileID: 0}
-  doorClose: {fileID: 0}
+  interactionDistance: 1.5
+  intText: {fileID: 6898805767440156147}
+  doorOpenAnimName: DoorOpen
+  doorCloseAnimName: DoorClose
+  doorOpen: {fileID: 8300000, guid: 213d8ed48108b4c0a8b20a40f756f08d, type: 3}
+  doorClose: {fileID: 8300000, guid: dd5f54f3e55274e259584316ac0768c9, type: 3}
   fill: 0
-  progressBar: {fileID: 0}
-  Bar: {fileID: 0}
+  progressBar: {fileID: 4554316959959565476}
+  Bar: {fileID: 521991492321760058}
   canOpen: 1
-  LockText: {fileID: 0}
+  LockText: {fileID: 4591889126049679010}
 --- !u!1 &67322977848972581
 GameObject:
   m_ObjectHideFlags: 0
@@ -10437,6 +10437,17 @@ MonoBehaviour:
   canRun: 1
   runSpeed: 7
   runningKey: 304
+  walkBobSpeed: 8
+  walkBobAmount: 0.05
+  runBobSpeed: 12
+  runBobAmount: 0.1
+  tiltAngle: 5
+  tiltSpeed: 5
+  shakeIntensity: 0.05
+  shakeDuration: 0.2
+  zoomSpeed: 1
+  cameraHolder: {fileID: 7850416220995802057}
+  playerCamera: {fileID: 8004034715669064260}
 --- !u!114 &356079694662189859
 MonoBehaviour:
   m_ObjectHideFlags: 0
