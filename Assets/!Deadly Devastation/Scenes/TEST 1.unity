@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0012073659, g: 0.0013261206, b: 0.0012073659, a: 1}
+  m_IndirectSpecularColor: {r: 0.00011324721, g: 0.00012438979, b: 0.00011324721, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -10578,6 +10578,63 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   KeyObject: {fileID: 1681381133}
+--- !u!1001 &1715650060
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5317722388373624681, guid: 1fcb3f221881d4d91998911abb8863c6, type: 3}
+      propertyPath: m_Name
+      value: outdoor_wall_lamp_01 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916511519070211199, guid: 1fcb3f221881d4d91998911abb8863c6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.327
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916511519070211199, guid: 1fcb3f221881d4d91998911abb8863c6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.9704075
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916511519070211199, guid: 1fcb3f221881d4d91998911abb8863c6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 8.479425
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916511519070211199, guid: 1fcb3f221881d4d91998911abb8863c6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916511519070211199, guid: 1fcb3f221881d4d91998911abb8863c6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916511519070211199, guid: 1fcb3f221881d4d91998911abb8863c6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.70710677
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916511519070211199, guid: 1fcb3f221881d4d91998911abb8863c6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916511519070211199, guid: 1fcb3f221881d4d91998911abb8863c6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916511519070211199, guid: 1fcb3f221881d4d91998911abb8863c6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916511519070211199, guid: 1fcb3f221881d4d91998911abb8863c6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1fcb3f221881d4d91998911abb8863c6, type: 3}
 --- !u!1 &1727831920
 GameObject:
   m_ObjectHideFlags: 0
@@ -10940,6 +10997,63 @@ MonoBehaviour:
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
+--- !u!1001 &1770769034
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5317722388373624681, guid: 1fcb3f221881d4d91998911abb8863c6, type: 3}
+      propertyPath: m_Name
+      value: outdoor_wall_lamp_01 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916511519070211199, guid: 1fcb3f221881d4d91998911abb8863c6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10.148
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916511519070211199, guid: 1fcb3f221881d4d91998911abb8863c6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.0166018
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916511519070211199, guid: 1fcb3f221881d4d91998911abb8863c6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916511519070211199, guid: 1fcb3f221881d4d91998911abb8863c6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.6087617
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916511519070211199, guid: 1fcb3f221881d4d91998911abb8863c6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916511519070211199, guid: 1fcb3f221881d4d91998911abb8863c6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7933532
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916511519070211199, guid: 1fcb3f221881d4d91998911abb8863c6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916511519070211199, guid: 1fcb3f221881d4d91998911abb8863c6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916511519070211199, guid: 1fcb3f221881d4d91998911abb8863c6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -105
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916511519070211199, guid: 1fcb3f221881d4d91998911abb8863c6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1fcb3f221881d4d91998911abb8863c6, type: 3}
 --- !u!1 &1772282935
 GameObject:
   m_ObjectHideFlags: 0
@@ -12209,6 +12323,63 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.49999994, y: 0.22285268, z: 0.3}
   m_Center: {x: 0, y: 0.11142634, z: 0.00000047757214}
+--- !u!1001 &1941065928
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5317722388373624681, guid: 1fcb3f221881d4d91998911abb8863c6, type: 3}
+      propertyPath: m_Name
+      value: outdoor_wall_lamp_01 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916511519070211199, guid: 1fcb3f221881d4d91998911abb8863c6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 8.41
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916511519070211199, guid: 1fcb3f221881d4d91998911abb8863c6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.3677344
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916511519070211199, guid: 1fcb3f221881d4d91998911abb8863c6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.4545126
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916511519070211199, guid: 1fcb3f221881d4d91998911abb8863c6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916511519070211199, guid: 1fcb3f221881d4d91998911abb8863c6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916511519070211199, guid: 1fcb3f221881d4d91998911abb8863c6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916511519070211199, guid: 1fcb3f221881d4d91998911abb8863c6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916511519070211199, guid: 1fcb3f221881d4d91998911abb8863c6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916511519070211199, guid: 1fcb3f221881d4d91998911abb8863c6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916511519070211199, guid: 1fcb3f221881d4d91998911abb8863c6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1fcb3f221881d4d91998911abb8863c6, type: 3}
 --- !u!43 &1941102667
 Mesh:
   m_ObjectHideFlags: 0
@@ -12581,6 +12752,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8827404771041250848, guid: 21bbffb4b5bd1425fb3e4dc7dfa95ea7, type: 3}
   m_PrefabInstance: {fileID: 1608789712992419275}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2032614668
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5317722388373624681, guid: 1fcb3f221881d4d91998911abb8863c6, type: 3}
+      propertyPath: m_Name
+      value: outdoor_wall_lamp_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916511519070211199, guid: 1fcb3f221881d4d91998911abb8863c6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.6838775
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916511519070211199, guid: 1fcb3f221881d4d91998911abb8863c6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.241429
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916511519070211199, guid: 1fcb3f221881d4d91998911abb8863c6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 6.463989
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916511519070211199, guid: 1fcb3f221881d4d91998911abb8863c6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916511519070211199, guid: 1fcb3f221881d4d91998911abb8863c6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916511519070211199, guid: 1fcb3f221881d4d91998911abb8863c6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916511519070211199, guid: 1fcb3f221881d4d91998911abb8863c6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916511519070211199, guid: 1fcb3f221881d4d91998911abb8863c6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916511519070211199, guid: 1fcb3f221881d4d91998911abb8863c6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916511519070211199, guid: 1fcb3f221881d4d91998911abb8863c6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1fcb3f221881d4d91998911abb8863c6, type: 3}
 --- !u!1 &2051870786
 GameObject:
   m_ObjectHideFlags: 0
@@ -35760,3 +35988,7 @@ SceneRoots:
   - {fileID: 1681381138}
   - {fileID: 937028846}
   - {fileID: 1813033185}
+  - {fileID: 2032614668}
+  - {fileID: 1770769034}
+  - {fileID: 1715650060}
+  - {fileID: 1941065928}
