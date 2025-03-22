@@ -1,5 +1,33 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-9062882391180733491
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 200a29924df02d048adc76ad97d6f738, type: 3}
+  m_Name: CRTVolume
+  m_EditorClassIdentifier: 
+  active: 0
+  Active:
+    m_OverrideState: 1
+    m_Value: 1
+  When:
+    m_OverrideState: 1
+    m_Value: 500
+  Scan:
+    m_OverrideState: 1
+    m_Value: -0.18
+  Brightness:
+    m_OverrideState: 1
+    m_Value: 1
+  Offset:
+    m_OverrideState: 1
+    m_Value: 1
 --- !u!114 &-8219011225338585744
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -78,6 +106,28 @@ MonoBehaviour:
   highlightsEnd:
     m_OverrideState: 0
     m_Value: 1
+--- !u!114 &-2768695220031076969
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5485954d14dfb9a4c8ead8edb0ded5b1, type: 3}
+  m_Name: LiftGammaGain
+  m_EditorClassIdentifier: 
+  active: 0
+  lift:
+    m_OverrideState: 1
+    m_Value: {x: 1, y: 0, z: 0.2103262, w: 0}
+  gamma:
+    m_OverrideState: 1
+    m_Value: {x: 1, y: 0, z: 0.21825457, w: 0}
+  gain:
+    m_OverrideState: 1
+    m_Value: {x: 0.62677974, y: 0.6457884, z: 1, w: 0}
 --- !u!114 &-2270128013028111461
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -96,7 +146,7 @@ MonoBehaviour:
     m_Value: 1
   When:
     m_OverrideState: 1
-    m_Value: 500
+    m_Value: 0
   Speed:
     m_OverrideState: 1
     m_Value: 1
@@ -206,44 +256,10 @@ MonoBehaviour:
   - {fileID: 2393720187381752082}
   - {fileID: 1079795590734490280}
   - {fileID: -6003208878776435513}
-  - {fileID: 392980723279726952}
   - {fileID: -2270128013028111461}
   - {fileID: -8219011225338585744}
---- !u!114 &392980723279726952
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9552dc531ee036d499efc8422245ab19, type: 3}
-  m_Name: GlitchVolume
-  m_EditorClassIdentifier: 
-  active: 1
-  Active:
-    m_OverrideState: 1
-    m_Value: 1
-  When:
-    m_OverrideState: 1
-    m_Value: 600
-  Noise:
-    m_OverrideState: 1
-    m_Value: {fileID: 2800000, guid: eb54ec7bd827f2b46a27e16a8822b6c0, type: 3}
-    dimension: 1
-  Size:
-    m_OverrideState: 1
-    m_Value: 26.3
-  BlockDensity:
-    m_OverrideState: 1
-    m_Value: 0.41
-  LineDensity:
-    m_OverrideState: 1
-    m_Value: 0.63
-  Speed:
-    m_OverrideState: 1
-    m_Value: 5
+  - {fileID: -2768695220031076969}
+  - {fileID: -9062882391180733491}
 --- !u!114 &1079795590734490280
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -280,7 +296,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   active: 1
   skipIterations:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 1
   threshold:
     m_OverrideState: 1
@@ -290,15 +306,15 @@ MonoBehaviour:
     m_Value: 6
   scatter:
     m_OverrideState: 1
-    m_Value: 0.311
+    m_Value: 0.35
   clamp:
-    m_OverrideState: 0
-    m_Value: 65472
+    m_OverrideState: 1
+    m_Value: 1
   tint:
     m_OverrideState: 1
     m_Value: {r: 0.5660378, g: 0.5660378, b: 0.5660378, a: 1}
   highQualityFiltering:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0
   downscale:
     m_OverrideState: 0
@@ -307,11 +323,11 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 6
   dirtTexture:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: {fileID: 0}
     dimension: 1
   dirtIntensity:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0
 --- !u!114 &2393720187381752082
 MonoBehaviour:

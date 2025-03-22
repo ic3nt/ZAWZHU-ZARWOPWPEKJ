@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7154040966238449516}
   - component: {fileID: 8004034715669064260}
-  - component: {fileID: 874462658083008128}
   - component: {fileID: 5180170901061033999}
   - component: {fileID: 7487998224082578652}
   - component: {fileID: 4074896290924485801}
@@ -92,7 +91,7 @@ Camera:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_RenderingPath: -1
+  m_RenderingPath: 1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
@@ -103,14 +102,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!124 &874462658083008128
-Behaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 49894168643017583}
-  m_Enabled: 1
 --- !u!81 &5180170901061033999
 AudioListener:
   m_ObjectHideFlags: 0
@@ -10697,7 +10688,7 @@ CapsuleCollider:
   m_Radius: 0.6942
   m_Height: 1.7397
   m_Direction: 1
-  m_Center: {x: -0.0107, y: 0.9582, z: 4.1274248e-17}
+  m_Center: {x: -0.0107, y: 0.9582, z: 4.1275e-17}
 --- !u!65 &3942757692964247748
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10717,8 +10708,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1.0699584, z: 1}
-  m_Center: {x: -0.0159, y: 1.23918, z: 0.0351}
+  m_Size: {x: 1, y: 1.069, z: 1}
+  m_Center: {x: -0.0159, y: 1.239, z: 0.0351}
 --- !u!54 &8759172915904957214
 Rigidbody:
   m_ObjectHideFlags: 0
