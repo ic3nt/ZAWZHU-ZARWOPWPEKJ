@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: c146daf0163687f47b4c34424b41c4be, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 36fd1cce0e97a4440b68d4fcc8be6cdf, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.00006423474, g: 0.000066277426, b: 0.00006423474, a: 1}
+  m_IndirectSpecularColor: {r: 0.00011324721, g: 0.00012438979, b: 0.00011324721, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -385,6 +385,7 @@ MonoBehaviour:
   toggleAgree: {fileID: 2133147809}
   buttonAgree: {fileID: 560629998}
   transitionManager: {fileID: 0}
+  saveManager: {fileID: 0}
   animator: {fileID: 265401970}
   middleTogglePosX: -170
   rightTogglePosX: -480
@@ -707,6 +708,7 @@ MonoBehaviour:
   toggleAgree: {fileID: 0}
   buttonAgree: {fileID: 0}
   transitionManager: {fileID: 0}
+  saveManager: {fileID: 0}
   animator: {fileID: 0}
   middleTogglePosX: 0
   rightTogglePosX: 0
@@ -4482,6 +4484,7 @@ MonoBehaviour:
   toggleAgree: {fileID: 0}
   buttonAgree: {fileID: 0}
   transitionManager: {fileID: 0}
+  saveManager: {fileID: 0}
   animator: {fileID: 8135178009750865294}
   middleTogglePosX: 0
   rightTogglePosX: 0
