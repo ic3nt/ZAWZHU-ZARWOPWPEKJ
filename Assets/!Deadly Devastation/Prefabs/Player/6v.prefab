@@ -9,14 +9,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7154040966238449516}
-  - component: {fileID: 6995447989479227429}
+  - component: {fileID: 985579807420707774}
+  - component: {fileID: 1526173846901625913}
   - component: {fileID: 5624368129212488429}
   - component: {fileID: 8004034715669064260}
   - component: {fileID: 7487998224082578652}
   - component: {fileID: 5180170901061033999}
   - component: {fileID: 6917495368009645262}
   - component: {fileID: 1161205722216859319}
-  - component: {fileID: 1526173846901625913}
   m_Layer: 0
   m_Name: FirstPersonCamera
   m_TagString: MainCamera
@@ -45,7 +45,7 @@ Transform:
   - {fileID: 7998921365420411812}
   m_Father: {fileID: 7850416220995802057}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6995447989479227429
+--- !u!114 &985579807420707774
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -61,17 +61,40 @@ MonoBehaviour:
   cameraHolder: {fileID: 7850416220995802057}
   character: {fileID: 5193859935782295756}
   Head: {fileID: 8019915723301141008}
-  walkBobSpeed: 10
+  walkBobSpeed: 8
   walkBobAmount: 0.1
-  runBobSpeed: 12
+  runBobSpeed: 10
   runBobAmount: 0.2
-  tiltAngle: 3
+  tiltAngle: 5
   tiltSpeed: 5
   shakeIntensity: 0.07
   shakeDuration: 0.2
-  zoomSpeed: 1
+  zoomSpeed: 4
   sensitivity: 2
   smoothing: 1.5
+--- !u!114 &1526173846901625913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 49894168643017583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89cb1784d1741c34f8c3e8a3f748f51f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionDistance: 1.5
+  intText: {fileID: 6898805767440156147}
+  doorOpenAnimName: DoorOpen
+  doorCloseAnimName: DoorClose
+  doorOpen: {fileID: 8300000, guid: 213d8ed48108b4c0a8b20a40f756f08d, type: 3}
+  doorClose: {fileID: 8300000, guid: dd5f54f3e55274e259584316ac0768c9, type: 3}
+  fill: 0
+  progressBar: {fileID: 4554316959959565476}
+  Bar: {fileID: 521991492321760058}
+  canOpen: 1
+  LockText: {fileID: 4591889126049679010}
 --- !u!114 &5624368129212488429
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -234,29 +257,6 @@ MonoBehaviour:
   terrainScannerPrefab: {fileID: 5829387580687154407, guid: 1aba4cc33ae3bdd4c9a9ca7c665cf5e5, type: 3}
   duration: 10
   size: 500
---- !u!114 &1526173846901625913
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 49894168643017583}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89cb1784d1741c34f8c3e8a3f748f51f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactionDistance: 1.5
-  intText: {fileID: 6898805767440156147}
-  doorOpenAnimName: DoorOpen
-  doorCloseAnimName: DoorClose
-  doorOpen: {fileID: 8300000, guid: 213d8ed48108b4c0a8b20a40f756f08d, type: 3}
-  doorClose: {fileID: 8300000, guid: dd5f54f3e55274e259584316ac0768c9, type: 3}
-  fill: 0
-  progressBar: {fileID: 4554316959959565476}
-  Bar: {fileID: 521991492321760058}
-  canOpen: 1
-  LockText: {fileID: 4591889126049679010}
 --- !u!1 &67322977848972581
 GameObject:
   m_ObjectHideFlags: 0
@@ -10437,17 +10437,6 @@ MonoBehaviour:
   canRun: 1
   runSpeed: 7
   runningKey: 304
-  walkBobSpeed: 8
-  walkBobAmount: 0.05
-  runBobSpeed: 12
-  runBobAmount: 0.1
-  tiltAngle: 5
-  tiltSpeed: 5
-  shakeIntensity: 0.05
-  shakeDuration: 0.2
-  zoomSpeed: 1
-  cameraHolder: {fileID: 7850416220995802057}
-  playerCamera: {fileID: 8004034715669064260}
 --- !u!114 &356079694662189859
 MonoBehaviour:
   m_ObjectHideFlags: 0
