@@ -1,90 +1,104 @@
 ﻿using System.Collections.Generic;
-using System.Globalization;
 using UnityEngine;
 using Unity.Netcode;
-using System.Collections;
 
 public class FirstPersonMovement : NetworkBehaviour
 {
-    public float speed = 5;
-
-    public Animator animator;
-
-    [Header("Running")]
+    [Header("Movement Settings")]
+    public float walkStartSpeed = 2f;
+    public float walkMaxSpeed = 5f;
+    public float runStartSpeed = 3f;
+    public float runMaxSpeed = 7f;
     public bool canRun = true;
-
-    public bool IsRunning { get; private set; }
-    public float runSpeed = 7;
     public KeyCode runningKey = KeyCode.LeftShift;
 
-    Rigidbody rigidbody;
+    [Header("Acceleration / Deceleration")]
+    public float accelerationTime = 0.5f;
+    public float decelerationTime = 0.3f;
 
-    public List<System.Func<float>> speedOverrides = new List<System.Func<float>>();
+    [Header("Animation")]
+    public Animator animator;
+
+    private Rigidbody rigidbody;
+    private Vector3 velocitySmoothDamp = Vector3.zero;
+    private float currentSpeed = 0f;
+
+    public bool IsRunning { get; private set; }
+    [HideInInspector] public bool IsMoving = false;
+
+    private void Awake()
+    {
+        rigidbody = GetComponent<Rigidbody>();
+    }
 
     private void Update()
     {
         if (!IsOwner) return;
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+        HandleAnimation();
+    }
 
+    private void FixedUpdate()
+    {
+        if (!IsOwner) return;
+        HandleMovement();
+    }
+
+    private void HandleAnimation()
+    {
+        IsMoving = Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0;
+        bool isShift = Input.GetKey(KeyCode.LeftShift);
+
+        if (IsMoving)
         {
             animator.SetBool("IsDanceOne", false);
-
-            animator.SetBool("IsWalk", true);
-            animator.SetBool("IsRun", false);
+            animator.SetBool("IsWalk", !isShift);
+            animator.SetBool("IsRun", isShift);
             animator.SetBool("IsIdle", false);
-
-            if (Input.GetKey(KeyCode.LeftShift))
-            {
-                animator.SetBool("IsRun", true);
-                animator.SetBool("IsWalk", false);
-                animator.SetBool("IsIdle", false);
-            }
         }
-        if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D))
+        else
         {
             animator.SetBool("IsIdle", true);
             animator.SetBool("IsRun", false);
             animator.SetBool("IsWalk", false);
+
             if (Input.GetKey(KeyCode.Alpha1))
             {
                 animator.SetBool("IsDanceOne", true);
             }
         }
-
-        if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.RightArrow))
-        {
-            animator.SetBool("IsWalk", true);
-            animator.SetBool("IsRun", false);
-            animator.SetBool("IsIdle", false);
-
-            if (Input.GetKey(KeyCode.LeftShift))
-            {
-                animator.SetBool("IsRun", true);
-                animator.SetBool("IsWalk", false);
-                animator.SetBool("IsIdle", false);
-            }
-        }
-    }
-    void Awake()
-    {
-        rigidbody = GetComponent<Rigidbody>();
     }
 
-    void FixedUpdate()
+    private void HandleMovement()
     {
-        if (!IsOwner) return;
+        IsRunning = canRun && Input.GetKey(runningKey);
+        float targetMaxSpeed = IsRunning ? runMaxSpeed : walkMaxSpeed;
+        float startSpeed = IsRunning ? runStartSpeed : walkStartSpeed;
 
-        IsRunning = canRun && Input.GetKey(KeyCode.LeftShift);
+        Vector2 input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        Vector3 inputDir = new Vector3(input.x, 0, input.y);
 
-        float targetMovingSpeed = IsRunning ? runSpeed : speed;
-        if (speedOverrides.Count > 0)
+        IsMoving = inputDir.magnitude > 0.1f;
+
+        if (IsMoving)
+            inputDir.Normalize();
+
+        Vector3 worldInputDir = transform.TransformDirection(inputDir);
+
+        if (IsMoving)
         {
-            targetMovingSpeed = speedOverrides[speedOverrides.Count - 1]();
+            currentSpeed = Mathf.MoveTowards(currentSpeed, targetMaxSpeed, Time.fixedDeltaTime * (targetMaxSpeed / accelerationTime));
+        }
+        else
+        {
+            currentSpeed = Mathf.MoveTowards(currentSpeed, 0f, Time.fixedDeltaTime * (targetMaxSpeed / decelerationTime));
         }
 
-        Vector2 targetVelocity = new Vector2(Input.GetAxis("Horizontal") * targetMovingSpeed, Input.GetAxis("Vertical") * targetMovingSpeed);
+        Vector3 targetVelocity = worldInputDir * currentSpeed;
+        Vector3 horizontalVelocity = new Vector3(rigidbody.velocity.x, 0, rigidbody.velocity.z);
 
-        rigidbody.velocity = transform.rotation * new Vector3(targetVelocity.x, rigidbody.velocity.y, targetVelocity.y);
+        Vector3 smoothedVelocity = Vector3.SmoothDamp(horizontalVelocity, targetVelocity, ref velocitySmoothDamp, IsMoving ? accelerationTime : decelerationTime);
 
+        smoothedVelocity.y = rigidbody.velocity.y;
+        rigidbody.velocity = smoothedVelocity;
     }
 }

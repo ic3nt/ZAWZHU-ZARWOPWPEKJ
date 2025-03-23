@@ -61,6 +61,9 @@ MonoBehaviour:
   cameraHolder: {fileID: 7850416220995802057}
   character: {fileID: 5193859935782295756}
   Head: {fileID: 8019915723301141008}
+  firstPersonMovement: {fileID: 6387213999055437123}
+  sensitivity: 2
+  smoothing: 1.5
   walkBobSpeed: 8
   walkBobAmount: 0.1
   runBobSpeed: 10
@@ -70,8 +73,6 @@ MonoBehaviour:
   shakeIntensity: 0.07
   shakeDuration: 0.2
   zoomSpeed: 4
-  sensitivity: 2
-  smoothing: 1.5
 --- !u!114 &1526173846901625913
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10432,11 +10433,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97fca36bd81de7c4cafce7bbf02ca611, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 4
-  animator: {fileID: 6920849563193250811}
+  walkStartSpeed: 2
+  walkMaxSpeed: 5
+  runStartSpeed: 3
+  runMaxSpeed: 7
   canRun: 1
-  runSpeed: 7
   runningKey: 304
+  accelerationTime: 0.1
+  decelerationTime: 0.1
+  animator: {fileID: 6920849563193250811}
+  IsMoving: 0
 --- !u!114 &356079694662189859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10450,7 +10456,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   personMovement: {fileID: 6387213999055437123}
-  personLook: {fileID: 0}
+  personLook: {fileID: 985579807420707774}
   personAudio: {fileID: 4083692567133244299}
   healthBar: {fileID: 4206986096636005520}
   healthAmountText: {fileID: 5521128430856653866}

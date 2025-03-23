@@ -8,6 +8,9 @@ public class FirstPersonLook : NetworkBehaviour
     public Transform cameraHolder;
     [SerializeField] private Transform character;
     public GameObject Head;
+    public FirstPersonMovement firstPersonMovement;
+    public float sensitivity = 2;
+    public float smoothing = 1.5f;
 
     [Header("Camera Effects")]
     public float walkBobSpeed = 8f;
@@ -32,16 +35,8 @@ public class FirstPersonLook : NetworkBehaviour
 
     private Vector3 initialHolderLocalPos;
     private Quaternion initialHolderLocalRot;
-
-    [Header("First Person Movement Settings")]
-    public float sensitivity = 2;
-    public float smoothing = 1.5f;
-
     private Vector2 velocity;
     private Vector2 frameVelocity;
-
-    private Rigidbody rigidbody;
-    private bool isRunning = false;
 
     void Start()
     {
@@ -56,8 +51,6 @@ public class FirstPersonLook : NetworkBehaviour
             playerCamera.enabled = false;
             return;
         }
-
-        rigidbody = GetComponent<Rigidbody>();
 
         // Инициализируем переменные
         if (IsOwner)
@@ -80,32 +73,18 @@ public class FirstPersonLook : NetworkBehaviour
         HandleLookRotation();
     }
 
-    void FixedUpdate()
-    {
-        if (!IsOwner) return;
-
-        isRunning = Input.GetKey(KeyCode.LeftShift) && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D));
-
-        float targetMovingSpeed = isRunning ? 7f : 5f;
-        Vector2 targetVelocity = new Vector2(Input.GetAxis("Horizontal") * targetMovingSpeed, Input.GetAxis("Vertical") * targetMovingSpeed);
-        rigidbody.velocity = transform.rotation * new Vector3(targetVelocity.x, rigidbody.velocity.y, targetVelocity.y);
-    }
-
     void HandleZoom()
     {
-        bool movingFast = Input.GetKey(KeyCode.LeftShift) && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D));
-        float targetZoom = movingFast ? defaultZoom + 15f : defaultZoom;
-        playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, targetZoom, zoomSpeed * Time.deltaTime); // Плавный зум
+        float targetZoom = firstPersonMovement.IsRunning ? defaultZoom + 15f : defaultZoom;
+        playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, targetZoom, zoomSpeed * Time.deltaTime);
     }
 
     void HandleCameraBobbing()
     {
-        bool isMoving = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D);
-
-        if (isMoving)
+        if (firstPersonMovement.IsMoving)
         {
-            float bobSpeed = isRunning ? runBobSpeed : walkBobSpeed;
-            float bobAmount = isRunning ? runBobAmount : walkBobAmount;
+            float bobSpeed = firstPersonMovement.IsRunning ? runBobSpeed : walkBobSpeed;
+            float bobAmount = firstPersonMovement.IsRunning ? runBobAmount : walkBobAmount;
 
             bobTimer += Time.deltaTime * bobSpeed;
             Vector3 bobOffset = new Vector3(0, Mathf.Sin(bobTimer) * bobAmount, 0);
@@ -127,17 +106,15 @@ public class FirstPersonLook : NetworkBehaviour
         else if (Input.GetKey(KeyCode.D))
             targetTilt = -tiltAngle;
 
-        // Плавный переход к целевому углу наклона с использованием Mathf.Lerp
         float currentTilt = cameraHolder.localRotation.eulerAngles.z;
         float smoothTilt = Mathf.LerpAngle(currentTilt, targetTilt, Time.deltaTime * tiltSpeed);
 
-        // Применение плавного наклона
         cameraHolder.localRotation = Quaternion.Euler(0, 0, smoothTilt);
     }
 
     void HandleCameraShake()
     {
-        if (shakeTimer > 0)
+        if (shakeTimer > 0 && firstPersonMovement.IsRunning)
         {
             Vector3 shakeOffset = new Vector3(
                 Random.Range(-shakeIntensity, shakeIntensity),
