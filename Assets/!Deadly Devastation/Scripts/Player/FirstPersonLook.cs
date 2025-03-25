@@ -52,12 +52,11 @@ public class FirstPersonLook : NetworkBehaviour
             return;
         }
 
-        // Инициализируем переменные
         if (IsOwner)
         {
             if (Head != null)
             {
-                Head.SetActive(false); // Скрываем голову у владельца
+                Head.SetActive(false);
             }
         }
     }
@@ -75,7 +74,7 @@ public class FirstPersonLook : NetworkBehaviour
 
     void HandleZoom()
     {
-        float targetZoom = firstPersonMovement.IsRunning ? defaultZoom + 15f : defaultZoom;
+        float targetZoom = firstPersonMovement.IsRunning && firstPersonMovement.IsMoving ? defaultZoom + 15f : defaultZoom;
         playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, targetZoom, zoomSpeed * Time.deltaTime);
     }
 
@@ -122,12 +121,12 @@ public class FirstPersonLook : NetworkBehaviour
                 0
             );
 
-            cameraHolder.localPosition = Vector3.Lerp(cameraHolder.localPosition, initialHolderLocalPos + shakeOffset, Time.deltaTime * 15f); // Плавная тряска
+            cameraHolder.localPosition = Vector3.Lerp(cameraHolder.localPosition, initialHolderLocalPos + shakeOffset, Time.deltaTime * 15f);
             shakeTimer -= Time.deltaTime;
         }
         else
         {
-            cameraHolder.localPosition = Vector3.Lerp(cameraHolder.localPosition, initialHolderLocalPos, Time.deltaTime * 5f); // Плавное возвращение к начальной позиции
+            cameraHolder.localPosition = Vector3.Lerp(cameraHolder.localPosition, initialHolderLocalPos, Time.deltaTime * 5f);
         }
     }
 
