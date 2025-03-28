@@ -73,6 +73,16 @@ MonoBehaviour:
   shakeIntensity: 0.07
   shakeDuration: 0.2
   zoomSpeed: 4
+  zoomInFOV: 30
+  canFocusOnEnemy: 1
+  focusSpeed: 5
+  focusDistance: 10
+  currentFocusTarget: {fileID: 0}
+  enemyDetectedSound: {fileID: 0}
+  audioSource: {fileID: 8711949578937777218}
+  enableShakeOnFocus: 1
+  focusShakeIntensity: 0.1
+  focusShakeDuration: 0.3
 --- !u!114 &1526173846901625913
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1126,134 +1136,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &508008151743628583
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3230749847483993860}
-  - component: {fileID: 1798686257756642843}
-  m_Layer: 0
-  m_Name: MusicAudioSource
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3230749847483993860
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 508008151743628583}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.11399996, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4039666044858596270}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!82 &1798686257756642843
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 508008151743628583}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 24300002, guid: bd32e8e9e8da1d24b9be0f95f4691ea7, type: 2}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!1 &521991492321760058
 GameObject:
   m_ObjectHideFlags: 0
@@ -2430,6 +2312,7 @@ GameObject:
   - component: {fileID: 5584911184751911336}
   - component: {fileID: 6701971896246096464}
   - component: {fileID: 1990589534437048152}
+  - component: {fileID: 4871151563821213324}
   m_Layer: 5
   m_Name: TextNeedKeyCard (TMP)
   m_TagString: Untagged
@@ -2484,7 +2367,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '[NEED A KEY CARD]'
+  m_text: <shake>[NEED A KEY CARD]
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 822b4fc90009f064197b8f06b33f09e6, type: 2}
   m_sharedMaterial: {fileID: -3760385980636559934, guid: 822b4fc90009f064197b8f06b33f09e6, type: 2}
@@ -2553,6 +2436,50 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &4871151563821213324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1438176840078019851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64cc8a40f9848a54c94bf232155b0b4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  database: {fileID: 11400000, guid: f0a33761ff6919d4a9979ee36980a29d, type: 2}
+  context:
+    scaleAnimations: 1
+    scaleUniformly: 1
+    useScaledTime: 1
+    tmpAnimator: {fileID: 4871151563821213324}
+  updateFrom: 0
+  animateOnStart: 1
+  animationsOverride: 1
+  defaultAnimationsStrings: []
+  defaultShowAnimationsStrings: []
+  defaultHideAnimationsStrings: []
+  excludedCharacters: 
+  excludedCharactersShow: 
+  excludedCharactersHide: 
+  excludePunctuation: 0
+  excludePunctuationShow: 0
+  excludePunctuationHide: 0
+  sceneKeywordDatabase: {fileID: 0}
+  keywordDatabase: {fileID: 0}
+  sceneAnimations:
+    _serializedList: []
+  sceneShowAnimations:
+    _serializedList: []
+  sceneHideAnimations:
+    _serializedList: []
+  preview: 1
+  useDefaultDatabase: 1
+  useDefaultKeywordDatabase: 0
+  initDatabase: 1
+  previewUpdatesPerSecond: 20
+  previewTimeScale: 5
 --- !u!1 &1442784696587244216
 GameObject:
   m_ObjectHideFlags: 0
@@ -10868,13 +10795,14 @@ GameObject:
   - component: {fileID: 8238999864736960816}
   - component: {fileID: 6935163729343554201}
   - component: {fileID: 3915063423091041371}
+  - component: {fileID: 477824007058491546}
   m_Layer: 5
   m_Name: TextProtectionDoor (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8238999864736960816
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10924,7 +10852,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ENHANCED PROTECTION
+  m_text: <sketchy>ENHANCED PROTECTION
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 822b4fc90009f064197b8f06b33f09e6, type: 2}
   m_sharedMaterial: {fileID: -3760385980636559934, guid: 822b4fc90009f064197b8f06b33f09e6, type: 2}
@@ -10993,6 +10921,50 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &477824007058491546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4591889126049679010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64cc8a40f9848a54c94bf232155b0b4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  database: {fileID: 11400000, guid: f0a33761ff6919d4a9979ee36980a29d, type: 2}
+  context:
+    scaleAnimations: 1
+    scaleUniformly: 1
+    useScaledTime: 1
+    tmpAnimator: {fileID: 477824007058491546}
+  updateFrom: 0
+  animateOnStart: 1
+  animationsOverride: 0
+  defaultAnimationsStrings: []
+  defaultShowAnimationsStrings: []
+  defaultHideAnimationsStrings: []
+  excludedCharacters: 
+  excludedCharactersShow: 
+  excludedCharactersHide: 
+  excludePunctuation: 0
+  excludePunctuationShow: 0
+  excludePunctuationHide: 0
+  sceneKeywordDatabase: {fileID: 0}
+  keywordDatabase: {fileID: 0}
+  sceneAnimations:
+    _serializedList: []
+  sceneShowAnimations:
+    _serializedList: []
+  sceneHideAnimations:
+    _serializedList: []
+  preview: 1
+  useDefaultDatabase: 1
+  useDefaultKeywordDatabase: 0
+  initDatabase: 1
+  previewUpdatesPerSecond: 100
+  previewTimeScale: 2.49
 --- !u!1 &4616058440651563641
 GameObject:
   m_ObjectHideFlags: 0
@@ -14743,7 +14715,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4517187933519319413}
-  - {fileID: 3230749847483993860}
   - {fileID: 2623355309749222868}
   - {fileID: 4828429855143952106}
   - {fileID: 5918401449181967958}
@@ -14788,6 +14759,7 @@ GameObject:
   - component: {fileID: 3869971143295788998}
   - component: {fileID: 286864008462723226}
   - component: {fileID: 3015053662393584639}
+  - component: {fileID: 273907778364287969}
   m_Layer: 5
   m_Name: TextDoorOpen (TMP)
   m_TagString: Untagged
@@ -14844,7 +14816,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: HACK THE DOOR [E]
+  m_text: <sketchy>HACK THE DOOR [E]
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 822b4fc90009f064197b8f06b33f09e6, type: 2}
   m_sharedMaterial: {fileID: -3760385980636559934, guid: 822b4fc90009f064197b8f06b33f09e6, type: 2}
@@ -14913,6 +14885,50 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &273907778364287969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6898805767440156147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64cc8a40f9848a54c94bf232155b0b4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  database: {fileID: 11400000, guid: f0a33761ff6919d4a9979ee36980a29d, type: 2}
+  context:
+    scaleAnimations: 1
+    scaleUniformly: 1
+    useScaledTime: 1
+    tmpAnimator: {fileID: 273907778364287969}
+  updateFrom: 0
+  animateOnStart: 1
+  animationsOverride: 0
+  defaultAnimationsStrings: []
+  defaultShowAnimationsStrings: []
+  defaultHideAnimationsStrings: []
+  excludedCharacters: 
+  excludedCharactersShow: 
+  excludedCharactersHide: 
+  excludePunctuation: 0
+  excludePunctuationShow: 0
+  excludePunctuationHide: 0
+  sceneKeywordDatabase: {fileID: 0}
+  keywordDatabase: {fileID: 0}
+  sceneAnimations:
+    _serializedList: []
+  sceneShowAnimations:
+    _serializedList: []
+  sceneHideAnimations:
+    _serializedList: []
+  preview: 1
+  useDefaultDatabase: 1
+  useDefaultKeywordDatabase: 0
+  initDatabase: 1
+  previewUpdatesPerSecond: 100
+  previewTimeScale: 2.49
 --- !u!1 &6902671252702184648
 GameObject:
   m_ObjectHideFlags: 0
