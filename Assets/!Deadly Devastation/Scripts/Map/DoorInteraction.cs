@@ -150,7 +150,6 @@ public class DoorInteraction : NetworkBehaviour
     {
         if (!uiElement.activeSelf)
         {
-            ShakeUI(intText);
             uiElement.SetActive(true);
             uiElement.transform.DOKill();
             uiElement.transform.localScale = Vector3.one * 0.8f;
@@ -162,7 +161,6 @@ public class DoorInteraction : NetworkBehaviour
     {
         if (uiElement.activeSelf)
         {
-            ShakeUI(intText);
             uiElement.transform.DOKill();
             uiElement.transform.DOScale(Vector3.one * 0.0f, 0.3f).SetEase(Ease.OutBack)
                 .OnComplete(() =>
@@ -172,15 +170,4 @@ public class DoorInteraction : NetworkBehaviour
                 });
         }
     }
-
-    private void ShakeUI(GameObject uiElement)
-    {
-        if (uiElement.activeSelf)
-        {
-            uiElement.transform.DOKill();
-            RectTransform rectTransform = uiElement.GetComponent<RectTransform>();
-            rectTransform.DOShakeAnchorPos(0.3f, 5f, 20, 90, false, true);
-        }
-    }
-
 }

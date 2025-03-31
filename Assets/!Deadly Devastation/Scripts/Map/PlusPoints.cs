@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlusPoints : MonoBehaviour
 {
-    public ChunkManager chunkManager;
+    public Floor chunkManager;
 
     public EnemySpawner enemySpawner;
 

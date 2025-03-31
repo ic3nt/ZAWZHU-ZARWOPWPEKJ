@@ -2614,10 +2614,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   floorCounterText: {fileID: 1990782838709175454}
-  Begin: {fileID: 6289916525232468551}
-  End: {fileID: 6403932103061963271}
+  begin: {fileID: 6289916525232468551}
+  end: {fileID: 6403932103061963271}
   currentFloor: 0
-  Floor: 0
+  floor: 0
 --- !u!114 &2676912089571323664
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14238,7 +14238,6 @@ GameObject:
   - component: {fileID: 4952810612949526897}
   - component: {fileID: 5564229592439040669}
   - component: {fileID: 1594748666564521120}
-  - component: {fileID: 4424668689877729756}
   - component: {fileID: 7409014644709445346}
   - component: {fileID: 3655912522662085764}
   - component: {fileID: 8013368652437264965}
@@ -14429,21 +14428,6 @@ MonoBehaviour:
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
---- !u!114 &4424668689877729756
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3984491910586959393}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2e8af7b1feab457bbd48d90fe15a7f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioSource: {fileID: 0}
-  IsLocked: 0
-  ChanceOfLock: 0.5
 --- !u!82 &7409014644709445346
 AudioSource:
   m_ObjectHideFlags: 0
@@ -24131,7 +24115,6 @@ GameObject:
   - component: {fileID: 4140448173226321015}
   - component: {fileID: 3528049116628019099}
   - component: {fileID: 7777602041235300774}
-  - component: {fileID: 4659444495086079194}
   - component: {fileID: 1953475093089158116}
   - component: {fileID: 5724727953155737986}
   - component: {fileID: 1367701183853221699}
@@ -24322,21 +24305,6 @@ MonoBehaviour:
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
---- !u!114 &4659444495086079194
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5369974004851526439}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2e8af7b1feab457bbd48d90fe15a7f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioSource: {fileID: 0}
-  IsLocked: 0
-  ChanceOfLock: 0.5
 --- !u!82 &1953475093089158116
 AudioSource:
   m_ObjectHideFlags: 0

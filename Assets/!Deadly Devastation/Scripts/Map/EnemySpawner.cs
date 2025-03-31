@@ -10,7 +10,7 @@ public class EnemySpawner : Enemy
 
     private System.Random random = new System.Random();
 
-    public ChunkManager chunkManager;
+    public Floor chunkManager;
 
     private void Start()
     {

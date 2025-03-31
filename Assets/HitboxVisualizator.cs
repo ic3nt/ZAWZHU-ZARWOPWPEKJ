@@ -13,10 +13,10 @@ public class HitboxVisualizer : MonoBehaviour
     {
         return hitboxType switch
         {
-            HitboxType.Wall => new Color(0, 1, 0, 0.3f),      // Зелёный
-            HitboxType.Trigger => new Color(0, 0, 1, 0.2f),   // Глубокий синий (более полупрозрачный)
-            HitboxType.Hurt => new Color(1, 0, 0, 0.3f),      // Красный (чуть менее прозрачный)
-            HitboxType.Player => new Color(1, 1, 0, 0.3f),    // Жёлтый
+            HitboxType.Wall => new Color(0, 1, 0, 0.3f),
+            HitboxType.Trigger => new Color(0, 0, 1, 0.2f),
+            HitboxType.Hurt => new Color(1, 0, 0, 0.3f),
+            HitboxType.Player => new Color(1, 1, 0, 0.3f),
             _ => Color.white,
         };
     }
@@ -37,10 +37,6 @@ public class HitboxVisualizer : MonoBehaviour
     private void DrawBox(BoxCollider box)
     {
         DrawSolidAndWire(box.center, box.size);
-
-#if UNITY_EDITOR
-        DrawStripesIfNeeded(box.center, box.size);
-#endif
     }
 
     private void DrawSphere(SphereCollider sphere)
@@ -59,24 +55,6 @@ public class HitboxVisualizer : MonoBehaviour
         Gizmos.color = GetColor() * 1.5f;
         Gizmos.DrawWireCube(center, size);
     }
-
-#if UNITY_EDITOR
-    private void DrawStripesIfNeeded(Vector3 center, Vector3 size)
-    {
-        if (hitboxType != HitboxType.Hurt && hitboxType != HitboxType.Trigger) return;
-
-        Color stripeColor = hitboxType == HitboxType.Hurt ? new Color(1, 0, 0, 0.8f) : new Color(0, 0, 1, 0.8f);
-        Handles.color = stripeColor;
-
-        float step = 0.2f;
-        for (float x = -size.x / 2; x < size.x / 2; x += step)
-        {
-            Vector3 start = center + new Vector3(x, -size.y / 2, 0);
-            Vector3 end = center + new Vector3(x + size.y, size.y / 2, 0);
-            Handles.DrawAAPolyLine(3, start, end);
-        }
-    }
-#endif
 }
 
 #if UNITY_EDITOR

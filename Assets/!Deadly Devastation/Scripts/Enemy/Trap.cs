@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Trap : MonoBehaviour
 {
-    public ChunkManager chunkManager;
+    public Floor chunkManager;
 
     public GameObject VacuumCl;
 
