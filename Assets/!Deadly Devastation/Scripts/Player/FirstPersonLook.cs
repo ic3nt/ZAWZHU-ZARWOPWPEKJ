@@ -63,7 +63,7 @@ public class FirstPersonLook : NetworkBehaviour
 
     void Start()
     {
-        //Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Locked;
         initialCameraLocalPos = playerCamera.transform.localPosition;
         initialHolderLocalPos = cameraHolder.localPosition;
         initialHolderLocalRot = cameraHolder.localRotation;
