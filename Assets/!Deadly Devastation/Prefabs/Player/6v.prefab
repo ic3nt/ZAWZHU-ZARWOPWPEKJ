@@ -6867,7 +6867,7 @@ Camera:
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 32
+    m_Bits: 1056
   m_RenderingPath: 1
   m_TargetTexture: {fileID: 8400000, guid: 9b8ba47acd41746f684da98164910e27, type: 2}
   m_TargetDisplay: 0
@@ -9980,7 +9980,7 @@ GameObject:
   - component: {fileID: 2979935775083507594}
   - component: {fileID: 6790663774530708164}
   m_Layer: 5
-  m_Name: Render Image
+  m_Name: RenderImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9994,7 +9994,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4219974796951251236}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 9}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -15733,7 +15733,7 @@ GameObject:
   - component: {fileID: 55813647956403315}
   - component: {fileID: 5874981992268928344}
   - component: {fileID: 6600115307780302906}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: TABWindow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
