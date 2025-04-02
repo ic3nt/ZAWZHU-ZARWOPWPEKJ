@@ -6,6 +6,8 @@ public class FirstPersonLook : NetworkBehaviour
     [Header("Camera Settings")]
     [Space(10)]
     public Camera playerCamera;
+    public bool useCameraForPlayerHUD = false;
+    public Camera HUDCamera;
     public Transform cameraHolder;
     [SerializeField] private Transform character;
     public GameObject Head;
@@ -43,7 +45,7 @@ public class FirstPersonLook : NetworkBehaviour
     [Space(10)]
     private float defaultZoom;
     public float zoomSpeed = 1f;
-    public float zoomInFOV = 30f; 
+    public float zoomInFOV = 30f;
 
     [Header("Camera Enemy Focus Settings")]
     [Space(10)]
@@ -84,6 +86,12 @@ public class FirstPersonLook : NetworkBehaviour
         }
 
         initialCameraPosition = playerCamera.transform.position;
+
+        // Если используется камера для UI, синхронизируем параметры с основной камеры
+        if (useCameraForPlayerHUD && HUDCamera != null)
+        {
+            SyncCameraParameters();
+        }
     }
 
     void Update()
@@ -100,6 +108,23 @@ public class FirstPersonLook : NetworkBehaviour
         {
             CheckForEnemyInView();
             FocusOnEnemy();
+        }
+
+        // Если включен UseCameraForUI, синхронизируем параметры камеры для UI
+        if (useCameraForPlayerHUD && HUDCamera != null)
+        {
+            SyncCameraParameters();
+        }
+    }
+
+    // Синхронизация параметров камеры
+    void SyncCameraParameters()
+    {
+        if (HUDCamera != null)
+        {
+            HUDCamera.fieldOfView = playerCamera.fieldOfView;
+            HUDCamera.transform.position = playerCamera.transform.position;
+            HUDCamera.transform.rotation = playerCamera.transform.rotation;
         }
     }
 

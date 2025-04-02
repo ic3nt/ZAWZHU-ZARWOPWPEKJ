@@ -38,7 +38,6 @@ Transform:
   - {fileID: 6390855274471334471}
   - {fileID: 2831341816836501232}
   - {fileID: 7998921365420411812}
-  - {fileID: 1793633196853297587}
   m_Father: {fileID: 7850416220995802057}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &8004034715669064260
@@ -5634,6 +5633,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 8004034715669064260}
+  useCameraForPlayerHUD: 1
+  HUDCamera: {fileID: 3030925508599487087}
   cameraHolder: {fileID: 7850416220995802057}
   character: {fileID: 5193859935782295756}
   Head: {fileID: 8019915723301141008}
@@ -6858,7 +6859,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3008223755684936308}
-  m_Father: {fileID: 7154040966238449516}
+  m_Father: {fileID: 7850416220995802057}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &3030925508599487087
 Camera:
@@ -12045,6 +12046,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7154040966238449516}
+  - {fileID: 1793633196853297587}
   m_Father: {fileID: 7981898014139028008}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4981838860486778707
