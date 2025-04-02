@@ -28,6 +28,25 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
-    m_Floats: []
-    m_Colors: []
+    m_Floats:
+    - _AnimationSpeed: 3
+    - _BackgroundEffect: 0
+    - _BlurIntensity: 0.822
+    - _BlurMax: 6
+    - _BlurMin: 2
+    - _DropSize: 0.94
+    - _DropSmoothness: 1
+    - _DropSpeed: 0.1
+    - _DropTransparency: 1
+    - _FadeTime: 5.08
+    - _HeartEffect: 0
+    - _LineLength: 2.57
+    - _LineThickness: 9.04
+    - _RainAmount: 0.5
+    - _RainIntensity: 1
+    - _SpeedFactor: 5
+    m_Colors:
+    - _BackgroundColor: {r: 0.5, g: 0.11084905, b: 0.11084905, a: 0}
+    - _DropColor: {r: 1, g: 0, b: 0, a: 1}
+    - _LineColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
