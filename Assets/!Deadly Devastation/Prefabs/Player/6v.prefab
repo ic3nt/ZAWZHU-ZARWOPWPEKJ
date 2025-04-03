@@ -6925,11 +6925,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_RenderShadows: 0
-  m_RequiresDepthTextureOption: 0
+  m_RequiresDepthTextureOption: 1
   m_RequiresOpaqueTextureOption: 0
   m_CameraType: 0
   m_Cameras: []
-  m_RendererIndex: 1
+  m_RendererIndex: 0
   m_VolumeLayerMask:
     serializedVersion: 2
     m_Bits: 1
@@ -10012,7 +10012,7 @@ GameObject:
   - component: {fileID: 3894758908603343050}
   - component: {fileID: 2979935775083507594}
   - component: {fileID: 6790663774530708164}
-  m_Layer: 5
+  m_Layer: 1
   m_Name: RenderTextureCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15324,7 +15324,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1437383078764712758}
-  m_Layer: 5
+  m_Layer: 1
   m_Name: RenderTextures
   m_TagString: Untagged
   m_Icon: {fileID: 0}
