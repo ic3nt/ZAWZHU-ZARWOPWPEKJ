@@ -12,8 +12,8 @@ public class ObjectDetectorUI : MonoBehaviour
     private HashSet<Collider> detectedObjects = new();
 
     [Header("General")]
-    [SerializeField] private LayerMask interactiveLayer;
-    [SerializeField] private LayerMask monsterLayer;
+    [SerializeField] private LayerMask highlightableLayer;
+    [SerializeField] private LayerMask warningLayer;
     [SerializeField] private LayerMask obstacleLayer;
     [SerializeField] private GameObject boundingBoxPrefab;
     [SerializeField] private RectTransform playerCanvas;
@@ -21,11 +21,11 @@ public class ObjectDetectorUI : MonoBehaviour
 
     [Header("Sounds")]
     [SerializeField] private AudioClip highlightSound;
-    [SerializeField] private AudioClip monsterHighlightSound;
+    [SerializeField] private AudioClip warningHighlightSound;
 
     [Header("Frame Colours")]
-    [SerializeField] private Color interactiveColor = Color.blue;
-    [SerializeField] private Color monsterColor = Color.red;
+    [SerializeField] private Color highlightableColor = Color.yellow;
+    [SerializeField] private Color warningColor = Color.red;
 
     private void Start()
     {
@@ -41,7 +41,7 @@ public class ObjectDetectorUI : MonoBehaviour
 
     private void DetectObjects()
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, 50f, interactiveLayer | monsterLayer);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, 50f, highlightableLayer | warningLayer);
         detectedObjects.RemoveWhere(col => !System.Array.Exists(colliders, c => c == col));
 
         foreach (var col in colliders)
@@ -58,15 +58,15 @@ public class ObjectDetectorUI : MonoBehaviour
     {
         if (!playerCanvas) return;
 
-        bool isMonster = ((1 << col.gameObject.layer) & monsterLayer.value) != 0;
+        bool isBad = ((1 << col.gameObject.layer) & warningLayer.value) != 0;
         RectTransform box = Instantiate(boundingBoxPrefab, playerCanvas).GetComponent<RectTransform>();
         box.name = $"Bounding Box UI [{col.gameObject.name}]";
         activeBoxes[col] = box;
 
-        SetColorRecursive(box, isMonster ? monsterColor : interactiveColor);
+        SetColorRecursive(box, isBad ? warningColor : highlightableColor);
         box.localScale = Vector3.zero;
         box.DOScale(Vector3.one * 1.2f, 0.3f).SetEase(Ease.OutBack);
-        audioSource.PlayOneShot(isMonster ? monsterHighlightSound : highlightSound);
+        audioSource.PlayOneShot(isBad ? warningHighlightSound : highlightSound);
 
         StartCoroutine(HideAfterDelay(col));
     }

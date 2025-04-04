@@ -48,8 +48,11 @@ public class LightIntensityController : MonoBehaviour
         if (controlledLight == null) return;
 
         Vector3 origin = controlledLight.transform.position;
+        Vector3 direction = controlledLight.transform.forward * maxDistance;
+
         Gizmos.color = hitDetected ? Color.red : Color.yellow;
-        Gizmos.DrawLine(origin, hitPoint);
-        Gizmos.DrawSphere(hitPoint, 0.1f);
+        Gizmos.DrawLine(origin, origin + direction);
+        Gizmos.DrawSphere(origin + direction, 0.1f);
     }
+
 }
