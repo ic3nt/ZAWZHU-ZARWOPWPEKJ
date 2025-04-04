@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: RainDrops
+  m_Name: RaindropsCameraLens
   m_Shader: {fileID: 4800000, guid: 196c623417394d3499297857b84f2a5c, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -34,6 +34,7 @@ Material:
     - _BlurIntensity: 0.822
     - _BlurMax: 6
     - _BlurMin: 2
+    - _DisableHeartZoom: 0
     - _DropSize: 0.94
     - _DropSmoothness: 1
     - _DropSpeed: 0.1

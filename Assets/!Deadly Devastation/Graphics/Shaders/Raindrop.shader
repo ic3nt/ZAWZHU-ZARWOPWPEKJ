@@ -1,23 +1,23 @@
-﻿// This shader is converted from 
-// Heartfelt(https://www.shadertoy.com/view/ltffzl) - by Martijn Steinrucken aka BigWings - 2017
-// countfrolic@gmail.com
-// License Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.
-
-Shader "Custom/Raindrop" {
-	Properties {
-		iChannel0("Albedo (RGB)", 2D) = "white" {}
-	}
-	SubShader {
-		Tags { "RenderType"="Opaque" }
-		LOD 200
-		Pass{
-			CGPROGRAM
-			#pragma vertex vert_img
-			#pragma fragment frag
+﻿Shader "Custom/Raindrop"
+{
+    Properties {
+        iChannel0("Albedo (RGB)", 2D) = "white" {}
+        _RainAmount("Rain Amount", Range(0, 1)) = 0.5
+        _Zoom("Zoom", Range(0.1, 2)) = 1.0
+    }
+    SubShader {
+        Tags { "RenderType"="Opaque" }
+        LOD 200
+        Pass {
+            CGPROGRAM
+            #pragma vertex vert_img
+            #pragma fragment frag
 
 			#include "UnityCG.cginc"
 
-			sampler2D iChannel0;
+          sampler2D iChannel0;
+            float _RainAmount;
+            float _Zoom;
 
 			#define S(a, b, t) smoothstep(a, b, t)
 			//#define CHEAP_NORMALS
@@ -25,7 +25,7 @@ Shader "Custom/Raindrop" {
 			#define USE_POST_PROCESSING
 
 			float3 N13(float p) {
-				//  from DAVE HOSKINS
+
 				float3 p3 = frac(float3(p, p, p) * float3(.1031, .11369, .13787));
 				p3 += dot(p3, p3.yzx + 19.19);
 				return frac(float3((p3.x + p3.y)*p3.z, (p3.x + p3.z)*p3.y, (p3.y + p3.z)*p3.x));
@@ -85,7 +85,6 @@ Shader "Custom/Raindrop" {
 				droplets = S(.3, 0., dd);
 				float m = mainDrop + droplets*r*trailFront;
 
-				//m += st.x>a.y*.45 || st.y>a.x*.165 ? 1.2 : 0.;
 				return float2(m, trail);
 			}
 
@@ -114,13 +113,11 @@ Shader "Custom/Raindrop" {
 				return float2(c, max(m1.y*l0, m2.y*l1));
 			}
 
+          fixed4 frag(v2f_img i) : SV_Target {
 
-			fixed4 frag(v2f_img i) : SV_Target{
+                float2 uv = ((i.uv * _ScreenParams.xy) - .5*_ScreenParams.xy) / _ScreenParams.y;
+                float2 UV = i.uv.xy;
 
-				float2 uv = ((i.uv * _ScreenParams.xy) - .5*_ScreenParams.xy) / _ScreenParams.y;
-				float2 UV = i.uv.xy;
-				//float3 M = iMouse.xyz / iResolution.xyz;
-				// for now
 				float3 M = float3(0.0, 0.0, 0.0);
 				float T = _Time.y + M.x*2.;
 
@@ -132,9 +129,9 @@ Shader "Custom/Raindrop" {
 
 				float t = T*.2;
 
-				//float rainAmount = iMouse.z>0. ? M.y : sin(T*.05)*.3 + .7;
-				// fixed rain amount
-				float rainAmount = M.y;
+                float rainAmount = _RainAmount;
+                float zoom = _Zoom; 
+
 
 				float maxBlur = lerp(3., 6., rainAmount);
 				float minBlur = 2.;
@@ -145,46 +142,44 @@ Shader "Custom/Raindrop" {
 				#ifdef HAS_HEART
 				story = S(0., 70., T);
 
-				t = min(1., T / 70.);						// remap drop time so it goes slower when it freezes
+				t = min(1., T / 70.);
 				t = 1. - t;
 				t = (1. - t*t)*70.;
 
-				float zoom = lerp(.3, 1.2, story);		// slowly zoom out
-				uv *= zoom;
-				minBlur = 4. + S(.5, 1., story)*3.;		// more opaque glass towards the end
+                uv *= zoom;
+
+				minBlur = 4. + S(.5, 1., story)*3.;	
 				maxBlur = 6. + S(.5, 1., story)*1.5;
 
-				float2 hv = uv - float2(.0, -.1);				// build heart
+				float2 hv = uv - float2(.0, -.1);
 				hv.x *= .5;
-				float s = S(110., 70., T);				// heart gets smaller and fades towards the end
+				float s = S(110., 70., T);
 				hv.y -= sqrt(abs(hv.x))*.5*s;
 				heart = length(hv);
 				heart = S(.4*s, .2*s, heart)*s;
-				rainAmount = heart;						// the rain is where the heart is
+				rainAmount = _RainAmount;				
 
-				maxBlur -= heart;							// inside the heart slighly less foggy
-				uv *= 1.5;								// zoom out a bit more
+				maxBlur -= heart;
+				uv *= 1.5;
 				t *= .25;
 				#else
-				float zoom = -cos(T*.2);
-				uv *= .7 + zoom*.3;
-				
+				uv *= 1.0;
 				#endif
-				UV = (UV - .5)*(.9 + zoom*.1) + .5;
+				UV = (UV - .5)*1.0 + .5; 
 
-				float staticDrops = S(-.5, 1., rainAmount)*2.;
-				float layer1 = S(.25, .75, rainAmount);
-				float layer2 = S(.0, .5, rainAmount);
+                float staticDrops = S(-.5, 1., rainAmount)*2.;
+                float layer1 = S(.25, .75, rainAmount);
+                float layer2 = S(.0, .5, rainAmount);
 
 
 				float2 c = Drops(uv, t, staticDrops, layer1, layer2);
 				#ifdef CHEAP_NORMALS
-				float2 n = float2(dFdx(c.x), dFdy(c.x));// cheap normals (3x cheaper, but 2 times shittier ;))
+				float2 n = float2(dFdx(c.x), dFdy(c.x));
 				#else
 				float2 e = float2(.001, 0.);
 				float cx = Drops(uv + e, t, staticDrops, layer1, layer2).x;
 				float cy = Drops(uv + e.yx, t, staticDrops, layer1, layer2).x;
-				float2 n = float2(cx - c.x, cy - c.x);		// expensive normals
+				float2 n = float2(cx - c.x, cy - c.x);
 				#endif
 
 
@@ -194,17 +189,15 @@ Shader "Custom/Raindrop" {
 				#endif
 
 				float focus = lerp(maxBlur - c.y, minBlur, S(.1, .2, c.x));
-				// textureLod to tex2Dlod(ref: https://msdn.microsoft.com/en-us/library/windows/desktop/bb509680(v=vs.85).aspx)
-				//float3 col = textureLod(iChannel0, UV + n, focus).rgb;
 				float4 texCoord = float4(UV.x + n.x, UV.y + n.y, 0, focus);
 				float4 lod = tex2Dlod(iChannel0, texCoord);
 				float3 col = lod.rgb;
 
 
 				#ifdef USE_POST_PROCESSING
-				t = (T + 3.)*.5;										// make time sync with first lightnoing
+				t = (T + 3.)*.5;	
 				float colFade = sin(t*.2)*.5 + .5 + story;
-				col *= lerp(float3(1., 1., 1.), float3(.8, .9, 1.3), colFade);	// subtle color shift
+				col *= lerp(float3(1., 1., 1.), float3(.8, .9, 1.3), colFade);
 				//float lightning = sin(t*sin(t*10.));				// lighting flicker
 				//lightning *= pow(max(0., sin(t + sin(t))), 10.);		// lightning flash
 				//col *= 1. + lightning*fade*lerp(1., .1, story*story);	// composite lightning
@@ -212,8 +205,6 @@ Shader "Custom/Raindrop" {
 
 				#endif
 
-
-																	//col = vec3(heart);
 				return fixed4(col, 1);
 			}
 			ENDCG
