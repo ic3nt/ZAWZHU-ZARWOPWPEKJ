@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 200a29924df02d048adc76ad97d6f738, type: 3}
   m_Name: CRTVolume
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   Active:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0
   When:
     m_OverrideState: 1
-    m_Value: 500
+    m_Value: 1000
   Scan:
     m_OverrideState: 1
-    m_Value: -0.18
+    m_Value: -0.35
   Brightness:
     m_OverrideState: 1
     m_Value: 1
@@ -106,28 +106,6 @@ MonoBehaviour:
   highlightsEnd:
     m_OverrideState: 0
     m_Value: 1
---- !u!114 &-2768695220031076969
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5485954d14dfb9a4c8ead8edb0ded5b1, type: 3}
-  m_Name: LiftGammaGain
-  m_EditorClassIdentifier: 
-  active: 0
-  lift:
-    m_OverrideState: 1
-    m_Value: {x: 1, y: 0, z: 0.2103262, w: 0}
-  gamma:
-    m_OverrideState: 1
-    m_Value: {x: 1, y: 0, z: 0.21825457, w: 0}
-  gain:
-    m_OverrideState: 1
-    m_Value: {x: 0.62677974, y: 0.6457884, z: 1, w: 0}
 --- !u!114 &-2270128013028111461
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -258,8 +236,8 @@ MonoBehaviour:
   - {fileID: -6003208878776435513}
   - {fileID: -2270128013028111461}
   - {fileID: -8219011225338585744}
-  - {fileID: -2768695220031076969}
   - {fileID: -9062882391180733491}
+  - {fileID: 7387736830409308567}
 --- !u!114 &1079795590734490280
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -382,3 +360,38 @@ MonoBehaviour:
   rounded:
     m_OverrideState: 1
     m_Value: 1
+--- !u!114 &7387736830409308567
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9552dc531ee036d499efc8422245ab19, type: 3}
+  m_Name: GlitchVolume
+  m_EditorClassIdentifier: 
+  active: 1
+  Active:
+    m_OverrideState: 1
+    m_Value: 1
+  When:
+    m_OverrideState: 1
+    m_Value: 0
+  Noise:
+    m_OverrideState: 1
+    m_Value: {fileID: 0}
+    dimension: 1
+  Size:
+    m_OverrideState: 1
+    m_Value: 50
+  BlockDensity:
+    m_OverrideState: 1
+    m_Value: 0.2
+  LineDensity:
+    m_OverrideState: 1
+    m_Value: 0.7
+  Speed:
+    m_OverrideState: 1
+    m_Value: 5
