@@ -205,19 +205,13 @@ Shader "Custom/Raindrop" {
 				t = (T + 3.)*.5;										// make time sync with first lightnoing
 				float colFade = sin(t*.2)*.5 + .5 + story;
 				col *= lerp(float3(1., 1., 1.), float3(.8, .9, 1.3), colFade);	// subtle color shift
-				float fade = S(0., 10., T);							// fade in at the start
 				//float lightning = sin(t*sin(t*10.));				// lighting flicker
 				//lightning *= pow(max(0., sin(t + sin(t))), 10.);		// lightning flash
 				//col *= 1. + lightning*fade*lerp(1., .1, story*story);	// composite lightning
 				col *= 1. - dot(UV -= .5, UV);							// vignette
 
-				#ifdef HAS_HEART
-				col = lerp(pow(col, float3(1.2, 1.2, 1.2)), col, heart);
-				fade *= S(102., 97., T);
 				#endif
 
-				col *= fade;										// composite start and end fade
-				#endif
 
 																	//col = vec3(heart);
 				return fixed4(col, 1);
