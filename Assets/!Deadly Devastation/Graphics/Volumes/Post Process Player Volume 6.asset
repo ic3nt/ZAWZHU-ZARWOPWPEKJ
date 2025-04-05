@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: CRTVolume
   m_EditorClassIdentifier: 
   active: 1
+  <displayName>k__BackingField: 
   Active:
     m_OverrideState: 1
     m_Value: 0
@@ -40,7 +41,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cb6dc478310fc144ac9072909814967, type: 3}
   m_Name: CameraShakeVolume
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
+  <displayName>k__BackingField: 
   Active:
     m_OverrideState: 1
     m_Value: 1
@@ -119,6 +121,7 @@ MonoBehaviour:
   m_Name: DrunkVolume
   m_EditorClassIdentifier: 
   active: 0
+  <displayName>k__BackingField: 
   Active:
     m_OverrideState: 1
     m_Value: 1
@@ -373,6 +376,7 @@ MonoBehaviour:
   m_Name: GlitchVolume
   m_EditorClassIdentifier: 
   active: 1
+  <displayName>k__BackingField: 
   Active:
     m_OverrideState: 1
     m_Value: 1
