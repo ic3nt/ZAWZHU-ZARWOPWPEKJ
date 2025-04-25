@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8394885866314686502
+--- !u!114 &-8148953322299254219
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   active: 1
   master:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value:
       <length>k__BackingField: 2
       m_Loop: 0
@@ -47,7 +47,7 @@ MonoBehaviour:
   red:
     m_OverrideState: 1
     m_Value:
-      <length>k__BackingField: 5
+      <length>k__BackingField: 6
       m_Loop: 0
       m_ZeroValue: 0
       m_Range: 1
@@ -64,28 +64,37 @@ MonoBehaviour:
           inWeight: 0
           outWeight: 0
         - serializedVersion: 3
-          time: 0.18450184
-          value: 0.504
-          inSlope: 0.9972801
-          outSlope: 0.9972801
+          time: 0.09030101
+          value: 0.2877698
+          inSlope: 3.6892817
+          outSlope: 3.6892817
           tangentMode: 0
           weightedMode: 0
           inWeight: 0
           outWeight: 0
         - serializedVersion: 3
-          time: 0.25461254
-          value: 0.74399996
-          inSlope: 0.84529644
-          outSlope: 0.84529644
+          time: 0.1638796
+          value: 0.3884892
+          inSlope: -1.9612778
+          outSlope: -1.9612778
           tangentMode: 0
           weightedMode: 0
           inWeight: 0
           outWeight: 0
         - serializedVersion: 3
-          time: 0.78597784
-          value: 1
-          inSlope: 1
-          outSlope: 1
+          time: 0.20401338
+          value: 0.61870503
+          inSlope: 0.15571915
+          outSlope: 0.15571915
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 0.5953177
+          value: 0.2805755
+          inSlope: 0.4661143
+          outSlope: 0.4661143
           tangentMode: 0
           weightedMode: 0
           inWeight: 0
@@ -103,7 +112,7 @@ MonoBehaviour:
         m_PostInfinity: 2
         m_RotationOrder: 4
   green:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value:
       <length>k__BackingField: 2
       m_Loop: 0
@@ -134,7 +143,7 @@ MonoBehaviour:
         m_PostInfinity: 2
         m_RotationOrder: 4
   blue:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value:
       <length>k__BackingField: 2
       m_Loop: 0
@@ -165,7 +174,7 @@ MonoBehaviour:
         m_PostInfinity: 2
         m_RotationOrder: 4
   hueVsHue:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value:
       <length>k__BackingField: 0
       m_Loop: 1
@@ -178,7 +187,7 @@ MonoBehaviour:
         m_PostInfinity: 2
         m_RotationOrder: 4
   hueVsSat:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value:
       <length>k__BackingField: 0
       m_Loop: 1
@@ -191,7 +200,7 @@ MonoBehaviour:
         m_PostInfinity: 2
         m_RotationOrder: 4
   satVsSat:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value:
       <length>k__BackingField: 0
       m_Loop: 0
@@ -204,7 +213,7 @@ MonoBehaviour:
         m_PostInfinity: 2
         m_RotationOrder: 4
   lumVsSat:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value:
       <length>k__BackingField: 0
       m_Loop: 0
@@ -229,9 +238,9 @@ MonoBehaviour:
   m_Name: Manual Post Process Volume Profile
   m_EditorClassIdentifier: 
   components:
-  - {fileID: 8763461445528067403}
-  - {fileID: -8394885866314686502}
---- !u!114 &8763461445528067403
+  - {fileID: 3807666267344080252}
+  - {fileID: -8148953322299254219}
+--- !u!114 &3807666267344080252
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -246,22 +255,22 @@ MonoBehaviour:
   active: 1
   shadows:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 0, z: 0.029309273, w: 0}
+    m_Value: {x: 1, y: 0.031273905, z: 0, w: 0}
   midtones:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 0.02727639, z: 0, w: 0}
+    m_Value: {x: 1, y: 0, z: 0.015658379, w: -0.11961722}
   highlights:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 0.016678361, z: 0, w: 0}
+    m_Value: {x: 1, y: 0.08026219, z: 0, w: 0}
   shadowsStart:
     m_OverrideState: 1
     m_Value: 0
   shadowsEnd:
     m_OverrideState: 1
-    m_Value: 0.3
+    m_Value: 2.76
   highlightsStart:
     m_OverrideState: 1
-    m_Value: 0.55
+    m_Value: 0
   highlightsEnd:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 5.22

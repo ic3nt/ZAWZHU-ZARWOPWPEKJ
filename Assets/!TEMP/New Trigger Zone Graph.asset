@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8edfe2103b8210e48b11c2e78f2f4e94, type: 3}
+  m_Name: New Trigger Zone Graph
+  m_EditorClassIdentifier: 
+  requireTag: 1
+  requiredTags: Player
+  requiredLayer:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  requireComponent: 1
+  requireLocalPlayer: 1
+  checkForNetworkObject: 1
+  triggerOnEnter: 1
+  triggerOnExit: 1
+  triggerOnStay: 0
+  stayRepeatInterval: 1
+  onlyOnce: 0
+  delayOnEnter: 0
+  delayOnExit: 0
+  autoDeactivateAfter: 0
+  onEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  onExit:
+    m_PersistentCalls:
+      m_Calls: []
+  onStay:
+    m_PersistentCalls:
+      m_Calls: []
+  isPlayerInside: 0

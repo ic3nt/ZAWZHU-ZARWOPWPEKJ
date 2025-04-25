@@ -18,39 +18,48 @@ public class DragRigidbody : MonoBehaviour
     private Transform jointTrans;
     private float dragDepth;
     public static GameObject grabbedObject;
-    void OnMouseDown()
+    private bool isDragging = false;
+
+    void Update()
     {
-        HandleInputBegin(Input.mousePosition);
-    }
-    void OnMouseUp()
-    {
-        HandleInputEnd();
-    }
-    void OnMouseDrag()
-    {
-        HandleInput(Input.mousePosition);
-    }
-    void FixedUpdate()
-    {
-        HandleRotation();
+        // Перетаскивание при удержании клавиши E
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            TryBeginDrag();
+        }
+
+        if (Input.GetKey(KeyCode.E) && isDragging)
+        {
+            HandleDrag(Input.mousePosition);
+        }
+
+        if (Input.GetKeyUp(KeyCode.E))
+        {
+            EndDrag();
+        }
+
         HandleDistanceChange();
+        HandleRotation();
     }
-    public void HandleInputBegin(Vector3 screenPosition)
+
+    void TryBeginDrag()
     {
-        var ray = Camera.main.ScreenPointToRay(screenPosition);
+        // Попробуем захватить объект при нажатии E
+        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit hit, distance))
         {
             if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Interactive"))
             {
-                dragDepth = CameraPlane.CameraToPointDepth(Camera.main, hit.point);
                 jointTrans = AttachJoint(hit.rigidbody, hit.point);
                 grabbedObject = hit.transform.gameObject;
+                isDragging = true;
 
                 ApplyOutline(grabbedObject, true);
             }
         }
     }
-    public void HandleInput(Vector3 screenPosition)
+
+    void HandleDrag(Vector3 screenPosition)
     {
         if (jointTrans == null)
             return;
@@ -58,21 +67,42 @@ public class DragRigidbody : MonoBehaviour
         Vector3 worldPos = Camera.main.ScreenToWorldPoint(new Vector3(screenPosition.x, screenPosition.y, distance));
         jointTrans.position = worldPos;
     }
-    public void HandleInputEnd()
+
+    void EndDrag()
     {
         if (jointTrans != null)
         {
             ApplyOutline(grabbedObject, false);
             grabbedObject = null;
             Destroy(jointTrans.gameObject);
+            isDragging = false;
         }
     }
+
     private void HandleDistanceChange()
     {
         float scroll = Input.GetAxis("Mouse ScrollWheel");
         if (scroll != 0)
         {
             distance = Mathf.Clamp(distance + scroll * distanceStep, minDistance, maxDistance);
+        }
+    }
+
+    private void HandleRotation()
+    {
+        if (jointTrans == null)
+            return;
+
+        if (Input.GetMouseButton(1)) // ПКМ для вращения
+        {
+            float rotationInput = Input.GetAxis("Mouse X");
+            jointTrans.Rotate(Vector3.up, rotationInput * rotationSpeed * Time.deltaTime);
+        }
+
+        if (Input.GetMouseButton(0)) // ЛКМ для вращения
+        {
+            float rotationInput = Input.GetAxis("Mouse Y");
+            jointTrans.Rotate(Vector3.left, rotationInput * rotationSpeed * Time.deltaTime);
         }
     }
 
@@ -106,22 +136,6 @@ public class DragRigidbody : MonoBehaviour
             positionDamper = damping,
             maximumForce = Mathf.Infinity
         };
-    }
-
-    private void HandleRotation()
-    {
-        if (jointTrans == null)
-            return;
-
-        if (Input.GetKey(KeyCode.Q))
-        {
-            jointTrans.Rotate(Vector3.up, -rotationSpeed * Time.deltaTime);
-        }
-
-        if (Input.GetKey(KeyCode.E))
-        {
-            jointTrans.Rotate(Vector3.up, rotationSpeed * Time.deltaTime);
-        }
     }
 
     private void ApplyOutline(GameObject obj, bool enable)
