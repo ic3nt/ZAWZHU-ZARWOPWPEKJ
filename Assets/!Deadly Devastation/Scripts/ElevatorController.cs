@@ -1,4 +1,4 @@
-using DG.Tweening;
+п»їusing DG.Tweening;
 using TMPro;
 using System.Collections;
 using UnityEngine;
@@ -47,37 +47,37 @@ public class ElevatorController : MonoBehaviour
         if (sequenceCoroutine != null)
         {
             StopCoroutine(sequenceCoroutine);
-            Debug.Log("Корутин остановлен.");
+            Debug.Log("РљРѕСЂСѓС‚РёРЅ РѕСЃС‚Р°РЅРѕРІР»РµРЅ.");
         }
         sequenceCoroutine = StartCoroutine(StageSequence());
-        Debug.Log("Корутин запущен.");
+        Debug.Log("РљРѕСЂСѓС‚РёРЅ Р·Р°РїСѓС‰РµРЅ.");
     }
 
     private IEnumerator StageSequence()
     {
         while (true)
         {
-            Debug.Log("Стадия: Едем");
+            Debug.Log("РЎС‚Р°РґРёСЏ: Р•РґРµРј");
             SetStage(RoundEvents.ElevatorStage.ElevatorMoving);
             yield return WaitWithLog(elevatorMoveDuration);
 
-            Debug.Log("Стадия: Прибыли");
+            Debug.Log("РЎС‚Р°РґРёСЏ: РџСЂРёР±С‹Р»Рё");
             SetStage(RoundEvents.ElevatorStage.Arriving);
             yield return WaitWithLog(arrivingDuration);
 
-            // генерация нового этажа
+            // РіРµРЅРµСЂР°С†РёСЏ РЅРѕРІРѕРіРѕ СЌС‚Р°Р¶Р°
             RoundEvents.InvokeGenerationUpdated(new GenerationInfo(RoundEvents.GenerationStage.Started, chunkManager.currentFloorIndex));
 
-            Debug.Log("Стадия: Открываем дверь");
+            Debug.Log("РЎС‚Р°РґРёСЏ: РћС‚РєСЂС‹РІР°РµРј РґРІРµСЂСЊ");
             SetStage(RoundEvents.ElevatorStage.DoorOpened);
             yield return WaitWithLog(doorOpenDuration);
 
-            Debug.Log("Стадия: Закрываем дверь");
+            Debug.Log("РЎС‚Р°РґРёСЏ: Р—Р°РєСЂС‹РІР°РµРј РґРІРµСЂСЊ");
             SetStage(RoundEvents.ElevatorStage.WaitingInside);
             yield return WaitWithLog(doorCloseDuration);
 
             chunkManager.currentFloorIndex--;
-            Debug.Log($"Переходим на этаж {chunkManager.currentFloorIndex}");
+            Debug.Log($"РџРµСЂРµС…РѕРґРёРј РЅР° СЌС‚Р°Р¶ {chunkManager.currentFloorIndex}");
         }
     }
 
@@ -86,7 +86,7 @@ public class ElevatorController : MonoBehaviour
         float timeLeft = seconds;
         while (timeLeft > 0)
         {
-            Debug.Log($"Осталось времени: {Mathf.Ceil(timeLeft)} сек");
+            Debug.Log($"РћСЃС‚Р°Р»РѕСЃСЊ РІСЂРµРјРµРЅРё: {Mathf.Ceil(timeLeft)} СЃРµРє");
             yield return new WaitForSeconds(1f);
             timeLeft -= 1f;
         }
@@ -106,47 +106,47 @@ public class ElevatorController : MonoBehaviour
         {
             case RoundEvents.ElevatorStage.ElevatorMoving:
                 statusText.text = GetRandom(new[] {
-            "Опять вниз?..",
-            "Ты серьёзно?",
-            "Поехали, чудик.",
-            "Ну, держись.",
-            "Скоро пожалеешь.",
-            "Вниз — твоя специализация.",
-            "Ты без меня никуда, да?",
-            "Я тебе не экскурсовод.",
-            "Готов умирать?",
-            "Дно близко."
+            "РћРїСЏС‚СЊ РІРЅРёР·?..",
+            "РўС‹ СЃРµСЂСЊС‘Р·РЅРѕ?",
+            "РџРѕРµС…Р°Р»Рё, С‡СѓРґРёРє.",
+            "РќСѓ, РґРµСЂР¶РёСЃСЊ.",
+            "РЎРєРѕСЂРѕ РїРѕР¶Р°Р»РµРµС€СЊ.",
+            "Р’РЅРёР· вЂ” С‚РІРѕСЏ СЃРїРµС†РёР°Р»РёР·Р°С†РёСЏ.",
+            "РўС‹ Р±РµР· РјРµРЅСЏ РЅРёРєСѓРґР°, РґР°?",
+            "РЇ С‚РµР±Рµ РЅРµ СЌРєСЃРєСѓСЂСЃРѕРІРѕРґ.",
+            "Р“РѕС‚РѕРІ СѓРјРёСЂР°С‚СЊ?",
+            "Р”РЅРѕ Р±Р»РёР·РєРѕ."
         });
                 break;
 
             case RoundEvents.ElevatorStage.Arriving:
                 statusText.text = GetRandom(new[] {
-            "Приехали.",
-            "Сейчас вылезать будете.",
-            "Ну что, трусы.",
-            "Этаж доставлен. Как и вы.",
-            "Добро пожаловать… в беду.",
-            "Живыми вряд ли вернётесь.",
-            "Не благодарите.",
-            "Я свою работу сделал, ваша очередь.",
-            "Сейчас открою...",
-            "Не беспокойтесь, вас убьют."
+            "РџСЂРёРµС…Р°Р»Рё.",
+            "РЎРµР№С‡Р°СЃ РІС‹Р»РµР·Р°С‚СЊ Р±СѓРґРµС‚Рµ.",
+            "РќСѓ С‡С‚Рѕ, С‚СЂСѓСЃС‹.",
+            "Р­С‚Р°Р¶ РґРѕСЃС‚Р°РІР»РµРЅ. РљР°Рє Рё РІС‹.",
+            "Р”РѕР±СЂРѕ РїРѕР¶Р°Р»РѕРІР°С‚СЊвЂ¦ РІ Р±РµРґСѓ.",
+            "Р–РёРІС‹РјРё РІСЂСЏРґ Р»Рё РІРµСЂРЅС‘С‚РµСЃСЊ.",
+            "РќРµ Р±Р»Р°РіРѕРґР°СЂРёС‚Рµ.",
+            "РЇ СЃРІРѕСЋ СЂР°Р±РѕС‚Сѓ СЃРґРµР»Р°Р», РІР°С€Р° РѕС‡РµСЂРµРґСЊ.",
+            "РЎРµР№С‡Р°СЃ РѕС‚РєСЂРѕСЋ...",
+            "РќРµ Р±РµСЃРїРѕРєРѕР№С‚РµСЃСЊ, РІР°СЃ СѓР±СЊСЋС‚."
         });
-                floorText.text = $"ЭТАЖ {currentFloor}";
+                floorText.text = $"Р­РўРђР– {currentFloor}";
                 break;
 
             case RoundEvents.ElevatorStage.DoorOpened:
                 statusText.text = GetRandom(new[] {
-            "Ну, марш отсюда.",
-            "Вперёд, мясо!",
-            "Давайте, покажите класс.",
-            "Шагайте отсюда...",
-            "Дверь открыта. На выход!",
-            "Надеюсь, вы не вернётесь.",
-            "Выход сзади. Удачи… ха.",
-            "Хватит пялиться, двигайся.",
-            "Иди и позорься.",
-            "Идите уже, герои."
+            "РќСѓ, РјР°СЂС€ РѕС‚СЃСЋРґР°.",
+            "Р’РїРµСЂС‘Рґ, РјСЏСЃРѕ!",
+            "Р”Р°РІР°Р№С‚Рµ, РїРѕРєР°Р¶РёС‚Рµ РєР»Р°СЃСЃ.",
+            "РЁР°РіР°Р№С‚Рµ РѕС‚СЃСЋРґР°...",
+            "Р”РІРµСЂСЊ РѕС‚РєСЂС‹С‚Р°. РќР° РІС‹С…РѕРґ!",
+            "РќР°РґРµСЋСЃСЊ, РІС‹ РЅРµ РІРµСЂРЅС‘С‚РµСЃСЊ.",
+            "Р’С‹С…РѕРґ СЃР·Р°РґРё. РЈРґР°С‡РёвЂ¦ С…Р°.",
+            "РҐРІР°С‚РёС‚ РїСЏР»РёС‚СЊСЃСЏ, РґРІРёРіР°Р№СЃСЏ.",
+            "РРґРё Рё РїРѕР·РѕСЂСЊСЃСЏ.",
+            "РРґРёС‚Рµ СѓР¶Рµ, РіРµСЂРѕРё."
         });
                 playerContainer.SetActive(false);
                 goodLuckContainer.SetActive(true);
@@ -154,17 +154,17 @@ public class ElevatorController : MonoBehaviour
 
             case RoundEvents.ElevatorStage.WaitingInside:
                 statusText.text = GetRandom(new[] {
-            "Живые? Вау.",
-            "Ну хоть, задание выполнили.",
-            "Боже...",
-            "Я скучал. Шутка.",
-            "Скучали? Я — нет.",
-            "Опять вы…",
-            "Пятиминутка позора закончена?",
-            "Больно били?",
-            "Вернулись потрепанными? Классика.",
-            "Жаль, что вы вернулись.",
-            "Неужели.",
+            "Р–РёРІС‹Рµ? Р’Р°Сѓ.",
+            "РќСѓ С…РѕС‚СЊ, Р·Р°РґР°РЅРёРµ РІС‹РїРѕР»РЅРёР»Рё.",
+            "Р‘РѕР¶Рµ...",
+            "РЇ СЃРєСѓС‡Р°Р». РЁСѓС‚РєР°.",
+            "РЎРєСѓС‡Р°Р»Рё? РЇ вЂ” РЅРµС‚.",
+            "РћРїСЏС‚СЊ РІС‹вЂ¦",
+            "РџСЏС‚РёРјРёРЅСѓС‚РєР° РїРѕР·РѕСЂР° Р·Р°РєРѕРЅС‡РµРЅР°?",
+            "Р‘РѕР»СЊРЅРѕ Р±РёР»Рё?",
+            "Р’РµСЂРЅСѓР»РёСЃСЊ РїРѕС‚СЂРµРїР°РЅРЅС‹РјРё? РљР»Р°СЃСЃРёРєР°.",
+            "Р–Р°Р»СЊ, С‡С‚Рѕ РІС‹ РІРµСЂРЅСѓР»РёСЃСЊ.",
+            "РќРµСѓР¶РµР»Рё.",
         });
                 playerContainer.SetActive(true);
                 goodLuckContainer.SetActive(false);
@@ -172,16 +172,16 @@ public class ElevatorController : MonoBehaviour
 
             case RoundEvents.ElevatorStage.WaitingForPlayers:
                 statusText.text = GetRandom(new[] {
-            "Где все?",
-            "Ну же…",
-            "БЫСТРЕЕ!",
-            "Я не железный. Хотя…",
-            "Долго ещё?",
-            "Ждём, как всегда.",
-            "Я состарюсь тут.",
-            "Ожидание. Моя любимая часть.",
-            "Ну давайте, тяните время.",
-            "Ты не один такой тормоз.",
+            "Р“РґРµ РІСЃРµ?",
+            "РќСѓ Р¶РµвЂ¦",
+            "Р‘Р«РЎРўР Р•Р•!",
+            "РЇ РЅРµ Р¶РµР»РµР·РЅС‹Р№. РҐРѕС‚СЏвЂ¦",
+            "Р”РѕР»РіРѕ РµС‰С‘?",
+            "Р–РґС‘Рј, РєР°Рє РІСЃРµРіРґР°.",
+            "РЇ СЃРѕСЃС‚Р°СЂСЋСЃСЊ С‚СѓС‚.",
+            "РћР¶РёРґР°РЅРёРµ. РњРѕСЏ Р»СЋР±РёРјР°СЏ С‡Р°СЃС‚СЊ.",
+            "РќСѓ РґР°РІР°Р№С‚Рµ, С‚СЏРЅРёС‚Рµ РІСЂРµРјСЏ.",
+            "РўС‹ РЅРµ РѕРґРёРЅ С‚Р°РєРѕР№ С‚РѕСЂРјРѕР·.",
         });
                 break;
         }
