@@ -1,7 +1,9 @@
 ﻿using DG.Tweening;
 using TMPro;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ElevatorController : MonoBehaviour
 {
@@ -21,15 +23,63 @@ public class ElevatorController : MonoBehaviour
     [SerializeField] private float doorCloseDuration = 3f;
 
     [Header("UI")]
+    [SerializeField] private GameObject windowsBackground;
+    [SerializeField] private GameObject gameStatusBackground;
+    [SerializeField] private GameObject floorCounterBackground;
     [SerializeField] private GameObject playerContainer;
     [SerializeField] private GameObject goodLuckContainer;
+
+    [Header("Visual Feedback")]
+    [SerializeField] private Material highlightMaterial;
+    [SerializeField] private float highlightDuration = 1f;
+
+    private Material originalMaterialWindow;
+    private Material originalMaterialStatus;
+    private Material originalMaterialFloor;
 
     private Vector3 originalPos;
     private Coroutine sequenceCoroutine;
 
+    private readonly Dictionary<GameObject, Mask> masks = new();
+
     private void Awake()
     {
         originalPos = door.localPosition;
+
+        originalMaterialWindow = GetOriginalMaterial(windowsBackground);
+        originalMaterialStatus = GetOriginalMaterial(gameStatusBackground);
+        originalMaterialFloor = GetOriginalMaterial(floorCounterBackground);
+
+        AddMaskIfAbsent(windowsBackground);
+        AddMaskIfAbsent(gameStatusBackground);
+        AddMaskIfAbsent(floorCounterBackground);
+    }
+
+    private void AddMaskIfAbsent(GameObject parent)
+    {
+        if (parent == null) return;
+
+        foreach (Transform child in parent.GetComponentsInChildren<Transform>(true))
+        {
+            var go = child.gameObject;
+            if (!masks.ContainsKey(go))
+            {
+                var mask = go.GetComponent<Mask>();
+                if (mask == null)
+                    mask = go.AddComponent<Mask>();
+
+                masks[go] = mask;
+            }
+        }
+    }
+
+
+
+    private Material GetOriginalMaterial(GameObject go)
+    {
+        if (go == null) return null;
+        Image img = go.GetComponent<Image>();
+        return img != null ? img.material : null;
     }
 
     private void OnEnable()
@@ -65,7 +115,6 @@ public class ElevatorController : MonoBehaviour
             SetStage(RoundEvents.ElevatorStage.Arriving);
             yield return WaitWithLog(arrivingDuration);
 
-            // генерация нового этажа
             RoundEvents.InvokeGenerationUpdated(new GenerationInfo(RoundEvents.GenerationStage.Started, chunkManager.currentFloorIndex));
 
             Debug.Log("Стадия: Открываем дверь");
@@ -105,98 +154,70 @@ public class ElevatorController : MonoBehaviour
         switch (stage)
         {
             case RoundEvents.ElevatorStage.ElevatorMoving:
-                statusText.text = GetRandom(new[] {
-            "Опять вниз?..",
-            "Ты серьёзно?",
-            "Поехали, чудик.",
-            "Ну, держись.",
-            "Скоро пожалеешь.",
-            "Вниз — твоя специализация.",
-            "Ты без меня никуда, да?",
-            "Я тебе не экскурсовод.",
-            "Готов умирать?",
-            "Дно близко."
-        });
+                statusText.text = GetRandom(new[]
+                {
+                    "Опять вниз?..", "Ты серьёзно?", "Поехали, чудик.",
+                    "Ну, держись.", "Скоро пожалеешь.", "Вниз - твоя специализация.",
+                    "Ты без меня никуда, да?", "Я тебе не экскурсовод.", "Готов умирать?", "Дно близко."
+                });
+                HighlightUI(gameStatusBackground, originalMaterialStatus);
                 break;
 
             case RoundEvents.ElevatorStage.Arriving:
-                statusText.text = GetRandom(new[] {
-            "Приехали.",
-            "Сейчас вылезать будете.",
-            "Ну что, трусы.",
-            "Этаж доставлен. Как и вы.",
-            "Добро пожаловать… в беду.",
-            "Живыми вряд ли вернётесь.",
-            "Не благодарите.",
-            "Я свою работу сделал, ваша очередь.",
-            "Сейчас открою...",
-            "Не беспокойтесь, вас убьют."
-        });
+                statusText.text = GetRandom(new[]
+                {
+                    "Приехали.", "Сейчас вылезать будете.", "Ну что, трусы.",
+                    "Этаж доставлен. Как и вы.", "Добро пожаловать… в беду.",
+                    "Живыми вряд ли вернётесь.", "Не благодарите.",
+                    "Я свою работу сделал, ваша очередь.", "Сейчас открою...", "Не беспокойтесь, вас убьют."
+                });
                 floorText.text = $"ЭТАЖ {currentFloor}";
+                HighlightUI(gameStatusBackground, originalMaterialStatus);
+                HighlightUI(floorCounterBackground, originalMaterialFloor);
                 break;
 
             case RoundEvents.ElevatorStage.DoorOpened:
-                statusText.text = GetRandom(new[] {
-            "Ну, марш отсюда.",
-            "Вперёд, мясо!",
-            "Давайте, покажите класс.",
-            "Шагайте отсюда...",
-            "Дверь открыта. На выход!",
-            "Надеюсь, вы не вернётесь.",
-            "Выход сзади. Удачи… ха.",
-            "Хватит пялиться, двигайся.",
-            "Иди и позорься.",
-            "Идите уже, герои."
-        });
+                statusText.text = GetRandom(new[]
+                {
+                    "Ну, марш отсюда.", "Вперёд, мясо!", "Давайте, покажите класс.",
+                    "Шагайте отсюда...", "Дверь открыта. На выход!", "Надеюсь, вы не вернётесь.",
+                    "Выход сзади. Удачи… ха.", "Хватит пялиться, двигайся.", "Иди и позорься.", "Идите уже, герои."
+                });
                 playerContainer.SetActive(false);
                 goodLuckContainer.SetActive(true);
+                HighlightUI(windowsBackground, originalMaterialWindow);
+                HighlightUI(gameStatusBackground, originalMaterialWindow);
+                Open();
                 break;
 
             case RoundEvents.ElevatorStage.WaitingInside:
-                statusText.text = GetRandom(new[] {
-            "Живые? Вау.",
-            "Ну хоть, задание выполнили.",
-            "Боже...",
-            "Я скучал. Шутка.",
-            "Скучали? Я — нет.",
-            "Опять вы…",
-            "Пятиминутка позора закончена?",
-            "Больно били?",
-            "Вернулись потрепанными? Классика.",
-            "Жаль, что вы вернулись.",
-            "Неужели.",
-        });
+                statusText.text = GetRandom(new[]
+                {
+                    "Живые? Вау.", "Ну хоть, задание выполнили.", "Боже...",
+                    "Я скучал. Шутка.", "Скучали? Я — нет.", "Опять вы…",
+                    "Пятиминутка позора закончена?", "Больно били?",
+                    "Вернулись потрепанными? Классика.", "Жаль, что вы вернулись.", "Неужели.",
+                });
                 playerContainer.SetActive(true);
                 goodLuckContainer.SetActive(false);
+                HighlightUI(windowsBackground, originalMaterialWindow);
+                HighlightUI(gameStatusBackground, originalMaterialWindow);
+                Close();
                 break;
 
             case RoundEvents.ElevatorStage.WaitingForPlayers:
-                statusText.text = GetRandom(new[] {
-            "Где все?",
-            "Ну же…",
-            "БЫСТРЕЕ!",
-            "Я не железный. Хотя…",
-            "Долго ещё?",
-            "Ждём, как всегда.",
-            "Я состарюсь тут.",
-            "Ожидание. Моя любимая часть.",
-            "Ну давайте, тяните время.",
-            "Ты не один такой тормоз.",
-        });
+                statusText.text = GetRandom(new[]
+                {
+                    "Где все?", "Ну же…", "БЫСТРЕЕ!",
+                    "Я не железный. Хотя…", "Долго ещё?", "Ждём, как всегда.",
+                    "Я состарюсь тут.", "Ожидание. Моя любимая часть.",
+                    "Ну давайте, тяните время.", "Ты не один такой тормоз.",
+                });
+                HighlightUI(gameStatusBackground, originalMaterialWindow);
                 break;
         }
 
         string GetRandom(string[] phrases) => phrases[Random.Range(0, phrases.Length)];
-
-
-        if (stage == RoundEvents.ElevatorStage.DoorOpened)
-        {
-            Open();
-        }
-        else if (stage == RoundEvents.ElevatorStage.WaitingInside || stage == RoundEvents.ElevatorStage.WaitingForPlayers)
-        {
-            Close();
-        }
     }
 
     public void Open()
@@ -208,4 +229,49 @@ public class ElevatorController : MonoBehaviour
     {
         door.DOLocalMoveY(originalPos.y, duration).SetEase(Ease.InQuad);
     }
+
+    #region UI Highlight
+
+    private void HighlightUI(GameObject parent, Material originalMat)
+    {
+        if (parent == null) return;
+
+        Image img = parent.GetComponent<Image>();
+        if (img == null || highlightMaterial == null) return;
+
+        AddMaskIfAbsent(parent);
+
+        SetMaskGraphics(parent, false);
+
+        img.material = highlightMaterial;
+
+        StartCoroutine(RevertMaterialAfterDelay(parent, img, originalMat));
+    }
+
+    private IEnumerator RevertMaterialAfterDelay(GameObject parent, Image img, Material originalMat)
+    {
+        yield return new WaitForSeconds(highlightDuration);
+
+        if (img != null)
+            img.material = originalMat;
+
+        SetMaskGraphics(parent, true);
+    }
+
+    private void SetMaskGraphics(GameObject parent, bool enabled)
+    {
+        if (parent == null) return;
+
+        foreach (Transform child in parent.GetComponentsInChildren<Transform>(true))
+        {
+            var go = child.gameObject;
+            if (masks.TryGetValue(go, out var mask))
+            {
+                mask.showMaskGraphic = enabled;
+            }
+        }
+    }
+
+
+    #endregion
 }

@@ -6331,6 +6331,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 425852496}
+  - component: {fileID: 425852499}
   - component: {fileID: 425852498}
   - component: {fileID: 425852497}
   m_Layer: 0
@@ -6379,7 +6380,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: X
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4354a3fe8f016614e9868e1338aa1d18, type: 2}
   m_sharedMaterial: {fileID: 6357009461900007844, guid: 4354a3fe8f016614e9868e1338aa1d18, type: 2}
@@ -6406,7 +6407,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 0.7
+  m_fontSize: 0.3
   m_fontSizeBase: 0.7
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -6456,6 +6457,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 425852495}
   m_CullTransparentMesh: 1
+--- !u!114 &425852499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 425852495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShowMaskGraphic: 1
 --- !u!1 &426755616
 GameObject:
   m_ObjectHideFlags: 0
@@ -9140,7 +9154,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -9422,6 +9436,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 957658592}
+  - component: {fileID: 957658595}
   - component: {fileID: 957658594}
   - component: {fileID: 957658593}
   m_Layer: 0
@@ -9547,6 +9562,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 957658591}
   m_CullTransparentMesh: 1
+--- !u!114 &957658595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 957658591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShowMaskGraphic: 1
 --- !u!1 &980902951
 GameObject:
   m_ObjectHideFlags: 0
@@ -16348,17 +16376,19 @@ MonoBehaviour:
   floorText: {fileID: 1901594124}
   chunkManager: {fileID: 1632652725}
   door: {fileID: 353756175}
-  elevatorCabin: {fileID: 0}
   openHeight: 30
   duration: 1.5
   elevatorMoveDuration: 10
   arrivingDuration: 5
   doorOpenDuration: 10
   doorCloseDuration: 3
+  windowsBackground: {fileID: 872701501}
+  gameStatusBackground: {fileID: 1823918820}
+  floorCounterBackground: {fileID: 936725461}
   playerContainer: {fileID: 93197698}
   goodLuckContainer: {fileID: 749499277}
-  shakeAmount: 0.05
-  shakeSpeed: 20
+  highlightMaterial: {fileID: 2100000, guid: 3fbd38d20aa3c9347b2abe6e6e5b7ce0, type: 2}
+  highlightDuration: 0.5
 --- !u!1 &1804186661
 GameObject:
   m_ObjectHideFlags: 0
@@ -16762,6 +16792,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1901594123}
+  - component: {fileID: 1901594126}
   - component: {fileID: 1901594125}
   - component: {fileID: 1901594124}
   m_Layer: 0
@@ -16810,7 +16841,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: X
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4354a3fe8f016614e9868e1338aa1d18, type: 2}
   m_sharedMaterial: {fileID: 6357009461900007844, guid: 4354a3fe8f016614e9868e1338aa1d18, type: 2}
@@ -16837,7 +16868,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 0.7
+  m_fontSize: 0.75
   m_fontSizeBase: 0.7
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -16887,6 +16918,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1901594122}
   m_CullTransparentMesh: 1
+--- !u!114 &1901594126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1901594122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShowMaskGraphic: 1
 --- !u!1 &1915104414
 GameObject:
   m_ObjectHideFlags: 0
