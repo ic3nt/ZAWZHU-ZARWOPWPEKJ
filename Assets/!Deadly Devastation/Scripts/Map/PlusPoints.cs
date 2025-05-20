@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlusPoints : MonoBehaviour
 {
-    public Floor chunkManager;
+    public Chunk chunk;
 
     public EnemySpawner enemySpawner;
 
@@ -21,23 +21,23 @@ public class PlusPoints : MonoBehaviour
         doorLock.SetActive(false);
         doorWork.SetActive(true);
 
-        if (chunkManager.currentFloor > 0)
+        if (chunk.floorNumber > 0)
         {
             plusPoints = Random.Range(4, 25);
 
-            if (chunkManager.currentFloor > 10)
+            if (chunk.floorNumber > 10)
             {
                 plusPoints = Random.Range(28, 43);
 
-                if (chunkManager.currentFloor > 20)
+                if (chunk.floorNumber > 20)
                 {
                     plusPoints = Random.Range(45, 59);
 
-                    if (chunkManager.currentFloor > 30)
+                    if (chunk.floorNumber > 30)
                     {
                         plusPoints = Random.Range(60, 74);
 
-                        if (chunkManager.currentFloor > 40)
+                        if (chunk.floorNumber > 40)
                         {
                             plusPoints = Random.Range(88, 160);
 
@@ -47,12 +47,6 @@ public class PlusPoints : MonoBehaviour
             }
         }
     }
-
-    private void FixedUpdate()
-    {
-
-    }
-
     private void OnTriggerEnter(Collider other)
     {
 
@@ -62,8 +56,6 @@ public class PlusPoints : MonoBehaviour
             {
                 pp.currfloor += 1;
                 pp.points += plusPoints;
-               
-
             }
 
             doorLock.SetActive(true);

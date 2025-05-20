@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Trap : MonoBehaviour
 {
-    public Floor chunkManager;
+    public Chunk chunk;
 
     public GameObject VacuumCl;
 
@@ -13,23 +13,23 @@ public class Trap : MonoBehaviour
 
     private void Start()
     {
-        if (chunkManager.currentFloor > 0)
+        if (chunk.floorNumber > 0)
         {
             ChanceOfStaying = 0f;
 
-            if (chunkManager.currentFloor > 5)
+            if (chunk.floorNumber > 5)
             {
                 ChanceOfStaying = 0.3f;
 
-                if (chunkManager.currentFloor > 20)
+                if (chunk.floorNumber > 20)
                 {
                     ChanceOfStaying = 0.8f;
 
-                    if (chunkManager.currentFloor > 30)
+                    if (chunk.floorNumber > 30)
                     {
                         ChanceOfStaying = 0.9f;
 
-                        if (chunkManager.currentFloor > 40)
+                        if (chunk.floorNumber > 40)
                         {
                             ChanceOfStaying = 1f;
 

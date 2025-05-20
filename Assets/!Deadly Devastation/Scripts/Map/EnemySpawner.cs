@@ -10,35 +10,35 @@ public class EnemySpawner : Enemy
 
     private System.Random random = new System.Random();
 
-    public Floor chunkManager;
+    public Chunk chunkManager;
 
     private void Start()
     {
-        if (chunkManager.currentFloor >= 0)
+        if (chunkManager.floorNumber >= 0)
         {
             maxSpawnPower = 0;
 
-            if (chunkManager.currentFloor > 5)
+            if (chunkManager.floorNumber > 5)
             {
                 maxSpawnPower = 2;
 
-                if (chunkManager.currentFloor > 10)
+                if (chunkManager.floorNumber > 10)
                 {
                     maxSpawnPower = 4;
-                    if (chunkManager.currentFloor > 15)
+                    if (chunkManager.floorNumber > 15)
                     {
                         maxSpawnPower = 8;
-                        if (chunkManager.currentFloor > 20)
+                        if (chunkManager.floorNumber > 20)
                         {
                             maxSpawnPower = 10;
-                            if (chunkManager.currentFloor > 30)
+                            if (chunkManager.floorNumber > 30)
                             {
                                 maxSpawnPower = 18;
 
-                                if (chunkManager.currentFloor > 50)
+                                if (chunkManager.floorNumber > 50)
                                 {
                                     maxSpawnPower = 20;
-                                    if (chunkManager.currentFloor > 70)
+                                    if (chunkManager.floorNumber > 70)
                                     {
                                         maxSpawnPower = 30;
                                     }

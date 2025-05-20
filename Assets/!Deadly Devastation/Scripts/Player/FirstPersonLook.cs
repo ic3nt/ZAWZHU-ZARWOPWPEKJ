@@ -4,14 +4,13 @@ using Unity.Netcode;
 public class FirstPersonLook : NetworkBehaviour
 {
     [Header("Camera Settings")]
-    [Space(10)]
     public Camera playerCamera;
-    public bool useCameraForPlayerHUD = false;
-    public Camera HUDCamera;
-    public Transform cameraHolder;
+    [SerializeField] private bool useCameraForPlayerHUD = false;
+    [SerializeField] private Camera HUDCamera;
+    [SerializeField] private Transform cameraHolder;
     [SerializeField] private Transform character;
-    public GameObject Head;
-    public FirstPersonMovement firstPersonMovement;
+    [SerializeField] private GameObject Head;
+    [SerializeField] private FirstPersonMovement firstPersonMovement;
     public float sensitivity = 2;
     public float smoothing = 1.5f;
 
@@ -22,44 +21,41 @@ public class FirstPersonLook : NetworkBehaviour
     private Vector3 initialCameraPosition;
 
     [Header("Camera Bob")]
-    [Space(10)]
-    public float walkBobSpeed = 8f;
-    public float walkBobAmount = 0.05f;
-    public float runBobSpeed = 12f;
-    public float runBobAmount = 0.1f;
+    public bool canCameraBobbing = true;
+    [SerializeField] private float walkBobSpeed = 8f;
+    [SerializeField] private float walkBobAmount = 0.05f;
+    [SerializeField] private float runBobSpeed = 12f;
+    [SerializeField] private float runBobAmount = 0.1f;
     private float bobTimer = 0f;
     private Vector3 initialCameraLocalPos;
 
     [Header("Camera Tilt")]
-    [Space(10)]
+    public bool canCameraTilt = true;
     public float tiltAngle = 5f;
-    public float tiltSpeed = 5f;
+    [SerializeField] private float tiltSpeed = 5f;
 
     [Header("Camera Shake")]
-    [Space(10)]
     public float shakeIntensity = 0.05f;
-    public float shakeDuration = 0.2f;
+    [SerializeField] private float shakeDuration = 0.2f;
     private float shakeTimer = 0f;
 
     [Header("Player Run Zoom")]
-    [Space(10)]
     private float defaultZoom;
-    public float zoomSpeed = 1f;
-    public float zoomInFOV = 30f;
+    [SerializeField] private float zoomSpeed = 1f;
+    [SerializeField] private float zoomInFOV = 30f;
 
     [Header("Camera Enemy Focus Settings")]
-    [Space(10)]
     public bool canFocusOnEnemy = true;
-    public float focusSpeed = 5f;
-    public float focusDistance = 10f;
+    [SerializeField] private float focusSpeed = 5f;
+    [SerializeField] private float focusDistance = 10f;
     [SerializeField] private Transform currentFocusTarget;
 
     public AudioClip enemyDetectedSound;
     public AudioSource audioSource;
 
     public bool enableShakeOnFocus = true;
-    public float focusShakeIntensity = 0.1f;
-    public float focusShakeDuration = 0.3f;
+    [SerializeField] private float focusShakeIntensity = 0.1f;
+    [SerializeField] private float focusShakeDuration = 0.3f;
 
     private bool isZoomedIn = false;
 
@@ -87,7 +83,6 @@ public class FirstPersonLook : NetworkBehaviour
 
         initialCameraPosition = playerCamera.transform.position;
 
-        // Если используется камера для UI, синхронизируем параметры с основной камеры
         if (useCameraForPlayerHUD && HUDCamera != null)
         {
             SyncCameraParameters();
@@ -99,10 +94,18 @@ public class FirstPersonLook : NetworkBehaviour
         if (!IsOwner) return;
 
         HandleZoom();
-        HandleCameraBobbing();
-        HandleCameraTilt();
         HandleCameraShake();
         HandleLookRotation();
+
+        if (canCameraBobbing)
+        {
+            HandleCameraBobbing();
+        }
+
+        if (canCameraTilt)
+        {
+            HandleCameraTilt();
+        }
 
         if (canFocusOnEnemy)
         {
@@ -110,14 +113,12 @@ public class FirstPersonLook : NetworkBehaviour
             FocusOnEnemy();
         }
 
-        // Если включен UseCameraForUI, синхронизируем параметры камеры для UI
         if (useCameraForPlayerHUD && HUDCamera != null)
         {
             SyncCameraParameters();
         }
     }
 
-    // Синхронизация параметров камеры
     void SyncCameraParameters()
     {
         if (HUDCamera != null)
