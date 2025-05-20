@@ -3,22 +3,20 @@ using UnityEngine;
 
 public class ChunkManager : MonoBehaviour
 {
-    [Header("Настройки количества этажей")]
-    public int totalUpperFloors = 30;
-    public int totalLowerFloors = 20;
+    [Header("Floors Settings")]
+    [SerializeField] private int totalUpperFloors = 30;
+    [SerializeField] private int totalLowerFloors = 20;
+    [Space(10)]
+    [SerializeField] private List<GameObject> upperNormalFloors;
+    [SerializeField] private List<GameObject> lowerNormalFloors;
+    [Space(10)]
+    [SerializeField] private List<GameObject> bossFloors;
 
-    [Header("Обычные этажи")]
-    public List<GameObject> upperNormalFloors;
-    public List<GameObject> lowerNormalFloors;
+    [SerializeField] private Transform spawnPoint;
+    [SerializeField] private GameObject currentFloor;
 
-    [Header("Боссы")]
-    public List<GameObject> bossFloors;
-
-    public Transform spawnPoint;
-    public GameObject currentFloor;
-
-    public int currentFloorNumber = 0;     // Счётчик всех сгенерированных этажей (начиная с 1)
-    public int currentFloorIndex = 0;     // Номер текущего этажа по логике (может быть отрицательным)
+    public int currentFloorNumber = 0;     // cчётчик всех сгенерированных этажей
+    public int currentFloorIndex = 0;     // yомер текущего этажа
 
     private void Start()
     {

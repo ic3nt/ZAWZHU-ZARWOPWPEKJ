@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.1522856, g: 0.21076076, b: 0.2789427, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -264,6 +264,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ba76c6034b5e0045905717b22956ca8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  elevatorController: {fileID: 1787469310}
 --- !u!4 &224801993
 Transform:
   m_ObjectHideFlags: 0
@@ -6413,7 +6414,7 @@ MonoBehaviour:
   m_fontSizeMax: 0.8
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 1024
+  m_VerticalAlignment: 8192
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: -30
@@ -6755,39 +6756,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c1d31463ef427242afe8b1def81b4c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <IsLocalPlayer>k__BackingField: 0
-  <IsOwner>k__BackingField: 0
-  <IsServer>k__BackingField: 0
-  <ServerIsHost>k__BackingField: 0
-  <IsClient>k__BackingField: 0
-  <IsHost>k__BackingField: 0
-  <IsOwnedByServer>k__BackingField: 0
-  <IsSpawned>k__BackingField: 0
-  m_NetworkObject: {fileID: 0}
-  <NetworkObjectId>k__BackingField: 0
-  <NetworkBehaviourId>k__BackingField: 0
-  NetworkBehaviourIdCache: 0
-  <OwnerClientId>k__BackingField: 0
-  m_VarInit: 0
-  <m_TargetIdBeingSynchronized>k__BackingField: 0
-  lowestPlayer: {fileID: 0}
-  ChunkPrefabs:
-  - {fileID: 7479931358086203721, guid: c94baa7d5eed54791b39eac2e6cfc53f, type: 3}
-  - {fileID: 7479931358086203721, guid: c94baa7d5eed54791b39eac2e6cfc53f, type: 3}
-  - {fileID: 7479931358086203721, guid: c94baa7d5eed54791b39eac2e6cfc53f, type: 3}
-  - {fileID: 7479931358086203721, guid: c94baa7d5eed54791b39eac2e6cfc53f, type: 3}
-  - {fileID: 7479931358086203721, guid: c94baa7d5eed54791b39eac2e6cfc53f, type: 3}
-  SpecialFloors: []
-  specialFloorInterval: 5
-  BossFloors: []
-  BossFloorLevels: 14000000280000003c000000
-  canBossDuplicate: 0
-  SecretFloors: []
-  secretFloorChance: 10
-  FirstChunk: {fileID: 4324744054821077781, guid: c10fa88e09ef82548a2544eb15aad1ff, type: 3}
-  totalFloors: 50
-  currentFloor: 1
-  spawnedChunks: []
 --- !u!4 &462639617
 Transform:
   m_ObjectHideFlags: 0
@@ -16218,6 +16186,10 @@ MonoBehaviour:
   door: {fileID: 353756175}
   openHeight: 30
   duration: 1.5
+  elevatorMoveDuration: 10
+  arrivingDuration: 5
+  doorOpenDuration: 10
+  doorCloseDuration: 3
   playerContainer: {fileID: 93197698}
   goodLuckContainer: {fileID: 749499277}
 --- !u!114 &1787469311
@@ -16232,7 +16204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5afea48c1dff5da489a606f14ac5f7fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  liftMoveDuration: 3
+  elevatorMoveDuration: 10
   arrivingDuration: 3
   doorOpenDuration: 3
   doorCloseDuration: 3
