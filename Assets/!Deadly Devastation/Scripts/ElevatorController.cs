@@ -97,10 +97,10 @@ public class ElevatorController : MonoBehaviour
         if (sequenceCoroutine != null)
         {
             StopCoroutine(sequenceCoroutine);
-            Debug.Log("Корутин остановлен.");
+            Debug.Log("Лифт остановлен");
         }
         sequenceCoroutine = StartCoroutine(StageSequence());
-        Debug.Log("Корутин запущен.");
+        Debug.Log("Лифт запущен");
     }
 
     private IEnumerator StageSequence()
@@ -156,18 +156,19 @@ public class ElevatorController : MonoBehaviour
             case RoundEvents.ElevatorStage.ElevatorMoving:
                 statusText.text = GetRandom(new[]
                 {
-                    "Опять вниз?..", "Ты серьёзно?", "Поехали, чудик.",
-                    "Ну, держись.", "Скоро пожалеешь.", "Вниз - твоя специализация.",
-                    "Ты без меня никуда, да?", "Я тебе не экскурсовод.", "Готов умирать?", "Дно близко."
+                    "Опять вниз?..", "Вы серьёзно?", "Поехали, чудики.",
+                    "Ну, держитесь.", "Скоро пожалеете.", "Вниз - ваша специализация.",
+                    "Вы без меня никуда, да?", "Готовы умирать?", "Дно близко."
                 });
+                playerContainer.SetActive(true);
                 HighlightUI(gameStatusBackground, originalMaterialStatus);
                 break;
 
             case RoundEvents.ElevatorStage.Arriving:
                 statusText.text = GetRandom(new[]
                 {
-                    "Приехали.", "Сейчас вылезать будете.", "Ну что, трусы.",
-                    "Этаж доставлен. Как и вы.", "Добро пожаловать… в беду.",
+                    "Приехали.", "Сейчас вылезать будете.", "Готовы?",
+                    "Этаж доставлен. Как и вы.", "Добро пожаловать... в беду.",
                     "Живыми вряд ли вернётесь.", "Не благодарите.",
                     "Я свою работу сделал, ваша очередь.", "Сейчас открою...", "Не беспокойтесь, вас убьют."
                 });
@@ -181,7 +182,7 @@ public class ElevatorController : MonoBehaviour
                 {
                     "Ну, марш отсюда.", "Вперёд, мясо!", "Давайте, покажите класс.",
                     "Шагайте отсюда...", "Дверь открыта. На выход!", "Надеюсь, вы не вернётесь.",
-                    "Выход сзади. Удачи… ха.", "Хватит пялиться, двигайся.", "Иди и позорься.", "Идите уже, герои."
+                    "Выход сзади. Удачи... ха.", "Хватит пялиться, двигайтесь.", "Идите и позорьтесь.", "Идите уже, герои."
                 });
                 playerContainer.SetActive(false);
                 goodLuckContainer.SetActive(true);
@@ -193,7 +194,7 @@ public class ElevatorController : MonoBehaviour
             case RoundEvents.ElevatorStage.WaitingInside:
                 statusText.text = GetRandom(new[]
                 {
-                    "Живые? Вау.", "Ну хоть, задание выполнили.", "Боже...",
+                    "Живые? Вау.", "Ну хоть, задание выполнили.", "И сто лет не прошло...",
                     "Я скучал. Шутка.", "Скучали? Я — нет.", "Опять вы…",
                     "Пятиминутка позора закончена?", "Больно били?",
                     "Вернулись потрепанными? Классика.", "Жаль, что вы вернулись.", "Неужели.",
@@ -209,7 +210,7 @@ public class ElevatorController : MonoBehaviour
                 statusText.text = GetRandom(new[]
                 {
                     "Где все?", "Ну же…", "БЫСТРЕЕ!",
-                    "Я не железный. Хотя…", "Долго ещё?", "Ждём, как всегда.",
+                    "Я не железный. Хотя...", "Долго ещё?", "Ждём, как всегда.",
                     "Я состарюсь тут.", "Ожидание. Моя любимая часть.",
                     "Ну давайте, тяните время.", "Ты не один такой тормоз.",
                 });
