@@ -10,11 +10,16 @@ public class ElevatorController : MonoBehaviour
     [Header("Components & Settings")]
     [SerializeField] private TMP_Text statusText;
     [SerializeField] private TMP_Text floorText;
-    [SerializeField] private ChunkManager chunkManager;
     [SerializeField] private Transform door;
+    [SerializeField] private Transform teleportPoint;
+    [SerializeField] private BoxCollider blockDoorColider;
     [Space(10)]
     public float openHeight = 3f;
     public float duration = 1.5f;
+
+    [Header("Managers")]
+    [SerializeField] private RoundManager roundManager;
+    [SerializeField] private ChunkManager chunkManager;
 
     [Header("Stage Durations (sec)")]
     [SerializeField] private float elevatorMoveDuration = 10f;
@@ -72,8 +77,6 @@ public class ElevatorController : MonoBehaviour
             }
         }
     }
-
-
 
     private Material GetOriginalMaterial(GameObject go)
     {
@@ -161,6 +164,7 @@ public class ElevatorController : MonoBehaviour
                     "Вы без меня никуда, да?", "Готовы умирать?", "Дно близко."
                 });
                 playerContainer.SetActive(true);
+                CheckAndTeleportPlayersInElevator();
                 HighlightUI(gameStatusBackground, originalMaterialStatus);
                 break;
 
@@ -203,6 +207,7 @@ public class ElevatorController : MonoBehaviour
                 goodLuckContainer.SetActive(false);
                 HighlightUI(windowsBackground, originalMaterialWindow);
                 HighlightUI(gameStatusBackground, originalMaterialWindow);
+                CheckAndTeleportPlayersInElevator();
                 Close();
                 break;
 
@@ -224,11 +229,35 @@ public class ElevatorController : MonoBehaviour
     public void Open()
     {
         door.DOLocalMoveY(originalPos.y + openHeight, duration).SetEase(Ease.OutQuad);
+        blockDoorColider.enabled = false;
     }
 
     public void Close()
     {
         door.DOLocalMoveY(originalPos.y, duration).SetEase(Ease.InQuad);
+        blockDoorColider.enabled = true;
+    }
+
+    public void CheckAndTeleportPlayersInElevator()
+    {
+        if (!roundManager.playerInsideElevator)
+        {
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            if (player != null)
+                player.transform.position = teleportPoint.transform.position;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+            roundManager.playerInsideElevator = true;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+            roundManager.playerInsideElevator = false;
     }
 
     #region UI Highlight

@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class RoundManager : MonoBehaviour
 {
+    [Header("Round Stat")]
+    public bool playerInsideElevator;
+
+    [Header("Managers")]
     [SerializeField] private ElevatorController elevatorController;
 
     void Update()

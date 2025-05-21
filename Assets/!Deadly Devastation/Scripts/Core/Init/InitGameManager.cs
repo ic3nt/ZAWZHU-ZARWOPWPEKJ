@@ -7,20 +7,12 @@ using UnityEngine.SceneManagement;
 public class InitGameManager : MonoBehaviour
 {
     [Header("Initialization Managers")]
-    [Space]
-    [SerializeField]
+
     public GameObject gameManager;
-
-    [SerializeField]
     public LocalizationManager localizationManager;
-
-    [SerializeField]
     public GameObject transitionManager;
-
-    [SerializeField]
     public DiscordController discordController;
-
-    [SerializeField]
+    public AudioManager audioManager;
     public GameObject console;
 
     private void Start()
@@ -78,6 +70,16 @@ public class InitGameManager : MonoBehaviour
         else
         {
             Debug.LogWarning("TransitionManager is not assigned in InitGameManager.");
+        }
+
+        if (audioManager != null)
+        {
+            DontDestroyOnLoad(audioManager);
+            Debug.Log($"AudioManager '{audioManager.name}' is now persistent.");
+        }
+        else
+        {
+            Debug.LogWarning("AudioManager is not assigned in InitGameManager.");
         }
 
         if (discordController != null)

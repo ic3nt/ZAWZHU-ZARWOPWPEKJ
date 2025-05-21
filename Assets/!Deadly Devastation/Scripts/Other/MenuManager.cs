@@ -100,6 +100,7 @@ public class MenuManager : MonoBehaviour
     [Header("Game Manager")]
     public DiscordController discordController;
     public LocalizationManager localizationManager;
+    public AudioManager audioManager;
     public GameObject transitionManager;
 
     [HideInInspector] public bool initSuccessful;
@@ -249,7 +250,6 @@ public class MenuManager : MonoBehaviour
                     initSuccessful = false;
                 }
             }
-
             if (localizationManager == null)
             {
                 GameObject localizationManagerObject = GameObject.FindWithTag("LocalizationManager");
@@ -281,6 +281,21 @@ public class MenuManager : MonoBehaviour
                 else
                 {
                     Debug.LogError("No object with tag 'DiscordManager' found in the scene!");
+                }
+            }
+            if (audioManager == null)
+            {
+                GameObject audioManagerObject = GameObject.FindWithTag("AudioManager");
+                if (audioManagerObject != null)
+                {
+                    InitErrorWindow.SetActive(false);
+                    audioManager = audioManagerObject.GetComponent<AudioManager>();
+                    Debug.Log("AudioController automatically assigned.");
+                    initSuccessful = true;
+                }
+                else
+                {
+                    Debug.LogError("No object with tag 'AudioManager' found in the scene!");
                 }
             }
         }

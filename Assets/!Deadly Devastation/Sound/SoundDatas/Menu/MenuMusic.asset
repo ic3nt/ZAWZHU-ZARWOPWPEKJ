@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 428348cfc03e79d45aa006017727f248, type: 3}
-  m_Name: New Sound Data
+  m_Name: MenuMusic
   m_EditorClassIdentifier: 
-  soundName: 
-  clips: []
+  soundName: MenuMusic
+  clips:
+  - {fileID: 8300000, guid: dd428b50ce4652743b1c53bb243a0176, type: 3}
   volume: 1
   pitch: 1
   loop: 0
