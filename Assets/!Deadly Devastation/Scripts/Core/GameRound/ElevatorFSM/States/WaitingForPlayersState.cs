@@ -1,0 +1,36 @@
+using UnityEngine;
+
+namespace RKS.DD.Game.ElevatorStates
+{
+    public class WaitingForPlayersState : ElevatorState
+    {
+        public WaitingForPlayersState(FSMElevator fsm) : base(fsm) { }
+
+        public override void Enter()
+        {
+            fsm.elevator.SetStage(RoundEvents.ElevatorStage.WaitingForPlayers);
+            fsm.elevator.statusText.text = GetRandom(new[]
+            {
+            "Где все?", "Ну же…", "БЫСТРЕЕ!",
+            "Я не железный. Хотя...", "Долго ещё?", "Ждём, как всегда.",
+            "Я состарюсь тут.", "Ожидание. Моя любимая часть.",
+            "Ну давайте, тяните время.", "Ты не один такой тормоз.",
+            "Живые? Вау.", "Ну хоть, задание выполнили.", "И сто лет не прошло...",
+            "Я скучал. Шутка.", "Скучали? Я — нет.", "Опять вы…",
+            "Пятиминутка позора закончена?", "Больно били?",
+            "Вернулись потрепанными? Классика.", "Жаль, что вы вернулись.", "Неужели."
+            });
+            fsm.elevator.HighlightUI(fsm.elevator.gameStatusBackground, fsm.elevator.originalMaterialWindow);
+            fsm.elevator.OpenDoor();
+
+            fsm.elevator.WaitAndContinue(fsm.elevator.doorCloseDuration, () =>
+            {
+                fsm.elevator.CloseDoor();
+                fsm.elevator.chunkManager.currentFloorIndex--;
+                fsm.SetState(new RKS.DD.Game.ElevatorStates.MovingState(fsm));
+            });
+
+            string GetRandom(string[] phrases) => phrases[Random.Range(0, phrases.Length)];
+        }
+    }
+}
