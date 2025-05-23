@@ -13,7 +13,8 @@ namespace RKS.DD.Game
         public TMP_Text statusText;
         public TMP_Text floorText;
         public Transform door;
-        public Transform teleportPoint;
+        public Transform insideTeleportPoint;
+        public Transform outsideTeleportPoint;
         public BoxCollider blockDoorColider;
         [Space(10)]
         public float openHeight = 3f;
@@ -126,15 +127,24 @@ namespace RKS.DD.Game
             blockDoorColider.enabled = true;
         }
 
-        public void CheckAndTeleportPlayersInElevator()
+        public void TeleportMisplacedPlayers(TeleportTarget target)
         {
-            if (!roundManager.playerInsideElevator)
+            foreach (var player in roundManager.allPlayers)
             {
-                GameObject player = GameObject.FindGameObjectWithTag("Player");
-                if (player != null)
-                    player.transform.position = teleportPoint.transform.position;
+                if (player == null) continue;
+
+                var vars = player.GetComponent<PlayerGameVariables>();
+                if (vars == null) continue;
+
+                bool shouldBeInside = target == TeleportTarget.Inside;
+
+                if (vars.playerInElevator != shouldBeInside && roundManager.playersInsideElevator? true : false)
+                {
+                    player.transform.position = shouldBeInside ? insideTeleportPoint.position : outsideTeleportPoint.position;
+                }
             }
         }
+
         public bool AreAllPlayersInElevator()
         {
             foreach (var player in roundManager.allPlayers)
@@ -145,11 +155,43 @@ namespace RKS.DD.Game
             return true;
         }
 
+        private void CheckAllPlayersElevatorState()
+        {
+            bool? insideState = null;
+
+            foreach (var player in roundManager.allPlayers)
+            {
+                if (player == null) continue;
+
+                var vars = player.GetComponent<PlayerGameVariables>();
+                if (vars == null) continue;
+
+                if (insideState == null)
+                {
+                    insideState = vars.playerInElevator;
+                }
+                else if (insideState != vars.playerInElevator)
+                {
+                    // Кто-то не совпадает — часть внутри, часть снаружи
+                    return;
+                }
+            }
+
+            // Все одинаково: либо все внутри, либо все снаружи
+            if (insideState != null)
+                roundManager.playersInsideElevator = insideState.Value;
+        }
+
+
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Player"))
             {
-                other.GetComponent<PlayerGameVariables>().playerInElevator = true;
+                var vars = other.GetComponent<PlayerGameVariables>();
+                if (vars == null) return;
+
+                vars.playerInElevator = true;
+                CheckAllPlayersElevatorState();
             }
         }
 
@@ -157,8 +199,19 @@ namespace RKS.DD.Game
         {
             if (other.CompareTag("Player"))
             {
-                other.GetComponent<PlayerGameVariables>().playerInElevator = false;
+                var vars = other.GetComponent<PlayerGameVariables>();
+                if (vars == null) return;
+
+                vars.playerInElevator = false;
+                CheckAllPlayersElevatorState();
             }
+        }
+
+
+        public enum TeleportTarget
+        {
+            Inside,
+            Outside
         }
 
 

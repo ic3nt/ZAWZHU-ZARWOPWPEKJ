@@ -13,8 +13,6 @@ public class SettingsManager : MonoBehaviour
     public Toggle visualMoverToggle;
     public VisualMover visualMover;
 
-    public AudioMixer audioMixer;
-
     public GameObject saveManager;
 
     private GameData.Data Data;
@@ -178,14 +176,13 @@ public class SettingsManager : MonoBehaviour
 
         if (volume <= 0.01f) // Условие для обработки почти 0
         {
-            audioMixer.SetFloat("MasterVolume", -80f); // Минимальная громкость в дБ
+            AudioManager.Instance.SetVolume(0);
             Debug.Log("Applying Volume: Muted");
         }
         else
         {
-            float dbVolume = Mathf.Log10(volume) * 30;
-            audioMixer.SetFloat("MasterVolume", dbVolume);
-            Debug.Log($"Applying Volume: {volume}, in dB: {dbVolume}");
+            AudioManager.Instance.SetVolume(volume);
+            Debug.Log($"Applying Volume: {volume}");
         }
 
         SaveSettings();

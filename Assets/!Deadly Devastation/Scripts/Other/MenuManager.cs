@@ -1,4 +1,6 @@
-﻿using DG.Tweening;
+﻿//это пиздец а не код, ПЕРЕПИСАТЬ!
+
+using DG.Tweening;
 using Discord;
 using EasyTransition;
 using System;
@@ -100,7 +102,6 @@ public class MenuManager : MonoBehaviour
     [Header("Game Manager")]
     public DiscordController discordController;
     public LocalizationManager localizationManager;
-    public AudioManager audioManager;
     public GameObject transitionManager;
 
     [HideInInspector] public bool initSuccessful;
@@ -183,6 +184,7 @@ public class MenuManager : MonoBehaviour
     void Start()
     {
         // делаем все чё надо
+        AudioManager.Instance.Play("MenuMusic");
 
         Cursor.lockState = CursorLockMode.None;
 
@@ -281,21 +283,6 @@ public class MenuManager : MonoBehaviour
                 else
                 {
                     Debug.LogError("No object with tag 'DiscordManager' found in the scene!");
-                }
-            }
-            if (audioManager == null)
-            {
-                GameObject audioManagerObject = GameObject.FindWithTag("AudioManager");
-                if (audioManagerObject != null)
-                {
-                    InitErrorWindow.SetActive(false);
-                    audioManager = audioManagerObject.GetComponent<AudioManager>();
-                    Debug.Log("AudioController automatically assigned.");
-                    initSuccessful = true;
-                }
-                else
-                {
-                    Debug.LogError("No object with tag 'AudioManager' found in the scene!");
                 }
             }
         }

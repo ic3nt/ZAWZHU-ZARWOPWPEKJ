@@ -1,4 +1,5 @@
 using UnityEngine;
+using static RKS.DD.Game.ElevatorController;
 
 namespace RKS.DD.Game.ElevatorStates
 {
@@ -18,12 +19,11 @@ namespace RKS.DD.Game.ElevatorStates
             fsm.elevator.goodLuckContainer.SetActive(false);
             fsm.elevator.HighlightUI(fsm.elevator.windowsBackground, fsm.elevator.originalMaterialWindow);
             fsm.elevator.HighlightUI(fsm.elevator.gameStatusBackground, fsm.elevator.originalMaterialWindow);
-            //fsm.elevator.CheckAndTeleportPlayersInElevator();
             fsm.elevator.CloseDoor();
+            fsm.elevator.TeleportMisplacedPlayers(TeleportTarget.Outside);
 
             fsm.elevator.WaitUntilConditionMetAndContinue(() => fsm.elevator.roundManager.taskCompleted, () =>
             {
-                RoundEvents.InvokeTaskCompleted(false);
                 fsm.SetState(new RKS.DD.Game.ElevatorStates.WaitingForPlayersState(fsm));
             });
 

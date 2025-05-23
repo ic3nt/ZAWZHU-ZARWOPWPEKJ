@@ -1,4 +1,5 @@
 using UnityEngine;
+using static RKS.DD.Game.ElevatorController;
 
 namespace RKS.DD.Game.ElevatorStates
 {
@@ -26,7 +27,9 @@ namespace RKS.DD.Game.ElevatorStates
             fsm.elevator.WaitUntilConditionMetAndContinue(() => fsm.elevator.AreAllPlayersInElevator(), () =>
             {
                 fsm.elevator.CloseDoor();
+                fsm.elevator.TeleportMisplacedPlayers(TeleportTarget.Inside);
                 fsm.elevator.chunkManager.currentFloorIndex--;
+                RoundEvents.InvokeTaskCompleted(false);
                 fsm.SetState(new RKS.DD.Game.ElevatorStates.MovingState(fsm));
             });
 
