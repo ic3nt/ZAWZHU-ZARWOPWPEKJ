@@ -16,7 +16,7 @@ namespace RKS.DD.Game.ElevatorStates
             "Вы без меня никуда, да?", "Готовы умирать?", "Дно близко."
             });
             fsm.elevator.playerContainer.SetActive(true);
-            fsm.elevator.CheckAndTeleportPlayersInElevator();
+            //fsm.elevator.CheckAndTeleportPlayersInElevator();
             fsm.elevator.HighlightUI(fsm.elevator.gameStatusBackground, fsm.elevator.originalMaterialStatus);
 
             fsm.elevator.WaitAndContinue(fsm.elevator.elevatorMoveDuration, () =>

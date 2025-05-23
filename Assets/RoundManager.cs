@@ -8,14 +8,42 @@ public class RoundManager : MonoBehaviour
     public bool playerInsideElevator;
     public bool taskCompleted = false;
 
+    [Header("Players")]
+    public List<GameObject> allPlayers = new List<GameObject>();
+
     [Header("Managers")]
     [SerializeField] private RKS.DD.Game.ElevatorController elevatorController;
 
     void Update()
     {
+        allPlayers = new List<GameObject>(GameObject.FindGameObjectsWithTag("Player"));
+
         if (Input.GetKeyDown(KeyCode.P))
         {
             elevatorController.StartSequence();
         }
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            RoundEvents.InvokeTaskCompleted(true);
+        }
+    }
+    private void HandleTaskCompleted(bool isCompleted)
+    {
+        taskCompleted = isCompleted;
+
+        if (isCompleted)
+            Debug.Log("Задание выполнено");
+        else
+            Debug.Log("Задание сброшено");
+    }
+
+    private void OnEnable()
+    {
+        RoundEvents.OnTaskCompleted += HandleTaskCompleted;
+    }
+
+    private void OnDisable()
+    {
+        RoundEvents.OnTaskCompleted -= HandleTaskCompleted;
     }
 }

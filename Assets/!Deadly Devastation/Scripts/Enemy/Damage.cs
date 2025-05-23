@@ -15,7 +15,7 @@ public class EnemyDamage : MonoBehaviour
 
         if (Time.time >= nextAttackTime && other.CompareTag("Player"))
         {
-            if (other.TryGetComponent<HealthManager>(out var hp))
+            if (other.TryGetComponent<PlayerHealth>(out var hp))
             {
                 hp.TakeDamage(damageEn);
                 nextAttackTime = Time.time + cooldownTime;

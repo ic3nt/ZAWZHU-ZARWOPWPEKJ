@@ -492,6 +492,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInsideElevator: 0
+  taskCompleted: 0
+  allPlayers: []
   elevatorController: {fileID: 1787469314}
 --- !u!4 &224801993
 Transform:
@@ -8620,7 +8622,7 @@ PrefabInstance:
       objectReference: {fileID: 1068508543}
     - target: {fileID: 2195243632546827877, guid: cda618ccd63a0664a96dd9ad49ab1345, type: 3}
       propertyPath: m_VersionIndex
-      value: 30
+      value: 33
       objectReference: {fileID: 0}
     - target: {fileID: 2650981630932455084, guid: cda618ccd63a0664a96dd9ad49ab1345, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8672,7 +8674,7 @@ PrefabInstance:
       objectReference: {fileID: 1985462231}
     - target: {fileID: 3987771280059099920, guid: cda618ccd63a0664a96dd9ad49ab1345, type: 3}
       propertyPath: m_VersionIndex
-      value: 5514
+      value: 5517
       objectReference: {fileID: 0}
     - target: {fileID: 4326557914876490439, guid: cda618ccd63a0664a96dd9ad49ab1345, type: 3}
       propertyPath: GlobalObjectIdHash
@@ -8688,7 +8690,7 @@ PrefabInstance:
       objectReference: {fileID: 1786216667}
     - target: {fileID: 5114467770520530026, guid: cda618ccd63a0664a96dd9ad49ab1345, type: 3}
       propertyPath: m_VersionIndex
-      value: 5834
+      value: 5837
       objectReference: {fileID: 0}
     - target: {fileID: 6772228211627892253, guid: cda618ccd63a0664a96dd9ad49ab1345, type: 3}
       propertyPath: m_Mesh
@@ -8700,7 +8702,7 @@ PrefabInstance:
       objectReference: {fileID: 365451242}
     - target: {fileID: 6938220469151737674, guid: cda618ccd63a0664a96dd9ad49ab1345, type: 3}
       propertyPath: m_VersionIndex
-      value: 17162
+      value: 17165
       objectReference: {fileID: 0}
     - target: {fileID: 7777602041235300774, guid: cda618ccd63a0664a96dd9ad49ab1345, type: 3}
       propertyPath: GlobalObjectIdHash
@@ -17012,8 +17014,8 @@ MonoBehaviour:
   duration: 1.5
   elevatorMoveDuration: 3
   arrivingDuration: 3
-  doorOpenDuration: 3
-  doorCloseDuration: 3
+  doorOpenDuration: 10
+  doorCloseDuration: 10
   windowsBackground: {fileID: 872701501}
   gameStatusBackground: {fileID: 1823918820}
   floorCounterBackground: {fileID: 936725461}
@@ -17023,7 +17025,7 @@ MonoBehaviour:
   roundManager: {fileID: 224801992}
   fsm: {fileID: 1787469313}
   highlightMaterial: {fileID: 2100000, guid: 3fbd38d20aa3c9347b2abe6e6e5b7ce0, type: 2}
-  highlightDuration: 0.7
+  highlightDuration: 0.5
   originalMaterialWindow: {fileID: 0}
   originalMaterialStatus: {fileID: 0}
   originalMaterialFloor: {fileID: 0}

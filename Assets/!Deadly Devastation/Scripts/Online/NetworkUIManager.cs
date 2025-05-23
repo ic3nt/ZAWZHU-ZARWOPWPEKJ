@@ -30,6 +30,7 @@ public class NetworkUIManager : MonoBehaviour
         serverButton.onClick.AddListener(StartServer);
 
         debugText.text = "Network UI Manager initialized. Ready to start.";
+        StartHost();
     }
 
     void StartHost()

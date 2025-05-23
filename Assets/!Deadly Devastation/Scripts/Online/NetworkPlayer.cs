@@ -13,8 +13,8 @@ public class NetworkPlayer : NetworkBehaviour
     {
         if (!IsLocalPlayer)
         {
-            GetComponent<FirstPersonMovement>().enabled = false;
-            playerCamera.GetComponent<FirstPersonLook>().enabled = false;
+            GetComponent<PlayerMovement>().enabled = false;
+            playerCamera.GetComponent<PlayerCamera>().enabled = false;
 
             playerCamera.GetComponent<Camera>().enabled = false;
         }
@@ -22,8 +22,8 @@ public class NetworkPlayer : NetworkBehaviour
 
         if (IsClient)
         {
-            GetComponent<FirstPersonMovement>().enabled = true;
-            playerCamera.GetComponent<FirstPersonLook>().enabled = true;
+            GetComponent<PlayerMovement>().enabled = true;
+            playerCamera.GetComponent<PlayerCamera>().enabled = true;
 
             playerCamera.GetComponent<Camera>().enabled = true;
         }

@@ -19,7 +19,7 @@ public class Charge : MonoBehaviour
     {
         if (Time.time >= nextAttackTime && other.CompareTag("Player"))
         {
-            if (other.TryGetComponent<HealthManager>(out var hp))
+            if (other.TryGetComponent<PlayerHealth>(out var hp))
             {
                 if (hp.healthAmount < 100)
                 {

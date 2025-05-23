@@ -11,7 +11,7 @@ public class HackerHealSkill : Skill
         if (NetworkManager.Singleton.IsServer)
         {
             // ѕример: восстановить здоровье всем игрокам
-            foreach (var player in FindObjectsOfType<HealthManager>())
+            foreach (var player in FindObjectsOfType<PlayerHealth>())
             {
                 player.Heal(HealAmount);
             }

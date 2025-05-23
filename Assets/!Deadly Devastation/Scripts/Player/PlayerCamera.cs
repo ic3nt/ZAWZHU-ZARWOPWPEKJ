@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Unity.Netcode;
 
-public class FirstPersonLook : NetworkBehaviour
+public class PlayerCamera : NetworkBehaviour
 {
     [Header("Camera Settings")]
     public Camera playerCamera;
@@ -10,7 +10,7 @@ public class FirstPersonLook : NetworkBehaviour
     [SerializeField] private Transform cameraHolder;
     [SerializeField] private Transform character;
     [SerializeField] private GameObject Head;
-    [SerializeField] private FirstPersonMovement firstPersonMovement;
+    [SerializeField] private PlayerMovement firstPersonMovement;
     public float sensitivity = 2;
     public float smoothing = 1.5f;
 

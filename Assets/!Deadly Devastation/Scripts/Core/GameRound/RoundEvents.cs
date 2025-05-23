@@ -11,7 +11,7 @@ public static class RoundEvents
 
     public static event Action<ElevatorStage> OnStageChanged;
 
-    public static event Action OnTaskCompleted;
+    public static event Action<bool> OnTaskCompleted;
 
     public static void InvokeStageChanged(ElevatorStage stage)
     {
@@ -23,8 +23,8 @@ public static class RoundEvents
         OnGenerationUpdated?.Invoke(info);
     }
 
-    public static void InvokeTaskCompleted()
+    public static void InvokeTaskCompleted(bool completed)
     {
-        OnTaskCompleted?.Invoke();
+        OnTaskCompleted?.Invoke(completed);
     }
 }

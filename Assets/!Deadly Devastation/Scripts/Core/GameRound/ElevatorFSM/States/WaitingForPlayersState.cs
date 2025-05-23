@@ -23,7 +23,7 @@ namespace RKS.DD.Game.ElevatorStates
             fsm.elevator.HighlightUI(fsm.elevator.gameStatusBackground, fsm.elevator.originalMaterialWindow);
             fsm.elevator.OpenDoor();
 
-            fsm.elevator.WaitAndContinue(fsm.elevator.doorCloseDuration, () =>
+            fsm.elevator.WaitUntilConditionMetAndContinue(() => fsm.elevator.AreAllPlayersInElevator(), () =>
             {
                 fsm.elevator.CloseDoor();
                 fsm.elevator.chunkManager.currentFloorIndex--;

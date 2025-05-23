@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerPointsInRound : MonoBehaviour
 {
-    public HealthManager healthManager;
+    public PlayerHealth healthManager;
     public int points;
 
     public int currfloor;

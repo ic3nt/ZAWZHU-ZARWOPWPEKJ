@@ -5457,25 +5457,25 @@ MonoBehaviour:
   character: {fileID: 5193859935782295756}
   Head: {fileID: 8019915723301141008}
   firstPersonMovement: {fileID: 6387213999055437123}
-  sensitivity: 1.7
+  sensitivity: 2
   smoothing: 1.5
   canCameraBobbing: 1
   walkBobSpeed: 8
-  walkBobAmount: 0.1
-  runBobSpeed: 10
-  runBobAmount: 0.2
+  walkBobAmount: 0.05
+  runBobSpeed: 12
+  runBobAmount: 0.1
   canCameraTilt: 1
   tiltAngle: 5
   tiltSpeed: 5
-  shakeIntensity: 0.07
+  shakeIntensity: 0.05
   shakeDuration: 0.2
-  zoomSpeed: 4
+  zoomSpeed: 1
   zoomInFOV: 30
   canFocusOnEnemy: 1
   focusSpeed: 5
   focusDistance: 10
   currentFocusTarget: {fileID: 0}
-  enemyDetectedSound: {fileID: 0}
+  enemyDetectedSound: {fileID: 8300000, guid: 1fd10306c01144036904aca2b71072f7, type: 3}
   audioSource: {fileID: 8711949578937777218}
   enableShakeOnFocus: 1
   focusShakeIntensity: 0.1
@@ -5510,7 +5510,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2625994491735084040}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 00552ee2b3dd04025986c376bc99a1a1, type: 3}
   m_Name: 
@@ -9769,6 +9769,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5193859935782295756}
   - component: {fileID: 5757891465360934014}
+  - component: {fileID: 7544469259598849955}
   - component: {fileID: 6387213999055437123}
   - component: {fileID: 356079694662189859}
   - component: {fileID: 2550335685054833410}
@@ -9833,6 +9834,22 @@ MonoBehaviour:
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
+--- !u!114 &7544469259598849955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4283364824617576930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 113d7f3f4e4f1a84fbe544a802a448fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerInElevator: 0
+  playerIsSpectator: 0
+  playerIsAFK: 0
+  playerIsSpeaking: 0
 --- !u!114 &6387213999055437123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9868,7 +9885,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   personMovement: {fileID: 6387213999055437123}
-  personLook: {fileID: 0}
+  personLook: {fileID: 4490969345584322249}
   personAudio: {fileID: 4083692567133244299}
   healthBar: {fileID: 4206986096636005520}
   healthAmountText: {fileID: 5521128430856653866}

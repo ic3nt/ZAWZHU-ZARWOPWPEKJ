@@ -9,8 +9,8 @@ using UnityEngine.U2D;
 
 public class NetworkUnstable : MonoBehaviour
 {
-    public FirstPersonLook firstPersonLook;
-    public FirstPersonMovement firstPersonMovement;
+    public PlayerCamera firstPersonLook;
+    public PlayerMovement firstPersonMovement;
   //  public Animator animatorUI;
     public GameObject NetworkUnstableWindow;
     public float timeRemaining = 91;
@@ -25,8 +25,8 @@ public class NetworkUnstable : MonoBehaviour
     {
         NetworkUnstableWindow.SetActive(false);
         timerIsRunning = false;
-        firstPersonMovement.GetComponent<FirstPersonMovement>().enabled = true;
-        firstPersonLook.GetComponent<FirstPersonLook>().enabled = true;
+        firstPersonMovement.GetComponent<PlayerMovement>().enabled = true;
+        firstPersonLook.GetComponent<PlayerCamera>().enabled = true;
     }
     public void LoadScene(string _sceneName)
     {
@@ -43,8 +43,8 @@ public class NetworkUnstable : MonoBehaviour
 
             // animatorUI.SetTrigger("UnstableNetwork");
             NetworkUnstableWindow.SetActive(true);
-            firstPersonMovement.GetComponent<FirstPersonMovement>().enabled = false;
-            firstPersonLook.GetComponent<FirstPersonLook>().enabled = false;
+            firstPersonMovement.GetComponent<PlayerMovement>().enabled = false;
+            firstPersonLook.GetComponent<PlayerCamera>().enabled = false;
          //   Debug.Log("Unstable network connecting!");
 
             if (!timerIsRunning)
@@ -77,8 +77,8 @@ public class NetworkUnstable : MonoBehaviour
 
             NetworkUnstableWindow.SetActive(false);
         //    Debug.Log("The network connection is normal!");
-            firstPersonMovement.GetComponent<FirstPersonMovement>().enabled = true;
-            firstPersonLook.GetComponent<FirstPersonLook>().enabled = true;
+            firstPersonMovement.GetComponent<PlayerMovement>().enabled = true;
+            firstPersonLook.GetComponent<PlayerCamera>().enabled = true;
             timerIsRunning = false;
             timeRemaining = 91;
         }

@@ -13,7 +13,7 @@ public class BombDamage : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            if (other.TryGetComponent<HealthManager>(out var hp))
+            if (other.TryGetComponent<PlayerHealth>(out var hp))
             {
                 hp.TakeDamage(damageB);
                 aus.Play();

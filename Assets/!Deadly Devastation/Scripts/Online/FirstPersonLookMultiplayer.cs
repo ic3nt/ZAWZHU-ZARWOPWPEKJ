@@ -19,7 +19,7 @@ public class FirstPersonLookMultiplayer : NetworkBehaviour
     void Reset()
     {
         if (!IsOwner) return;
-        character = GetComponentInParent<FirstPersonMovement>().transform;
+        character = GetComponentInParent<PlayerMovement>().transform;
     }
 
     void Start()

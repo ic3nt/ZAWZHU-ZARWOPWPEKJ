@@ -4,11 +4,11 @@ using UnityEngine.UI;
 using TMPro;
 using EasyTransition;
 
-public class HealthManager : MonoBehaviour
+public class PlayerHealth : MonoBehaviour
 {
    // public DemoLoadScene loadScene;
-    public FirstPersonMovement personMovement;
-    public FirstPersonLook personLook;
+    public PlayerMovement personMovement;
+    public PlayerCamera personLook;
     public FirstPersonAudio personAudio;
     public Image healthBar;
     public TextMeshProUGUI healthAmountText;
@@ -25,8 +25,8 @@ public class HealthManager : MonoBehaviour
     {
         // делаем в старте все что нужно
 
-        personMovement.GetComponent<FirstPersonMovement>().enabled = true;
-        personLook.GetComponent<FirstPersonLook>().enabled = true;
+        personMovement.GetComponent<PlayerMovement>().enabled = true;
+        personLook.GetComponent<PlayerCamera>().enabled = true;
         personAudio.GetComponent<FirstPersonAudio>().enabled = true;
         lastDamageTime = Time.time;
     }
@@ -137,8 +137,8 @@ public class HealthManager : MonoBehaviour
     {
         timerOn = false;
         Cursor.lockState = CursorLockMode.None;
-        personMovement.GetComponent<FirstPersonMovement>().enabled = false;
-        personLook.GetComponent<FirstPersonLook>().enabled = false;
+        personMovement.GetComponent<PlayerMovement>().enabled = false;
+        personLook.GetComponent<PlayerCamera>().enabled = false;
         personAudio.GetComponent<FirstPersonAudio>().enabled = false;
         animatorUI.SetTrigger("Dead");
     }

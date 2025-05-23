@@ -84,6 +84,23 @@ namespace RKS.DD.Game
             StartCoroutine(WaitCoroutine(seconds, nextState));
         }
 
+        public void WaitUntilConditionMetAndContinue(System.Func<bool> condition, System.Action next)
+        {
+            StartCoroutine(WaitUntilCoroutine(condition, next));
+        }
+
+        private IEnumerator WaitUntilCoroutine(System.Func<bool> condition, System.Action next)
+        {
+            while (!condition())
+            {
+                Debug.Log("Ожидание выполнения условий...");
+                yield return new WaitForSeconds(1f);
+            }
+
+            Debug.Log("Условия выполнены!");
+            next?.Invoke();
+        }
+
         private IEnumerator WaitCoroutine(float seconds, System.Action next)
         {
             float timer = seconds;
@@ -118,18 +135,32 @@ namespace RKS.DD.Game
                     player.transform.position = teleportPoint.transform.position;
             }
         }
+        public bool AreAllPlayersInElevator()
+        {
+            foreach (var player in roundManager.allPlayers)
+            {
+                if (player == null) continue;
+                if (!player.GetComponent<PlayerGameVariables>().playerInElevator) return false;
+            }
+            return true;
+        }
 
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Player"))
-                roundManager.playerInsideElevator = true;
+            {
+                other.GetComponent<PlayerGameVariables>().playerInElevator = true;
+            }
         }
 
         private void OnTriggerExit(Collider other)
         {
             if (other.CompareTag("Player"))
-                roundManager.playerInsideElevator = false;
+            {
+                other.GetComponent<PlayerGameVariables>().playerInElevator = false;
+            }
         }
+
 
         #region UI Hightlight
         public void HighlightUI(GameObject parent, Material originalMat)

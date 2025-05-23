@@ -2,9 +2,9 @@
 using UnityEngine;
 using Unity.Netcode;
 
-public class FirstPersonMovement : NetworkBehaviour
+public class PlayerMovement : NetworkBehaviour
 {
-    [Header("Movement Settings")]
+    [Header("Movement Variables")]
     public float walkStartSpeed = 2f;
     public float walkMaxSpeed = 5f;
     public float runStartSpeed = 3f;
@@ -13,8 +13,8 @@ public class FirstPersonMovement : NetworkBehaviour
     public KeyCode runningKey = KeyCode.LeftShift;
 
     [Header("Acceleration / Deceleration")]
-    public float accelerationTime = 0.5f;
-    public float decelerationTime = 0.3f;
+    [SerializeField] private float accelerationTime = 0.5f;
+    [SerializeField] private float decelerationTime = 0.3f;
 
     [Header("Animation")]
     public Animator animator;
@@ -22,7 +22,6 @@ public class FirstPersonMovement : NetworkBehaviour
     private Rigidbody rigidbody;
     private Vector3 velocitySmoothDamp = Vector3.zero;
     private float currentSpeed = 0f;
-
     public bool IsRunning { get; private set; }
     [HideInInspector] public bool IsMoving = false;
 
