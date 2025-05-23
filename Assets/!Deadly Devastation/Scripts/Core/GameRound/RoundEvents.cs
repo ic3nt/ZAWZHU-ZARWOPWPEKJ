@@ -7,7 +7,7 @@ public static class RoundEvents
 
     public static Action<GenerationInfo> OnGenerationUpdated;
 
-    public enum ElevatorStage { Moving, Arriving, DoorOpened, DoorClosed, WaitingForPlayers }
+    public enum ElevatorStage { Beginning, Moving, Arriving, DoorOpened, DoorClosed, WaitingForPlayers }
 
     public static event Action<ElevatorStage> OnStageChanged;
 

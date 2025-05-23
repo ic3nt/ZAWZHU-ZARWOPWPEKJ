@@ -43,7 +43,6 @@ public class ChunkManager : MonoBehaviour
         }
     }
 
-
     public void SpawnFloor(int floorIndex)
     {
         if (currentFloor != null)
