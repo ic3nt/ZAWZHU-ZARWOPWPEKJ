@@ -27,6 +27,12 @@
                 RoundEvents.InvokeTaskCompleted(true);
             }
         }
+
+    public void TaskComplete(bool value)
+    {
+        RoundEvents.InvokeTaskCompleted(value);
+    }
+
         private void HandleTaskCompleted(bool isCompleted)
         {
             taskCompleted = isCompleted;

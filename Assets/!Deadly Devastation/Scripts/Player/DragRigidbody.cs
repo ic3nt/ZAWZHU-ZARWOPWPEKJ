@@ -1,109 +1,79 @@
-using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 public class DragRigidbody : MonoBehaviour
 {
-    [Header("Capture options")]
-    public float force = 1000;
-    public float damping = 100;
-    public float distance = 3f;
-    public float minDistance = 1f;
-    public float maxDistance = 10f;
-    public float distanceStep = 0.5f;
+    public float force = 600;
+    public float damping = 6;
+    public float distance = 15;
 
-    [Header("Rotate an object")]
-    public float rotationSpeed = 150f;
+    public Camera dragCamera; // Камера, с которой идет взаимодействие (например, камера с RenderTexture)
+    public static GameObject grabbedObject;
 
     private Transform jointTrans;
-    private float dragDepth;
-    public static GameObject grabbedObject;
-    private bool isDragging = false;
+    private Rigidbody attachedRb;
 
     void Update()
     {
-        // Перетаскивание при удержании клавиши E
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetMouseButtonDown(0))
         {
-            TryBeginDrag();
+            HandleInputBegin();
         }
-
-        if (Input.GetKey(KeyCode.E) && isDragging)
+        else if (Input.GetMouseButton(0))
         {
-            HandleDrag(Input.mousePosition);
+            HandleInput();
         }
-
-        if (Input.GetKeyUp(KeyCode.E))
+        else if (Input.GetMouseButtonUp(0))
         {
-            EndDrag();
+            HandleInputEnd();
         }
-
-        HandleDistanceChange();
-        HandleRotation();
     }
 
-    void TryBeginDrag()
+    private void Awake()
     {
-        // Попробуем захватить объект при нажатии E
-        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        dragCamera = Camera.main;
+    }
+
+    void HandleInputBegin()
+    {
+        if (dragCamera == null)
+        {
+            Debug.LogWarning("Drag camera not assigned.");
+            return;
+        }
+
+        Ray ray = dragCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f));
         if (Physics.Raycast(ray, out RaycastHit hit, distance))
         {
             if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Interactive"))
             {
+                grabbedObject = hit.collider.gameObject;
                 jointTrans = AttachJoint(hit.rigidbody, hit.point);
-                grabbedObject = hit.transform.gameObject;
-                isDragging = true;
-
-                ApplyOutline(grabbedObject, true);
+                attachedRb = hit.rigidbody;
             }
         }
     }
 
-    void HandleDrag(Vector3 screenPosition)
+    void HandleInput()
     {
-        if (jointTrans == null)
+        if (jointTrans == null || dragCamera == null)
             return;
 
-        Vector3 worldPos = Camera.main.ScreenToWorldPoint(new Vector3(screenPosition.x, screenPosition.y, distance));
-        jointTrans.position = worldPos;
+        // Направление — прямо перед камерой
+        Ray ray = dragCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f));
+        jointTrans.position = ray.origin + ray.direction * distance;
     }
 
-    void EndDrag()
+    void HandleInputEnd()
     {
         if (jointTrans != null)
         {
-            ApplyOutline(grabbedObject, false);
-            grabbedObject = null;
             Destroy(jointTrans.gameObject);
-            isDragging = false;
-        }
-    }
-
-    private void HandleDistanceChange()
-    {
-        float scroll = Input.GetAxis("Mouse ScrollWheel");
-        if (scroll != 0)
-        {
-            distance = Mathf.Clamp(distance + scroll * distanceStep, minDistance, maxDistance);
-        }
-    }
-
-    private void HandleRotation()
-    {
-        if (jointTrans == null)
-            return;
-
-        if (Input.GetMouseButton(1)) // ПКМ для вращения
-        {
-            float rotationInput = Input.GetAxis("Mouse X");
-            jointTrans.Rotate(Vector3.up, rotationInput * rotationSpeed * Time.deltaTime);
+            jointTrans = null;
         }
 
-        if (Input.GetMouseButton(0)) // ЛКМ для вращения
-        {
-            float rotationInput = Input.GetAxis("Mouse Y");
-            jointTrans.Rotate(Vector3.left, rotationInput * rotationSpeed * Time.deltaTime);
-        }
+        grabbedObject = null;
+        attachedRb = null;
     }
 
     Transform AttachJoint(Rigidbody rb, Vector3 attachmentPosition)
@@ -112,12 +82,13 @@ public class DragRigidbody : MonoBehaviour
         go.hideFlags = HideFlags.HideInHierarchy;
         go.transform.position = attachmentPosition;
 
-        var newRb = go.AddComponent<Rigidbody>();
+        Rigidbody newRb = go.AddComponent<Rigidbody>();
         newRb.isKinematic = true;
 
-        var joint = go.AddComponent<ConfigurableJoint>();
+        ConfigurableJoint joint = go.AddComponent<ConfigurableJoint>();
         joint.connectedBody = rb;
         joint.configuredInWorldSpace = true;
+
         joint.xDrive = NewJointDrive(force, damping);
         joint.yDrive = NewJointDrive(force, damping);
         joint.zDrive = NewJointDrive(force, damping);
@@ -127,7 +98,7 @@ public class DragRigidbody : MonoBehaviour
         return go.transform;
     }
 
-    private JointDrive NewJointDrive(float force, float damping)
+    JointDrive NewJointDrive(float force, float damping)
     {
         return new JointDrive
         {
@@ -136,27 +107,5 @@ public class DragRigidbody : MonoBehaviour
             positionDamper = damping,
             maximumForce = Mathf.Infinity
         };
-    }
-
-    private void ApplyOutline(GameObject obj, bool enable)
-    {
-        if (obj == null) return;
-
-        OutlineScript outline = obj.GetComponent<OutlineScript>();
-        if (enable)
-        {
-            if (!outline)
-            {
-                outline = obj.AddComponent<OutlineScript>();
-            }
-            outline.enabled = true;
-        }
-        else
-        {
-            if (outline)
-            {
-                outline.enabled = false;
-            }
-        }
     }
 }

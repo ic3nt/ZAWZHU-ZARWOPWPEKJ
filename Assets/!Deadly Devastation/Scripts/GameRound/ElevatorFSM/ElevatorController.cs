@@ -76,7 +76,7 @@ namespace RKS.DD.Game
 
         public void StartSequence()
         {
-            fsm.SetState(new RKS.DD.Game.ElevatorStates.MovingState(fsm));
+            fsm.SetState(new RKS.DD.Game.ElevatorStates.BegginingState(fsm));
             Debug.Log("Лифт запущен");
         }
 
@@ -129,84 +129,69 @@ namespace RKS.DD.Game
 
         public void TeleportMisplacedPlayers(TeleportTarget target)
         {
+            if (!TryGetComponent(out Collider elevatorCollider))
+            {
+                Debug.LogWarning("Elevator has no collider!");
+                return;
+            }
+
+            Bounds bounds = elevatorCollider.bounds;
+            bool shouldBeInside = target == TeleportTarget.Inside;
+
             foreach (var player in roundManager.allPlayers)
             {
                 if (player == null) continue;
-
                 var vars = player.GetComponent<PlayerGameVariables>();
                 if (vars == null) continue;
 
-                bool shouldBeInside = target == TeleportTarget.Inside;
+                bool isInside = bounds.Contains(player.transform.position);
 
-                if (vars.playerInElevator != shouldBeInside && roundManager.playersInsideElevator? true : false)
+                if (isInside != shouldBeInside)
                 {
-                    player.transform.position = shouldBeInside ? insideTeleportPoint.position : outsideTeleportPoint.position;
+                    player.transform.position = shouldBeInside
+                        ? insideTeleportPoint.position
+                        : outsideTeleportPoint.position;
                 }
+
+                vars.playerInElevator = shouldBeInside;
             }
+
+            CheckAllPlayersElevatorState();
         }
 
         public bool AreAllPlayersInElevator()
         {
+            if (!TryGetComponent(out Collider elevatorCollider))
+                return false;
+
+            Bounds bounds = elevatorCollider.bounds;
+
             foreach (var player in roundManager.allPlayers)
             {
                 if (player == null) continue;
-                if (!player.GetComponent<PlayerGameVariables>().playerInElevator) return false;
+                if (!bounds.Contains(player.transform.position))
+                    return false;
             }
+
             return true;
         }
 
-        private void CheckAllPlayersElevatorState()
+        public void CheckAllPlayersElevatorState()
         {
-            bool? insideState = null;
+            roundManager.playersInsideElevator = AreAllPlayersInElevator();
 
-            foreach (var player in roundManager.allPlayers)
+            if (TryGetComponent(out Collider elevatorCollider))
             {
-                if (player == null) continue;
-
-                var vars = player.GetComponent<PlayerGameVariables>();
-                if (vars == null) continue;
-
-                if (insideState == null)
+                Bounds bounds = elevatorCollider.bounds;
+                foreach (var player in roundManager.allPlayers)
                 {
-                    insideState = vars.playerInElevator;
-                }
-                else if (insideState != vars.playerInElevator)
-                {
-                    // Кто-то не совпадает — часть внутри, часть снаружи
-                    return;
+                    if (player == null) continue;
+                    var vars = player.GetComponent<PlayerGameVariables>();
+                    if (vars == null) continue;
+                    vars.playerInElevator = bounds.Contains(player.transform.position);
                 }
             }
-
-            // Все одинаково: либо все внутри, либо все снаружи
-            if (insideState != null)
-                roundManager.playersInsideElevator = insideState.Value;
         }
-
-
-        private void OnTriggerEnter(Collider other)
-        {
-            if (other.CompareTag("Player"))
-            {
-                var vars = other.GetComponent<PlayerGameVariables>();
-                if (vars == null) return;
-
-                vars.playerInElevator = true;
-                CheckAllPlayersElevatorState();
-            }
-        }
-
-        private void OnTriggerExit(Collider other)
-        {
-            if (other.CompareTag("Player"))
-            {
-                var vars = other.GetComponent<PlayerGameVariables>();
-                if (vars == null) return;
-
-                vars.playerInElevator = false;
-                CheckAllPlayersElevatorState();
-            }
-        }
-
 
         public enum TeleportTarget
         {
