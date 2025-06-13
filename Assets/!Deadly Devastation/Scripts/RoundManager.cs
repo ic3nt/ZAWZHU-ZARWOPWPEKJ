@@ -18,14 +18,14 @@
         {
             allPlayers = new List<GameObject>(GameObject.FindGameObjectsWithTag("Player"));
 
-            if (Input.GetKeyDown(KeyCode.P))
-            {
-                elevatorController.StartSequence();
-            }
-            if (Input.GetKeyDown(KeyCode.Z))
-            {
-                RoundEvents.InvokeTaskCompleted(true);
-            }
+    //        if (Input.GetKeyDown(KeyCode.P))
+    //        {
+    //            elevatorController.StartSequence();
+    //        }
+    //        if (Input.GetKeyDown(KeyCode.Z))
+    //        {
+    //            RoundEvents.InvokeTaskCompleted(true);
+    //        }
         }
 
     public void TaskComplete(bool value)

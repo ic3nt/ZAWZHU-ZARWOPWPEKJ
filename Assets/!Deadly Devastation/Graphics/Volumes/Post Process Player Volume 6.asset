@@ -1,34 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-9062882391180733491
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 200a29924df02d048adc76ad97d6f738, type: 3}
-  m_Name: CRTVolume
-  m_EditorClassIdentifier: 
-  active: 1
-  <displayName>k__BackingField: 
-  Active:
-    m_OverrideState: 1
-    m_Value: 0
-  When:
-    m_OverrideState: 1
-    m_Value: 1000
-  Scan:
-    m_OverrideState: 1
-    m_Value: -0.35
-  Brightness:
-    m_OverrideState: 1
-    m_Value: 1
-  Offset:
-    m_OverrideState: 1
-    m_Value: 1
 --- !u!114 &-8219011225338585744
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -107,32 +78,6 @@ MonoBehaviour:
     m_Value: 0.55
   highlightsEnd:
     m_OverrideState: 0
-    m_Value: 1
---- !u!114 &-2270128013028111461
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e164acabf378b54fb9216ba720815f9, type: 3}
-  m_Name: DrunkVolume
-  m_EditorClassIdentifier: 
-  active: 0
-  <displayName>k__BackingField: 
-  Active:
-    m_OverrideState: 1
-    m_Value: 1
-  When:
-    m_OverrideState: 1
-    m_Value: 0
-  Speed:
-    m_OverrideState: 1
-    m_Value: 1
-  Zoom:
-    m_OverrideState: 1
     m_Value: 1
 --- !u!114 &-1809082535530292213
 MonoBehaviour:
@@ -237,10 +182,6 @@ MonoBehaviour:
   - {fileID: 2393720187381752082}
   - {fileID: 1079795590734490280}
   - {fileID: -6003208878776435513}
-  - {fileID: -2270128013028111461}
-  - {fileID: -8219011225338585744}
-  - {fileID: -9062882391180733491}
-  - {fileID: 7387736830409308567}
 --- !u!114 &1079795590734490280
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -363,39 +304,3 @@ MonoBehaviour:
   rounded:
     m_OverrideState: 1
     m_Value: 1
---- !u!114 &7387736830409308567
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9552dc531ee036d499efc8422245ab19, type: 3}
-  m_Name: GlitchVolume
-  m_EditorClassIdentifier: 
-  active: 1
-  <displayName>k__BackingField: 
-  Active:
-    m_OverrideState: 1
-    m_Value: 1
-  When:
-    m_OverrideState: 1
-    m_Value: 0
-  Noise:
-    m_OverrideState: 1
-    m_Value: {fileID: 0}
-    dimension: 1
-  Size:
-    m_OverrideState: 1
-    m_Value: 50
-  BlockDensity:
-    m_OverrideState: 1
-    m_Value: 0.2
-  LineDensity:
-    m_OverrideState: 1
-    m_Value: 0.7
-  Speed:
-    m_OverrideState: 1
-    m_Value: 5
