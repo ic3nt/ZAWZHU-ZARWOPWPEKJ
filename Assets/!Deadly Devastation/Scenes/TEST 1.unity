@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.00011324721, g: 0.00012438979, b: 0.00011324721, a: 1}
+  m_IndirectSpecularColor: {r: 0.000114433744, g: 0.00012420691, b: 0.000114433744, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6083,7 +6083,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3a57a2f290fb9474db50ac098d52736f, type: 2}
+  - {fileID: 2100000, guid: 4f2673df16a764f4481c761c347d812f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9191,7 +9191,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &778079925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9253,7 +9253,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 32767
+  m_SortingOrder: 1488
   m_TargetDisplay: 0
 --- !u!224 &778079928
 RectTransform:
@@ -22221,7 +22221,7 @@ MonoBehaviour:
   NetworkConfig:
     ProtocolVersion: 0
     NetworkTransport: {fileID: 7385628205857566256}
-    PlayerPrefab: {fileID: 4283364824617576930, guid: 1dad3cfdaf807a44fa092f4dc3dead53, type: 3}
+    PlayerPrefab: {fileID: 3317704105534906839, guid: 0f9e34c858eae4f13b463cf0d861564f, type: 3}
     Prefabs:
       NetworkPrefabsLists: []
     TickRate: 30
