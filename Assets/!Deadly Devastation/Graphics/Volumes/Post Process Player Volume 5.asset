@@ -62,34 +62,6 @@ MonoBehaviour:
   rounded:
     m_OverrideState: 1
     m_Value: 1
---- !u!114 &-7190279588282548865
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 745dbe63215d76041a5b631c8de9de3d, type: 3}
-  m_Name: CartoonVolume
-  m_EditorClassIdentifier: 
-  active: 1
-  Active:
-    m_OverrideState: 1
-    m_Value: 1
-  When:
-    m_OverrideState: 1
-    m_Value: 1000
-  Lines:
-    m_OverrideState: 1
-    m_Value: 30
-  ColorLight:
-    m_OverrideState: 1
-    m_Value: {r: 1, g: 1, b: 1, a: 1}
-  ColorDark:
-    m_OverrideState: 1
-    m_Value: {r: 0, g: 0, b: 0, a: 1}
 --- !u!114 &-6642176084379277688
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -345,7 +317,6 @@ MonoBehaviour:
   - {fileID: -8978400730504178424}
   - {fileID: 7588340389624359362}
   - {fileID: 8193634346479762908}
-  - {fileID: -7190279588282548865}
 --- !u!114 &1844499790903139595
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -531,6 +502,3 @@ MonoBehaviour:
   Speed:
     m_OverrideState: 1
     m_Value: 1.1
-  Zoom:
-    m_OverrideState: 1
-    m_Value: 0.59

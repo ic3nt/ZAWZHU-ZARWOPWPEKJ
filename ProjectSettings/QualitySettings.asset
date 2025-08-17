@@ -109,7 +109,6 @@ QualitySettings:
     excludedTargetPlatforms:
     - Server
     - Windows Store Apps
-    - Standalone
   - serializedVersion: 3
     name: High
     pixelLightCount: 2
@@ -158,10 +157,11 @@ QualitySettings:
     terrainBillboardStart: 50
     terrainFadeLength: 5
     terrainMaxTrees: 50
-    excludedTargetPlatforms: []
+    excludedTargetPlatforms:
+    - Standalone
   m_TextureMipmapLimitGroupNames: []
   m_PerPlatformDefaultQuality:
     Android: 0
     Server: 2
-    Standalone: 2
+    Standalone: 1
     Windows Store Apps: 2

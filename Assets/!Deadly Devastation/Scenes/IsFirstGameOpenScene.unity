@@ -392,7 +392,8 @@ MonoBehaviour:
   downButtonPosY: -800
   topButtonPosY: -595
   tweenDuration: 1
-  rotationSpeed: 10
+  cameraToRotate: {fileID: 1497362417}
+  rotationSpeed: 20
 --- !u!114 &265401966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -715,6 +716,7 @@ MonoBehaviour:
   downButtonPosY: 0
   topButtonPosY: 0
   tweenDuration: 0
+  cameraToRotate: {fileID: 0}
   rotationSpeed: 30
 --- !u!114 &307519846
 MonoBehaviour:
@@ -1638,7 +1640,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 32
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -1680,7 +1682,7 @@ MonoBehaviour:
   m_RenderShadows: 1
   m_RequiresDepthTextureOption: 2
   m_RequiresOpaqueTextureOption: 2
-  m_CameraType: 0
+  m_CameraType: 1
   m_Cameras: []
   m_RendererIndex: -1
   m_VolumeLayerMask:
@@ -3413,7 +3415,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1497362415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3430,7 +3432,8 @@ MonoBehaviour:
   m_RequiresDepthTextureOption: 2
   m_RequiresOpaqueTextureOption: 2
   m_CameraType: 0
-  m_Cameras: []
+  m_Cameras:
+  - {fileID: 498434105}
   m_RendererIndex: -1
   m_VolumeLayerMask:
     serializedVersion: 2
@@ -3494,7 +3497,7 @@ Camera:
   field of view: 85
   orthographic: 0
   orthographic size: 5
-  m_Depth: 0
+  m_Depth: -1.05
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -4491,6 +4494,7 @@ MonoBehaviour:
   downButtonPosY: 0
   topButtonPosY: 0
   tweenDuration: 0
+  cameraToRotate: {fileID: 0}
   rotationSpeed: 30
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

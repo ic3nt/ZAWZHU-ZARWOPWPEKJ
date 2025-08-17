@@ -27,7 +27,7 @@ public class FirstOpenSceneManager : MonoBehaviour
     public float tweenDuration;
 
     [Space]
-    private Camera cameraToRotate;
+    [SerializeField] private Camera cameraToRotate;
     public float rotationSpeed = 10.0f; 
 
     private float rotationY = 0f;
@@ -56,7 +56,6 @@ public class FirstOpenSceneManager : MonoBehaviour
 
         toggleAgree.onValueChanged.AddListener(OnToggleValueChanged);
 
-        cameraToRotate = Camera.main;
         originalY = cameraToRotate.transform.position.y;
 
         if (saveManager == null)
