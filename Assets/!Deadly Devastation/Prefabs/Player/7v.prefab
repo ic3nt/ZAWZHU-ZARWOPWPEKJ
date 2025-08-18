@@ -1208,7 +1208,7 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 0.95998895, b: 0.514151, a: 1}
-  m_Intensity: 15
+  m_Intensity: 10
   m_Range: 15
   m_SpotAngle: 90.83786
   m_InnerSpotAngle: 45.5682
@@ -1245,7 +1245,7 @@ Light:
   m_RenderMode: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 1159
+    m_Bits: 1409
   m_RenderingLayerMask: 1
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
@@ -1741,7 +1741,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &245621787311789691
 Transform:
   m_ObjectHideFlags: 0
@@ -3478,8 +3478,8 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 0.95998895, b: 0.514151, a: 1}
-  m_Intensity: 6
-  m_Range: 15
+  m_Intensity: 5
+  m_Range: 6
   m_SpotAngle: 98.02097
   m_InnerSpotAngle: 52.038548
   m_CookieSize: 10
@@ -3515,7 +3515,7 @@ Light:
   m_RenderMode: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 7936
+    m_Bits: 1921
   m_RenderingLayerMask: 1
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
@@ -3890,7 +3890,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5406279270723151288
 Transform:
   m_ObjectHideFlags: 0
@@ -5618,7 +5618,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1617784963733918641
 Transform:
   m_ObjectHideFlags: 0
@@ -5665,6 +5665,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a66d3c068b430e44fb0acff91ef0800a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Light: {fileID: 470981704190781395}
 --- !u!1 &2366776829258571728
 GameObject:
   m_ObjectHideFlags: 0
@@ -16527,7 +16528,7 @@ MonoBehaviour:
   stepAudio: {fileID: 7592981946600267995}
   runningAudio: {fileID: 8376286930106945459}
   velocityThreshold: 0.01
-  landingAudio: {fileID: 5665663963249359173}
+  landingAudio: {fileID: 0}
   landingSFX: []
   jump: {fileID: 0}
   jumpAudio: {fileID: 0}
