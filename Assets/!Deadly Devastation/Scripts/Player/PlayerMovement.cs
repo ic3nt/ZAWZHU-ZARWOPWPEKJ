@@ -12,12 +12,16 @@ public class PlayerMovement : NetworkBehaviour
     public bool canRun = true;
     public KeyCode runningKey = KeyCode.LeftShift;
 
+
     [Header("Acceleration / Deceleration")]
     [SerializeField] private float accelerationTime = 0.5f;
     [SerializeField] private float decelerationTime = 0.3f;
 
     [Header("Animation")]
     public Animator animator;
+
+    // Контроль движения (сделан публичным)
+    public bool CanMove = true;
 
     private Rigidbody rigidbody;
     private Vector3 velocitySmoothDamp = Vector3.zero;
@@ -33,13 +37,46 @@ public class PlayerMovement : NetworkBehaviour
     private void Update()
     {
         if (!IsOwner) return;
-        HandleAnimation();
+
+        if (CanMove)
+        {
+            HandleAnimation();
+        }
+        else
+        {
+            // Принудительно зафиксировать состояние Idle
+            IsMoving = false;
+            if (animator != null)
+            {
+                animator.SetBool("IsIdle", true);
+                animator.SetBool("IsRun", false);
+                animator.SetBool("IsWalk", false);
+                // animator.SetBool("IsDanceOne", false); // можно при необходимости
+            }
+        }
     }
 
     private void FixedUpdate()
     {
         if (!IsOwner) return;
-        HandleMovement();
+
+        if (CanMove)
+        {
+            HandleMovement();
+        }
+        else
+        {
+            // Остановить горизонтальное движение, сохранить вертикальную скорость
+            Vector3 vel = rigidbody.velocity;
+            vel.x = 0f;
+            vel.z = 0f;
+            rigidbody.velocity = new Vector3(vel.x, rigidbody.velocity.y, vel.z);
+
+            currentSpeed = 0f;
+            velocitySmoothDamp = Vector3.zero;
+            IsRunning = false;
+            IsMoving = false;
+        }
     }
 
     private void HandleAnimation()

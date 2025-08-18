@@ -7992,6 +7992,7 @@ GameObject:
   - component: {fileID: 5991298759250343824}
   - component: {fileID: 6236117930237290853}
   - component: {fileID: 6923055958110388051}
+  - component: {fileID: 5318591011577029214}
   m_Layer: 0
   m_Name: 7v
   m_TagString: Player
@@ -8080,6 +8081,7 @@ MonoBehaviour:
   accelerationTime: 0.1
   decelerationTime: 0.1
   animator: {fileID: 6236117930237290853}
+  CanMove: 1
   IsMoving: 0
 --- !u!114 &1634237587014523608
 MonoBehaviour:
@@ -8426,6 +8428,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5318591011577029214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3317704105534906839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6eb1bed1b973d48ca8c8d41e0fb4f86e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 6236117930237290853}
+  kickForce: 500
+  delay: 0.2
+  PM: {fileID: 7143494988555535794}
 --- !u!1 &3367720728260918112
 GameObject:
   m_ObjectHideFlags: 0

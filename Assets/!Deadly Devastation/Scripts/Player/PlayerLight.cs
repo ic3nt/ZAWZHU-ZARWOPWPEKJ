@@ -4,8 +4,6 @@ public class PlayerLight : MonoBehaviour
 {
     public GameObject Light;
 
-
-
     private void Start()
     {
         Light.SetActive(false);
