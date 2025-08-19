@@ -8126,7 +8126,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHealth: 100
   _startHealth: 100
-  _currentHealth: 1009
   _damageCooldown: 0
   _destroyOnDeath: 0
 --- !u!114 &4690459089005627408
@@ -8358,7 +8357,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3317704105534906839}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: ff63374eca8b69749a0bcc2d58760852, type: 3}
