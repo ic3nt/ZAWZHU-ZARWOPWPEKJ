@@ -8085,6 +8085,10 @@ MonoBehaviour:
   _movement: {fileID: 7143494988555535794}
   _cameraController: {fileID: 6248640917761348267}
   _fpAudio: {fileID: 7785926417949770388}
+  _wallCheckDistance: 1
+  _wallLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!114 &7143494988555535794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8100,7 +8104,7 @@ MonoBehaviour:
   walkStartSpeed: 2
   walkMaxSpeed: 5
   runStartSpeed: 3
-  runMaxSpeed: 8
+  runMaxSpeed: 15
   accelerationTime: 0.1
   decelerationTime: 0.1
   runBuildUpTime: 2
@@ -8122,7 +8126,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHealth: 100
   _startHealth: 100
-  _damageCooldown: 0.1
+  _damageCooldown: 0
   _destroyOnDeath: 0
 --- !u!114 &4690459089005627408
 MonoBehaviour:
@@ -8458,13 +8462,10 @@ MonoBehaviour:
   kickRange: 2
   delay: 1
   kickKey: 113
-  kickAnimationCount: 3
+  kickAnimationCount: 2
   kickShakeData: {fileID: 11400000, guid: 5a56c21352f924f4a921de48beece207, type: 2}
   hitShakeData: {fileID: 11400000, guid: aa1a19327685bd940810d628edb73682, type: 2}
   runningKickShakeData: {fileID: 11400000, guid: 8bf0e727b86e35d4aa52165807dc5266, type: 2}
-  timeSlowdown: 0.2
-  slowdownDuration: 0.15
-  cameraKnockback: 0.2
 --- !u!114 &9087729532779588293
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8478,7 +8479,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: {fileID: 1634237587014523608}
-  _dps: 2
+  _dps: 3
 --- !u!114 &8707190214422657074
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17937,7 +17938,7 @@ MonoBehaviour:
   cameraTilt: 1
   tiltAngle: 5
   tiltSpeed: 5
-  sprintFovBoost: 30
+  sprintFovBoost: 20
   fovLerpSpeed: 1
   fovBreathAmplitude: 1.25
   fovBreathSpeed: 2.5

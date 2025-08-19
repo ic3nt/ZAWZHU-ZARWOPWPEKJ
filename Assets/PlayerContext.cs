@@ -16,7 +16,11 @@ public class PlayerContext : NetworkBehaviour
     [Tooltip("First-person movement logic (optional, but many systems read from it).")]
     [SerializeField] private PlayerMovement _movement;
     [SerializeField] private PlayerCameraController _cameraController;
-    [SerializeField] private FirstPersonAudio _fpAudio; // existing in your project
+    [SerializeField] private FirstPersonAudio _fpAudio;
+
+    [Header("Settings Refs")]
+    [SerializeField] private float _wallCheckDistance = 1f;
+    [SerializeField] private LayerMask _wallLayer;
 
 
     public Rigidbody Rb => _rb ? _rb : (_rb = GetComponent<Rigidbody>());
@@ -26,7 +30,8 @@ public class PlayerContext : NetworkBehaviour
     public PlayerMovement Movement => _movement ? _movement : (_movement = GetComponent<PlayerMovement>());
     public PlayerCameraController CameraController => _cameraController ? _cameraController : (_cameraController = GetComponent<PlayerCameraController>());
     public FirstPersonAudio FpAudio => _fpAudio;
-
+    public LayerMask WallLayer => _wallLayer;
+    public float WallCheckDistance => _wallCheckDistance;
 
     private void Reset()
     {

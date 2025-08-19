@@ -58,19 +58,35 @@ public class PlayerMovement : NetworkBehaviour
     private void Update()
     {
         if (!IsOwner) return;
+
         if (CanMove) UpdateAnimation();
         else ForceIdle();
 
+        // Проверка на приземление
         bool grounded = Physics.Raycast(transform.position + Vector3.up * 0.1f, Vector3.down, 0.2f);
         if (!_wasGrounded && grounded) OnJumpLand?.Invoke();
         _wasGrounded = grounded;
+
+        // 🔹 Вывод в консоль
+        Debug.Log($"[PlayerMovement] Running: {IsRunning}, Speed: {CurrentHorizontalSpeed:F2}");
     }
 
     private void FixedUpdate()
     {
         if (!IsOwner) return;
+
         if (CanMove) ApplyMovement();
         else HaltHorizontal();
+    }
+
+    private bool HasWallAhead()
+    {
+        if (Physics.Raycast(transform.position + Vector3.up * 0.5f, transform.forward, out RaycastHit hit, _ctx.WallCheckDistance))
+        {
+            if (((1 << hit.collider.gameObject.layer) & _ctx.WallLayer) != 0)
+                return true;
+        }
+        return false;
     }
 
     private void UpdateAnimation()
@@ -78,13 +94,16 @@ public class PlayerMovement : NetworkBehaviour
         IsMoving = Mathf.Abs(Input.GetAxisRaw("Horizontal")) > 0.01f || Mathf.Abs(Input.GetAxisRaw("Vertical")) > 0.01f;
         bool shift = Input.GetKey(runKey);
 
+        // 🔹 теперь тут учитываем стену
+        IsRunning = canRun && shift && IsMoving && Input.GetAxisRaw("Vertical") > 0.1f && !HasWallAhead();
+
         if (!_animator) return;
 
         if (IsMoving)
         {
             _animator.SetBool(HashDance1, false);
-            _animator.SetBool(HashWalk, !shift);
-            _animator.SetBool(HashRun, shift);
+            _animator.SetBool(HashWalk, !IsRunning);
+            _animator.SetBool(HashRun, IsRunning);
             _animator.SetBool(HashIdle, false);
         }
         else
@@ -109,8 +128,7 @@ public class PlayerMovement : NetworkBehaviour
             OnHardStop?.Invoke();
         _wasInputMoving = IsMoving;
 
-        IsRunning = canRun && Input.GetKey(runKey);
-
+        // прогресс ускорения при беге
         if (IsRunning && IsMoving)
             RunProgress01 = Mathf.MoveTowards(RunProgress01, 1f, Time.fixedDeltaTime / Mathf.Max(0.01f, runBuildUpTime));
         else
@@ -153,8 +171,18 @@ public class PlayerMovement : NetworkBehaviour
 
     private void HaltHorizontal()
     {
-        Vector3 v = _rb.velocity; v.x = 0; v.z = 0; _rb.velocity = v;
-        _currentSpeed = 0f; _velSmoothRef = Vector3.zero; IsRunning = false; IsMoving = false; RunProgress01 = 0f; _wasInputMoving = false;
+        Vector3 v = _rb.velocity;
+        v.x = 0;
+        v.z = 0;
+        _rb.velocity = v;
+
+        _currentSpeed = 0f;
+        _velSmoothRef = Vector3.zero;
+        IsRunning = false;
+        IsMoving = false;
+        RunProgress01 = 0f;
+        _wasInputMoving = false;
+
         ForceIdle();
     }
 
