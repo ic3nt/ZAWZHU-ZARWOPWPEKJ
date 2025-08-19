@@ -19,12 +19,12 @@ public class Charge : MonoBehaviour
     {
         if (Time.time >= nextAttackTime && other.CompareTag("Player"))
         {
-            if (other.TryGetComponent<PlayerHealth>(out var hp))
+    //        if (other.TryGetComponent<PlayerHealth>(out var hp))
             {
-                if (hp.healthAmount < 100)
+       //         if (hp.healthAmount < 100)
                 {
                     Instantiate(particles, PartPos.position, PartPos.rotation);
-                    hp.Heal(chargeam);
+       //             hp.Heal(chargeam);
                     aus.Play();
                     nextAttackTime = Time.time + cooldownTime; // Устанавливаем время следующего удара с учетом кулдауна
                 }

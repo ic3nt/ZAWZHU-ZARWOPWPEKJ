@@ -1,96 +1,70 @@
 using UnityEngine;
 
-public interface IInteract
-{
-    void Interact();
-}
-
-public class PlayerInteractive : MonoBehaviour
+public class PlayerInteractor : MonoBehaviour
 {
     [Header("Interaction")]
-    public Camera interactCamera;
-    public float interactRange = 3f;
-    public LayerMask interactMask;
+    [SerializeField] private float interactRange = 3f;
+    [SerializeField] private LayerMask interactMask;
 
-    private GameObject currentHighlightedObject;
+    private GameObject _current;
+    private Camera interactCamera;
 
-    void Update()
+    private void Awake()
     {
-        HighlightInteractable();
-
-        if (Input.GetMouseButtonDown(0))
+        if (!interactCamera)
         {
-            TryInteract();
+            var ctx = GetComponentInParent<PlayerContext>();
+            if (ctx) interactCamera = ctx.Camera;
         }
     }
 
-    void HighlightInteractable()
+    private void Update()
     {
-        if (interactCamera == null) return;
+        Highlight();
+        if (Input.GetMouseButtonDown(0)) TryInteract();
+    }
 
-        Ray ray = interactCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
-        if (Physics.Raycast(ray, out RaycastHit hitInfo, interactRange, interactMask))
+    private void Highlight()
+    {
+        if (!interactCamera) return;
+
+        Ray ray = interactCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+        if (Physics.Raycast(ray, out var hit, interactRange, interactMask) &&
+            hit.collider.TryGetComponent<Interactable>(out _))
         {
-            var interactable = hitInfo.collider.GetComponent<IInteract>();
-            if (interactable != null)
+            var go = hit.collider.gameObject;
+            if (_current != go)
             {
-                GameObject hitObject = hitInfo.collider.gameObject;
-
-                if (currentHighlightedObject != hitObject)
-                {
-                    RemoveOutline(currentHighlightedObject);
-                    ApplyOutline(hitObject, true);
-                    currentHighlightedObject = hitObject;
-                }
-
-                return;
+                SetOutline(_current, false);
+                SetOutline(go, true);
+                _current = go;
             }
-        }
-
-        // Если луч никуда не попал или объект не интерактивный — убрать подсветку
-        RemoveOutline(currentHighlightedObject);
-        currentHighlightedObject = null;
-    }
-
-    void TryInteract()
-    {
-        if (interactCamera == null)
-        {
-            Debug.LogWarning("Не назначена камера для взаимодействия!", this);
             return;
         }
 
-        Ray ray = interactCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
-        if (Physics.Raycast(ray, out RaycastHit hitInfo, interactRange, interactMask))
+        SetOutline(_current, false);
+        _current = null;
+    }
+
+    private void TryInteract()
+    {
+        if (!interactCamera) return;
+
+        Ray ray = interactCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+        if (Physics.Raycast(ray, out var hit, interactRange, interactMask) &&
+            hit.collider.TryGetComponent<Interactable>(out var interactable))
         {
-            if (hitInfo.collider.TryGetComponent<IInteract>(out var interactable))
-            {
-                interactable.Interact();
-            }
+            interactable.Interact();
         }
     }
 
-    void ApplyOutline(GameObject obj, bool enable)
+    private void SetOutline(GameObject obj, bool on)
     {
-        if (obj == null) return;
+        if (!obj) return;
 
-        OutlineScript outline = obj.GetComponent<OutlineScript>();
-        if (enable)
-        {
-            if (outline == null)
-                outline = obj.AddComponent<OutlineScript>();
+        if (!obj.TryGetComponent<OutlineScript>(out var outline) && on)
+            outline = obj.AddComponent<OutlineScript>();
 
-            outline.enabled = true;
-        }
-        else
-        {
-            if (outline != null)
-                outline.enabled = false;
-        }
-    }
-
-    void RemoveOutline(GameObject obj)
-    {
-        ApplyOutline(obj, false);
+        if (outline) outline.enabled = on;
     }
 }

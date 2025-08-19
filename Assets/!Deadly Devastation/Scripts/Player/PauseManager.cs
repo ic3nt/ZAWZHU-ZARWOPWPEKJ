@@ -43,7 +43,7 @@ public class PauseManager : MonoBehaviour
     public void Pause()
     {
         Time.timeScale = 0;
-        Camera.GetComponent<PlayerCamera>().enabled = false;
+  //      Camera.GetComponent<PlayerCamera>().enabled = false;
         PauseWindow.SetActive(true);
         PauseWindowInteractive.SetActive(true);
         HealthWindow.SetActive(false);
@@ -55,7 +55,7 @@ public class PauseManager : MonoBehaviour
     public void Resume()
     {
         Time.timeScale = 1;
-        Camera.GetComponent<PlayerCamera>().enabled = true;
+   //     Camera.GetComponent<PlayerCamera>().enabled = true;
         PauseWindow.SetActive(false);
         PauseWindowInteractive.SetActive(false);
         SettingsWindow.SetActive(false);

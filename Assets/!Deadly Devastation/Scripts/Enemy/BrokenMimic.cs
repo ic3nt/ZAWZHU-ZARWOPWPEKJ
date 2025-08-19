@@ -19,7 +19,7 @@ public class BrokenMimic : MonoBehaviour
 
     public float brokeT;
 
-    public EnemyDamage dg;
+   // public EnemyDamage dg;
 
     public Collider coll;
 
@@ -88,7 +88,7 @@ public class BrokenMimic : MonoBehaviour
         an.SetTrigger("Broke");
         aus4.Play();
         aus2.Stop();
-        dg.HitColl.enabled = false;
+      //  dg.HitColl.enabled = false;
         coll.enabled = false;
     }
 }

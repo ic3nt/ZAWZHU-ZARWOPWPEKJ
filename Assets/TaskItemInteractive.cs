@@ -1,13 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
-public class TaskItemInteractive : MonoBehaviour, IInteract
+public class TaskItemInteractive : Interactable
 {
-    public void Interact()
+    public override void Interact()
     {
-        Debug.Log("Interact");
+        Debug.Log("Task item interacted!");
         RoundEvents.InvokeTaskCompleted(true);
     }
 }

@@ -11,7 +11,7 @@ public class Forester : MonoBehaviour
 
     private NavMeshAgent aiAgent;
 
-    public EnemyDamage dmg;
+//    public EnemyDamage dmg;
 
     void Start()
     {
@@ -41,12 +41,12 @@ public class Forester : MonoBehaviour
 
         if (fov.canSee)
         {
-            dmg.HitColl.enabled = false;
+     //       dmg.HitColl.enabled = false;
             aiAgent.isStopped = true;
         }
         else
         {
-            dmg.HitColl.enabled = true;
+     //       dmg.HitColl.enabled = true;
             aiAgent.isStopped = false;
         }
     }

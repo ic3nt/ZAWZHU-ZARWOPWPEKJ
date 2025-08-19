@@ -1,12 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerGameVariables : MonoBehaviour
+public class PlayerRoundVariables : MonoBehaviour
 {
     [Header("Main Variables")]
-    public bool playerInElevator;
-    public bool playerIsSpectator;
-    public bool playerIsAFK;
-    public bool playerIsSpeaking;
+    [SerializeField] private bool playerInElevator;
+    [SerializeField] private bool isSpectator;
+    [SerializeField] private bool isAFK;
+    [SerializeField] private bool isSpeaking;
+
+    public bool PlayerInElevator { get => playerInElevator; set => playerInElevator = value; }
+    public bool IsSpectator { get => isSpectator; set => isSpectator = value; }
+    public bool IsAFK { get => isAFK; set => isAFK = value; }
+    public bool IsSpeaking { get => isSpeaking; set => isSpeaking = value; }
 }

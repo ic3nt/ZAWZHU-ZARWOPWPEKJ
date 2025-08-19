@@ -141,8 +141,8 @@ namespace RKS.DD.Game
             foreach (var player in roundManager.allPlayers)
             {
                 if (player == null) continue;
-                var vars = player.GetComponent<PlayerGameVariables>();
-                if (vars == null) continue;
+          //      var vars = player.GetComponent<PlayerGameVariables>();
+        //        if (vars == null) continue;
 
                 bool isInside = bounds.Contains(player.transform.position);
 
@@ -153,7 +153,7 @@ namespace RKS.DD.Game
                         : outsideTeleportPoint.position;
                 }
 
-                vars.playerInElevator = shouldBeInside;
+        //        vars.playerInElevator = shouldBeInside;
             }
 
             CheckAllPlayersElevatorState();
@@ -186,9 +186,9 @@ namespace RKS.DD.Game
                 foreach (var player in roundManager.allPlayers)
                 {
                     if (player == null) continue;
-                    var vars = player.GetComponent<PlayerGameVariables>();
-                    if (vars == null) continue;
-                    vars.playerInElevator = bounds.Contains(player.transform.position);
+           //         var vars = player.GetComponent<PlayerGameVariables>();
+           //         if (vars == null) continue;
+           //         vars.playerInElevator = bounds.Contains(player.transform.position);
                 }
             }
         }

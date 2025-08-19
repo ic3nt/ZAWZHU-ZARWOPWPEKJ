@@ -20,7 +20,7 @@ public class ToyRobot : MonoBehaviour
 
     private Animator anim;
 
-    public EnemyDamage dmg;
+  //  public EnemyDamage dmg;
 
     // тут страшно, очень очень
 
@@ -77,7 +77,7 @@ public class ToyRobot : MonoBehaviour
         aud3.enabled = false;
         aud1.Play();
         anim.SetBool("IsRun", false);
-        dmg.HitColl.enabled = false;
+   //     dmg.HitColl.enabled = false;
         aiAgent.isStopped = true;
         yield return new WaitForSeconds(Random.Range(2,5));
         aud1.Stop();
@@ -92,7 +92,7 @@ public class ToyRobot : MonoBehaviour
         aud3.enabled = true;
         aud2.Play();
         anim.SetBool("IsRun", true);
-        dmg.HitColl.enabled = true;
+   //     dmg.HitColl.enabled = true;
         aiAgent.isStopped = false;
 
         yield return new WaitForSeconds(Random.Range(1, 2));

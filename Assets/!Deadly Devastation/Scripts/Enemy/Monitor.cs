@@ -13,7 +13,7 @@ public class Monitor : MonoBehaviour
 
     private NavMeshAgent aiAgent;
 
-    public EnemyDamage dmg;
+   // public EnemyDamage dmg;
 
     // тут страшно, серьёзно
 
@@ -21,7 +21,7 @@ public class Monitor : MonoBehaviour
     {
         aiAgent = gameObject.GetComponent<NavMeshAgent>();
         aiAgent.isStopped = true;
-        dmg.HitColl.enabled = false;
+    //    dmg.HitColl.enabled = false;
     }
 
 
@@ -63,10 +63,10 @@ public class Monitor : MonoBehaviour
 
         public IEnumerator Broke()
         {
-        dmg.HitColl.enabled = true;
+   //     dmg.HitColl.enabled = true;
         yield return new WaitForSeconds(Random.Range(4, 10));
         aiAgent.isStopped = true;
-        dmg.HitColl.enabled = false;
+   //    dmg.HitColl.enabled = false;
 
 
     }

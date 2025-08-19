@@ -13,9 +13,9 @@ public class BombDamage : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            if (other.TryGetComponent<PlayerHealth>(out var hp))
+      //      if (other.TryGetComponent<PlayerHealth>(out var hp))
             {
-                hp.TakeDamage(damageB);
+       //         hp.TakeDamage(damageB);
                 aus.Play();
                 Instantiate(part, gameObject.transform.position, gameObject.transform.rotation);
                 Destroy(vac);

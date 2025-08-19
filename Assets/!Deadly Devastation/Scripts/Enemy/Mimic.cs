@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class Mimic : MonoBehaviour
 {
     private Transform closestPlayer;
-    public EnemyDamage dmg;
+//    public EnemyDamage dmg;
 
     private NavMeshAgent aiAgent;
 
@@ -23,7 +23,7 @@ public class Mimic : MonoBehaviour
         aiAgent = GetComponent<NavMeshAgent>();
         aiAgent.stoppingDistance = 3;
         aiAgent.speed = 4;
-        dmg.HitColl.enabled = false;
+  //      dmg.HitColl.enabled = false;
         StartCoroutine(Go());
         aiAgent.isStopped = false;
     }
@@ -58,7 +58,7 @@ public class Mimic : MonoBehaviour
         aud3.Play();
         aud4.Play();
         aiAgent.isStopped = false;
-        dmg.HitColl.enabled = true;
+    //    dmg.HitColl.enabled = true;
        
 
     }

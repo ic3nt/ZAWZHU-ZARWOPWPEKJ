@@ -2,23 +2,22 @@ using UnityEngine;
 
 public class PlayerLight : MonoBehaviour
 {
-    public GameObject Light;
+    [SerializeField] private GameObject lightObj;
+    [SerializeField] private KeyCode toggleKey = KeyCode.F;
+    [SerializeField] private string sfxKey = "--";
 
     private void Start()
     {
-        Light.SetActive(false);
+        if (lightObj) lightObj.SetActive(false);
     }
 
-    void LateUpdate()
+    private void LateUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(toggleKey) && lightObj)
         {
-            //an.SetBool("IsLighterOn", !an.GetBool("IsLighterOn"));
-
-            Light.SetActive(!Light.active);
-            AudioManager.Instance.Play("--");
+            lightObj.SetActive(!lightObj.activeSelf);
+            if (!string.IsNullOrEmpty(sfxKey) && AudioManager.Instance)
+                AudioManager.Instance.Play(sfxKey);
         }
-
     }
-
 }

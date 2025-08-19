@@ -1,22 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class ButtonInteractive : MonoBehaviour, IInteract
+public class ButtonInteractive : Interactable
 {
     [Header("Event On Interact")]
-    [Space(10)]
     [SerializeField] private UnityEvent onInteract;
 
     [Header("Animator")]
-    [Space(10)]
     [SerializeField] private Animator buttonAnimator;
-    public void Interact()
+
+    public override void Interact()
     {
-        Debug.Log("Interact");
+        Debug.Log("Button clicked!");
         onInteract?.Invoke();
 
-        buttonAnimator.SetTrigger("Click");
+        if (buttonAnimator != null)
+            buttonAnimator.SetTrigger("Click");
     }
 }

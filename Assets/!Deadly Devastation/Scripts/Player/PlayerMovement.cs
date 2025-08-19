@@ -1,37 +1,44 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Unity.Netcode;
 
+[RequireComponent(typeof(PlayerContext))]
 public class PlayerMovement : NetworkBehaviour
 {
-    [Header("Movement Variables")]
-    public float walkStartSpeed = 2f;
-    public float walkMaxSpeed = 5f;
-    public float runStartSpeed = 3f;
-    public float runMaxSpeed = 7f;
-    public bool canRun = true;
-    public KeyCode runningKey = KeyCode.LeftShift;
+    [Header("Speed (m/s)")]
+    [SerializeField] private float walkStartSpeed = 2f;
+    [SerializeField] private float walkMaxSpeed = 5f;
+    [SerializeField] private float runStartSpeed = 3f;
+    [SerializeField] private float runMaxSpeed = 7f;
 
-
-    [Header("Acceleration / Deceleration")]
+    [Header("Dynamics (s)")]
     [SerializeField] private float accelerationTime = 0.5f;
     [SerializeField] private float decelerationTime = 0.3f;
 
-    [Header("Animation")]
-    public Animator animator;
+    [Header("Input")]
+    [SerializeField] private KeyCode runKey = KeyCode.LeftShift;
+    [SerializeField] private bool canRun = true;
 
-    // Контроль движения (сделан публичным)
-    public bool CanMove = true;
-
-    private Rigidbody rigidbody;
-    private Vector3 velocitySmoothDamp = Vector3.zero;
-    private float currentSpeed = 0f;
+    public bool CanMove { get; set; } = true;
     public bool IsRunning { get; private set; }
-    [HideInInspector] public bool IsMoving = false;
+    public bool IsMoving { get; private set; }
+
+    private PlayerContext _ctx;
+    private Animator _animator;
+    private Rigidbody _rb;
+    private float _currentSpeed;
+    private Vector3 _velSmoothRef;
+
+    // Animator hashes
+    private static readonly int HashIdle = Animator.StringToHash("IsIdle");
+    private static readonly int HashWalk = Animator.StringToHash("IsWalk");
+    private static readonly int HashRun = Animator.StringToHash("IsRun");
+    private static readonly int HashDance1 = Animator.StringToHash("IsDanceOne");
 
     private void Awake()
     {
-        rigidbody = GetComponent<Rigidbody>();
+        _ctx = GetComponent<PlayerContext>();
+        _rb = _ctx.Rb;
+        if (!_animator) _animator = _ctx.Animator;
     }
 
     private void Update()
@@ -39,21 +46,9 @@ public class PlayerMovement : NetworkBehaviour
         if (!IsOwner) return;
 
         if (CanMove)
-        {
-            HandleAnimation();
-        }
+            UpdateAnimation();
         else
-        {
-            // Принудительно зафиксировать состояние Idle
-            IsMoving = false;
-            if (animator != null)
-            {
-                animator.SetBool("IsIdle", true);
-                animator.SetBool("IsRun", false);
-                animator.SetBool("IsWalk", false);
-                // animator.SetBool("IsDanceOne", false); // можно при необходимости
-            }
-        }
+            ForceIdle();
     }
 
     private void FixedUpdate()
@@ -61,80 +56,75 @@ public class PlayerMovement : NetworkBehaviour
         if (!IsOwner) return;
 
         if (CanMove)
-        {
-            HandleMovement();
-        }
+            ApplyMovement();
         else
-        {
-            // Остановить горизонтальное движение, сохранить вертикальную скорость
-            Vector3 vel = rigidbody.velocity;
-            vel.x = 0f;
-            vel.z = 0f;
-            rigidbody.velocity = new Vector3(vel.x, rigidbody.velocity.y, vel.z);
-
-            currentSpeed = 0f;
-            velocitySmoothDamp = Vector3.zero;
-            IsRunning = false;
-            IsMoving = false;
-        }
+            HaltHorizontal();
     }
 
-    private void HandleAnimation()
+    private void UpdateAnimation()
     {
-        IsMoving = Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0;
-        bool isShift = Input.GetKey(KeyCode.LeftShift);
+        IsMoving = Mathf.Abs(Input.GetAxisRaw("Horizontal")) > 0.01f || Mathf.Abs(Input.GetAxisRaw("Vertical")) > 0.01f;
+        bool shift = Input.GetKey(runKey);
+
+        if (!_animator) return;
 
         if (IsMoving)
         {
-            animator.SetBool("IsDanceOne", false);
-            animator.SetBool("IsWalk", !isShift);
-            animator.SetBool("IsRun", isShift);
-            animator.SetBool("IsIdle", false);
+            _animator.SetBool(HashDance1, false);
+            _animator.SetBool(HashWalk, !shift);
+            _animator.SetBool(HashRun, shift);
+            _animator.SetBool(HashIdle, false);
         }
         else
         {
-            animator.SetBool("IsIdle", true);
-            animator.SetBool("IsRun", false);
-            animator.SetBool("IsWalk", false);
+            _animator.SetBool(HashIdle, true);
+            _animator.SetBool(HashRun, false);
+            _animator.SetBool(HashWalk, false);
 
             if (Input.GetKey(KeyCode.Alpha1))
-            {
-                animator.SetBool("IsDanceOne", true);
-            }
+                _animator.SetBool(HashDance1, true);
         }
     }
 
-    private void HandleMovement()
+    private void ApplyMovement()
     {
-        IsRunning = canRun && Input.GetKey(runningKey);
-        float targetMaxSpeed = IsRunning ? runMaxSpeed : walkMaxSpeed;
-        float startSpeed = IsRunning ? runStartSpeed : walkStartSpeed;
+        IsRunning = canRun && Input.GetKey(runKey);
+        float targetMax = IsRunning ? runMaxSpeed : walkMaxSpeed;
 
-        Vector2 input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-        Vector3 inputDir = new Vector3(input.x, 0, input.y);
+        Vector2 input = new(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        Vector3 dir = new Vector3(input.x, 0f, input.y);
+        IsMoving = dir.sqrMagnitude > 0.01f;
+        if (IsMoving) dir.Normalize();
 
-        IsMoving = inputDir.magnitude > 0.1f;
+        Vector3 worldDir = transform.TransformDirection(dir);
+        float accel = targetMax / Mathf.Max(0.01f, accelerationTime);
+        float decel = targetMax / Mathf.Max(0.01f, decelerationTime);
 
-        if (IsMoving)
-            inputDir.Normalize();
+        _currentSpeed = Mathf.MoveTowards(
+            _currentSpeed,
+            IsMoving ? targetMax : 0f,
+            Time.fixedDeltaTime * (IsMoving ? accel : decel)
+        );
 
-        Vector3 worldInputDir = transform.TransformDirection(inputDir);
+        Vector3 targetVel = worldDir * _currentSpeed;
+        Vector3 horizVel = new Vector3(_rb.velocity.x, 0f, _rb.velocity.z);
+        Vector3 smooth = Vector3.SmoothDamp(horizVel, targetVel, ref _velSmoothRef, IsMoving ? accelerationTime : decelerationTime);
+        smooth.y = _rb.velocity.y;
+        _rb.velocity = smooth;
+    }
 
-        if (IsMoving)
-        {
-            currentSpeed = Mathf.MoveTowards(currentSpeed, targetMaxSpeed, Time.fixedDeltaTime * (targetMaxSpeed / accelerationTime));
-        }
-        else
-        {
-            currentSpeed = Mathf.MoveTowards(currentSpeed, 0f, Time.fixedDeltaTime * (targetMaxSpeed / decelerationTime));
-        }
+    private void HaltHorizontal()
+    {
+        Vector3 v = _rb.velocity; v.x = 0; v.z = 0; _rb.velocity = v;
+        _currentSpeed = 0f; _velSmoothRef = Vector3.zero; IsRunning = false; IsMoving = false;
+        ForceIdle();
+    }
 
-        Vector3 targetVelocity = worldInputDir * currentSpeed;
-        Vector3 horizontalVelocity = new Vector3(rigidbody.velocity.x, 0, rigidbody.velocity.z);
-
-        Vector3 smoothedVelocity = Vector3.SmoothDamp(horizontalVelocity, targetVelocity, ref velocitySmoothDamp, IsMoving ? accelerationTime : decelerationTime);
-
-        smoothedVelocity.y = rigidbody.velocity.y;
-        rigidbody.velocity = smoothedVelocity;
+    private void ForceIdle()
+    {
+        if (!_animator) return;
+        _animator.SetBool(HashIdle, true);
+        _animator.SetBool(HashRun, false);
+        _animator.SetBool(HashWalk, false);
     }
 }
