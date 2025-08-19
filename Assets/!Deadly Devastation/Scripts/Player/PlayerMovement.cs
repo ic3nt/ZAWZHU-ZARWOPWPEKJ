@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using Unity.Netcode;
 
 [RequireComponent(typeof(PlayerContext))]
@@ -11,8 +12,13 @@ public class PlayerMovement : NetworkBehaviour
     [SerializeField] private float runMaxSpeed = 7f;
 
     [Header("Dynamics (s)")]
-    [SerializeField] private float accelerationTime = 0.5f;
-    [SerializeField] private float decelerationTime = 0.3f;
+    [SerializeField] private float accelerationTime = 0.4f;
+    [SerializeField] private float decelerationTime = 0.35f;
+
+    [Header("Run build-up")]
+    [SerializeField] private float runBuildUpTime = 2.0f;
+    [SerializeField] private float inertiaMultiplier = 3.0f;
+    [SerializeField] private float hardStopSpeedThreshold = 3.0f;
 
     [Header("Input")]
     [SerializeField] private KeyCode runKey = KeyCode.LeftShift;
@@ -21,14 +27,22 @@ public class PlayerMovement : NetworkBehaviour
     public bool CanMove { get; set; } = true;
     public bool IsRunning { get; private set; }
     public bool IsMoving { get; private set; }
+    public float RunProgress01 { get; private set; }
+    public float CurrentHorizontalSpeed => new Vector3(_rb.velocity.x, 0f, _rb.velocity.z).magnitude;
+
+    public event Action OnHardStop;
+    public event Action OnSprintCollision;
+    public event Action OnJumpLand;
 
     private PlayerContext _ctx;
     private Animator _animator;
     private Rigidbody _rb;
+
     private float _currentSpeed;
     private Vector3 _velSmoothRef;
+    private bool _wasInputMoving;
+    private bool _wasGrounded;
 
-    // Animator hashes
     private static readonly int HashIdle = Animator.StringToHash("IsIdle");
     private static readonly int HashWalk = Animator.StringToHash("IsWalk");
     private static readonly int HashRun = Animator.StringToHash("IsRun");
@@ -44,21 +58,19 @@ public class PlayerMovement : NetworkBehaviour
     private void Update()
     {
         if (!IsOwner) return;
+        if (CanMove) UpdateAnimation();
+        else ForceIdle();
 
-        if (CanMove)
-            UpdateAnimation();
-        else
-            ForceIdle();
+        bool grounded = Physics.Raycast(transform.position + Vector3.up * 0.1f, Vector3.down, 0.2f);
+        if (!_wasGrounded && grounded) OnJumpLand?.Invoke();
+        _wasGrounded = grounded;
     }
 
     private void FixedUpdate()
     {
         if (!IsOwner) return;
-
-        if (CanMove)
-            ApplyMovement();
-        else
-            HaltHorizontal();
+        if (CanMove) ApplyMovement();
+        else HaltHorizontal();
     }
 
     private void UpdateAnimation()
@@ -88,35 +100,61 @@ public class PlayerMovement : NetworkBehaviour
 
     private void ApplyMovement()
     {
-        IsRunning = canRun && Input.GetKey(runKey);
-        float targetMax = IsRunning ? runMaxSpeed : walkMaxSpeed;
-
         Vector2 input = new(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         Vector3 dir = new Vector3(input.x, 0f, input.y);
         IsMoving = dir.sqrMagnitude > 0.01f;
         if (IsMoving) dir.Normalize();
 
+        if (_wasInputMoving && !IsMoving && CurrentHorizontalSpeed > hardStopSpeedThreshold)
+            OnHardStop?.Invoke();
+        _wasInputMoving = IsMoving;
+
+        IsRunning = canRun && Input.GetKey(runKey);
+
+        if (IsRunning && IsMoving)
+            RunProgress01 = Mathf.MoveTowards(RunProgress01, 1f, Time.fixedDeltaTime / Mathf.Max(0.01f, runBuildUpTime));
+        else
+            RunProgress01 = Mathf.MoveTowards(RunProgress01, 0f, Time.fixedDeltaTime / Mathf.Max(0.01f, runBuildUpTime * 0.75f));
+
+        float targetMax = IsRunning && IsMoving
+            ? Mathf.Lerp(runStartSpeed, runMaxSpeed, RunProgress01)
+            : (IsMoving ? walkMaxSpeed : 0f);
+
         Vector3 worldDir = transform.TransformDirection(dir);
-        float accel = targetMax / Mathf.Max(0.01f, accelerationTime);
-        float decel = targetMax / Mathf.Max(0.01f, decelerationTime);
+
+        float accelRate = targetMax / Mathf.Max(0.01f, accelerationTime);
+        float decelRate = targetMax / Mathf.Max(0.01f, decelerationTime * Mathf.Max(1f, inertiaMultiplier));
 
         _currentSpeed = Mathf.MoveTowards(
             _currentSpeed,
-            IsMoving ? targetMax : 0f,
-            Time.fixedDeltaTime * (IsMoving ? accel : decel)
+            targetMax,
+            Time.fixedDeltaTime * (IsMoving ? accelRate : decelRate)
         );
 
         Vector3 targetVel = worldDir * _currentSpeed;
         Vector3 horizVel = new Vector3(_rb.velocity.x, 0f, _rb.velocity.z);
-        Vector3 smooth = Vector3.SmoothDamp(horizVel, targetVel, ref _velSmoothRef, IsMoving ? accelerationTime : decelerationTime);
+        float smoothTime = IsMoving ? accelerationTime : decelerationTime * Mathf.Max(1f, inertiaMultiplier);
+        Vector3 smooth = Vector3.SmoothDamp(horizVel, targetVel, ref _velSmoothRef, smoothTime);
+
         smooth.y = _rb.velocity.y;
         _rb.velocity = smooth;
+    }
+
+    private void OnCollisionEnter(Collision col)
+    {
+        if (IsRunning && CurrentHorizontalSpeed > 3f && col.contacts.Length > 0)
+            OnSprintCollision?.Invoke();
+    }
+
+    public void AddImpulse(Vector3 impulse)
+    {
+        _rb.velocity += impulse;
     }
 
     private void HaltHorizontal()
     {
         Vector3 v = _rb.velocity; v.x = 0; v.z = 0; _rb.velocity = v;
-        _currentSpeed = 0f; _velSmoothRef = Vector3.zero; IsRunning = false; IsMoving = false;
+        _currentSpeed = 0f; _velSmoothRef = Vector3.zero; IsRunning = false; IsMoving = false; RunProgress01 = 0f; _wasInputMoving = false;
         ForceIdle();
     }
 

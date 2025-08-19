@@ -1,18 +1,44 @@
 using System.Collections;
 using UnityEngine;
+using FirstGearGames.SmoothCameraShaker;
 
+[RequireComponent(typeof(PlayerContext))]
 public class HitManager : MonoBehaviour
 {
-    public Animator animator; // Ссылка на аниматор
-    public float kickForce = 500f; // Сила удара
-    public float delay = 0.2f; // Задержка между ударами
-    public PlayerMovement PM;
+    [Header("Kick Settings")]
+    [SerializeField] private float kickForce = 500f;
+    [SerializeField] private float kickRange = 2f;
+    [SerializeField] private float delay = 0.2f;
+    [SerializeField] private KeyCode kickKey = KeyCode.Q;
 
-    private bool isKicking = false;
+    [Header("Kick Animations")]
+    [SerializeField] private int kickAnimationCount = 2;
 
-    void Update()
+    [Header("Camera Shakes")]
+    [SerializeField] private ShakeData kickShakeData;
+    [SerializeField] private ShakeData hitShakeData;
+    [SerializeField] private ShakeData runningKickShakeData;
+
+    [Header("Special Effects")]
+    [SerializeField] private float timeSlowdown = 0.2f;
+    [SerializeField] private float slowdownDuration = 0.15f;
+    [SerializeField] private float cameraKnockback = 0.2f;
+
+    private Animator _animator;
+    private PlayerContext _ctx;
+    private PlayerMovement _playerMovement;
+    private bool _isKicking = false;
+
+    private void Awake()
     {
-        if (Input.GetKeyDown(KeyCode.Q) && !isKicking)
+        _ctx = GetComponent<PlayerContext>();
+        _animator = _ctx.Animator;
+        _playerMovement = _ctx.Movement;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(kickKey) && !_isKicking)
         {
             StartCoroutine(Kick());
         }
@@ -20,37 +46,76 @@ public class HitManager : MonoBehaviour
 
     private IEnumerator Kick()
     {
-        PM.CanMove = false;
-        isKicking = true;
+        _isKicking = true;
 
-        // Вызов анимации
-        animator.SetTrigger("Kick"); // Предполагается, что вы создали триггер "Kick" в аниматоре
+        int randomKickIndex = Random.Range(1, kickAnimationCount);
+        _animator.SetInteger("KickIndex", randomKickIndex);
+        _animator.SetTrigger("Kick");
+        Debug.Log("invoke kick" + randomKickIndex);
+        bool hitSomething = false;
 
-        // Найти предметы рядом
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 2f); // Радиус поиска
-
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, kickRange);
         foreach (var hitCollider in hitColliders)
         {
-            // Проверка, является ли объект "предметом" для пинания
             Rigidbody rb = hitCollider.GetComponent<Rigidbody>();
-            if (rb != null)
+            if (rb != null && rb.gameObject != this.gameObject)
             {
-                // Применить силу к предмету
                 rb.AddForce(transform.forward * kickForce);
+                hitSomething = true;
+
+                if (hitShakeData != null)
+                {
+                    CameraShakerHandler.Shake(hitShakeData);
+                    StartCoroutine(CameraKnockbackEffect());
+                }
             }
         }
 
-        // Задержка
-        yield return new WaitForSeconds(delay);
+        if (!hitSomething && kickShakeData != null)
+            CameraShakerHandler.Shake(kickShakeData);
 
-        isKicking = false;
-        PM.CanMove = true;
+        if (_playerMovement.IsRunning && runningKickShakeData != null)
+        {
+            CameraShakerHandler.Shake(runningKickShakeData);
+            StartCoroutine(DoSlowMotion());
+            _playerMovement.AddImpulse(transform.forward * kickForce * 0.01f);
+        }
+
+        yield return new WaitForSeconds(delay);
+        _isKicking = false;
+    }
+
+    private IEnumerator DoSlowMotion()
+    {
+        float originalTimeScale = Time.timeScale;
+        Time.timeScale = timeSlowdown;
+        yield return new WaitForSecondsRealtime(slowdownDuration);
+        Time.timeScale = originalTimeScale;
+    }
+
+    private IEnumerator CameraKnockbackEffect()
+    {
+        Camera mainCam = Camera.main;
+        if (mainCam != null)
+        {
+            Vector3 originalPos = mainCam.transform.localPosition;
+            Vector3 knockbackPos = originalPos - mainCam.transform.forward * cameraKnockback;
+
+            float t = 0f;
+            while (t < 1f)
+            {
+                t += Time.deltaTime * 10f;
+                mainCam.transform.localPosition = Vector3.Lerp(originalPos, knockbackPos, Mathf.Sin(t * Mathf.PI));
+                yield return null;
+            }
+
+            mainCam.transform.localPosition = originalPos;
+        }
     }
 
     private void OnDrawGizmosSelected()
     {
-        // Визуализация зоны пинания в редакторе
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, 2f);
+        Gizmos.DrawWireSphere(transform.position, kickRange);
     }
 }
