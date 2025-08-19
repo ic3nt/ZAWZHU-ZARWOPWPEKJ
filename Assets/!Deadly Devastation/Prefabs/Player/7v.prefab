@@ -8126,6 +8126,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHealth: 100
   _startHealth: 100
+  _currentHealth: 1009
   _damageCooldown: 0
   _destroyOnDeath: 0
 --- !u!114 &4690459089005627408
@@ -8462,7 +8463,7 @@ MonoBehaviour:
   kickRange: 2
   delay: 1
   kickKey: 113
-  kickAnimationCount: 2
+  kickAnimationCount: 3
   kickShakeData: {fileID: 11400000, guid: 5a56c21352f924f4a921de48beece207, type: 2}
   hitShakeData: {fileID: 11400000, guid: aa1a19327685bd940810d628edb73682, type: 2}
   runningKickShakeData: {fileID: 11400000, guid: 8bf0e727b86e35d4aa52165807dc5266, type: 2}

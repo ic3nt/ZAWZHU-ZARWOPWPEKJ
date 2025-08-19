@@ -14,10 +14,10 @@ public class Health : MonoBehaviour
     public float Current { get; private set; }
     public bool IsDead => Current <= 0f;
 
-    public event Action<float, float> OnDamaged;      // (amount, current)
-    public event Action<float, float> OnHealed;       // (amount, current)
+    public event Action<float, float> OnDamaged;
+    public event Action<float, float> OnHealed;
     public event Action OnDied;
-    public event Action<float, float> OnChanged;      // (current, max)
+    public event Action<float, float> OnChanged;
 
     private float _lastDamageTime;
 
