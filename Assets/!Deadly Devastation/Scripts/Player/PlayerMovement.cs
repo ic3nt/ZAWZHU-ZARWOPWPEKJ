@@ -28,6 +28,7 @@ public class PlayerMovement : NetworkBehaviour
     public bool IsRunning { get; private set; }
     public bool IsMoving { get; private set; }
     public float RunProgress01 { get; private set; }
+    public float RunProgress02 { get; private set; }
     public float CurrentHorizontalSpeed => new Vector3(_rb.velocity.x, 0f, _rb.velocity.z).magnitude;
 
     public event Action OnHardStop;
@@ -62,12 +63,10 @@ public class PlayerMovement : NetworkBehaviour
         if (CanMove) UpdateAnimation();
         else ForceIdle();
 
-        // Проверка на приземление
         bool grounded = Physics.Raycast(transform.position + Vector3.up * 0.1f, Vector3.down, 0.2f);
         if (!_wasGrounded && grounded) OnJumpLand?.Invoke();
         _wasGrounded = grounded;
 
-        // 🔹 Вывод в консоль
         Debug.Log($"[PlayerMovement] Running: {IsRunning}, Speed: {CurrentHorizontalSpeed:F2}");
     }
 
@@ -94,7 +93,6 @@ public class PlayerMovement : NetworkBehaviour
         IsMoving = Mathf.Abs(Input.GetAxisRaw("Horizontal")) > 0.01f || Mathf.Abs(Input.GetAxisRaw("Vertical")) > 0.01f;
         bool shift = Input.GetKey(runKey);
 
-        // 🔹 теперь тут учитываем стену
         IsRunning = canRun && shift && IsMoving && Input.GetAxisRaw("Vertical") > 0.1f && !HasWallAhead();
 
         if (!_animator) return;
@@ -128,7 +126,6 @@ public class PlayerMovement : NetworkBehaviour
             OnHardStop?.Invoke();
         _wasInputMoving = IsMoving;
 
-        // прогресс ускорения при беге
         if (IsRunning && IsMoving)
             RunProgress01 = Mathf.MoveTowards(RunProgress01, 1f, Time.fixedDeltaTime / Mathf.Max(0.01f, runBuildUpTime));
         else
@@ -156,6 +153,11 @@ public class PlayerMovement : NetworkBehaviour
 
         smooth.y = _rb.velocity.y;
         _rb.velocity = smooth;
+
+        if (IsRunning && IsMoving && CurrentHorizontalSpeed >= runMaxSpeed - 5f)
+            RunProgress02 = 1f;
+        else
+            RunProgress02 = 0f;
     }
 
     private void OnCollisionEnter(Collision col)
