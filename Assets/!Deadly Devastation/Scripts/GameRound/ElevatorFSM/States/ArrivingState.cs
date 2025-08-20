@@ -12,12 +12,12 @@ namespace RKS.DD.Game.ElevatorStates
             RoundEvents.InvokeGenerationUpdated(new GenerationInfo(RoundEvents.GenerationStage.Started, fsm.elevator.chunkManager.currentFloorIndex));
             fsm.elevator.statusText.text = GetRandom(new[]
             {
-            "Приехали.", "Сейчас вылезать будете.", "Готовы?",
-            "Этаж доставлен. Как и вы.", "Добро пожаловать... в беду.",
-            "Живыми вряд ли вернётесь.", "Не благодарите.",
-            "Я свою работу сделал, ваша очередь.", "Сейчас открою...", "Не беспокойтесь, вас убьют."
+            "РџСЂРёРµС…Р°Р»Рё.", "РЎРµР№С‡Р°СЃ РІС‹Р»РµР·Р°С‚СЊ Р±СѓРґРµС‚Рµ.", "Р“РѕС‚РѕРІС‹?",
+            "Р­С‚Р°Р¶ РґРѕСЃС‚Р°РІР»РµРЅ. РљР°Рє Рё РІС‹.", "Р”РѕР±СЂРѕ РїРѕР¶Р°Р»РѕРІР°С‚СЊ... РІ Р±РµРґСѓ.",
+            "Р–РёРІС‹РјРё РІСЂСЏРґ Р»Рё РІРµСЂРЅС‘С‚РµСЃСЊ.", "РќРµ Р±Р»Р°РіРѕРґР°СЂРёС‚Рµ.",
+            "РЇ СЃРІРѕСЋ СЂР°Р±РѕС‚Сѓ СЃРґРµР»Р°Р», РІР°С€Р° РѕС‡РµСЂРµРґСЊ.", "РЎРµР№С‡Р°СЃ РѕС‚РєСЂРѕСЋ...", "РќРµ Р±РµСЃРїРѕРєРѕР№С‚РµСЃСЊ, РІР°СЃ СѓР±СЊСЋС‚."
             });
-            fsm.elevator.floorText.text = $"ЭТАЖ {fsm.elevator.chunkManager.currentFloorIndex}";
+            fsm.elevator.floorText.text = $"Р­РўРђР– {fsm.elevator.chunkManager.currentFloorIndex}";
             fsm.elevator.HighlightUI(fsm.elevator.gameStatusBackground, fsm.elevator.originalMaterialStatus);
             fsm.elevator.HighlightUI(fsm.elevator.floorCounterBackground, fsm.elevator.originalMaterialFloor);
 

@@ -12,9 +12,9 @@ namespace RKS.DD.Game.ElevatorStates
             fsm.elevator.SetStage(RoundEvents.ElevatorStage.Moving);
             fsm.elevator.statusText.text = GetRandom(new[]
             {
-            "Опять вниз?..", "Вы серьёзно?", "Поехали, чудики.",
-            "Ну, держитесь.", "Скоро пожалеете.", "Вниз - ваша специализация.",
-            "Вы без меня никуда, да?", "Готовы умирать?", "Дно близко."
+            "РћРїСЏС‚СЊ РІРЅРёР·?..", "Р’С‹ СЃРµСЂСЊС‘Р·РЅРѕ?", "РџРѕРµС…Р°Р»Рё, С‡СѓРґРёРєРё.",
+            "РќСѓ, РґРµСЂР¶РёС‚РµСЃСЊ.", "РЎРєРѕСЂРѕ РїРѕР¶Р°Р»РµРµС‚Рµ.", "Р’РЅРёР· - РІР°С€Р° СЃРїРµС†РёР°Р»РёР·Р°С†РёСЏ.",
+            "Р’С‹ Р±РµР· РјРµРЅСЏ РЅРёРєСѓРґР°, РґР°?", "Р“РѕС‚РѕРІС‹ СѓРјРёСЂР°С‚СЊ?", "Р”РЅРѕ Р±Р»РёР·РєРѕ."
             });
             fsm.elevator.playerContainer.SetActive(true);
             fsm.elevator.TeleportMisplacedPlayers(TeleportTarget.Inside);

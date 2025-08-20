@@ -12,8 +12,8 @@ namespace RKS.DD.Game.ElevatorStates
             fsm.elevator.SetStage(RoundEvents.ElevatorStage.DoorClosed);
             fsm.elevator.statusText.text = GetRandom(new[]
             {
-            "Пока, пока)!", "Двери закрываются!", "Идите работать!",
-            "Работайте!"
+            "РџРѕРєР°, РїРѕРєР°)!", "Р”РІРµСЂРё Р·Р°РєСЂС‹РІР°СЋС‚СЃСЏ!", "РРґРёС‚Рµ СЂР°Р±РѕС‚Р°С‚СЊ!",
+            "Р Р°Р±РѕС‚Р°Р№С‚Рµ!"
             });
             fsm.elevator.playerContainer.SetActive(true);
             fsm.elevator.goodLuckContainer.SetActive(false);
