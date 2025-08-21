@@ -8196,6 +8196,9 @@ MonoBehaviour:
   walkMaxSpeed: 5
   runStartSpeed: 3
   runMaxSpeed: 15
+  clumsyJitter: 0.4
+  clumsySpeedPenalty: 0.4
+  clumsyProgressScale: 1
   accelerationTime: 0.1
   decelerationTime: 0.1
   runBuildUpTime: 2
@@ -8594,9 +8597,9 @@ MonoBehaviour:
   _t15: 15
   maxShakeStrength: 30
   maxSpeedForShake: 15
-  shakeDuration: 0.2
-  vibrato: 10
-  smoothTime: 0.3
+  baseSmoothTime: 0.3
+  minNoiseFrequency: 5
+  maxNoiseFrequency: 25
 --- !u!114 &6671310186434294224
 MonoBehaviour:
   m_ObjectHideFlags: 0
