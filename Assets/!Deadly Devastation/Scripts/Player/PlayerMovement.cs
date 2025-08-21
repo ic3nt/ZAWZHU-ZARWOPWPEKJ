@@ -38,7 +38,6 @@ public class PlayerMovement : NetworkBehaviour
     private PlayerContext _ctx;
     private Animator _animator;
     private Rigidbody _rb;
-
     private float _currentSpeed;
     private Vector3 _velSmoothRef;
     private bool _wasInputMoving;
