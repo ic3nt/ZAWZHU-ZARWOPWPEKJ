@@ -62,6 +62,7 @@ public class HitManager : MonoBehaviour
             Rigidbody rb = hitCollider.GetComponent<Rigidbody>();
             if (rb != null && rb.gameObject != this.gameObject)
             {
+                AudioManager.Instance.Play("Hit");
                 rb.AddForce(transform.forward * kickForce);
                 hitSomething = true;
 

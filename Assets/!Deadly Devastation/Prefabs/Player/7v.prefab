@@ -1293,7 +1293,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 743655855
+  GlobalObjectIdHash: 2496998494
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -3563,7 +3563,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1363520394
+  GlobalObjectIdHash: 2496998494
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -7993,7 +7993,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2579822014
+  GlobalObjectIdHash: 2496998494
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -8411,8 +8411,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   kickForce: 600
-  kickRange: 3
-  delay: 0.25
+  kickRange: 2
+  delay: 1
   kickKey: 113
   kickAnimationCount: 3
   kickShakeData: {fileID: 11400000, guid: 5a56c21352f924f4a921de48beece207, type: 2}
@@ -8455,9 +8455,9 @@ MonoBehaviour:
   _t15: 15
   maxShakeStrength: 30
   maxSpeedForShake: 15
-  shakeDuration: 0.2
-  vibrato: 10
-  smoothTime: 0.3
+  baseSmoothTime: 0.3
+  minNoiseFrequency: 5
+  maxNoiseFrequency: 25
 --- !u!114 &6671310186434294224
 MonoBehaviour:
   m_ObjectHideFlags: 0
