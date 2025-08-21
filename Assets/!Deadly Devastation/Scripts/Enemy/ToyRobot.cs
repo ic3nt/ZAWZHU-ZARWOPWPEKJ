@@ -1,55 +1,83 @@
 using UnityEngine;
 using UnityEngine.AI;
-
-
-using System.Collections.Generic;
-using System;
-using Random = UnityEngine.Random;
 using System.Collections;
 
-public class ToyRobot : MonoBehaviour
+[RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(Health))]
+public class ToyRobot : MonoBehaviour, IHittable
 {
+    [Header("Audio")]
+    [SerializeField] private AudioSource aud1;
+    [SerializeField] private AudioSource aud2;
+    [SerializeField] private AudioSource aud3;
+
+    [Header("AI")]
+    [SerializeField] private float minStopTime = 2f;
+    [SerializeField] private float maxStopTime = 5f;
+    [SerializeField] private float minRunTime = 3f;
+    [SerializeField] private float maxRunTime = 5f;
+
+    [SerializeField] private float agentSpeed = 3.5f;
+    [SerializeField] private float agentAcceleration = 8f;
+    [SerializeField] private float agentAngularSpeed = 120f;
+    [SerializeField] private float stoppingDistance = 0.5f;
+
     private Transform closestPlayer;
-
-    public AudioSource aud1;
-
-    public AudioSource aud2;
-    public AudioSource aud3;
-
     private NavMeshAgent aiAgent;
-
     private Animator anim;
+    private Health health;
 
-  //  public EnemyDamage dmg;
+    private Coroutine behaviourRoutine;
+    private bool isDead;
 
-    // тут страшно, очень очень
-
-    void Start()
+    private void Awake()
     {
-
+        aiAgent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
-        aiAgent = gameObject.GetComponent<NavMeshAgent>();
-        anim.SetBool("IsRun", false);
-        aud3.enabled = false;
-        StartCoroutine(Stop());
+        health = GetComponent<Health>();
 
+        // Настройка агента
+        aiAgent.speed = agentSpeed;
+        aiAgent.acceleration = agentAcceleration;
+        aiAgent.angularSpeed = agentAngularSpeed;
+        aiAgent.stoppingDistance = stoppingDistance;
+        aiAgent.updateRotation = true;
+        aiAgent.updatePosition = true;
+
+        // Отключаем Root Motion, чтобы агент сам двигал объект
+        anim.applyRootMotion = false;
+
+        health.OnDied += OnDeath;
+        Debug.Log("[ToyRobot] Awake: Components initialized");
+    }
+
+    private void Start()
+    {
+        aud3.enabled = false;
+        anim.SetBool("IsRun", false);
+        behaviourRoutine = StartCoroutine(BehaviourLoop());
+        Debug.Log("[ToyRobot] Start: Behaviour loop started");
     }
 
     private void Update()
     {
+        if (isDead) return;
+
         if (closestPlayer == null || !closestPlayer.gameObject.activeInHierarchy)
-        {
             FindClosestPlayer();
-        }
 
-
-        if (closestPlayer != null)
+        if (closestPlayer != null && !aiAgent.isStopped)
         {
             aiAgent.SetDestination(closestPlayer.position);
+            Debug.DrawLine(transform.position, closestPlayer.position, Color.red);
         }
+
+        // Анимация движения
+        anim.SetBool("IsRun", !aiAgent.isStopped && aiAgent.velocity.magnitude > 0.1f);
     }
 
-    void FindClosestPlayer()
+    private void FindClosestPlayer()
     {
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         float closestDistanceSqr = Mathf.Infinity;
@@ -57,8 +85,7 @@ public class ToyRobot : MonoBehaviour
 
         foreach (GameObject player in players)
         {
-            Vector3 directionToTarget = player.transform.position - transform.position;
-            float dSqrToTarget = directionToTarget.sqrMagnitude;
+            float dSqrToTarget = (player.transform.position - transform.position).sqrMagnitude;
             if (dSqrToTarget < closestDistanceSqr)
             {
                 closestDistanceSqr = dSqrToTarget;
@@ -69,41 +96,119 @@ public class ToyRobot : MonoBehaviour
         if (closestPlayerObj != null)
         {
             closestPlayer = closestPlayerObj.transform;
+            Debug.Log("[ToyRobot] Closest player found: " + closestPlayer.name);
+        }
+        else
+        {
+            Debug.Log("[ToyRobot] No players found!");
         }
     }
 
-    public IEnumerator Stop()
+    private IEnumerator BehaviourLoop()
     {
+        while (!isDead)
+        {
+            yield return StopState();
+            yield return GoState();
+        }
+    }
+
+    private IEnumerator StopState()
+    {
+        aiAgent.isStopped = true;
         aud3.enabled = false;
         aud1.Play();
-        anim.SetBool("IsRun", false);
-   //     dmg.HitColl.enabled = false;
-        aiAgent.isStopped = true;
-        yield return new WaitForSeconds(Random.Range(2,5));
+
+        Debug.Log("[ToyRobot] StopState: Agent stopped");
+
+        yield return new WaitForSeconds(Random.Range(minStopTime, maxStopTime));
+
         aud1.Stop();
-
-        StartCoroutine(Go());
-        
-
-        
+        Debug.Log("[ToyRobot] StopState: Finished waiting");
     }
-    public IEnumerator Go()
+
+    private IEnumerator GoState()
     {
+        aiAgent.isStopped = false;
         aud3.enabled = true;
         aud2.Play();
-        anim.SetBool("IsRun", true);
-   //     dmg.HitColl.enabled = true;
-        aiAgent.isStopped = false;
 
-        yield return new WaitForSeconds(Random.Range(1, 2));
+        Debug.Log("[ToyRobot] GoState: Agent moving");
+
+        yield return new WaitForSeconds(Random.Range(minRunTime, maxRunTime));
+
         aud2.Stop();
-
-        StartCoroutine(Stop());
-       
-
-        
-
-
+        Debug.Log("[ToyRobot] GoState: Finished running");
     }
 
+    public void OnHit(Vector3 force, int damage, GameObject hitter)
+    {
+        if (isDead) return;
+
+        health.TakeDamage(damage);
+        Debug.Log("[ToyRobot] OnHit: Took " + damage + " damage from " + hitter.name);
+    }
+
+    private void OnDeath()
+    {
+        if (isDead) return;
+        isDead = true;
+
+        if (behaviourRoutine != null)
+            StopCoroutine(behaviourRoutine);
+
+        aiAgent.isStopped = true;
+        aiAgent.enabled = false;
+
+        aud1.Stop();
+        aud2.Stop();
+        aud3.enabled = false;
+
+        AudioManager.Instance.Play("Deathblow");
+
+        anim.SetBool("IsRun", false);
+        anim.SetTrigger("Die");
+
+        Debug.Log("[ToyRobot] OnDeath: Robot died");
+
+        StartCoroutine(DisableAnimatorAndSink());
+    }
+
+    private IEnumerator DisableAnimatorAndSink()
+    {
+        yield return new WaitForSeconds(5f);
+        anim.enabled = false;
+        Debug.Log("[ToyRobot] DisableAnimatorAndSink: Animator disabled");
+
+        yield return SinkObject();
+    }
+
+    private IEnumerator SinkObject()
+    {
+        float sinkDuration = 3f;
+        float elapsed = 0f;
+        Vector3 startPos = transform.position;
+        Vector3 endPos = startPos + Vector3.down * 3f;
+
+        while (elapsed < sinkDuration)
+        {
+            transform.position = Vector3.Lerp(startPos, endPos, elapsed / sinkDuration);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.position = endPos;
+        Debug.Log("[ToyRobot] SinkObject: Destroying robot");
+        Destroy(gameObject);
+    }
+
+    // Визуализация пути агента
+    private void OnDrawGizmos()
+    {
+        if (aiAgent != null && closestPlayer != null)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawLine(transform.position, aiAgent.destination);
+        }
+    }
 }

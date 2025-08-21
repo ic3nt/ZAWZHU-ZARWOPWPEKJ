@@ -8076,10 +8076,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 732203f5f95d6864989fa0e373a28e50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 100
-  _startHealth: 100
-  _damageCooldown: 0
-  _destroyOnDeath: 0
+  maxHealth: 100
+  startHealth: 100
+  damageCooldown: 0.1
+  destroyOnDeath: 0
+  currentHealth: 0
+  isDead: 0
 --- !u!114 &4690459089005627408
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8130,7 +8132,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3317704105534906839}
   serializedVersion: 4
-  m_Mass: 150
+  m_Mass: 200
   m_Drag: 2
   m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -8410,9 +8412,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6eb1bed1b973d48ca8c8d41e0fb4f86e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kickForce: 600
+  kickForce: 10
   kickRange: 2
   delay: 1
+  kickDamage: 10
   kickKey: 113
   kickAnimationCount: 3
   kickShakeData: {fileID: 11400000, guid: 5a56c21352f924f4a921de48beece207, type: 2}
@@ -8453,11 +8456,6 @@ MonoBehaviour:
   _t50: 50
   _t30: 30
   _t15: 15
-  maxShakeStrength: 30
-  maxSpeedForShake: 15
-  baseSmoothTime: 0.3
-  minNoiseFrequency: 5
-  maxNoiseFrequency: 25
 --- !u!114 &6671310186434294224
 MonoBehaviour:
   m_ObjectHideFlags: 0

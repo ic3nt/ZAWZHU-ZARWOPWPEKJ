@@ -77,6 +77,7 @@ GameObject:
   - component: {fileID: 3614165001876365204}
   - component: {fileID: 381189309685131871}
   - component: {fileID: 6727265869472434813}
+  - component: {fileID: 7649658734345780153}
   m_Layer: 8
   m_Name: ToyRobot
   m_TagString: Enemy
@@ -164,7 +165,10 @@ MonoBehaviour:
   aud1: {fileID: 7019416438302873491}
   aud2: {fileID: 169808435147466385}
   aud3: {fileID: 6727265869472434813}
-  dmg: {fileID: 6045522001286116994}
+  minStopTime: 2
+  maxStopTime: 5
+  minRunTime: 1
+  maxRunTime: 2
 --- !u!95 &3614165001876365204
 Animator:
   serializedVersion: 5
@@ -322,6 +326,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7649658734345780153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 274569623656201373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 732203f5f95d6864989fa0e373a28e50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  startHealth: 100
+  damageCooldown: 0.1
+  destroyOnDeath: 0
+  currentHealth: 0
+  isDead: 0
 --- !u!1 &620102503879770599
 GameObject:
   m_ObjectHideFlags: 0
@@ -936,7 +958,6 @@ GameObject:
   m_Component:
   - component: {fileID: 9221130063165600880}
   - component: {fileID: 304352463289765945}
-  - component: {fileID: 6045522001286116994}
   - component: {fileID: 8062451597849508488}
   m_Layer: 0
   m_Name: HitColl
@@ -981,21 +1002,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.6899111, y: 1.9926803, z: 0.6972046}
   m_Center: {x: 0.016857743, y: 0.9774449, z: 0.29663277}
---- !u!114 &6045522001286116994
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6427180892929180140}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 861aaf5e5f7e849acb68e73257250b8d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageEn: 10
-  cooldownTime: 0.3
-  HitColl: {fileID: 304352463289765945}
 --- !u!114 &8062451597849508488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1304,6 +1310,9 @@ GameObject:
   - component: {fileID: 6664450122074030037}
   - component: {fileID: 3391432022244228353}
   - component: {fileID: 2118550660315013515}
+  - component: {fileID: 5834021910888664073}
+  - component: {fileID: 5412871715839341676}
+  - component: {fileID: 8411565467761974617}
   m_Layer: 8
   m_Name: Robot Toy
   m_TagString: Untagged
@@ -1406,7 +1415,10 @@ MonoBehaviour:
   aud1: {fileID: 0}
   aud2: {fileID: 0}
   aud3: {fileID: 0}
-  dmg: {fileID: 0}
+  minStopTime: 2
+  maxStopTime: 5
+  minRunTime: 1
+  maxRunTime: 2
 --- !u!205 &2118550660315013515
 LODGroup:
   m_ObjectHideFlags: 0
@@ -1431,6 +1443,67 @@ LODGroup:
     fadeTransitionWidth: 0
     renderers: []
   m_Enabled: 1
+--- !u!195 &5834021910888664073
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9057991149150915821}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.047662817
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 0.012891976
+  m_BaseOffset: 0.006445988
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!95 &5412871715839341676
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9057991149150915821}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d2ccf2e8be8af864594d05468247ac66, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8411565467761974617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9057991149150915821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 732203f5f95d6864989fa0e373a28e50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  startHealth: 100
+  damageCooldown: 0.1
+  destroyOnDeath: 0
+  currentHealth: 0
+  isDead: 0
 --- !u!1001 &1310265907843157966
 PrefabInstance:
   m_ObjectHideFlags: 0

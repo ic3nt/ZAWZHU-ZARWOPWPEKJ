@@ -6,9 +6,10 @@ using FirstGearGames.SmoothCameraShaker;
 public class HitManager : MonoBehaviour
 {
     [Header("Kick Settings")]
-    [SerializeField] private float kickForce = 500f;
+    [SerializeField] private float kickForce = 10f;
     [SerializeField] private float kickRange = 2f;
     [SerializeField] private float delay = 0.2f;
+    [SerializeField] private int kickDamage = 10;
     [SerializeField] private KeyCode kickKey = KeyCode.Q;
 
     [Header("Kick Animations")]
@@ -54,22 +55,25 @@ public class HitManager : MonoBehaviour
         _animator.SetInteger("KickIndex", randomKickIndex);
         _animator.SetTrigger("Kick");
         Debug.Log("invoke kick " + randomKickIndex);
+
         bool hitSomething = false;
 
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, kickRange);
         foreach (var hitCollider in hitColliders)
         {
-            Rigidbody rb = hitCollider.GetComponent<Rigidbody>();
-            if (rb != null && rb.gameObject != this.gameObject)
+            if (hitCollider.gameObject == this.gameObject)
+                continue;
+
+            IHittable hittable = hitCollider.GetComponent<IHittable>();
+            if (hittable != null)
             {
                 AudioManager.Instance.Play("Hit");
-                rb.AddForce(transform.forward * kickForce);
+                Vector3 force = transform.forward * kickForce;
+                hittable.OnHit(force, kickDamage, gameObject);
                 hitSomething = true;
 
                 if (hitShakeData != null)
-                {
                     CameraShakerHandler.Shake(hitShakeData);
-                }
             }
         }
 

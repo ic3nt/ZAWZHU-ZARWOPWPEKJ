@@ -66,7 +66,7 @@ public class PlayerMovement : NetworkBehaviour
         if (!_wasGrounded && grounded) OnJumpLand?.Invoke();
         _wasGrounded = grounded;
 
-        Debug.Log($"[PlayerMovement] Running: {IsRunning}, Speed: {CurrentHorizontalSpeed:F2}");
+    //    Debug.Log($"[PlayerMovement] Running: {IsRunning}, Speed: {CurrentHorizontalSpeed:F2}");
     }
 
     private void FixedUpdate()
