@@ -17,12 +17,11 @@ public class StatsUIController : MonoBehaviour
     [SerializeField, Range(0, 100)] private float _t30 = 30;
     [SerializeField, Range(0, 100)] private float _t15 = 15;
 
-    [Header("Speedometer Shake")]
-    [SerializeField] private float maxShakeStrength = 30f;
-    [SerializeField] private float maxSpeedForShake = 15f;
-    [SerializeField] private float baseSmoothTime = 0.3f;
-    [SerializeField] private float minNoiseFrequency = 5f;
-    [SerializeField] private float maxNoiseFrequency = 25f;
+    private float maxShakeStrength = 30f;
+    private float maxSpeedForShake = 15f;
+    private float baseSmoothTime = 0.3f;
+    private float minNoiseFrequency = 5f;
+    private float maxNoiseFrequency = 25f;
 
     private static readonly int HashNormal = Animator.StringToHash("Normal");
     private static readonly int HashH50 = Animator.StringToHash("Health50");
