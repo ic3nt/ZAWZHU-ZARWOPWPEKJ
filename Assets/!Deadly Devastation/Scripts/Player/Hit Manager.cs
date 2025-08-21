@@ -48,6 +48,8 @@ public class HitManager : MonoBehaviour
     {
         _isKicking = true;
 
+        AudioManager.Instance.Play("Woosh");
+
         int randomKickIndex = Random.Range(1, kickAnimationCount);
         _animator.SetInteger("KickIndex", randomKickIndex);
         _animator.SetTrigger("Kick");
