@@ -67,7 +67,7 @@ public class HitManager : MonoBehaviour
             IHittable hittable = hitCollider.GetComponent<IHittable>();
             if (hittable != null)
             {
-                AudioManager.Instance.Play("Hit");
+                AudioManager.Instance.PlayAndForget("Hit");
                 Vector3 force = transform.forward * kickForce;
                 hittable.OnHit(force, kickDamage, gameObject);
                 hitSomething = true;

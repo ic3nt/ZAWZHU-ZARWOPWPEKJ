@@ -164,7 +164,7 @@ public class ToyRobot : MonoBehaviour, IHittable
         aud2.Stop();
         aud3.enabled = false;
 
-        AudioManager.Instance.Play("Deathblow");
+        AudioManager.Instance.PlayAndForget("Deathblow");
 
         anim.SetBool("IsRun", false);
         anim.SetTrigger("Die");
@@ -202,7 +202,6 @@ public class ToyRobot : MonoBehaviour, IHittable
         Destroy(gameObject);
     }
 
-    // Визуализация пути агента
     private void OnDrawGizmos()
     {
         if (aiAgent != null && closestPlayer != null)
