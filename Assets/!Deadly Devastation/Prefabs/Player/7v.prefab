@@ -8594,9 +8594,9 @@ MonoBehaviour:
   _t15: 15
   maxShakeStrength: 30
   maxSpeedForShake: 15
-  baseSmoothTime: 0.3
-  minNoiseFrequency: 5
-  maxNoiseFrequency: 25
+  shakeDuration: 0.2
+  vibrato: 10
+  smoothTime: 0.3
 --- !u!114 &6671310186434294224
 MonoBehaviour:
   m_ObjectHideFlags: 0
