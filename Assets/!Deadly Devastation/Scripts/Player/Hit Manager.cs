@@ -7,10 +7,10 @@ public class HitManager : MonoBehaviour
 {
     [Header("Kick Settings")]
     [SerializeField] private float kickForce = 10f;
-    [SerializeField] private float kickRange = 2f;
+    [SerializeField] private Vector3 kickBoxSize = new Vector3(1f, 1f, 2f);
     [SerializeField] private float delay = 0.2f;
     [SerializeField] private int kickDamage = 10;
-    [SerializeField] private KeyCode kickKey = KeyCode.Q;
+    [SerializeField] private KeyCode kickKey = KeyCode.Mouse0;
 
     [Header("Kick Animations")]
     [SerializeField] private int kickAnimationCount = 2;
@@ -58,7 +58,9 @@ public class HitManager : MonoBehaviour
 
         bool hitSomething = false;
 
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, kickRange);
+        Vector3 boxCenter = transform.position + transform.forward * (kickBoxSize.z * 0.5f);
+        Collider[] hitColliders = Physics.OverlapBox(boxCenter, kickBoxSize * 0.5f, transform.rotation);
+
         foreach (var hitCollider in hitColliders)
         {
             if (hitCollider.gameObject == this.gameObject)
@@ -93,6 +95,8 @@ public class HitManager : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, kickRange);
+        Vector3 boxCenter = transform.position + transform.forward * (kickBoxSize.z * 0.5f);
+        Gizmos.matrix = Matrix4x4.TRS(boxCenter, transform.rotation, kickBoxSize);
+        Gizmos.DrawWireCube(Vector3.zero, Vector3.one);
     }
 }

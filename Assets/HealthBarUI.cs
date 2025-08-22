@@ -21,6 +21,10 @@ public class HealthBarUI : MonoBehaviour
     [SerializeField] private float shakeStrength = 0.3f;
 
     private WorldSpaceCanvasBillboard billboard;
+    private Vector3 barInitialPos;
+    private Vector3 textInitialPos;
+    private Vector3 barInitialScale;
+    private Vector3 textInitialScale;
 
     private void Start()
     {
@@ -34,6 +38,17 @@ public class HealthBarUI : MonoBehaviour
         SetBarsInstant(health.Current, health.MaxHealth);
 
         billboard = GetComponentInChildren<WorldSpaceCanvasBillboard>();
+
+        if (barContainer)
+        {
+            barInitialPos = barContainer.localPosition;
+            barInitialScale = barContainer.localScale;
+        }
+        if (textContainer)
+        {
+            textInitialPos = textContainer.localPosition;
+            textInitialScale = textContainer.localScale;
+        }
     }
 
     private void UpdateBars(float current, float max)
@@ -53,22 +68,20 @@ public class HealthBarUI : MonoBehaviour
 
         if (barContainer)
         {
-            barContainer.DOPunchPosition(
-                punchVector,
-                shakeDuration,
-                2,
-                0.4f
-            );
+            barContainer.DOKill();
+            barContainer.localPosition = barInitialPos;
+            barContainer
+                .DOPunchPosition(punchVector, shakeDuration, 2, 0.4f)
+                .OnComplete(() => barContainer.DOLocalMove(barInitialPos, 0.2f).SetEase(Ease.OutQuad));
         }
 
         if (textContainer)
         {
-            textContainer.DOPunchPosition(
-                punchVector * 0.5f,
-                shakeDuration,
-                2,
-                0.4f
-            );
+            textContainer.DOKill();
+            textContainer.localPosition = textInitialPos;
+            textContainer
+                .DOPunchPosition(punchVector * 0.5f, shakeDuration, 2, 0.4f)
+                .OnComplete(() => textContainer.DOLocalMove(textInitialPos, 0.2f).SetEase(Ease.OutQuad));
         }
     }
 
@@ -77,17 +90,28 @@ public class HealthBarUI : MonoBehaviour
         Vector3 punchScale = Vector3.one * 0.1f;
 
         if (barContainer)
-            barContainer.DOPunchScale(punchScale, 0.3f, 5, 0.5f);
+        {
+            barContainer.DOKill();
+            barContainer.localScale = barInitialScale;
+            barContainer
+                .DOPunchScale(punchScale, 0.3f, 5, 0.5f)
+                .OnComplete(() => barContainer.DOScale(barInitialScale, 0.2f).SetEase(Ease.OutQuad));
+        }
 
         if (textContainer)
-            textContainer.DOPunchScale(punchScale, 0.3f, 5, 0.5f);
+        {
+            textContainer.DOKill();
+            textContainer.localScale = textInitialScale;
+            textContainer
+                .DOPunchScale(punchScale, 0.3f, 5, 0.5f)
+                .OnComplete(() => textContainer.DOScale(textInitialScale, 0.2f).SetEase(Ease.OutQuad));
+        }
     }
 
     private void OnDied()
     {
         billboard.FadeOut(1.5f);
     }
-
 
     private void SetBarsInstant(float current, float max)
     {

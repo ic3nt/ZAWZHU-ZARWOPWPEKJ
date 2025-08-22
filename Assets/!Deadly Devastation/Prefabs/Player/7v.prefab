@@ -8413,10 +8413,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   kickForce: 10
-  kickRange: 2
-  delay: 1
+  kickBoxSize: {x: 1, y: 1, z: 2}
+  delay: 0
   kickDamage: 10
-  kickKey: 113
+  kickKey: 323
   kickAnimationCount: 3
   kickShakeData: {fileID: 11400000, guid: 5a56c21352f924f4a921de48beece207, type: 2}
   hitShakeData: {fileID: 11400000, guid: aa1a19327685bd940810d628edb73682, type: 2}
@@ -8434,7 +8434,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: {fileID: 1634237587014523608}
-  _dps: 1
+  _dps: 5
 --- !u!114 &8707190214422657074
 MonoBehaviour:
   m_ObjectHideFlags: 0
