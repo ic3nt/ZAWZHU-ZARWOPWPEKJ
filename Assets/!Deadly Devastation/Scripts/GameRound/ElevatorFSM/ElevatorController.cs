@@ -117,15 +117,21 @@ namespace RKS.DD.Game
 
         public void OpenDoor()
         {
-            door.DOLocalMoveY(originalPos.y + openHeight, duration).SetEase(Ease.OutQuad);
+            // Делаем плавнее и чуть дольше
+            door.DOLocalMoveY(originalPos.y + openHeight, duration * 1.3f)
+                .SetEase(Ease.OutSine);
             blockDoorColider.enabled = false;
         }
 
         public void CloseDoor()
         {
-            door.DOLocalMoveY(originalPos.y, duration).SetEase(Ease.InQuad);
+            // Быстрее, но с мягким затуханием в конце
+            door.DOLocalMoveY(originalPos.y, duration * 0.8f)
+                .SetEase(Ease.OutQuart);
             blockDoorColider.enabled = true;
         }
+
+
 
         public void TeleportMisplacedPlayers(TeleportTarget target)
         {

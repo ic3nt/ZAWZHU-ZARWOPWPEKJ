@@ -12,6 +12,7 @@ public class ButtonInteractive : Interactable
     public override void Interact()
     {
         Debug.Log("Button clicked!");
+        AudioManager.Instance.Play("Button");
         onInteract?.Invoke();
 
         if (buttonAnimator != null)
