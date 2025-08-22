@@ -17,11 +17,11 @@ public class WorldSpaceCanvasBillboard : MonoBehaviour
     [SerializeField] Vector3 rotationOffset = new Vector3(0, 180f, 0);
     [SerializeField] float rotationSmooth = 10f;
 
-    Camera cam;
-    CanvasGroup cg;
-    bool visible;
-    Coroutine fadeRoutine;
-    bool autoFade = true;
+    private Camera cam;
+    private CanvasGroup cg;
+    private bool visible;
+    private Coroutine fadeRoutine;
+    private bool autoFade = true;
 
     void OnValidate()
     {
@@ -30,47 +30,39 @@ public class WorldSpaceCanvasBillboard : MonoBehaviour
         if (rotationSmooth < 0f) rotationSmooth = 0f;
     }
 
-    void Awake()
-    {
-        cg = GetComponent<CanvasGroup>();
-    }
-
     void Start()
     {
+        cg = GetComponent<CanvasGroup>();
         cam = Camera.main;
         if (cam == null && Camera.allCamerasCount > 0) cam = Camera.allCameras[0];
     }
 
     void Update()
     {
+        if (!autoFade) return;
+
         if (cam == null)
         {
             cam = Camera.main;
             if (cam == null && Camera.allCamerasCount > 0) cam = Camera.allCameras[0];
+            if (cam == null) return;
         }
 
-        if (cam != null)
+        Vector3 dir = cam.transform.position - transform.position;
+        if (dir.sqrMagnitude > 0.0001f)
         {
-            Vector3 dir = cam.transform.position - transform.position;
-            if (dir.sqrMagnitude > 0.0001f)
-            {
-                Quaternion desired = Quaternion.LookRotation(dir, Vector3.up) * Quaternion.Euler(rotationOffset);
-                Vector3 de = desired.eulerAngles;
-                Vector3 ce = transform.rotation.eulerAngles;
+            Quaternion desired = Quaternion.LookRotation(dir, Vector3.up) * Quaternion.Euler(rotationOffset);
+            Vector3 de = desired.eulerAngles;
+            Vector3 ce = transform.rotation.eulerAngles;
 
-                Quaternion targetRot = Quaternion.Euler(
-                    rotateX ? de.x : ce.x,
-                    rotateY ? de.y : ce.y,
-                    rotateZ ? de.z : ce.z
-                );
+            Quaternion targetRot = Quaternion.Euler(
+                rotateX ? de.x : ce.x,
+                rotateY ? de.y : ce.y,
+                rotateZ ? de.z : ce.z
+            );
 
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, rotationSmooth * Time.deltaTime);
-            }
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, rotationSmooth * Time.deltaTime);
         }
-
-        if (!autoFade) return;
-
-        if (cam == null) return;
 
         float dist = Vector3.Distance(transform.position, cam.transform.position);
         if (!visible && dist <= showDistance) visible = true;
@@ -82,30 +74,14 @@ public class WorldSpaceCanvasBillboard : MonoBehaviour
         cg.interactable = cg.alpha > 0.99f;
     }
 
-    public void HideImmediateAndDisableAutoFade()
+    public void FadeOut(float duration = 0.8f)
     {
         if (fadeRoutine != null) StopCoroutine(fadeRoutine);
         autoFade = false;
-        cg.alpha = 0f;
-        cg.blocksRaycasts = false;
-        cg.interactable = false;
+        fadeRoutine = StartCoroutine(FadeToZero(duration));
     }
 
-    public void FadeInAndEnableAutoFade(float duration = 0.8f)
-    {
-        if (fadeRoutine != null) StopCoroutine(fadeRoutine);
-        autoFade = false;
-        fadeRoutine = StartCoroutine(FadeTo(1f, duration, true));
-    }
-
-    public void FadeOutAndDisableAutoFade(float duration = 0.8f)
-    {
-        if (fadeRoutine != null) StopCoroutine(fadeRoutine);
-        autoFade = false;
-        fadeRoutine = StartCoroutine(FadeTo(0f, duration, false));
-    }
-
-    IEnumerator FadeTo(float target, float duration, bool enableAutoAfter)
+    private IEnumerator FadeToZero(float duration)
     {
         float start = cg.alpha;
         float time = 0f;
@@ -113,14 +89,13 @@ public class WorldSpaceCanvasBillboard : MonoBehaviour
         while (time < duration)
         {
             time += Time.deltaTime;
-            cg.alpha = Mathf.Lerp(start, target, duration <= 0f ? 1f : time / duration);
+            cg.alpha = Mathf.Lerp(start, 0f, time / duration);
             yield return null;
         }
 
-        cg.alpha = target;
-        cg.blocksRaycasts = cg.alpha > 0.01f;
-        cg.interactable = cg.alpha > 0.99f;
+        cg.alpha = 0f;
+        cg.blocksRaycasts = false;
+        cg.interactable = false;
         fadeRoutine = null;
-        autoFade = enableAutoAfter;
     }
 }

@@ -7,27 +7,26 @@ using TMPro;
 public class HealthBarUI : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] Health health;
-    [SerializeField] Image frontBar;
-    [SerializeField] Image backBar;
-    [SerializeField] RectTransform barContainer;
-    [SerializeField] TextMeshProUGUI hpText;
-    [SerializeField] RectTransform textContainer;
+    [SerializeField] private Health health;
+    [SerializeField] private Image frontBar;
+    [SerializeField] private Image backBar;
+    [SerializeField] private RectTransform barContainer;
+    [SerializeField] private TextMeshProUGUI hpText;
+    [SerializeField] private RectTransform textContainer;
 
     [Header("Animation Settings")]
-    [SerializeField] float frontSpeed = 1f;
-    [SerializeField] float backSpeed = 2f;
-    [SerializeField] float shakeDuration = 1f;
-    [SerializeField] float shakeStrength = 0.3f;
+    [SerializeField] private float frontSpeed = 1f;
+    [SerializeField] private float backSpeed = 2f;
+    [SerializeField] private float shakeDuration = 1f;
+    [SerializeField] private float shakeStrength = 0.3f;
 
-    WorldSpaceCanvasBillboard billboard;
-    Vector3 barInitialPos;
-    Vector3 textInitialPos;
-    Vector3 barInitialScale;
-    Vector3 textInitialScale;
-    bool shown = false;
+    private WorldSpaceCanvasBillboard billboard;
+    private Vector3 barInitialPos;
+    private Vector3 textInitialPos;
+    private Vector3 barInitialScale;
+    private Vector3 textInitialScale;
 
-    void Start()
+    private void Start()
     {
         if (!health) health = GetComponentInParent<Health>();
 
@@ -38,8 +37,7 @@ public class HealthBarUI : MonoBehaviour
 
         SetBarsInstant(health.Current, health.MaxHealth);
 
-        billboard = GetComponent<WorldSpaceCanvasBillboard>();
-        billboard.HideImmediateAndDisableAutoFade();
+        billboard = GetComponentInChildren<WorldSpaceCanvasBillboard>();
 
         if (barContainer)
         {
@@ -53,22 +51,18 @@ public class HealthBarUI : MonoBehaviour
         }
     }
 
-    void UpdateBars(float current, float max)
+    private void UpdateBars(float current, float max)
     {
-        float targetFill = max > 0f ? current / max : 0f;
+        float targetFill = current / max;
         frontBar.DOFillAmount(targetFill, frontSpeed).SetEase(Ease.OutCubic);
         backBar.DOFillAmount(targetFill, backSpeed).SetEase(Ease.OutCubic);
-        if (hpText) hpText.text = $"{Mathf.CeilToInt(current)}";
+
+        if (hpText)
+            hpText.text = $"{Mathf.CeilToInt(current)}";
     }
 
-    void OnDamaged(float damage, float current)
+    private void OnDamaged(float damage, float current)
     {
-        if (!shown)
-        {
-            billboard.FadeInAndEnableAutoFade(0.5f);
-            shown = true;
-        }
-
         Vector2 randomDir = Random.insideUnitCircle.normalized * shakeStrength;
         Vector3 punchVector = new Vector3(randomDir.x, randomDir.y, 0f);
 
@@ -91,7 +85,7 @@ public class HealthBarUI : MonoBehaviour
         }
     }
 
-    void OnHealed(float healed, float current)
+    private void OnHealed(float healed, float current)
     {
         Vector3 punchScale = Vector3.one * 0.1f;
 
@@ -114,17 +108,18 @@ public class HealthBarUI : MonoBehaviour
         }
     }
 
-    void OnDied()
+    private void OnDied()
     {
-        billboard.FadeOutAndDisableAutoFade(1.5f);
-        shown = false;
+        billboard.FadeOut(1.5f);
     }
 
-    void SetBarsInstant(float current, float max)
+    private void SetBarsInstant(float current, float max)
     {
-        float fill = max > 0f ? current / max : 0f;
+        float fill = current / max;
         frontBar.fillAmount = fill;
         backBar.fillAmount = fill;
-        if (hpText) hpText.text = $"{Mathf.CeilToInt(current)}";
+
+        if (hpText)
+            hpText.text = $"{Mathf.CeilToInt(current)}";
     }
 }
