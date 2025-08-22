@@ -27,7 +27,6 @@ public class ToyRobot : MonoBehaviour, IHittable
     private NavMeshAgent aiAgent;
     private Animator anim;
     private Health health;
-
     private Coroutine behaviourRoutine;
     private bool isDead;
 
@@ -36,8 +35,6 @@ public class ToyRobot : MonoBehaviour, IHittable
         aiAgent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         health = GetComponent<Health>();
-
-        // Настройка агента
         aiAgent.speed = agentSpeed;
         aiAgent.acceleration = agentAcceleration;
         aiAgent.angularSpeed = agentAngularSpeed;
@@ -45,7 +42,6 @@ public class ToyRobot : MonoBehaviour, IHittable
         aiAgent.updateRotation = true;
         aiAgent.updatePosition = true;
 
-        // Отключаем Root Motion, чтобы агент сам двигал объект
         anim.applyRootMotion = false;
 
         health.OnDied += OnDeath;
@@ -73,7 +69,6 @@ public class ToyRobot : MonoBehaviour, IHittable
             Debug.DrawLine(transform.position, closestPlayer.position, Color.red);
         }
 
-        // Анимация движения
         anim.SetBool("IsRun", !aiAgent.isStopped && aiAgent.velocity.magnitude > 0.1f);
     }
 
@@ -185,7 +180,7 @@ public class ToyRobot : MonoBehaviour, IHittable
 
     private IEnumerator SinkObject()
     {
-        float sinkDuration = 3f;
+        float sinkDuration = 4f;
         float elapsed = 0f;
         Vector3 startPos = transform.position;
         Vector3 endPos = startPos + Vector3.down * 3f;
