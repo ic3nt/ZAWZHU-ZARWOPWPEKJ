@@ -6,8 +6,6 @@ public class PlayerCameraController : NetworkBehaviour
 {
     [Header("Bindings")]
     [SerializeField] private Camera playerCamera;
-    [SerializeField] private bool useCameraForHUD = false;
-    [SerializeField] private Camera hudCamera;
     [SerializeField] private Transform cameraHolder;
     [SerializeField] private Transform characterRoot;
     [SerializeField] private GameObject headModel;
@@ -92,9 +90,6 @@ public class PlayerCameraController : NetworkBehaviour
         _initialHolderPos = cameraHolder ? cameraHolder.localPosition : Vector3.zero;
         _initialCamLocalPos = playerCamera.transform.localPosition;
         _defaultFov = playerCamera.fieldOfView;
-
-        if (useCameraForHUD && hudCamera)
-            SyncHUDCamera();
     }
 
     private void Update()
@@ -106,7 +101,6 @@ public class PlayerCameraController : NetworkBehaviour
         if (cameraBobbing) HandleBobbing();
         if (cameraTilt) HandleTilt();
 
-        if (useCameraForHUD && hudCamera) SyncHUDCamera();
     }
 
     private void HandleLook()
@@ -189,11 +183,5 @@ public class PlayerCameraController : NetworkBehaviour
     private void OnJumpLand()
     {
         if (jumpLandShake != null) CameraShakerHandler.Shake(jumpLandShake);
-    }
-
-    private void SyncHUDCamera()
-    {
-        hudCamera.fieldOfView = playerCamera.fieldOfView;
-        hudCamera.transform.SetPositionAndRotation(playerCamera.transform.position, playerCamera.transform.rotation);
     }
 }
