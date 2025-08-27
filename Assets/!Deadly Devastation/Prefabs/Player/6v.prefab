@@ -4892,7 +4892,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 4068749129
+  GlobalObjectIdHash: 1024488806
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -5795,35 +5795,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 8004034715669064260}
-  useCameraForPlayerHUD: 1
-  HUDCamera: {fileID: 3030925508599487087}
   cameraHolder: {fileID: 7850416220995802057}
-  character: {fileID: 5193859935782295756}
-  Head: {fileID: 8019915723301141008}
-  firstPersonMovement: {fileID: 6387213999055437123}
+  characterRoot: {fileID: 0}
+  headModel: {fileID: 0}
+  movement: {fileID: 0}
   sensitivity: 2
   smoothing: 1.5
-  canCameraBobbing: 1
+  pitchLimits: {x: -70, y: 80}
+  cameraBobbing: 1
   walkBobSpeed: 8
   walkBobAmount: 0.05
   runBobSpeed: 12
   runBobAmount: 0.1
-  canCameraTilt: 1
+  bobGrowthFactor: 1.6
+  cameraTilt: 1
   tiltAngle: 5
   tiltSpeed: 5
-  shakeIntensity: 0.05
-  shakeDuration: 0.2
-  zoomSpeed: 1
-  zoomInFOV: 30
-  canFocusOnEnemy: 0
-  focusSpeed: 100
-  focusDistance: 10
-  currentFocusTarget: {fileID: 0}
-  enemyDetectedSound: {fileID: 0}
-  audioSource: {fileID: 8711949578937777218}
-  enableShakeOnFocus: 0
-  focusShakeIntensity: 0.1
-  focusShakeDuration: 0.3
+  sprintFovBoost: 15
+  fovLerpSpeed: 3
+  fovBreathAmplitude: 1.25
+  fovBreathSpeed: 2.5
+  hardStopShake: {fileID: 0}
+  sprintCollisionShake: {fileID: 0}
+  jumpLandShake: {fileID: 0}
 --- !u!114 &2067644308405998521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10115,6 +10109,7 @@ GameObject:
   - component: {fileID: 1727781559324161334}
   - component: {fileID: 6920849563193250811}
   - component: {fileID: 7028199266864596487}
+  - component: {fileID: 8451486379042819828}
   m_Layer: 0
   m_Name: 6v
   m_TagString: Player
@@ -10157,7 +10152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 4068749129
+  GlobalObjectIdHash: 685511847
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -10179,9 +10174,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInElevator: 0
-  playerIsSpectator: 0
-  playerIsAFK: 0
-  playerIsSpeaking: 0
+  isSpectator: 0
+  isAFK: 0
+  isSpeaking: 0
 --- !u!114 &6387213999055437123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10198,12 +10193,13 @@ MonoBehaviour:
   walkMaxSpeed: 5
   runStartSpeed: 3
   runMaxSpeed: 8
-  canRun: 1
-  runningKey: 304
   accelerationTime: 0.1
   decelerationTime: 0.1
-  animator: {fileID: 6920849563193250811}
-  IsMoving: 0
+  runBuildUpTime: 2
+  inertiaMultiplier: 3
+  hardStopSpeedThreshold: 3
+  runKey: 304
+  canRun: 1
 --- !u!114 &356079694662189859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10216,14 +10212,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 732203f5f95d6864989fa0e373a28e50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  personMovement: {fileID: 6387213999055437123}
-  personLook: {fileID: 4490969345584322249}
-  personAudio: {fileID: 4083692567133244299}
-  healthBar: {fileID: 4206986096636005520}
-  healthAmountText: {fileID: 5521128430856653866}
-  animatorUI: {fileID: 2198747415647600519}
-  healthAmount: 100
-  timerOn: 1
+  maxHealth: 100
+  startHealth: 100
+  damageCooldown: 0.1
+  destroyOnDeath: 0
+  currentHealth: 0
+  isDead: 0
 --- !u!114 &4208182090757206958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10236,7 +10230,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f6a746af0d70bb4d8ae126ed5067b34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactCamera: {fileID: 8004034715669064260}
   interactRange: 3
   interactMask:
     serializedVersion: 2
@@ -10410,14 +10403,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76031bbd0fdd64d4bbae7e5792333add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstPersonLook: {fileID: 0}
-  firstPersonMovement: {fileID: 6387213999055437123}
-  NetworkUnstableWindow: {fileID: 6436401704377539756}
-  timeRemaining: 91
-  timerIsRunning: 0
-  startDelay: 0
-  transition: {fileID: 11400000, guid: 3ad3e86dc386e60458fda4c93a2c3d62, type: 2}
+  context: {fileID: 0}
+  movement: {fileID: 0}
+  cameraController: {fileID: 0}
+  unstableWindow: {fileID: 0}
   timeText: {fileID: 8424293495202502268}
+  lockControlsOnUnstable: 1
+  countdownSeconds: 91
+  autoReturnToMenu: 1
+  menuSceneName: IsMenuScene
+  transition: {fileID: 11400000, guid: 3ad3e86dc386e60458fda4c93a2c3d62, type: 2}
+  startDelay: 0
+  OnNetworkUnreachable:
+    m_PersistentCalls:
+      m_Calls: []
+  OnNetworkRestored:
+    m_PersistentCalls:
+      m_Calls: []
+  pollInterval: 0.25
 --- !u!114 &1727781559324161334
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10549,6 +10552,29 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8451486379042819828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4283364824617576930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e46bc26bc7afe9242930c13abc8be3fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rb: {fileID: 8759172915904957214}
+  _animator: {fileID: 6920849563193250811}
+  _camera: {fileID: 8004034715669064260}
+  _audio: {fileID: 7028199266864596487}
+  _movement: {fileID: 6387213999055437123}
+  _cameraController: {fileID: 0}
+  _fpAudio: {fileID: 4083692567133244299}
+  _wallCheckDistance: 1
+  _wallLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &4341190546390473430
 GameObject:
   m_ObjectHideFlags: 0
@@ -13213,11 +13239,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea069b56565464e81b9023b3d6eab435, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canSway: 1
-  inSwP: {x: -0.00945, y: 1.055, z: 0}
-  swayAm: 0.02
-  maxswayAm: 0.1
-  swaySm: 10
+  enabledSway: 1
+  baseLocalPosition: {x: 0, y: 0, z: 0}
+  amplitude: 1
+  maxAmplitude: 5
+  smooth: 10
 --- !u!1 &5671541661562111639
 GameObject:
   m_ObjectHideFlags: 0
@@ -15972,7 +15998,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 4068749129
+  GlobalObjectIdHash: 1242773824
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -16028,11 +16054,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea069b56565464e81b9023b3d6eab435, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canSway: 1
-  inSwP: {x: 0, y: 0, z: 0}
-  swayAm: 0.02
-  maxswayAm: 0.07
-  swaySm: 20
+  enabledSway: 1
+  baseLocalPosition: {x: 0, y: 0, z: 0}
+  amplitude: 1
+  maxAmplitude: 5
+  smooth: 10
 --- !u!114 &1689399690924944681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16045,6 +16071,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a66d3c068b430e44fb0acff91ef0800a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lightObj: {fileID: 0}
+  toggleKey: 102
+  sfxKey: --
 --- !u!1 &7419772057084079355
 GameObject:
   m_ObjectHideFlags: 0

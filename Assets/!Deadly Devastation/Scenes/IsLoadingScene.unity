@@ -898,8 +898,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8371e0d749d17fd4a88e3bc911896630, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loadScene: {fileID: 828788835}
   waitTime: 1.2
+  initGameManager: {fileID: 0}
+  saveManager: {fileID: 0}
 --- !u!114 &2113004489
 MonoBehaviour:
   m_ObjectHideFlags: 0

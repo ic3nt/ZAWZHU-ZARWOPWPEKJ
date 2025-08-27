@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.00006423474, g: 0.000066277426, b: 0.00006423474, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1513,7 +1513,7 @@ MonoBehaviour:
   force: 1000
   damping: 100
   distance: 10
-  rotationSpeed: 100
+  dragCamera: {fileID: 0}
 --- !u!54 &191538381
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2675,7 +2675,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TriggerColl: {fileID: 310547940}
-  dmg: {fileID: 271258643}
 --- !u!1 &331201684
 GameObject:
   m_ObjectHideFlags: 0
@@ -3615,11 +3614,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 471738408}
   m_Mesh: {fileID: -2432090755550338912, guid: c15dd470ba2b64430a5dd1d3c1591a38, type: 3}
---- !u!4 &508553018 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5620401314896923603, guid: dcb6bf050057c4fbf833ae26d6bafbbc, type: 3}
-  m_PrefabInstance: {fileID: 1667743155}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &528375638
 GameObject:
   m_ObjectHideFlags: 0
@@ -6824,7 +6818,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9626,7 +9620,7 @@ MonoBehaviour:
   force: 1000
   damping: 100
   distance: 10
-  rotationSpeed: 100
+  dragCamera: {fileID: 0}
 --- !u!54 &985980857
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -10129,7 +10123,7 @@ Transform:
   - {fileID: 249255382}
   - {fileID: 1837225163}
   - {fileID: 717958730}
-  - {fileID: 508553018}
+  - {fileID: 1667743156}
   - {fileID: 774426077}
   - {fileID: 1892786011}
   - {fileID: 6482856031426217510}
@@ -10510,7 +10504,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e2c5ca9b7b69d1945bae01d23a4f42f6, type: 2}
   m_sharedMaterial: {fileID: 1963963251288941634, guid: e2c5ca9b7b69d1945bae01d23a4f42f6, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 1963963251288941634, guid: e2c5ca9b7b69d1945bae01d23a4f42f6, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -12079,17 +12074,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!114 &1117692016 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6045522001286116994, guid: dcb6bf050057c4fbf833ae26d6bafbbc, type: 3}
-  m_PrefabInstance: {fileID: 1667743155}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 861aaf5e5f7e849acb68e73257250b8d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!43 &1163711999
 Mesh:
   m_ObjectHideFlags: 0
@@ -13689,7 +13673,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -13866,7 +13850,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -15274,7 +15258,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 822b4fc90009f064197b8f06b33f09e6, type: 2}
   m_sharedMaterial: {fileID: -3760385980636559934, guid: 822b4fc90009f064197b8f06b33f09e6, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: -3760385980636559934, guid: 822b4fc90009f064197b8f06b33f09e6, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -16381,7 +16366,7 @@ PrefabInstance:
     - target: {fileID: 3391432022244228353, guid: dcb6bf050057c4fbf833ae26d6bafbbc, type: 3}
       propertyPath: dmg
       value: 
-      objectReference: {fileID: 1117692016}
+      objectReference: {fileID: 0}
     - target: {fileID: 3391432022244228353, guid: dcb6bf050057c4fbf833ae26d6bafbbc, type: 3}
       propertyPath: Player
       value: 
@@ -16491,6 +16476,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dcb6bf050057c4fbf833ae26d6bafbbc, type: 3}
+--- !u!4 &1667743156 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5843001047105439003, guid: dcb6bf050057c4fbf833ae26d6bafbbc, type: 3}
+  m_PrefabInstance: {fileID: 1667743155}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1681381133
 GameObject:
   m_ObjectHideFlags: 0
@@ -16582,7 +16572,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 15303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9875a245ac49007498213638a307faa1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -16642,7 +16632,7 @@ MonoBehaviour:
   force: 1000
   damping: 100
   distance: 3
-  rotationSpeed: 150
+  dragCamera: {fileID: 0}
 --- !u!114 &1681381140
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18169,7 +18159,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 822b4fc90009f064197b8f06b33f09e6, type: 2}
   m_sharedMaterial: {fileID: -3760385980636559934, guid: 822b4fc90009f064197b8f06b33f09e6, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: -3760385980636559934, guid: 822b4fc90009f064197b8f06b33f09e6, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -18368,7 +18359,7 @@ MonoBehaviour:
   force: 1000
   damping: 100
   distance: 10
-  rotationSpeed: 150
+  dragCamera: {fileID: 0}
 --- !u!54 &1933854354
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -21835,7 +21826,9 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d7de0925549f1244b9809660c5d52eb0, type: 2}
   m_sharedMaterial: {fileID: -2934396589229133276, guid: d7de0925549f1244b9809660c5d52eb0, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: -2934396589229133276, guid: d7de0925549f1244b9809660c5d52eb0, type: 2}
+  - {fileID: 0}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -23886,7 +23879,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 822b4fc90009f064197b8f06b33f09e6, type: 2}
   m_sharedMaterial: {fileID: -3760385980636559934, guid: 822b4fc90009f064197b8f06b33f09e6, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: -3760385980636559934, guid: 822b4fc90009f064197b8f06b33f09e6, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -29173,6 +29167,8 @@ MonoBehaviour:
   gameUI: {fileID: 1193935044}
   debugText: {fileID: 1095069261}
   ipLobbyText: {fileID: 2100877260}
+  playerPrefab: {fileID: 0}
+  spawnPoints: []
 --- !u!1 &6477735593565839897
 GameObject:
   m_ObjectHideFlags: 0
@@ -43270,7 +43266,9 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - {fileID: 0}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -43948,7 +43946,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d7de0925549f1244b9809660c5d52eb0, type: 2}
   m_sharedMaterial: {fileID: -2934396589229133276, guid: d7de0925549f1244b9809660c5d52eb0, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: -2934396589229133276, guid: d7de0925549f1244b9809660c5d52eb0, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:

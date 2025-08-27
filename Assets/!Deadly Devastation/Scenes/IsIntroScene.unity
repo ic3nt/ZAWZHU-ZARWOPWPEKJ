@@ -152,10 +152,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 412eba3968b3b804287d01a6d23e5bdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  poolSize: 20
+  dontDestroyOnLoad: 1
+  masterVolume: 1
   libraries:
   - {fileID: 11400000, guid: 4d13873c2e9ed4944ac51ec3c304e523, type: 2}
-  poolSize: 20
-  masterVolume: 1
 --- !u!4 &60505610
 Transform:
   m_ObjectHideFlags: 0

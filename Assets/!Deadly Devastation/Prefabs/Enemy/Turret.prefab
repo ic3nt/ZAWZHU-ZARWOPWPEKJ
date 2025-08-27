@@ -318,11 +318,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 200fc6dac23d9481f9368805706b14b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aus: {fileID: 5964524724713154681}
+  audioSource: {fileID: 0}
   spawnPoint: {fileID: 8685570862680440898}
   throwForce: 40
-  Bomb: {fileID: 149466963953430689, guid: 9ff579f8fc613480aaed237d1ef8529a, type: 3}
-  particalExplosion: {fileID: 7330687291104082643}
+  bombObject: {fileID: 0}
+  partialExplosion: {fileID: 0}
 --- !u!82 &5964524724713154681
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1719,7 +1719,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

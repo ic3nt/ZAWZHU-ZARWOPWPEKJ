@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.00006472844, g: 0.00006647875, b: 0.00006472844, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -17732,17 +17732,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 10d9bd58906b23c46b453ae735aae544, type: 3}
   m_PrefabInstance: {fileID: 638925807}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &641617184 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2663572215230497575, guid: d4214d95452304deeb3e03ff0d546dc3, type: 3}
-  m_PrefabInstance: {fileID: 7414228523130331823}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 060618d8650124c428f41a98ea5c68e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &642358946
 GameObject:
   m_ObjectHideFlags: 0
@@ -23590,8 +23579,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b17222df5723eb4b86273010ede5838, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Kail: {fileID: 0}
+  mainButtonsGroup: {fileID: 0}
+  world: {fileID: 0}
+  manualObjects: {fileID: 0}
+  mainCamera: {fileID: 0}
   discordController: {fileID: 282651143}
   localizationManager: {fileID: 1224787249}
+  transitionManager: {fileID: 0}
+  initSuccessful: 0
   transition: {fileID: 11400000, guid: 3ad3e86dc386e60458fda4c93a2c3d62, type: 2}
   startDelay: 0
   animator: {fileID: 119013788}
@@ -23602,12 +23598,22 @@ MonoBehaviour:
   animatorManual: {fileID: 1476899427}
   animatorStore: {fileID: 1476899427}
   animatorCatalog: {fileID: 25684543}
-  ManualMonsterButton: {fileID: 1766126292}
-  ManualMonsterToyRobotWindow: {fileID: 2143995273}
-  ManualMonsterMimicWindow: {fileID: 1752317999}
-  ManualMonstersObjects: {fileID: 1268400681}
-  ToyRobotObject: {fileID: 96557423}
-  MimicObject: {fileID: 218817829}
+  InitErrorWindow: {fileID: 0}
+  manualEntries: []
+  currentSelectionText: {fileID: 0}
+  currentSelectionDescription: {fileID: 0}
+  manualLabel: {fileID: 0}
+  backgroundManual: {fileID: 0}
+  mainWindow: {fileID: 0}
+  infoWindow: {fileID: 0}
+  shakeStrength: 10
+  shakeVibrato: 10
+  shakeDuration: 0.3
+  moveDuration: 1
+  rotationDuration: 1
+  shakeStrength3D: 10
+  shakeVibrato3D: 10
+  shakeDuration3D: 0.3
 --- !u!114 &844423365
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29665,8 +29671,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82641dd6f6160b945933eef16a5d6a7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UpdateWindow: {fileID: 683496658}
-  DisableWindow: {fileID: 291052179}
+  menuManager: {fileID: 0}
+  updateWindow: {fileID: 0}
+  mainButtonsGroup: {fileID: 0}
 --- !u!114 &1038987685
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34862,6 +34869,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b23aa8cf972fc944bb7b49cf2ac2f89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentLanguage: 
+  saveManager: {fileID: 0}
 --- !u!4 &1224787250
 Transform:
   m_ObjectHideFlags: 0
@@ -56117,7 +56126,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 606433785ab501c4586c06d0ed450f96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NameText: {fileID: 261997197}
   ErrorLoginWindow: {fileID: 1572692004}
   BanWindow: {fileID: 1786766771}
   NotFoundOrDeleteAccountWindow: {fileID: 2087557457}
@@ -59191,7 +59199,7 @@ PrefabInstance:
     - target: {fileID: 5993768512390727216, guid: a565abbd26b664079a00dc6895f7bebd, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 641617184}
+      objectReference: {fileID: 0}
     - target: {fileID: 7630901342696374573, guid: a565abbd26b664079a00dc6895f7bebd, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -59211,7 +59219,7 @@ PrefabInstance:
     - target: {fileID: 8679562222712263010, guid: a565abbd26b664079a00dc6895f7bebd, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 641617184}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
