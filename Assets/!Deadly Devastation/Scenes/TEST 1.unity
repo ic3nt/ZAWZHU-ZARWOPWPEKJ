@@ -284,7 +284,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   startHealth: 100
-  damageCooldown: 0.1
   destroyOnDeath: 0
   currentHealth: 0
   isDead: 0
@@ -7855,7 +7854,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   startHealth: 100
-  damageCooldown: 0.1
   destroyOnDeath: 0
   currentHealth: 0
   isDead: 0
@@ -13032,7 +13030,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   startHealth: 100
-  damageCooldown: 0.1
   destroyOnDeath: 0
   currentHealth: 0
   isDead: 0
@@ -15530,7 +15527,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   startHealth: 100
-  damageCooldown: 0.1
   destroyOnDeath: 0
   currentHealth: 0
   isDead: 0
@@ -16171,7 +16167,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   startHealth: 100
-  damageCooldown: 0.1
   destroyOnDeath: 0
   currentHealth: 0
   isDead: 0
@@ -19153,7 +19148,7 @@ Light:
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.972549, g: 1, b: 0, a: 1}
   m_Intensity: 100
   m_Range: 7.99365
   m_SpotAngle: 38.438423
@@ -22093,7 +22088,7 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 2
+  m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -22238,11 +22233,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8977537927238072481, guid: dcb6bf050057c4fbf833ae26d6bafbbc, type: 3}
       propertyPath: maxHealth
-      value: 300
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 8977537927238072481, guid: dcb6bf050057c4fbf833ae26d6bafbbc, type: 3}
       propertyPath: startHealth
-      value: 300
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -7,7 +7,6 @@ public class Health : MonoBehaviour
     [Header("Health Settings")]
     [SerializeField, Min(1)] private float maxHealth = 100f;
     [SerializeField, Min(0)] private float startHealth = 100f;
-    [SerializeField, Tooltip("Минимальная задержка между получением урона (сек)")]
     private float damageCooldown = 0.1f;
     [SerializeField] private bool destroyOnDeath = false;
 
