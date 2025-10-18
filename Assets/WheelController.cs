@@ -20,6 +20,20 @@ public class WheelController : MonoBehaviour
     [SerializeField] private Ease openEase = Ease.OutBack;
     [SerializeField] private Ease closeEase = Ease.InBack;
 
+    [Header("Circle Outline Settings")]
+    [SerializeField] private RectTransform circleOutline;
+    [SerializeField] private float rotationSpeed = 45f;
+    [SerializeField] private bool rotateClockwise = true;
+    [SerializeField] private bool rotateOutline = true;
+    [SerializeField] private bool animateColor = true;
+    [SerializeField] private float colorCycleDuration = 3f; // время полного RGB цикла
+    [Range(0f, 1f)]
+    [SerializeField] private float brightness = 1f;
+
+    private Image circleImage;
+    private Tween rotationTween;
+    private Tween colorTween;
+
     private bool isVisible;
     private Vector3 baseScale;
     private Sequence wheelSequence;
@@ -41,12 +55,60 @@ public class WheelController : MonoBehaviour
 
         ArrangeButtons();
         HideInstant();
+
+        if (circleOutline)
+            circleImage = circleOutline.GetComponent<Image>();
+    }
+
+    private void Start()
+    {
+        StartCircleRotation();
+        StartCircleColorCycle();
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Tab)) Show();
         if (Input.GetKeyUp(KeyCode.Tab)) Hide();
+    }
+
+    // Вечное вращение круга (только 2D — по оси Z)
+    private void StartCircleRotation()
+    {
+        if (!circleOutline || !rotateOutline) return;
+
+        rotationTween?.Kill();
+
+        float direction = rotateClockwise ? -1f : 1f;
+        float duration = 360f / rotationSpeed;
+
+        rotationTween = circleOutline
+            .DOLocalRotate(new Vector3(0, 0, 360f * direction), duration, RotateMode.FastBeyond360)
+            .SetEase(Ease.Linear)
+            .SetLoops(-1, LoopType.Restart);
+    }
+
+    // Плавный RGB-перелив цвета
+    private void StartCircleColorCycle()
+    {
+        if (!circleImage) return;
+        colorTween?.Kill();
+
+        if (!animateColor)
+        {
+            // возвращаем к белому если RGB отключён
+            //circleImage.color = Color.white * brightness;
+            return;
+        }
+
+        colorTween = DOTween.To(() => 0f, x =>
+        {
+            // hue от 0 до 1 (замкнутый RGB круг)
+            Color rgb = Color.HSVToRGB(x % 1f, 1f, brightness);
+            circleImage.color = rgb;
+        }, 1f, colorCycleDuration)
+        .SetEase(Ease.Linear)
+        .SetLoops(-1, LoopType.Restart);
     }
 
     private void ArrangeButtons()
@@ -70,16 +132,12 @@ public class WheelController : MonoBehaviour
             rect.localScale = Vector3.one;
             rect.anchoredPosition = pos;
 
-
             float lookAngle = Mathf.Atan2(pos.y, pos.x) * Mathf.Rad2Deg;
             rect.localRotation = Quaternion.Euler(0f, 0f, lookAngle + 270f);
 
             buttons[i].Setup(this, angleDeg);
         }
     }
-
-
-
 
     public void Show()
     {
@@ -96,6 +154,7 @@ public class WheelController : MonoBehaviour
             {
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
+
                 if (centerText)
                 {
                     centerText.text = "Выберите эмоцию";

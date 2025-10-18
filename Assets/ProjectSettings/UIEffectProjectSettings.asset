@@ -25,7 +25,13 @@ ShaderVariantCollection:
         passType: 0
       - keywords: COLOR_FILTER DETAIL_MULTIPLY_ADDITIVE SAMPLING_EDGE_ALPHA TRANSITION_FADE
         passType: 0
+      - keywords: COLOR_FILTER EDGE_PLAIN SAMPLING_EDGE_ALPHA
+        passType: 0
       - keywords: COLOR_FILTER EDGE_PLAIN SAMPLING_EDGE_LUMINANCE
+        passType: 0
+      - keywords: COLOR_FILTER EDGE_PLAIN SAMPLING_PIXELATION
+        passType: 0
+      - keywords: COLOR_FILTER EDGE_PLAIN SAMPLING_RGB_SHIFT
         passType: 0
       - keywords: COLOR_FILTER EDGE_SHINY SAMPLING_EDGE_LUMINANCE
         passType: 0
