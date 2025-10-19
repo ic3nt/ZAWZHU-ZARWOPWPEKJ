@@ -20731,9 +20731,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1942251752576094437, guid: f369f83d3679e2c42a500558f6c3aa87, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.189
+      objectReference: {fileID: 0}
+    - target: {fileID: 1942251752576094437, guid: f369f83d3679e2c42a500558f6c3aa87, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.253
+      objectReference: {fileID: 0}
     - target: {fileID: 2574948337445593100, guid: f369f83d3679e2c42a500558f6c3aa87, type: 3}
       propertyPath: m_Name
       value: test 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2574948337445593100, guid: f369f83d3679e2c42a500558f6c3aa87, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5197897289407332476, guid: f369f83d3679e2c42a500558f6c3aa87, type: 3}
       propertyPath: m_LocalPosition.x
@@ -26867,7 +26879,7 @@ MonoBehaviour:
   NetworkConfig:
     ProtocolVersion: 0
     NetworkTransport: {fileID: 7385628205857566256}
-    PlayerPrefab: {fileID: 3317704105534906839, guid: 0f9e34c858eae4f13b463cf0d861564f, type: 3}
+    PlayerPrefab: {fileID: 3317704105534906839, guid: ae3904c87cd0d394f8b46e28775a6a70, type: 3}
     Prefabs:
       NetworkPrefabsLists: []
     TickRate: 30

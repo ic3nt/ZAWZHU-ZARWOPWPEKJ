@@ -4,17 +4,29 @@ using TMPro;
 using DG.Tweening;
 using System.Collections.Generic;
 
-public class WheelController : MonoBehaviour
+public enum SelectorType
 {
+    Circular,
+    Grid
+}
+
+public class SelectorController : MonoBehaviour
+{
+    [Header("General Settings")]
+    [SerializeField] private SelectorType selectorType = SelectorType.Circular;
+    [SerializeField] private KeyCode openKey = KeyCode.Tab;
+
     [Header("References")]
-    [SerializeField] private RectTransform wheelTransform;
+    [SerializeField] private RectTransform selectorTransform;
     [SerializeField] private Image selectedIcon;
     [SerializeField] private TextMeshProUGUI centerText;
     [SerializeField] private Sprite noImage;
-    [SerializeField] private List<WheelButton> buttons = new();
+    [SerializeField] private List<SelectorButton> buttons = new();
 
-    [Header("Wheel Settings")]
+    [Header("Circular Settings")]
     [SerializeField] private float radius = 200f;
+
+    [Header("Animation Settings")]
     [SerializeField] private float openDuration = 0.4f;
     [SerializeField] private float closeDuration = 0.25f;
     [SerializeField] private Ease openEase = Ease.OutBack;
@@ -26,38 +38,42 @@ public class WheelController : MonoBehaviour
     [SerializeField] private bool rotateClockwise = true;
     [SerializeField] private bool rotateOutline = true;
     [SerializeField] private bool animateColor = true;
-    [SerializeField] private float colorCycleDuration = 3f; // время полного RGB цикла
+    [SerializeField] private float colorCycleDuration = 3f;
     [Range(0f, 1f)]
     [SerializeField] private float brightness = 1f;
 
     private Image circleImage;
     private Tween rotationTween;
     private Tween colorTween;
+    private Sequence animSequence;
 
     private bool isVisible;
     private Vector3 baseScale;
-    private Sequence wheelSequence;
-    private WheelButton hoveredButton;
+    private SelectorButton hoveredButton;
 
     public int SelectedItemID { get; private set; } = -1;
 
     private void Awake()
     {
-        if (!wheelTransform)
+        if (!selectorTransform)
         {
-            Debug.LogError("[WheelController] Missing wheelTransform reference!");
+            Debug.LogError("[SelectorController] Missing selectorTransform reference!");
             enabled = false;
             return;
         }
 
-        baseScale = wheelTransform.localScale;
-        wheelTransform.localScale = Vector3.zero;
-
-        ArrangeButtons();
-        HideInstant();
+        baseScale = selectorTransform.localScale;
+        selectorTransform.localScale = Vector3.zero;
 
         if (circleOutline)
             circleImage = circleOutline.GetComponent<Image>();
+
+        if (selectorType == SelectorType.Circular)
+            ArrangeCircularButtons();
+        else
+            AssignGridButtons();
+
+        HideInstant();
     }
 
     private void Start()
@@ -68,15 +84,14 @@ public class WheelController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab)) Show();
-        if (Input.GetKeyUp(KeyCode.Tab)) Hide();
+        if (Input.GetKeyDown(openKey)) Show();
+        if (Input.GetKeyUp(openKey)) Hide();
     }
 
-    // Вечное вращение круга (только 2D — по оси Z)
+
     private void StartCircleRotation()
     {
         if (!circleOutline || !rotateOutline) return;
-
         rotationTween?.Kill();
 
         float direction = rotateClockwise ? -1f : 1f;
@@ -88,7 +103,6 @@ public class WheelController : MonoBehaviour
             .SetLoops(-1, LoopType.Restart);
     }
 
-    // Плавный RGB-перелив цвета
     private void StartCircleColorCycle()
     {
         if (!circleImage) return;
@@ -96,14 +110,12 @@ public class WheelController : MonoBehaviour
 
         if (!animateColor)
         {
-            // возвращаем к белому если RGB отключён
-            //circleImage.color = Color.white * brightness;
+            circleImage.color = Color.white * brightness;
             return;
         }
 
         colorTween = DOTween.To(() => 0f, x =>
         {
-            // hue от 0 до 1 (замкнутый RGB круг)
             Color rgb = Color.HSVToRGB(x % 1f, 1f, brightness);
             circleImage.color = rgb;
         }, 1f, colorCycleDuration)
@@ -111,7 +123,7 @@ public class WheelController : MonoBehaviour
         .SetLoops(-1, LoopType.Restart);
     }
 
-    private void ArrangeButtons()
+    private void ArrangeCircularButtons()
     {
         int count = buttons.Count;
         if (count == 0) return;
@@ -124,9 +136,9 @@ public class WheelController : MonoBehaviour
             float angleRad = angleDeg * Mathf.Deg2Rad;
 
             Vector2 pos = new Vector2(Mathf.Cos(angleRad), Mathf.Sin(angleRad)) * radius;
-
             RectTransform rect = buttons[i].GetComponent<RectTransform>();
-            rect.SetParent(wheelTransform, false);
+
+            rect.SetParent(selectorTransform, false);
             rect.anchorMin = rect.anchorMax = new Vector2(0.5f, 0.5f);
             rect.pivot = new Vector2(0.5f, 0.5f);
             rect.localScale = Vector3.one;
@@ -135,8 +147,14 @@ public class WheelController : MonoBehaviour
             float lookAngle = Mathf.Atan2(pos.y, pos.x) * Mathf.Rad2Deg;
             rect.localRotation = Quaternion.Euler(0f, 0f, lookAngle + 270f);
 
-            buttons[i].Setup(this, angleDeg);
+            buttons[i].Setup(this);
         }
+    }
+
+    private void AssignGridButtons()
+    {
+        foreach (var btn in buttons)
+            btn.Setup(this);
     }
 
     public void Show()
@@ -144,12 +162,15 @@ public class WheelController : MonoBehaviour
         if (isVisible) return;
         isVisible = true;
 
-        wheelSequence?.Kill();
-        wheelTransform.localScale = Vector3.zero;
+        animSequence?.Kill();
+        selectorTransform.localScale = Vector3.zero;
 
-        wheelSequence = DOTween.Sequence();
+        if (selectorType == SelectorType.Grid)
+            AssignGridButtons();
 
-        wheelSequence.Append(wheelTransform.DOScale(baseScale, openDuration).SetEase(openEase))
+        animSequence = DOTween.Sequence();
+
+        animSequence.Append(selectorTransform.DOScale(baseScale, openDuration).SetEase(openEase))
             .OnStart(() =>
             {
                 Cursor.lockState = CursorLockMode.None;
@@ -157,21 +178,23 @@ public class WheelController : MonoBehaviour
 
                 if (centerText)
                 {
-                    centerText.text = "Выберите эмоцию";
+                    centerText.text = "Выберите элемент";
                     centerText.alpha = 0f;
                     centerText.DOFade(1f, 0.3f);
                 }
 
-                // поочередное появление кнопок
-                for (int i = 0; i < buttons.Count; i++)
+                if (selectorType == SelectorType.Circular)
                 {
-                    var btn = buttons[i];
-                    RectTransform rect = btn.GetComponent<RectTransform>();
-                    rect.localScale = Vector3.zero;
+                    for (int i = 0; i < buttons.Count; i++)
+                    {
+                        var btn = buttons[i];
+                        RectTransform rect = btn.GetComponent<RectTransform>();
+                        rect.localScale = Vector3.zero;
 
-                    rect.DOScale(1f, 0.25f)
-                        .SetEase(Ease.OutBack)
-                        .SetDelay(0.05f * i);
+                        rect.DOScale(1f, 0.25f)
+                            .SetEase(Ease.OutBack)
+                            .SetDelay(0.05f * i);
+                    }
                 }
             });
     }
@@ -181,7 +204,7 @@ public class WheelController : MonoBehaviour
         if (!isVisible) return;
         isVisible = false;
 
-        WheelButton selected = hoveredButton;
+        SelectorButton selected = hoveredButton;
 
         if (selected)
         {
@@ -190,20 +213,20 @@ public class WheelController : MonoBehaviour
 
             if (centerText)
             {
-                centerText.text = "OKAY!";
+                centerText.text = "OK!";
                 centerText.alpha = 1f;
                 centerText.transform.localScale = Vector3.one * 0.7f;
 
                 centerText.DOFade(1f, 0.25f);
                 centerText.transform.DOScale(1f, 0.3f).SetEase(Ease.OutBack);
 
-                DOVirtual.DelayedCall(1.3f, () =>
+                DOVirtual.DelayedCall(1.2f, () =>
                 {
                     if (centerText) centerText.text = "";
                 });
             }
 
-            Debug.Log($"Selected emotion: {selected.itemName}");
+            Debug.Log($"[Selector] Selected: {selected.itemName}");
         }
         else
         {
@@ -211,10 +234,10 @@ public class WheelController : MonoBehaviour
             if (centerText) centerText.text = "";
         }
 
-        wheelSequence?.Kill();
-        wheelSequence = DOTween.Sequence();
+        animSequence?.Kill();
+        animSequence = DOTween.Sequence();
 
-        wheelSequence.Append(wheelTransform.DOScale(Vector3.zero, closeDuration).SetEase(closeEase))
+        animSequence.Append(selectorTransform.DOScale(Vector3.zero, closeDuration).SetEase(closeEase))
             .OnStart(() =>
             {
                 Cursor.lockState = CursorLockMode.Locked;
@@ -229,13 +252,13 @@ public class WheelController : MonoBehaviour
 
     private void HideInstant()
     {
-        wheelTransform.localScale = Vector3.zero;
+        selectorTransform.localScale = Vector3.zero;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         isVisible = false;
     }
 
-    public void OnButtonHover(WheelButton button)
+    public void OnButtonHover(SelectorButton button)
     {
         if (!button || hoveredButton == button) return;
 
@@ -243,10 +266,14 @@ public class WheelController : MonoBehaviour
         hoveredButton = button;
         hoveredButton.Select();
 
-        if (centerText) centerText.text = button.itemName;
+        if (centerText)
+        {
+            centerText.text = button.itemName;
+            centerText.DOFade(1f, 0.2f);
+        }
     }
 
-    public void OnButtonClick(WheelButton button)
+    public void OnButtonClick(SelectorButton button)
     {
         if (!button) return;
         hoveredButton = button;
