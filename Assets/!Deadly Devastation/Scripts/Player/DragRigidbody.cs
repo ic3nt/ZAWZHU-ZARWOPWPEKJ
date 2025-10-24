@@ -38,7 +38,7 @@ public class DragRigidbody : MonoBehaviour
     {
         if (dragCamera == null)
         {
-            Debug.LogWarning("Drag camera not assigned.");
+   //         Debug.LogWarning("Drag camera not assigned.");
             return;
         }
 

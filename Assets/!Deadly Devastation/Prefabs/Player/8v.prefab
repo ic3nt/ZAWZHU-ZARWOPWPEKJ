@@ -11775,7 +11775,7 @@ Animator:
   m_GameObject: {fileID: 3317704105534906839}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d0bc3190fccd140a6bf14da9d2666d09, type: 2}
+  m_Controller: {fileID: 9100000, guid: 86b33ff1f33123c4cbde10d5a9f6ad7a, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -11898,7 +11898,7 @@ MonoBehaviour:
   kickBoxSize: {x: 1, y: 1, z: 2}
   delay: 1
   kickDamage: 10
-  kickKey: 113
+  kickKey: 323
   kickAnimationCount: 3
   kickShakeData: {fileID: 11400000, guid: 5a56c21352f924f4a921de48beece207, type: 2}
   hitShakeData: {fileID: 11400000, guid: aa1a19327685bd940810d628edb73682, type: 2}
@@ -21230,7 +21230,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 4124908174431447226}
-  m_PlaneDistance: 0.3
+  m_PlaneDistance: 0.1
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
