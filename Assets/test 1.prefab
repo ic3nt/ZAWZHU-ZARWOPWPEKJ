@@ -28589,8 +28589,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: monitor 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4083501151425157549, guid: 9ad6a04761a5d354282d764685ed68da, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.447
+      objectReference: {fileID: 0}
+    - target: {fileID: 7202271454713460447, guid: 9ad6a04761a5d354282d764685ed68da, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f24d068abc356f04b80a72fde29a0f78, type: 2}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: -516098083770646512, guid: 9ad6a04761a5d354282d764685ed68da, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9ad6a04761a5d354282d764685ed68da, type: 3}
