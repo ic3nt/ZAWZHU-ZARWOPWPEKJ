@@ -39,7 +39,7 @@ public class PlayerCameraController : NetworkBehaviour
     [SerializeField] private ShakeData hardStopShake;
     [SerializeField] private ShakeData sprintCollisionShake;
     [SerializeField] private ShakeData jumpLandShake;
-
+    [SerializeField] private ShakeData fallingShake; // 🎯 новое — шейк во время падения
 
     private PlayerContext _ctx;
     private Vector3 _initialHolderPos;
@@ -63,6 +63,7 @@ public class PlayerCameraController : NetworkBehaviour
             movement.OnHardStop += OnHardStop;
             movement.OnSprintCollision += OnSprintCollision;
             movement.OnJumpLand += OnJumpLand;
+            movement.OnFallingShake += OnFallingShake;
         }
     }
 
@@ -73,6 +74,7 @@ public class PlayerCameraController : NetworkBehaviour
             movement.OnHardStop -= OnHardStop;
             movement.OnSprintCollision -= OnSprintCollision;
             movement.OnJumpLand -= OnJumpLand;
+            movement.OnFallingShake -= OnFallingShake;
         }
     }
 
@@ -100,7 +102,6 @@ public class PlayerCameraController : NetworkBehaviour
         HandleFOV();
         if (cameraBobbing) HandleBobbing();
         if (cameraTilt) HandleTilt();
-
     }
 
     private void HandleLook()
@@ -170,18 +171,14 @@ public class PlayerCameraController : NetworkBehaviour
         cameraHolder.localRotation = Quaternion.Euler(0, 0, smoothZ);
     }
 
-    private void OnHardStop()
-    {
-        if (hardStopShake != null) CameraShakerHandler.Shake(hardStopShake);
-    }
+    private void OnHardStop() => CameraShakerHandler.Shake(hardStopShake);
+    private void OnSprintCollision() => CameraShakerHandler.Shake(sprintCollisionShake);
+    private void OnJumpLand() => CameraShakerHandler.Shake(jumpLandShake);
 
-    private void OnSprintCollision()
+    // 🎯 Тряска во время падения
+    private void OnFallingShake()
     {
-        if (sprintCollisionShake != null) CameraShakerHandler.Shake(sprintCollisionShake);
-    }
-
-    private void OnJumpLand()
-    {
-        if (jumpLandShake != null) CameraShakerHandler.Shake(jumpLandShake);
+        if (fallingShake != null)
+            CameraShakerHandler.Shake(fallingShake);
     }
 }

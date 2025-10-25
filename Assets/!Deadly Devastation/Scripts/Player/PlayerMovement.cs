@@ -20,6 +20,19 @@ public class PlayerMovement : NetworkBehaviour
     [SerializeField] private float inertiaMultiplier = 3.0f;
     [SerializeField] private float hardStopSpeedThreshold = 3.0f;
 
+    [Header("Falling behaviour")]
+    [SerializeField] private float fallGravityMultiplier = 2.5f;
+    [SerializeField] private float fallSpeedDamping = 0.9f;
+
+    [Header("Air control")]
+    [SerializeField] private float airControlFactor = 0.4f;
+    [SerializeField] private float airInertia = 0.9f;
+    [SerializeField] private float minFallMoveSpeed = 1.5f;
+
+    [Header("Falling shake")]
+    [SerializeField] private float fallShakeDelay = 0.5f;   // после скольки секунд падения начинать тряску
+    [SerializeField] private float fallShakeInterval = 0.25f; // интервал тряски во время падения
+
     [Header("Input")]
     [SerializeField] private KeyCode runKey = KeyCode.LeftShift;
     [SerializeField] private bool canRun = true;
@@ -27,6 +40,7 @@ public class PlayerMovement : NetworkBehaviour
     public bool CanMove { get; set; } = true;
     public bool IsRunning { get; private set; }
     public bool IsMoving { get; private set; }
+    public bool IsFalling { get; private set; }
     public float RunProgress01 { get; private set; }
     public float RunProgress02 { get; private set; }
     public float CurrentHorizontalSpeed => new Vector3(_rb.velocity.x, 0f, _rb.velocity.z).magnitude;
@@ -34,6 +48,7 @@ public class PlayerMovement : NetworkBehaviour
     public event Action OnHardStop;
     public event Action OnSprintCollision;
     public event Action OnJumpLand;
+    public event Action OnFallingShake; // 🎯 новое событие для тряски во время падения
 
     private PlayerContext _ctx;
     private Animator _animator;
@@ -42,6 +57,9 @@ public class PlayerMovement : NetworkBehaviour
     private Vector3 _velSmoothRef;
     private bool _wasInputMoving;
     private bool _wasGrounded;
+
+    private float _fallTimer;
+    private float _fallShakeTimer;
 
     private static readonly int HashIdle = Animator.StringToHash("IsIdle");
     private static readonly int HashWalk = Animator.StringToHash("IsWalk");
@@ -64,17 +82,53 @@ public class PlayerMovement : NetworkBehaviour
 
         bool grounded = Physics.Raycast(transform.position + Vector3.up * 0.1f, Vector3.down, 0.2f);
         if (!_wasGrounded && grounded) OnJumpLand?.Invoke();
-        _wasGrounded = grounded;
 
-    //    Debug.Log($"[PlayerMovement] Running: {IsRunning}, Speed: {CurrentHorizontalSpeed:F2}");
+        // Проверка на падение
+        if (!grounded && _rb.velocity.y < -0.1f)
+        {
+            IsFalling = true;
+            _fallTimer += Time.deltaTime;
+
+            // Если падение длится достаточно долго — запускаем тряску
+            if (_fallTimer >= fallShakeDelay)
+            {
+                _fallShakeTimer += Time.deltaTime;
+                if (_fallShakeTimer >= fallShakeInterval)
+                {
+                    OnFallingShake?.Invoke();
+                    _fallShakeTimer = 0f;
+                }
+            }
+        }
+        else
+        {
+            // Сброс, если приземлились
+            if (IsFalling && grounded)
+            {
+                _fallTimer = 0f;
+                _fallShakeTimer = 0f;
+            }
+            IsFalling = false;
+        }
+
+        _wasGrounded = grounded;
     }
 
     private void FixedUpdate()
     {
         if (!IsOwner) return;
 
-        if (CanMove) ApplyMovement();
-        else HaltHorizontal();
+        if (CanMove)
+        {
+            if (IsFalling)
+                ApplyFallingPhysics();
+            else
+                ApplyMovement();
+        }
+        else
+        {
+            HaltHorizontal();
+        }
     }
 
     private bool HasWallAhead()
@@ -157,6 +211,28 @@ public class PlayerMovement : NetworkBehaviour
             RunProgress02 = 1f;
         else
             RunProgress02 = 0f;
+    }
+
+    private void ApplyFallingPhysics()
+    {
+        Vector2 input = new(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        Vector3 inputDir = new Vector3(input.x, 0f, input.y);
+        if (inputDir.sqrMagnitude > 0.01f)
+            inputDir.Normalize();
+
+        Vector3 airDir = transform.TransformDirection(inputDir);
+        Vector3 horizVel = new Vector3(_rb.velocity.x, 0f, _rb.velocity.z);
+        horizVel *= airInertia;
+        horizVel += airDir * airControlFactor;
+
+        float horizontalSpeed = horizVel.magnitude;
+        if (horizontalSpeed < minFallMoveSpeed && horizontalSpeed > 0.1f)
+            horizVel = horizVel.normalized * minFallMoveSpeed;
+
+        float gravityBoost = Physics.gravity.y * (fallGravityMultiplier - 1f);
+        Vector3 verticalVel = new Vector3(0, gravityBoost * Time.fixedDeltaTime, 0);
+        Vector3 newVel = horizVel + new Vector3(0, _rb.velocity.y, 0) + verticalVel;
+        _rb.velocity = newVel;
     }
 
     private void OnCollisionEnter(Collision col)

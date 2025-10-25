@@ -11796,6 +11796,11 @@ MonoBehaviour:
   runBuildUpTime: 2
   inertiaMultiplier: 5
   hardStopSpeedThreshold: 3
+  fallGravityMultiplier: 2.5
+  fallSpeedDamping: 0.9
+  airControlFactor: 0.6
+  airInertia: 0.9
+  minFallMoveSpeed: 1.5
   runKey: 304
   canRun: 1
 --- !u!114 &1634237587014523608
@@ -12167,7 +12172,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: {fileID: 1634237587014523608}
-  _dps: 5
+  _dps: 1
 --- !u!114 &8707190214422657074
 MonoBehaviour:
   m_ObjectHideFlags: 0

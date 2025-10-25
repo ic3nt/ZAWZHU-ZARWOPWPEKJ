@@ -85,7 +85,7 @@ public class HitManager : MonoBehaviour
         if (_playerMovement.IsRunning && runningKickShakeData != null)
         {
             CameraShakerHandler.Shake(runningKickShakeData);
-            _playerMovement.AddImpulse(transform.forward * kickForce * 0.01f);
+          //  _playerMovement.AddImpulse(transform.forward * kickForce * 0.01f);
         }
 
         yield return new WaitForSeconds(delay);
