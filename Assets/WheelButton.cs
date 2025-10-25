@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
 using UnityEngine.EventSystems;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(RectTransform))]
 public class SelectorButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
@@ -30,6 +31,9 @@ public class SelectorButton : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     [SerializeField] private float hoverOutDuration = 0.25f;
     [SerializeField] private float shakeStrength = 5f;
     [SerializeField] private float shakeDuration = 1.2f;
+
+    [Header("Events")]
+    public UnityEvent onSelectAction; // 🎯 добавлено событие
 
     private RectTransform rect;
     private Vector3 startScale;
@@ -104,6 +108,7 @@ public class SelectorButton : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     public void OnPointerClick(PointerEventData eventData)
     {
         controller?.OnButtonClick(this);
+        onSelectAction?.Invoke(); // 🔥 Вызов события при выборе
     }
 
     private void ActivateOutline(bool active)

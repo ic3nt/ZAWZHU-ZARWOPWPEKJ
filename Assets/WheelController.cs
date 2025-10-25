@@ -213,7 +213,7 @@ public class SelectorController : MonoBehaviour
 
             if (centerText)
             {
-                centerText.text = "OK!";
+                centerText.text = "OKAY!";
                 centerText.alpha = 1f;
                 centerText.transform.localScale = Vector3.one * 0.7f;
 
