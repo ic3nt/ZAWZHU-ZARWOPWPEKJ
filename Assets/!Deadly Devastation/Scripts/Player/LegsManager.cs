@@ -3,7 +3,7 @@ using UnityEngine;
 using FirstGearGames.SmoothCameraShaker;
 
 [RequireComponent(typeof(PlayerContext))]
-public class HitManager : MonoBehaviour
+public class LegsManager : MonoBehaviour
 {
     [Header("Kick Settings")]
     [SerializeField] private float kickForce = 10f;

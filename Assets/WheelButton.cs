@@ -9,7 +9,6 @@ using UnityEngine.Events;
 public class SelectorButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     [Header("Button Info")]
-    public int ID;
     public string itemName;
     public Sprite icon;
 

@@ -208,7 +208,6 @@ public class SelectorController : MonoBehaviour
 
         if (selected)
         {
-            SelectedItemID = selected.ID;
             if (selectedIcon) selectedIcon.sprite = selected.icon;
 
             if (centerText)
