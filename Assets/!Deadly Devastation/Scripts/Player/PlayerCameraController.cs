@@ -26,8 +26,8 @@ public class PlayerCameraController : NetworkBehaviour
 
     [Header("Tilt")]
     [SerializeField] private bool cameraTilt = true;
-    [SerializeField] private float tiltAngle = 5f;
-    [SerializeField] private float tiltSpeed = 5f;
+    [SerializeField, Range(1f, 15f)] private float tiltSpeed = 6f;
+    [SerializeField, Range(1f, 15f)] private float tiltAngle = 8f;
 
     [Header("FOV")]
     [SerializeField] private float sprintFovBoost = 15f;
@@ -39,7 +39,7 @@ public class PlayerCameraController : NetworkBehaviour
     [SerializeField] private ShakeData hardStopShake;
     [SerializeField] private ShakeData sprintCollisionShake;
     [SerializeField] private ShakeData jumpLandShake;
-    [SerializeField] private ShakeData fallingShake; // 🎯 новое — шейк во время падения
+    [SerializeField] private ShakeData fallingShake;
 
     private PlayerContext _ctx;
     private Vector3 _initialHolderPos;
@@ -64,6 +64,7 @@ public class PlayerCameraController : NetworkBehaviour
             movement.OnSprintCollision += OnSprintCollision;
             movement.OnJumpLand += OnJumpLand;
             movement.OnFallingShake += OnFallingShake;
+            movement.FadeOutShake += FadeOutShake;
         }
     }
 
@@ -75,6 +76,7 @@ public class PlayerCameraController : NetworkBehaviour
             movement.OnSprintCollision -= OnSprintCollision;
             movement.OnJumpLand -= OnJumpLand;
             movement.OnFallingShake -= OnFallingShake;
+            movement.FadeOutShake -= FadeOutShake;
         }
     }
 
@@ -120,7 +122,6 @@ public class PlayerCameraController : NetworkBehaviour
     {
         float progress = movement ? movement.RunProgress01 : 0f;
         float targetFov = _defaultFov + sprintFovBoost * progress;
-
         float breath01 = Mathf.InverseLerp(0.6f, 1f, progress);
         if (breath01 > 0f)
             targetFov += Mathf.Sin(Time.time * fovBreathSpeed) * fovBreathAmplitude * breath01;
@@ -141,44 +142,40 @@ public class PlayerCameraController : NetworkBehaviour
 
             _bobTimer += Time.deltaTime * spd;
             Vector3 offset = new Vector3(0, Mathf.Sin(_bobTimer) * amt, 0);
-            playerCamera.transform.localPosition = Vector3.Lerp(
-                playerCamera.transform.localPosition,
-                _initialCamLocalPos + offset,
-                Time.deltaTime * 10f
-            );
+            playerCamera.transform.localPosition = Vector3.Lerp(playerCamera.transform.localPosition, _initialCamLocalPos + offset, Time.deltaTime * 10f);
         }
         else
         {
             _bobTimer = 0f;
-            playerCamera.transform.localPosition = Vector3.Lerp(
-                playerCamera.transform.localPosition,
-                _initialCamLocalPos,
-                Time.deltaTime * 10f
-            );
+            playerCamera.transform.localPosition = Vector3.Lerp(playerCamera.transform.localPosition, _initialCamLocalPos, Time.deltaTime * 10f);
         }
     }
 
     private void HandleTilt()
     {
-        if (!cameraHolder) return;
+        if (!cameraHolder || movement == null) return;
 
-        float target = 0f;
-        if (Input.GetKey(KeyCode.A)) target = tiltAngle;
-        else if (Input.GetKey(KeyCode.D)) target = -tiltAngle;
+        Vector3 localVel = characterRoot.InverseTransformDirection(movement.GetComponent<Rigidbody>().velocity);
+        float strafeSpeed = Mathf.Clamp(localVel.x / movement.walkMaxSpeed, -1f, 1f);
+        float tiltMultiplier = movement.IsRunning ? 1.3f : 1f;
+        float targetTilt = -strafeSpeed * tiltAngle * tiltMultiplier;
+
+        if (movement.IsFalling)
+            targetTilt += Mathf.Sin(Time.time * 4f) * 0.5f;
+
+        float yawDelta = Input.GetAxis("Mouse X");
+        targetTilt -= yawDelta * 0.5f;
 
         float currentZ = cameraHolder.localRotation.eulerAngles.z;
-        float smoothZ = Mathf.LerpAngle(currentZ, target, Time.deltaTime * tiltSpeed);
+        if (currentZ > 180f) currentZ -= 360f;
+        float smoothZ = Mathf.Lerp(currentZ, targetTilt, Time.deltaTime * tiltSpeed);
+
         cameraHolder.localRotation = Quaternion.Euler(0, 0, smoothZ);
     }
 
     private void OnHardStop() => CameraShakerHandler.Shake(hardStopShake);
     private void OnSprintCollision() => CameraShakerHandler.Shake(sprintCollisionShake);
     private void OnJumpLand() => CameraShakerHandler.Shake(jumpLandShake);
-
-    // 🎯 Тряска во время падения
-    private void OnFallingShake()
-    {
-        if (fallingShake != null)
-            CameraShakerHandler.Shake(fallingShake);
-    }
+    private void OnFallingShake() { if (fallingShake != null) CameraShakerHandler.Shake(fallingShake); }
+    private void FadeOutShake() => CameraShakerHandler.FadeOut();
 }

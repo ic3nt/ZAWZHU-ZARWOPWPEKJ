@@ -7,7 +7,7 @@ public class PlayerMovement : NetworkBehaviour
 {
     [Header("Speed (m/s)")]
     [SerializeField] private float walkStartSpeed = 2f;
-    [SerializeField] private float walkMaxSpeed = 5f;
+    public float walkMaxSpeed = 5f;
     [SerializeField] private float runStartSpeed = 3f;
     [SerializeField] private float runMaxSpeed = 7f;
 
@@ -22,7 +22,6 @@ public class PlayerMovement : NetworkBehaviour
 
     [Header("Falling behaviour")]
     [SerializeField] private float fallGravityMultiplier = 2.5f;
-    [SerializeField] private float fallSpeedDamping = 0.9f;
 
     [Header("Air control")]
     [SerializeField] private float airControlFactor = 0.4f;
@@ -30,8 +29,8 @@ public class PlayerMovement : NetworkBehaviour
     [SerializeField] private float minFallMoveSpeed = 1.5f;
 
     [Header("Falling shake")]
-    [SerializeField] private float fallShakeDelay = 0.5f;   // после скольки секунд падения начинать тряску
-    [SerializeField] private float fallShakeInterval = 0.25f; // интервал тряски во время падения
+    [SerializeField] private float fallShakeDelay = 0.3f;
+    [SerializeField] private float fallShakeInterval = 0.25f;
 
     [Header("Input")]
     [SerializeField] private KeyCode runKey = KeyCode.LeftShift;
@@ -48,7 +47,8 @@ public class PlayerMovement : NetworkBehaviour
     public event Action OnHardStop;
     public event Action OnSprintCollision;
     public event Action OnJumpLand;
-    public event Action OnFallingShake; // 🎯 новое событие для тряски во время падения
+    public event Action OnFallingShake;
+    public event Action FadeOutShake;
 
     private PlayerContext _ctx;
     private Animator _animator;
@@ -57,7 +57,6 @@ public class PlayerMovement : NetworkBehaviour
     private Vector3 _velSmoothRef;
     private bool _wasInputMoving;
     private bool _wasGrounded;
-
     private float _fallTimer;
     private float _fallShakeTimer;
 
@@ -70,26 +69,32 @@ public class PlayerMovement : NetworkBehaviour
     {
         _ctx = GetComponent<PlayerContext>();
         _rb = _ctx.Rb;
-        if (!_animator) _animator = _ctx.Animator;
+        _animator = _ctx.Animator;
     }
 
     private void Update()
     {
         if (!IsOwner) return;
 
-        if (CanMove) UpdateAnimation();
-        else ForceIdle();
+        if (CanMove)
+            UpdateAnimation();
+        else
+            ForceIdle();
 
-        bool grounded = Physics.Raycast(transform.position + Vector3.up * 0.1f, Vector3.down, 0.2f);
-        if (!_wasGrounded && grounded) OnJumpLand?.Invoke();
+        const float rayLength = 1.0f;
+        bool grounded = Physics.Raycast(transform.position + Vector3.up * 0.1f, Vector3.down, rayLength);
+        Debug.DrawRay(transform.position + Vector3.up * 0.1f, Vector3.down * rayLength, grounded ? Color.green : Color.red);
 
-        // Проверка на падение
         if (!grounded && _rb.velocity.y < -0.1f)
         {
-            IsFalling = true;
-            _fallTimer += Time.deltaTime;
+            if (!IsFalling)
+            {
+                IsFalling = true;
+                _fallTimer = 0f;
+                _fallShakeTimer = 0f;
+            }
 
-            // Если падение длится достаточно долго — запускаем тряску
+            _fallTimer += Time.deltaTime;
             if (_fallTimer >= fallShakeDelay)
             {
                 _fallShakeTimer += Time.deltaTime;
@@ -100,14 +105,16 @@ public class PlayerMovement : NetworkBehaviour
                 }
             }
         }
-        else
+
+        if (!_wasGrounded && grounded)
         {
-            // Сброс, если приземлились
-            if (IsFalling && grounded)
-            {
-                _fallTimer = 0f;
-                _fallShakeTimer = 0f;
-            }
+            OnJumpLand?.Invoke();
+
+            if (IsFalling)
+                FadeOutShake?.Invoke();
+
+            _fallTimer = 0f;
+            _fallShakeTimer = 0f;
             IsFalling = false;
         }
 
@@ -143,29 +150,24 @@ public class PlayerMovement : NetworkBehaviour
 
     private void UpdateAnimation()
     {
-        IsMoving = Mathf.Abs(Input.GetAxisRaw("Horizontal")) > 0.01f || Mathf.Abs(Input.GetAxisRaw("Vertical")) > 0.01f;
-        bool shift = Input.GetKey(runKey);
-
-        IsRunning = canRun && shift && IsMoving && Input.GetAxisRaw("Vertical") > 0.1f && !HasWallAhead();
-
         if (!_animator) return;
 
-        if (IsMoving)
-        {
-            _animator.SetBool(HashDance1, false);
-            _animator.SetBool(HashWalk, !IsRunning);
-            _animator.SetBool(HashRun, IsRunning);
-            _animator.SetBool(HashIdle, false);
-        }
-        else
-        {
-            _animator.SetBool(HashIdle, true);
-            _animator.SetBool(HashRun, false);
-            _animator.SetBool(HashWalk, false);
+        float speed = CurrentHorizontalSpeed;
+        bool moving = speed > 0.1f;
+        bool running = speed > (walkMaxSpeed + runMaxSpeed) / 2f;
 
-            if (Input.GetKey(KeyCode.Alpha1))
-                _animator.SetBool(HashDance1, true);
-        }
+        IsMoving = moving;
+        IsRunning = running;
+
+        _animator.SetBool(HashIdle, !moving);
+        _animator.SetBool(HashWalk, moving && !running);
+        _animator.SetBool(HashRun, running);
+        _animator.SetFloat("Speed", speed);
+
+        if (Input.GetKey(KeyCode.Alpha1))
+            _animator.SetBool(HashDance1, true);
+        else
+            _animator.SetBool(HashDance1, false);
     }
 
     private void ApplyMovement()
@@ -179,6 +181,9 @@ public class PlayerMovement : NetworkBehaviour
             OnHardStop?.Invoke();
         _wasInputMoving = IsMoving;
 
+        bool shift = Input.GetKey(runKey);
+        IsRunning = canRun && shift && IsMoving && input.y > 0.1f && !HasWallAhead();
+
         if (IsRunning && IsMoving)
             RunProgress01 = Mathf.MoveTowards(RunProgress01, 1f, Time.fixedDeltaTime / Mathf.Max(0.01f, runBuildUpTime));
         else
@@ -189,49 +194,37 @@ public class PlayerMovement : NetworkBehaviour
             : (IsMoving ? walkMaxSpeed : 0f);
 
         Vector3 worldDir = transform.TransformDirection(dir);
-
         float accelRate = targetMax / Mathf.Max(0.01f, accelerationTime);
         float decelRate = targetMax / Mathf.Max(0.01f, decelerationTime * Mathf.Max(1f, inertiaMultiplier));
 
-        _currentSpeed = Mathf.MoveTowards(
-            _currentSpeed,
-            targetMax,
-            Time.fixedDeltaTime * (IsMoving ? accelRate : decelRate)
-        );
+        _currentSpeed = Mathf.MoveTowards(_currentSpeed, targetMax, Time.fixedDeltaTime * (IsMoving ? accelRate : decelRate));
 
         Vector3 targetVel = worldDir * _currentSpeed;
         Vector3 horizVel = new Vector3(_rb.velocity.x, 0f, _rb.velocity.z);
-        float smoothTime = IsMoving ? accelerationTime : decelerationTime * Mathf.Max(1f, inertiaMultiplier);
-        Vector3 smooth = Vector3.SmoothDamp(horizVel, targetVel, ref _velSmoothRef, smoothTime);
+        Vector3 smooth = Vector3.SmoothDamp(horizVel, targetVel, ref _velSmoothRef, IsMoving ? accelerationTime : decelerationTime * Mathf.Max(1f, inertiaMultiplier));
 
         smooth.y = _rb.velocity.y;
         _rb.velocity = smooth;
 
-        if (IsRunning && IsMoving && CurrentHorizontalSpeed >= runMaxSpeed - 5f)
-            RunProgress02 = 1f;
-        else
-            RunProgress02 = 0f;
+        RunProgress02 = (IsRunning && IsMoving && CurrentHorizontalSpeed >= runMaxSpeed - 5f) ? 1f : 0f;
     }
 
     private void ApplyFallingPhysics()
     {
         Vector2 input = new(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         Vector3 inputDir = new Vector3(input.x, 0f, input.y);
-        if (inputDir.sqrMagnitude > 0.01f)
-            inputDir.Normalize();
+        if (inputDir.sqrMagnitude > 0.01f) inputDir.Normalize();
 
         Vector3 airDir = transform.TransformDirection(inputDir);
         Vector3 horizVel = new Vector3(_rb.velocity.x, 0f, _rb.velocity.z);
-        horizVel *= airInertia;
-        horizVel += airDir * airControlFactor;
+        horizVel = horizVel * airInertia + airDir * airControlFactor;
 
         float horizontalSpeed = horizVel.magnitude;
         if (horizontalSpeed < minFallMoveSpeed && horizontalSpeed > 0.1f)
             horizVel = horizVel.normalized * minFallMoveSpeed;
 
         float gravityBoost = Physics.gravity.y * (fallGravityMultiplier - 1f);
-        Vector3 verticalVel = new Vector3(0, gravityBoost * Time.fixedDeltaTime, 0);
-        Vector3 newVel = horizVel + new Vector3(0, _rb.velocity.y, 0) + verticalVel;
+        Vector3 newVel = horizVel + new Vector3(0, _rb.velocity.y + gravityBoost * Time.fixedDeltaTime, 0);
         _rb.velocity = newVel;
     }
 
@@ -269,5 +262,6 @@ public class PlayerMovement : NetworkBehaviour
         _animator.SetBool(HashIdle, true);
         _animator.SetBool(HashRun, false);
         _animator.SetBool(HashWalk, false);
+        _animator.SetFloat("Speed", 0f);
     }
 }
