@@ -36,6 +36,11 @@ public class PlayerMovement : NetworkBehaviour
     [SerializeField] private KeyCode runKey = KeyCode.LeftShift;
     [SerializeField] private bool canRun = true;
 
+    [Header("Animation Speed Multiplier")]
+    [SerializeField] private float minMultiplier = 0.8f;
+    [SerializeField] private float maxMultiplier = 1.5f;
+    [SerializeField] private float animSpeedSmoothTime = 0.1f;
+
     public bool CanMove { get; set; } = true;
     public bool IsRunning { get; private set; }
     public bool IsMoving { get; private set; }
@@ -59,11 +64,13 @@ public class PlayerMovement : NetworkBehaviour
     private bool _wasGrounded;
     private float _fallTimer;
     private float _fallShakeTimer;
+    private float _multiplierVelocity;
 
     private static readonly int HashIdle = Animator.StringToHash("IsIdle");
     private static readonly int HashWalk = Animator.StringToHash("IsWalk");
     private static readonly int HashRun = Animator.StringToHash("IsRun");
     private static readonly int HashDance1 = Animator.StringToHash("IsDanceOne");
+    private static readonly int HashMultiplier = Animator.StringToHash("Multiplier");
 
     private void Awake()
     {
@@ -162,12 +169,29 @@ public class PlayerMovement : NetworkBehaviour
         _animator.SetBool(HashIdle, !moving);
         _animator.SetBool(HashWalk, moving && !running);
         _animator.SetBool(HashRun, running);
-        _animator.SetFloat("Speed", speed);
 
+        // 🎬 Управляем скоростью анимации только через параметр Multiplier
+        float normalizedSpeed = speed / runMaxSpeed;
+        float targetMultiplier = Mathf.Lerp(minMultiplier, maxMultiplier, normalizedSpeed);
+        float smoothMultiplier = Mathf.SmoothDamp(
+            _animator.GetFloat(HashMultiplier),
+            targetMultiplier,
+            ref _multiplierVelocity,
+            animSpeedSmoothTime
+        );
+
+        _animator.SetFloat(HashMultiplier, smoothMultiplier);
+
+        // Танец — фиксированный множитель 1
         if (Input.GetKey(KeyCode.Alpha1))
+        {
             _animator.SetBool(HashDance1, true);
+            _animator.SetFloat(HashMultiplier, 1f);
+        }
         else
+        {
             _animator.SetBool(HashDance1, false);
+        }
     }
 
     private void ApplyMovement()
@@ -262,6 +286,6 @@ public class PlayerMovement : NetworkBehaviour
         _animator.SetBool(HashIdle, true);
         _animator.SetBool(HashRun, false);
         _animator.SetBool(HashWalk, false);
-        _animator.SetFloat("Speed", 0f);
+        _animator.SetFloat(HashMultiplier, 1f);
     }
 }
