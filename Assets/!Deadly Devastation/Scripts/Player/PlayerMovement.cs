@@ -41,6 +41,10 @@ public class PlayerMovement : NetworkBehaviour
     [SerializeField] private float maxMultiplier = 1.5f;
     [SerializeField] private float animSpeedSmoothTime = 0.1f;
 
+    [Header("Turn Animations")]
+    [SerializeField] private float turnSpeedThresholdDegPerSec = 30f;
+    [SerializeField] private float turnSmoothTime = 0.12f;
+
     public bool CanMove { get; set; } = true;
     public bool IsRunning { get; private set; }
     public bool IsMoving { get; private set; }
@@ -66,22 +70,36 @@ public class PlayerMovement : NetworkBehaviour
     private float _fallShakeTimer;
     private float _multiplierVelocity;
 
+    private Vector3 _lastForward;
+    private float _turnSpeedSmooth;
+    private float _turnSmoothVel;
+
     private static readonly int HashIdle = Animator.StringToHash("IsIdle");
     private static readonly int HashWalk = Animator.StringToHash("IsWalk");
     private static readonly int HashRun = Animator.StringToHash("IsRun");
     private static readonly int HashDance1 = Animator.StringToHash("IsDanceOne");
     private static readonly int HashMultiplier = Animator.StringToHash("Multiplier");
+    private static readonly int HashTurnLeft = Animator.StringToHash("IsTurnLeft");
+    private static readonly int HashTurnRight = Animator.StringToHash("IsTurnRight");
 
     private void Awake()
     {
         _ctx = GetComponent<PlayerContext>();
         _rb = _ctx.Rb;
         _animator = _ctx.Animator;
+        _lastForward = transform.forward;
     }
 
     private void Update()
     {
         if (!IsOwner) return;
+
+        Vector3 currentForward = transform.forward;
+        float signedAngleThisFrame = Vector3.SignedAngle(_lastForward, currentForward, Vector3.up);
+        _lastForward = currentForward;
+
+        float degPerSec = signedAngleThisFrame / Mathf.Max(Time.deltaTime, 1e-6f);
+        _turnSpeedSmooth = Mathf.SmoothDamp(_turnSpeedSmooth, degPerSec, ref _turnSmoothVel, turnSmoothTime);
 
         if (CanMove)
             UpdateAnimation();
@@ -90,7 +108,6 @@ public class PlayerMovement : NetworkBehaviour
 
         const float rayLength = 1.0f;
         bool grounded = Physics.Raycast(transform.position + Vector3.up * 0.1f, Vector3.down, rayLength);
-        Debug.DrawRay(transform.position + Vector3.up * 0.1f, Vector3.down * rayLength, grounded ? Color.green : Color.red);
 
         if (!grounded && _rb.velocity.y < -0.1f)
         {
@@ -170,7 +187,6 @@ public class PlayerMovement : NetworkBehaviour
         _animator.SetBool(HashWalk, moving && !running);
         _animator.SetBool(HashRun, running);
 
-        // 🎬 Управляем скоростью анимации только через параметр Multiplier
         float normalizedSpeed = speed / runMaxSpeed;
         float targetMultiplier = Mathf.Lerp(minMultiplier, maxMultiplier, normalizedSpeed);
         float smoothMultiplier = Mathf.SmoothDamp(
@@ -179,10 +195,8 @@ public class PlayerMovement : NetworkBehaviour
             ref _multiplierVelocity,
             animSpeedSmoothTime
         );
-
         _animator.SetFloat(HashMultiplier, smoothMultiplier);
 
-        // Танец — фиксированный множитель 1
         if (Input.GetKey(KeyCode.Alpha1))
         {
             _animator.SetBool(HashDance1, true);
@@ -191,6 +205,18 @@ public class PlayerMovement : NetworkBehaviour
         else
         {
             _animator.SetBool(HashDance1, false);
+        }
+
+        if (!IsMoving && Mathf.Abs(_turnSpeedSmooth) >= turnSpeedThresholdDegPerSec)
+        {
+            bool turningRight = _turnSpeedSmooth > 0f;
+            _animator.SetBool(HashTurnLeft, !turningRight);
+            _animator.SetBool(HashTurnRight, turningRight);
+        }
+        else
+        {
+            _animator.SetBool(HashTurnLeft, false);
+            _animator.SetBool(HashTurnRight, false);
         }
     }
 
@@ -287,5 +313,7 @@ public class PlayerMovement : NetworkBehaviour
         _animator.SetBool(HashRun, false);
         _animator.SetBool(HashWalk, false);
         _animator.SetFloat(HashMultiplier, 1f);
+        _animator.SetBool(HashTurnLeft, false);
+        _animator.SetBool(HashTurnRight, false);
     }
 }

@@ -11807,6 +11807,10 @@ MonoBehaviour:
   minMultiplier: 0.5
   maxMultiplier: 1.5
   animSpeedSmoothTime: 0.05
+  turnSpeedThresholdDegPerSec: 30
+  turnSmoothTime: 0.12
+  fallGravityAcceleration: 0.1
+  maxExtraFallMultiplier: 3
 --- !u!114 &1634237587014523608
 MonoBehaviour:
   m_ObjectHideFlags: 0
