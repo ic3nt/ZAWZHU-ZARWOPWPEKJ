@@ -1,4 +1,4 @@
-﻿//это пиздец а не код, ПЕРЕПИСАТЬ!
+﻿// БЛЯТЬ Я ПОТОМ ВЕСЬ УЖАС НАХУЙ СНЕСУ А ТО ЭТО ПИЗДЕЦБ ПУСТЬ ПОКА ОСТАНЕТСЯ БЯЛТЬ ЭТО УЖАС
 
 using DG.Tweening;
 using Discord;
@@ -12,6 +12,9 @@ using UnityEditor;
 using UnityEngine.PlayerLoop;
 using UnityEngine.SceneManagement;
 using UnityEngine.Diagnostics;
+using Zenject;
+using RKS.DD.Core.Managers;
+using RKS.DD.Core;
 
 #if UNITY_EDITOR
 [CustomEditor(typeof(MenuManager))]
@@ -90,7 +93,7 @@ public class ManualEntry
     public Vector3 offScreenRotation;
 }
 
-public class MenuManager : MonoBehaviour
+public class MenuManager : RKSBehaviour
 {
     [Header("Menu Objects")]
     public GameObject Kail;
@@ -98,13 +101,6 @@ public class MenuManager : MonoBehaviour
     public GameObject world;
     public GameObject manualObjects;
     public GameObject mainCamera;
-
-    [Header("Game Manager")]
-    public DiscordController discordController;
-    public LocalizationManager localizationManager;
-    public GameObject transitionManager;
-
-    [HideInInspector] public bool initSuccessful;
 
     [Header("Transition Settings")]
     public TransitionSettings transition;
@@ -181,10 +177,9 @@ public class MenuManager : MonoBehaviour
     private bool isCatalogOpen = false;
     private bool isCatalogAnimationPlaying = false;
 
-    void Start()
+    protected override void OnReady()
     {
-        // делаем все чё надо
-        AudioManager.Instance.Play("MenuMusic");
+        Audio.Play("MenuMusic");
 
         Cursor.lockState = CursorLockMode.None;
 
@@ -198,100 +193,25 @@ public class MenuManager : MonoBehaviour
         isCatalog = false;
         isNotSelect = true;
 
-        // статус в дискорде дефолтный
-
-        switch (localizationManager.CurrentLanguage)
+        switch (Localization.currentLanguage)
         {
             case "en_US":
-                discordController.state = "He just sits on the menu and that's it.";
-                discordController.details = "Menu";
+                Discord.state = "He just sits on the menu and that's it.";
+                Discord.details = "Menu";
                 break;
             case "ru_RU":
-                discordController.state = "Просто сидит в меню и все.";
-                discordController.details = "Меню";
+                Discord.state = "Просто сидит в меню и все.";
+                Discord.details = "Меню";
                 break;
             case "de_DE":
-                discordController.state = "Es steht einfach auf der Speisekarte und das war’s.";
-                discordController.details = "Speisekarte";
+                Discord.state = "Es steht einfach auf der Speisekarte und das war’s.";
+                Discord.details = "Speisekarte";
                 break;
             case "es_ES":
-                discordController.state = "Sólo se sienta en el menú y eso es todo.";
-                discordController.details = "Menú";
+                Discord.state = "Sólo se sienta en el menú y eso es todo.";
+                Discord.details = "Menú";
                 break;
         }
-    }
-
-    public void Awake()
-    {
-        InitCheck();
-        transitionManager.GetComponent<DemoLoadScene>().transition = transition;
-        transitionManager.GetComponent<DemoLoadScene>().startDelay = startDelay;
-    }
-
-    //инициализация
-
-    private void InitCheck()
-    {
-        if (Application.isPlaying)
-        {
-            if (transitionManager == null)
-            {
-                GameObject transitionManagerObject = GameObject.FindWithTag("TransitionManager");
-                if (transitionManagerObject != null)
-                {
-                    InitErrorWindow.SetActive(false);
-                    transitionManager = transitionManagerObject;
-                    Debug.Log("TransitionManager automatically assigned.");
-                    initSuccessful = true;
-                }
-                else
-                {
-                    mainButtonsGroup.SetActive(false);
-                    StartCoroutine(ErrorInitWindowWaitForSecondCoroutine());
-                    Debug.LogError("No object with tag 'TransitionManager' found in the scene!");
-                    initSuccessful = false;
-                }
-            }
-            if (localizationManager == null)
-            {
-                GameObject localizationManagerObject = GameObject.FindWithTag("LocalizationManager");
-                if (localizationManagerObject != null)
-                {
-                    InitErrorWindow.SetActive(false);
-                    localizationManager = localizationManagerObject.GetComponent<LocalizationManager>();
-                    Debug.Log("LocalizationManager automatically assigned.");
-                    initSuccessful = true;
-                }
-                else
-                {
-                    mainButtonsGroup.SetActive(false);
-                    StartCoroutine(ErrorInitWindowWaitForSecondCoroutine());
-                    Debug.LogError("No object with tag 'LocalizationManager' found in the scene!");
-                    initSuccessful = false;
-                }
-            }
-            if (discordController == null)
-            {
-                GameObject discordManagerObject = GameObject.FindWithTag("DiscordManager");
-                if (discordManagerObject != null)
-                {
-                    InitErrorWindow.SetActive(false);
-                    discordController = discordManagerObject.GetComponent<DiscordController>();
-                    Debug.Log("DiscordController automatically assigned.");
-                    initSuccessful = true;
-                }
-                else
-                {
-                    Debug.LogError("No object with tag 'DiscordManager' found in the scene!");
-                }
-            }
-        }
-    }
-
-    private IEnumerator ErrorInitWindowWaitForSecondCoroutine()
-    {
-        yield return new WaitForSeconds(0.8f);
-        InitErrorWindow.SetActive(true);
     }
 
     void Update()
@@ -305,23 +225,23 @@ public class MenuManager : MonoBehaviour
                 MenuButton();
                 Debug.Log("Menu");
 
-                switch (localizationManager.CurrentLanguage)
+                switch (Localization.currentLanguage)
                 {
                     case "en_US":
-                        discordController.state = "He just sits on the menu and that's it.";
-                        discordController.details = "Menu";
+                        Discord.state = "He just sits on the menu and that's it.";
+                        Discord.details = "Menu";
                         break;
                     case "ru_RU":
-                        discordController.state = "Просто сидит в меню и все.";
-                        discordController.details = "Меню";
+                        Discord.state = "Просто сидит в меню и все.";
+                        Discord.details = "Меню";
                         break;
                     case "de_DE":
-                        discordController.state = "Es steht einfach auf der Speisekarte und das war’s.";
-                        discordController.details = "Speisekarte";
+                        Discord.state = "Es steht einfach auf der Speisekarte und das war’s.";
+                        Discord.details = "Speisekarte";
                         break;
                     case "es_ES":
-                        discordController.state = "Sólo se sienta en el menú y eso es todo.";
-                        discordController.details = "Menú";
+                        Discord.state = "Sólo se sienta en el menú y eso es todo.";
+                        Discord.details = "Menú";
                         break;
                 }
             }
@@ -342,19 +262,19 @@ public class MenuManager : MonoBehaviour
                 isSettingsAnimationPlaying = true;
                 Debug.Log("Settings");
 
-                switch (localizationManager.CurrentLanguage)
+                switch (Localization.currentLanguage)
                 {
                     case "en_US":
-                        discordController.state = "Sets up Deadly Devastation...";
+                        Discord.state = "Sets up Deadly Devastation...";
                         break;
                     case "ru_RU":
-                        discordController.state = "Настраивает Deadly Devastation...";
+                        Discord.state = "Настраивает Deadly Devastation...";
                         break;
                     case "es_ES":
-                        discordController.state = "Configura Deadly Devastation...";
+                        Discord.state = "Configura Deadly Devastation...";
                         break;
                     case "de_DE":
-                        discordController.state = "Konfiguriert Deadly Devastation...";
+                        Discord.state = "Konfiguriert Deadly Devastation...";
                         break;
                 }
             }
@@ -388,19 +308,19 @@ public class MenuManager : MonoBehaviour
                 isManualOpen = true;
                 Debug.Log("Manual");
 
-                switch (localizationManager.CurrentLanguage)
+                switch (Localization.currentLanguage)
                 {
                     case "en_US":
-                        discordController.state = "Carefully examines the manual...";
+                        Discord.state = "Carefully examines the manual...";
                         break;
                     case "ru_RU":
-                        discordController.state = "Внимательно изучает справочник...";
+                        Discord.state = "Внимательно изучает справочник...";
                         break;
                     case "es_ES":
-                        discordController.state = "Estudiando atentamente el libro de referencia...";
+                        Discord.state = "Estudiando atentamente el libro de referencia...";
                         break;
                     case "de_DE":
-                        discordController.state = "Das Nachschlagewerk sorgfältig studieren...";
+                        Discord.state = "Das Nachschlagewerk sorgfältig studieren...";
                         break;
                 }
             }
@@ -422,19 +342,19 @@ public class MenuManager : MonoBehaviour
                 isPlayedStoreAnimation = true;
                 Debug.Log("Store");
 
-                switch (localizationManager.CurrentLanguage)
+                switch (Localization.currentLanguage)
                 {
                     case "en_US":
-                        discordController.state = "On a shopping trip...";
+                        Discord.state = "On a shopping trip...";
                         break;
                     case "ru_RU":
-                        discordController.state = "На шоппинге...";
+                        Discord.state = "На шоппинге...";
                         break;
                     case "es_ES":
-                        discordController.state = "On a shopping trip...";
+                        Discord.state = "On a shopping trip...";
                         break;
                     case "de_DE":
-                        discordController.state = "On a shopping trip...";
+                        Discord.state = "On a shopping trip...";
                         break;
                 }
             }
@@ -469,19 +389,19 @@ public class MenuManager : MonoBehaviour
                 isPlayedCatalogAnimation = true;
                 Debug.Log("Catalog");
 
-                switch (localizationManager.CurrentLanguage)
+                switch (Localization.currentLanguage)
                 {
                     case "en_US":
-                        discordController.state = "Looks at the catalog...";
+                        Discord.state = "Looks at the catalog...";
                         break;
                     case "ru_RU":
-                        discordController.state = "Рассматривает каталог...";
+                        Discord.state = "Рассматривает каталог...";
                         break;
                     case "es_ES":
-                        discordController.state = "Mirando el catálogo...";
+                        Discord.state = "Mirando el catálogo...";
                         break;
                     case "de_DE":
-                        discordController.state = "Blick in den Katalog...";
+                        Discord.state = "Blick in den Katalog...";
                         break;
                 }
             }
@@ -520,23 +440,23 @@ public class MenuManager : MonoBehaviour
 
         Kail.GetComponent<RotatingModel>().enabled = true;
 
-        switch (localizationManager.CurrentLanguage)
+        switch (Localization.currentLanguage)
         {
             case "en_US":
-                discordController.state = "He just sits on the menu and that's it.";
-                discordController.details = "Menu";
+                Discord.state = "He just sits on the menu and that's it.";
+                Discord.details = "Menu";
                 break;
             case "ru_RU":
-                discordController.state = "Просто сидит в меню и все.";
-                discordController.details = "Меню";
+                Discord.state = "Просто сидит в меню и все.";
+                Discord.details = "Меню";
                 break;
             case "de_DE":
-                discordController.state = "Es steht einfach auf der Speisekarte und das war’s.";
-                discordController.details = "Speisekarte";
+                Discord.state = "Es steht einfach auf der Speisekarte und das war’s.";
+                Discord.details = "Speisekarte";
                 break;
             case "es_ES":
-                discordController.state = "Sólo se sienta en el menú y eso es todo.";
-                discordController.details = "Menú";
+                Discord.state = "Sólo se sienta en el menú y eso es todo.";
+                Discord.details = "Menú";
                 break;
         }
     }
@@ -553,23 +473,23 @@ public class MenuManager : MonoBehaviour
         isNotSelect = true;
         animator.SetTrigger("PlayMenu");
 
-        switch (localizationManager.CurrentLanguage)
+        switch (Localization.currentLanguage)
         {
             case "en_US":
-                discordController.state = "Multiplayer or Single-player? Hmmm.";
-                discordController.details = "Menu";
+                Discord.state = "Multiplayer or Single-player? Hmmm.";
+                Discord.details = "Menu";
                 break;
             case "ru_RU":
-                discordController.state = "Мультиплеер или Одиночная игра? Хммм.";
-                discordController.details = "Меню";
+                Discord.state = "Мультиплеер или Одиночная игра? Хммм.";
+                Discord.details = "Меню";
                 break;
             case "de_DE":
-                discordController.state = "Mehrspieler oder Einzelspieler? Hmmm.";
-                discordController.details = "Speisekarte";
+                Discord.state = "Mehrspieler oder Einzelspieler? Hmmm.";
+                Discord.details = "Speisekarte";
                 break;
             case "es_ES":
-                discordController.state = "¿Multijugador o un jugador? Mmm.";
-                discordController.details = "Menú";
+                Discord.state = "¿Multijugador o un jugador? Mmm.";
+                Discord.details = "Menú";
                 break;
         }
     }
@@ -584,23 +504,23 @@ public class MenuManager : MonoBehaviour
         isNotSelect = true;
         animator.SetTrigger("QuitMenu");
 
-        switch (localizationManager.CurrentLanguage)
+        switch (Localization.currentLanguage)
         {
             case "en_US":
-                discordController.state = "WANTS TO QUIT THE GAME ((((";
-                discordController.details = "Menu";
+                Discord.state = "WANTS TO QUIT THE GAME ((((";
+                Discord.details = "Menu";
                 break;
             case "ru_RU":
-                discordController.state = "ХОЧЕТ ВЫЙТИ ИЗ ИГРЫ ((((";
-                discordController.details = "Меню";
+                Discord.state = "ХОЧЕТ ВЫЙТИ ИЗ ИГРЫ ((((";
+                Discord.details = "Меню";
                 break;
             case "de_DE":
-                discordController.state = "WILL DAS SPIEL VERLASSEN ((((";
-                discordController.details = "Speisekarte";
+                Discord.state = "WILL DAS SPIEL VERLASSEN ((((";
+                Discord.details = "Speisekarte";
                 break;
             case "es_ES":
-                discordController.state = "QUIERE SALIR DEL JUEGO ((((";
-                discordController.details = "Menú";
+                Discord.state = "QUIERE SALIR DEL JUEGO ((((";
+                Discord.details = "Menú";
                 break;
         }
     }
@@ -615,23 +535,23 @@ public class MenuManager : MonoBehaviour
         isNotSelect = true;
         animator.SetTrigger("CreditsMenu");
 
-        switch (localizationManager.CurrentLanguage)
+        switch (Localization.currentLanguage)
         {
             case "en_US":
-                discordController.state = "Admires the developers ^^";
-                discordController.details = "Menu";
+                Discord.state = "Admires the developers ^^";
+                Discord.details = "Menu";
                 break;
             case "ru_RU":
-                discordController.state = "Любуется разработчиками ^^";
-                discordController.details = "Меню";
+                Discord.state = "Любуется разработчиками ^^";
+                Discord.details = "Меню";
                 break;
             case "de_DE":
-                discordController.state = "Von den Entwicklern geliebt ^^";
-                discordController.details = "Speisekarte";
+                Discord.state = "Von den Entwicklern geliebt ^^";
+                Discord.details = "Speisekarte";
                 break;
             case "es_ES":
-                discordController.state = "Amado por los desarrolladores ^^";
-                discordController.details = "Menú";
+                Discord.state = "Amado por los desarrolladores ^^";
+                Discord.details = "Menú";
                 break;
         }
     }
@@ -734,7 +654,7 @@ public class MenuManager : MonoBehaviour
     public void SingleplayerButton()
     {
         Debug.Log("Single-player mode");
-        transitionManager.GetComponent<DemoLoadScene>().LoadScene("TEST");
+        Transition.LoadScene("TEST");
     }
     public void MultiplayerButton()
     {

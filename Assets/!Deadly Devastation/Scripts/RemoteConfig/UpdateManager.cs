@@ -35,10 +35,6 @@ public class UpdateManager : MonoBehaviour
         }
         else
         {
-            if (menuManager.initSuccessful == true)
-            {
-                mainButtonsGroup.SetActive(true);
-            }
         }
 
 #if DEBUG

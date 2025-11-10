@@ -4,7 +4,7 @@ public class FSMElevator : MonoBehaviour
 {
     [SerializeField] private ElevatorState currentState;
 
-    public RKS.DD.Game.ElevatorController elevator;
+    public RKS.DD.Game.Elevator.ElevatorController elevator;
 
     public void SetState(ElevatorState newState)
     {

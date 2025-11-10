@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
+using RKS.DD.Core.Managers;
+using Zenject;
 
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(Animator))]
@@ -29,6 +31,8 @@ public class ToyRobot : MonoBehaviour, IHittable
     private Health health;
     private Coroutine behaviourRoutine;
     private bool isDead;
+
+   [Inject] private AudioManager audioManager;
 
     private void Awake()
     {
@@ -159,7 +163,7 @@ public class ToyRobot : MonoBehaviour, IHittable
         aud2.Stop();
         aud3.enabled = false;
 
-        AudioManager.Instance.PlayAndForget("Deathblow");
+        audioManager.PlayAndForget("Deathblow");
 
         anim.SetBool("IsRun", false);
         anim.SetTrigger("Die");

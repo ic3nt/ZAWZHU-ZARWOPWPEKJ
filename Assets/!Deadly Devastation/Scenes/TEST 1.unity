@@ -8086,7 +8086,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 251518257579750754, guid: 551d8bc799cee1b49bb5c71e543a7790, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 252443851148255408, guid: 551d8bc799cee1b49bb5c71e543a7790, type: 3}
       propertyPath: m_Mesh
@@ -8252,6 +8252,30 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1449212021}
+    - target: {fileID: 3785362247446124537, guid: 551d8bc799cee1b49bb5c71e543a7790, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3785362247446124537, guid: 551d8bc799cee1b49bb5c71e543a7790, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3785362247446124537, guid: 551d8bc799cee1b49bb5c71e543a7790, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3785362247446124537, guid: 551d8bc799cee1b49bb5c71e543a7790, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3785362247446124537, guid: 551d8bc799cee1b49bb5c71e543a7790, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 3785362247446124537, guid: 551d8bc799cee1b49bb5c71e543a7790, type: 3}
+      propertyPath: m_UseColorTemperature
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3805884158612802722, guid: 551d8bc799cee1b49bb5c71e543a7790, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -8451,7 +8475,19 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4600878427083686882, guid: 551d8bc799cee1b49bb5c71e543a7790, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 739176416567076091, guid: 551d8bc799cee1b49bb5c71e543a7790, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 1255024169605783612, guid: 551d8bc799cee1b49bb5c71e543a7790, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 3233917987378936450, guid: 551d8bc799cee1b49bb5c71e543a7790, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 551d8bc799cee1b49bb5c71e543a7790, type: 3}
 --- !u!1 &422882385
 GameObject:
@@ -16352,7 +16388,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolSize: 10
-  dontDestroyOnLoad: 1
   masterVolume: 1
   libraries:
   - {fileID: 11400000, guid: eb26d905ce225472787f54a7db143942, type: 2}
@@ -26946,7 +26981,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3718808863022212071
 RectTransform:
   m_ObjectHideFlags: 0

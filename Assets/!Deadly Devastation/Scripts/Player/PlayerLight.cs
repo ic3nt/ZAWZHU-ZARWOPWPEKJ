@@ -16,8 +16,8 @@ public class PlayerLight : MonoBehaviour
         if (Input.GetKeyDown(toggleKey) && lightObj)
         {
             lightObj.SetActive(!lightObj.activeSelf);
-            if (!string.IsNullOrEmpty(sfxKey) && AudioManager.Instance)
-                AudioManager.Instance.Play(sfxKey);
+          //  if (!string.IsNullOrEmpty(sfxKey) && AudioManager.Instance)
+          //      AudioManager.Instance.Play(sfxKey);
         }
     }
 }

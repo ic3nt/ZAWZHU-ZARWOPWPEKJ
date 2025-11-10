@@ -1,36 +1,30 @@
+using RKS.DD.Core;
 using UnityEngine;
 
-public class ButtonSwitchLang : MonoBehaviour
+[DisallowMultipleComponent]
+public sealed class ButtonSwitchLang : RKSBehaviour
 {
-    [SerializeField]
-    private LocalizationManager localizationManager;
-
-    private void Awake()
-    {
-        if (localizationManager == null)
-        {
-            GameObject managerObject = GameObject.FindWithTag("LocalizationManager");
-            if (managerObject != null)
-            {
-                localizationManager = managerObject.GetComponent<LocalizationManager>();
-            }
-            else
-            {
-                Debug.LogError("No object with tag 'LocalizationManager' found in the scene!");
-            }
-        }
-    }
+    [SerializeField] private string languageCode;
 
     public void OnButtonClick()
     {
-        if (localizationManager != null)
+        if (Localization == null)
         {
-            localizationManager.CurrentLanguage = name;
-            Debug.Log("Language changed to: " + name);
+            return;
         }
-        else
+
+        string targetLang = string.IsNullOrWhiteSpace(languageCode) ? gameObject.name : languageCode;
+
+        if (string.IsNullOrWhiteSpace(targetLang))
         {
-            Debug.LogError("LocalizationManager is not assigned!");
+            return;
         }
+
+        if (Localization.currentLanguage == targetLang)
+        {
+            return;
+        }
+
+        Localization.SetLanguage(targetLang);
     }
 }

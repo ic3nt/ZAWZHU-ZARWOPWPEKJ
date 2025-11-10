@@ -12,7 +12,7 @@
         public List<GameObject> allPlayers = new List<GameObject>();
 
         [Header("Managers")]
-        [SerializeField] private RKS.DD.Game.ElevatorController elevatorController;
+        [SerializeField] private RKS.DD.Game.Elevator.ElevatorController elevatorController;
 
         void Update()
         {

@@ -1,136 +1,146 @@
-using System.Collections;
-using System.Collections.Generic;
-using EasyTransition;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using EasyTransition;
+using RKS.DD.Core;
 
-public class FirstOpenSceneManager : MonoBehaviour
+namespace RKS.DD.Core.Managers 
 {
-
-    public RectTransform toggleAgreeRectTransform;
-    public RectTransform buttonAgreeRectTransform;
-
-    public Toggle toggleAgree;
-    public Button buttonAgree;
-
-    [Space]
-    public DemoLoadScene transitionManager;
-    public SaveManager saveManager; 
-    private GameData.Data Data; 
-
-    public Animator animator;
-
-    [Space]
-    public float middleTogglePosX, rightTogglePosX;
-    public float downButtonPosY, topButtonPosY;
-    public float tweenDuration;
-
-    [Space]
-    [SerializeField] private Camera cameraToRotate;
-    public float rotationSpeed = 10.0f; 
-
-    private float rotationY = 0f;
-    private float originalY;
-
-    void Update()
+    public class FirstOpenSceneManager : RKSBehaviour
     {
-        rotationY += rotationSpeed * Time.deltaTime;
+        [Header("UI Elements")]
+        [SerializeField] private RectTransform toggleAgreeRectTransform;
+        [SerializeField] private RectTransform buttonAgreeRectTransform;
+        [SerializeField] private Toggle toggleAgree;
+        [SerializeField] private Button buttonAgree;
 
-        if (rotationY >= 360f)
+        [Header("UI Animation Settings")]
+        [SerializeField] private float middleTogglePosX = 0f;
+        [SerializeField] private float rightTogglePosX = 300f;
+        [SerializeField] private float downButtonPosY = -200f;
+        [SerializeField] private float topButtonPosY = -50f;
+        [SerializeField] private float tweenDuration = 0.5f;
+
+        [Header("Transition")]
+        [SerializeField] private DemoLoadScene transitionManager;
+
+        [Header("Camera Rotation")]
+        [SerializeField] private Camera cameraToRotate;
+        [SerializeField] private float rotationSpeed = 10.0f;
+
+        [Header("Animation Controller")]
+        [SerializeField] private Animator animator;
+
+        private float rotationY = 0f;
+
+        protected override void OnReady()
         {
-            rotationY -= 360f;
+            InitializeCamera();
+            InitializeUI();
+            InitializeSave();
         }
 
-        cameraToRotate.transform.rotation = Quaternion.Euler(0, rotationY, 0);
-
-        Vector3 newPosition = cameraToRotate.transform.position;
-        cameraToRotate.transform.position = newPosition;
-    }
-
-    void Start()
-    {
-        toggleAgreeRectTransform.DOAnchorPosX(middleTogglePosX, tweenDuration);
-        buttonAgreeRectTransform.DOAnchorPosY(downButtonPosY, tweenDuration);
-        buttonAgree.interactable = false;
-
-        toggleAgree.onValueChanged.AddListener(OnToggleValueChanged);
-
-        originalY = cameraToRotate.transform.position.y;
-
-        if (saveManager == null)
+        private void InitializeCamera()
         {
-            GameObject saveManagerObject = GameObject.FindWithTag("GameManager");
-            if (saveManagerObject != null)
+            if (cameraToRotate == null)
             {
-                saveManager = saveManagerObject.GetComponent<SaveManager>();
-                Debug.Log("GameManager automatically assigned.");
+                Debug.LogWarning("[FirstOpenSceneManager] Camera not assigned, skipping rotation setup.");
+                return;
             }
-            else
-            {
-                Debug.LogError("No object with tag 'GameManager' found in the scene!");
-            }
+
+            rotationY = cameraToRotate.transform.rotation.eulerAngles.y;
         }
 
-        Data = saveManager.Load();
-
-        if (Data == null)
+        private void InitializeUI()
         {
-            Data = new GameData.Data();
-            saveManager.Save(Data);
-        }
-
-        if (transitionManager == null)
-        {
-            GameObject managerObject = GameObject.FindWithTag("TransitionManager");
-            if (managerObject != null)
-            {
-                transitionManager = managerObject.GetComponent<DemoLoadScene>();
-                Debug.Log("TransitionManager automatically assigned.");
-            }
-            else
-            {
-                Debug.LogError("No object with tag 'TransitionManager' found in the scene!");
-            }
-        }
-    }
-
-    private void OnToggleValueChanged(bool isOn)
-    {
-        if (isOn)
-        {
-            buttonAgree.interactable = true;
-            toggleAgreeRectTransform.DOAnchorPosX(rightTogglePosX, tweenDuration);
-            buttonAgreeRectTransform.DOAnchorPosY(topButtonPosY, tweenDuration);
-
-            Data.isPlayerAgreedPlay = true;
-            saveManager.Save(Data);
-        }
-        else
-        {
-            buttonAgree.interactable = false;
             toggleAgreeRectTransform.DOAnchorPosX(middleTogglePosX, tweenDuration);
             buttonAgreeRectTransform.DOAnchorPosY(downButtonPosY, tweenDuration);
 
-            Data.isPlayerAgreedPlay = false;
-            saveManager.Save(Data);
+            buttonAgree.interactable = false;
+            toggleAgree.onValueChanged.AddListener(OnToggleValueChanged);
         }
-    }
 
-    public void SelectLocalizationAnimation()
-    {
-        animator.SetTrigger("IsSelectLocalizationTrigger");
-    }
+        private void InitializeSave()
+        {
+            if (Save.CurrentData == null)
+            {
+                Debug.LogWarning("[FirstOpenSceneManager] No save data found, creating new.");
+                Save.Load();
+                Save.Save();
+            }
+        }
 
-    public void EndAnimation()
-    {
-        animator.SetTrigger("IsEndTrigger");
-    }
+        private void Update()
+        {
+            RotateCamera();
+        }
 
-    public void GoToMenuScene()
-    {
-        transitionManager.LoadScene("IsMenuScene");
-        Data.isPlayerAgreedPlay = true;
-        saveManager.Save(Data);
+        private void RotateCamera()
+        {
+            if (cameraToRotate == null) return;
+
+            rotationY += rotationSpeed * Time.deltaTime;
+            if (rotationY >= 360f) rotationY -= 360f;
+
+            cameraToRotate.transform.rotation = Quaternion.Euler(0, rotationY, 0);
+        }
+
+        private void OnToggleValueChanged(bool isOn)
+        {
+            var data = Save.CurrentData;
+
+            if (isOn)
+            {
+                buttonAgree.interactable = true;
+                toggleAgreeRectTransform.DOAnchorPosX(rightTogglePosX, tweenDuration);
+                buttonAgreeRectTransform.DOAnchorPosY(topButtonPosY, tweenDuration);
+
+                data.isPlayerAgreedPlay = true;
+            }
+            else
+            {
+                buttonAgree.interactable = false;
+                toggleAgreeRectTransform.DOAnchorPosX(middleTogglePosX, tweenDuration);
+                buttonAgreeRectTransform.DOAnchorPosY(downButtonPosY, tweenDuration);
+
+                data.isPlayerAgreedPlay = false;
+            }
+
+            Save.Save();
+        }
+
+        public void SelectLocalizationAnimation()
+        {
+            if (animator != null)
+                animator.SetTrigger("IsSelectLocalizationTrigger");
+        }
+
+        public void EndAnimation()
+        {
+            if (animator != null)
+                animator.SetTrigger("IsEndTrigger");
+        }
+
+        public void GoToMenuScene()
+        {
+            var data = Save.CurrentData;
+            data.isPlayerAgreedPlay = true;
+            Save.Save(data);
+
+            if (transitionManager != null)
+            {
+                transitionManager.LoadScene("IsMenuScene");
+            }
+            else if (Transition != null)
+            {
+                Transition.LoadScene("IsMenuScene");
+            }
+            else
+            {
+                UnityEngine.SceneManagement.SceneManager.LoadScene("IsMenuScene");
+            }
+
+            Debug.Log("[FirstOpenSceneManager] Player agreed → loading menu.");
+        }
     }
 }

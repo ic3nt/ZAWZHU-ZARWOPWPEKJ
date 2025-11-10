@@ -49,6 +49,9 @@ public class PlayerCameraController : NetworkBehaviour
     private Vector2 _frameVel;
     private float _bobTimer;
 
+    // Добавлено для плавного наклона
+    private float _currentTilt = 0f;
+
     private void Awake()
     {
         _ctx = GetComponentInParent<PlayerContext>();
@@ -157,6 +160,7 @@ public class PlayerCameraController : NetworkBehaviour
 
         Vector3 localVel = characterRoot.InverseTransformDirection(movement.GetComponent<Rigidbody>().velocity);
         float strafeSpeed = Mathf.Clamp(localVel.x / movement.walkMaxSpeed, -1f, 1f);
+
         float tiltMultiplier = movement.IsRunning ? 1.3f : 1f;
         float targetTilt = -strafeSpeed * tiltAngle * tiltMultiplier;
 
@@ -166,11 +170,10 @@ public class PlayerCameraController : NetworkBehaviour
         float yawDelta = Input.GetAxis("Mouse X");
         targetTilt -= yawDelta * 0.5f;
 
-        float currentZ = cameraHolder.localRotation.eulerAngles.z;
-        if (currentZ > 180f) currentZ -= 360f;
-        float smoothZ = Mathf.Lerp(currentZ, targetTilt, Time.deltaTime * tiltSpeed);
+        // Плавное изменение наклона
+        _currentTilt = Mathf.Lerp(_currentTilt, targetTilt, Time.deltaTime * tiltSpeed);
 
-        cameraHolder.localRotation = Quaternion.Euler(0, 0, smoothZ);
+        cameraHolder.localRotation = Quaternion.Euler(0f, 0f, _currentTilt);
     }
 
     private void OnHardStop() => CameraShakerHandler.Shake(hardStopShake);

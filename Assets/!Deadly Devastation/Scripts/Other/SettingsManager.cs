@@ -1,203 +1,144 @@
 using UnityEngine;
-using UnityEngine.Audio;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
+using RKS.DD.Core;
+using RKS.DD.Core.Managers;
+using Zenject;
 
-public class SettingsManager : MonoBehaviour
+namespace RKS.DD.UI
 {
-    [Header("UI Elements")]
-    public TMP_Dropdown frameRateDropdown;
-    public TMP_Dropdown windowModeDropdown;
-    public Slider volumeSlider;
-    public Toggle visualMoverToggle;
-    public VisualMover visualMover;
-
-    public GameObject saveManager;
-
-    private GameData.Data Data;
-
-    public LocalizationManager localizationManager;
-
-    private void Start()
+    public class SettingsManager : RKSBehaviour
     {
-        if (saveManager == null)
+        [Header("UI Elements")]
+        [SerializeField] private TMP_Dropdown frameRateDropdown;
+        [SerializeField] private TMP_Dropdown windowModeDropdown;
+        [SerializeField] private Slider volumeSlider;
+        [SerializeField] private Toggle visualMoverToggle;
+        [SerializeField] private VisualMover visualMover;
+
+        protected override void OnReady()
         {
-            GameObject saveManagerObject = GameObject.FindWithTag("GameManager");
-            if (saveManagerObject != null)
+            LoadSettings();
+
+            frameRateDropdown.onValueChanged.AddListener(_ => UpdateFrameRate());
+            windowModeDropdown.onValueChanged.AddListener(_ => UpdateWindowMode());
+            visualMoverToggle.onValueChanged.AddListener(_ => UpdateVisualMover());
+
+            EventTrigger trigger = volumeSlider.gameObject.AddComponent<EventTrigger>();
+            EventTrigger.Entry entry = new EventTrigger.Entry { eventID = EventTriggerType.PointerUp };
+            entry.callback.AddListener(_ => UpdateVolume());
+            trigger.triggers.Add(entry);
+        }
+
+        private void SaveSettings()
+        {
+            var data = Save.CurrentData;
+
+            data.isFirstRun = false;
+            data.isPlayerAgreedPlay = true;
+            data.language = Localization != null ? Localization.currentLanguage : "en";
+            data.frameRateIndex = frameRateDropdown.value;
+            data.windowModeIndex = windowModeDropdown.value;
+            data.volumeValue = volumeSlider.value;
+            data.isVisualMoverEnabled = visualMoverToggle.isOn;
+
+            Save.Save();
+            Debug.Log("[SettingsManager] Settings saved.");
+        }
+
+        private void LoadSettings()
+        {
+            var data = Save.Load();
+
+            if (data == null)
             {
-                saveManager = saveManagerObject;
-                Debug.Log("GameManager automatically assigned.");
+                Debug.LogWarning("[SettingsManager] No save found. Creating default data.");
+                data = new GameData.Data();
+                Save.Save(data);
             }
-            else
+
+            ApplySettings(data);
+        }
+
+        private void ApplySettings(GameData.Data settings)
+        {
+            // FPS
+            frameRateDropdown.value = settings.frameRateIndex;
+            frameRateDropdown.RefreshShownValue();
+            UpdateFrameRate();
+
+            // Окно
+            windowModeDropdown.value = settings.windowModeIndex;
+            windowModeDropdown.RefreshShownValue();
+            UpdateWindowMode();
+
+            // Громкость
+            volumeSlider.value = settings.volumeValue;
+            UpdateVolume();
+
+            // Визуальные эффекты
+            visualMoverToggle.isOn = settings.isVisualMoverEnabled;
+            UpdateVisualMover();
+
+            // Язык
+            if (Localization != null)
+                Localization.SetLanguage(settings.language);
+        }
+
+        // ================== SETTINGS LOGIC ==================
+
+        private void UpdateFrameRate()
+        {
+            int frameRateIndex = frameRateDropdown.value;
+            Debug.Log($"[SettingsManager] Applying FrameRate preset: {frameRateIndex}");
+
+            switch (frameRateIndex)
             {
-                Debug.LogError("No object with tag 'GameManager' found in the scene!");
+                case 0: QualitySettings.vSyncCount = 1; Application.targetFrameRate = -1; break; // VSync
+                case 1: QualitySettings.vSyncCount = 0; Application.targetFrameRate = -1; break; // Unlimited
+                case 2: QualitySettings.vSyncCount = 0; Application.targetFrameRate = 144; break;
+                case 3: QualitySettings.vSyncCount = 0; Application.targetFrameRate = 120; break;
+                case 4: QualitySettings.vSyncCount = 0; Application.targetFrameRate = 60; break;
+                case 5: QualitySettings.vSyncCount = 0; Application.targetFrameRate = 30; break;
             }
+
+            SaveSettings();
         }
 
-        if (localizationManager == null)
+        private void UpdateWindowMode()
         {
-            GameObject localizationManagerObject = GameObject.FindWithTag("LocalizationManager");
-            if (localizationManagerObject != null)
+            int windowModeIndex = windowModeDropdown.value;
+            Debug.Log($"[SettingsManager] Applying WindowMode preset: {windowModeIndex}");
+
+            switch (windowModeIndex)
             {
-                localizationManager = localizationManagerObject.GetComponent<LocalizationManager>();
-                Debug.Log("LocalizationManager automatically assigned.");
+                case 0: Screen.fullScreenMode = FullScreenMode.FullScreenWindow; break;
+                case 1: Screen.fullScreenMode = FullScreenMode.MaximizedWindow; break;
+                case 2: Screen.fullScreenMode = FullScreenMode.MaximizedWindow; break;
+                case 3: Screen.fullScreenMode = FullScreenMode.Windowed; break;
             }
-            else
-            {
-                Debug.LogError("No object with tag 'LocalizationManager' found in the scene!");
-            }
+
+            SaveSettings();
         }
 
-        LoadSettings();
-
-        frameRateDropdown.onValueChanged.AddListener(delegate { UpdateFrameRate(); });
-        windowModeDropdown.onValueChanged.AddListener(delegate { UpdateWindowMode(); });
-
-        //volumeSlider.onValueChanged.AddListener(delegate { UpdateVolume(); });
-
-        EventTrigger trigger = volumeSlider.gameObject.AddComponent<EventTrigger>();
-        EventTrigger.Entry entry = new EventTrigger.Entry
+        private void UpdateVolume()
         {
-            eventID = EventTriggerType.PointerUp
-        };
-        entry.callback.AddListener((eventData) => UpdateVolume());
-        trigger.triggers.Add(entry);
-
-        visualMoverToggle.onValueChanged.AddListener(delegate { UpdateVisualMover(); });
-    }
-
-    public void SaveSettings()
-    {
-        Debug.Log("Saving settings...");
-
-        Data = new GameData.Data
-        {
-            isFirstRun = false,
-            isPlayerAgreedPlay = true,
-            language = localizationManager.currentLanguage,
-            frameRateIndex = frameRateDropdown.value,
-            windowModeIndex = windowModeDropdown.value,
-            volumeValue = volumeSlider.value, // Сохранение уровня громкости
-            isVisualMoverEnabled = visualMoverToggle.isOn
-        };
-
-        saveManager.GetComponent<SaveManager>().Save(Data);
-    }
-
-    public void LoadSettings()
-    {
-        Debug.Log("Loading settings...");
-
-        Data = saveManager.GetComponent<SaveManager>().Load();
-        ApplySettings(Data);
-    }
-
-    private void ApplySettings(GameData.Data settings)
-    {
-        frameRateDropdown.value = settings.frameRateIndex;
-        frameRateDropdown.RefreshShownValue();
-        UpdateFrameRate();
-
-        windowModeDropdown.value = settings.windowModeIndex;
-        windowModeDropdown.RefreshShownValue();
-        UpdateWindowMode();
-
-        volumeSlider.value = settings.volumeValue; // Загрузка громкости
-        UpdateVolume(); // Применяем громкость
-
-        visualMoverToggle.isOn = settings.isVisualMoverEnabled;
-        UpdateVisualMover();
-    }
-
-    public void UpdateFrameRate()
-    {
-        int frameRateIndex = frameRateDropdown.value;
-        Debug.Log("Applying FrameRate: " + frameRateIndex);
-
-        switch (frameRateIndex)
-        {
-            case 0: // V-Sync
-                QualitySettings.vSyncCount = 1;
-                Application.targetFrameRate = -1;
-                break;
-            case 1: // Unlimited
-                QualitySettings.vSyncCount = 0;
-                Application.targetFrameRate = -1;
-                break;
-            case 2: // 144 FPS
-                QualitySettings.vSyncCount = 0;
-                Application.targetFrameRate = 144;
-                break;
-            case 3: // 120 FPS
-                QualitySettings.vSyncCount = 0;
-                Application.targetFrameRate = 120;
-                break;
-            case 4: // 60 FPS
-                QualitySettings.vSyncCount = 0;
-                Application.targetFrameRate = 60;
-                break;
-            case 5: // 30 FPS
-                QualitySettings.vSyncCount = 0;
-                Application.targetFrameRate = 30;
-                break;
+            float volume = volumeSlider.value;
+            Audio.SetVolume(volume <= 0.01f ? 0f : volume);
+            Debug.Log($"[SettingsManager] Applying Volume: {(volume <= 0.01f ? "Muted" : volume.ToString("0.00"))}");
+            SaveSettings();
         }
 
-        SaveSettings();
-    }
-
-    public void UpdateWindowMode()
-    {
-        int windowModeIndex = windowModeDropdown.value;
-        Debug.Log("Applying WindowMode: " + windowModeIndex);
-
-        switch (windowModeIndex)
+        private void UpdateVisualMover()
         {
-            case 0: // Fullscreen
-                Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
-                break;
-            case 1: // Windowed (no border)
-                Screen.fullScreenMode = FullScreenMode.MaximizedWindow;
-                break;
-            case 2: // Maximized
-                Screen.fullScreenMode = FullScreenMode.MaximizedWindow;
-                break;
-            case 3: // Windowed
-                Screen.fullScreenMode = FullScreenMode.Windowed;
-                break;
+            bool isEnabled = visualMoverToggle.isOn;
+            Debug.Log($"[SettingsManager] VisualMover: {(isEnabled ? "Enabled" : "Disabled")}");
+
+            if (visualMover != null)
+                visualMover.enabled = isEnabled;
+
+            SaveSettings();
         }
-
-        SaveSettings();
-    }
-
-    public void UpdateVolume()
-    {
-        float volume = volumeSlider.value;
-
-        if (volume <= 0.01f) // Условие для обработки почти 0
-        {
-            AudioManager.Instance.SetVolume(0);
-            Debug.Log("Applying Volume: Muted");
-        }
-        else
-        {
-            AudioManager.Instance.SetVolume(volume);
-            Debug.Log($"Applying Volume: {volume}");
-        }
-
-        SaveSettings();
-    }
-
-    public void UpdateVisualMover()
-    {
-        bool isEnabled = visualMoverToggle.isOn;
-        Debug.Log("Applying VisualMover: " + (isEnabled ? "Enabled" : "Disabled"));
-
-        if (visualMover != null)
-        {
-            visualMover.enabled = isEnabled;
-        }
-
-        SaveSettings();
     }
 }

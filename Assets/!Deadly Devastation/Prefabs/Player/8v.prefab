@@ -11133,7 +11133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8c2e706ea3a1234cb8fc63049d7b283, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  localizationManager: {fileID: 0}
+  languageCode: 
 --- !u!114 &4292364115457625087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11682,14 +11682,13 @@ GameObject:
   - component: {fileID: 8813455281843308631}
   - component: {fileID: 7143494988555535794}
   - component: {fileID: 1634237587014523608}
+  - component: {fileID: 1920673118360522668}
   - component: {fileID: 4690459089005627408}
-  - component: {fileID: 4601132431338228991}
+  - component: {fileID: 6705124743129032673}
   - component: {fileID: 8738194778763945130}
   - component: {fileID: 6762205413028271246}
   - component: {fileID: 1060520132644592825}
   - component: {fileID: 848141794532275173}
-  - component: {fileID: 6705124743129032673}
-  - component: {fileID: 1920673118360522668}
   - component: {fileID: 5991298759250343824}
   - component: {fileID: 6236117930237290853}
   - component: {fileID: 6923055958110388051}
@@ -11841,6 +11840,36 @@ MonoBehaviour:
   destroyOnDeath: 0
   currentHealth: 0
   isDead: 0
+--- !u!114 &1920673118360522668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3317704105534906839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76031bbd0fdd64d4bbae7e5792333add, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  context: {fileID: 8813455281843308631}
+  movement: {fileID: 7143494988555535794}
+  cameraController: {fileID: 6248640917761348267}
+  unstableWindow: {fileID: 7774314059844654045}
+  timeText: {fileID: 4312776212266267194}
+  lockControlsOnUnstable: 1
+  countdownSeconds: 91
+  autoReturnToMenu: 1
+  menuSceneName: IsMenuScene
+  transition: {fileID: 11400000, guid: 3ad3e86dc386e60458fda4c93a2c3d62, type: 2}
+  startDelay: 0
+  OnNetworkUnreachable:
+    m_PersistentCalls:
+      m_Calls: []
+  OnNetworkRestored:
+    m_PersistentCalls:
+      m_Calls: []
+  pollInterval: 0.25
 --- !u!114 &4690459089005627408
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11870,7 +11899,7 @@ MonoBehaviour:
   warningClip: {fileID: 8300000, guid: 20c59a2bba895f843946fc361a88eaed, type: 3}
   highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   warningColor: {r: 1, g: 0, b: 0, a: 1}
---- !u!114 &4601132431338228991
+--- !u!114 &6705124743129032673
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -11879,10 +11908,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3317704105534906839}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 520ffb3b132e948119bdd8525ef3327e, type: 3}
+  m_Script: {fileID: 11500000, guid: 03f876808ab059b45981c640453cae22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Cheat: {fileID: 5827260578915601415, guid: e65ae2fdc6d5942e0bfd14560c54beea, type: 3}
+  hitboxType: 3
 --- !u!54 &8738194778763945130
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -11985,49 +12014,6 @@ MonoBehaviour:
   InLocalSpace: 0
   Interpolate: 1
   SlerpPosition: 0
---- !u!114 &6705124743129032673
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3317704105534906839}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03f876808ab059b45981c640453cae22, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hitboxType: 3
---- !u!114 &1920673118360522668
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3317704105534906839}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76031bbd0fdd64d4bbae7e5792333add, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  context: {fileID: 8813455281843308631}
-  movement: {fileID: 7143494988555535794}
-  cameraController: {fileID: 6248640917761348267}
-  unstableWindow: {fileID: 7774314059844654045}
-  timeText: {fileID: 4312776212266267194}
-  lockControlsOnUnstable: 1
-  countdownSeconds: 91
-  autoReturnToMenu: 1
-  menuSceneName: IsMenuScene
-  transition: {fileID: 11400000, guid: 3ad3e86dc386e60458fda4c93a2c3d62, type: 2}
-  startDelay: 0
-  OnNetworkUnreachable:
-    m_PersistentCalls:
-      m_Calls: []
-  OnNetworkRestored:
-    m_PersistentCalls:
-      m_Calls: []
-  pollInterval: 0.25
 --- !u!114 &5991298759250343824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24092,7 +24078,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8c2e706ea3a1234cb8fc63049d7b283, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  localizationManager: {fileID: 0}
+  languageCode: 
 --- !u!114 &2267544515365097850
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28118,8 +28104,8 @@ MonoBehaviour:
   runBobAmount: 0.1
   bobGrowthFactor: 1.6
   cameraTilt: 1
-  tiltSpeed: 5
-  tiltAngle: 5
+  tiltSpeed: 4
+  tiltAngle: 3
   sprintFovBoost: 20
   fovLerpSpeed: 1
   fovBreathAmplitude: 1.25

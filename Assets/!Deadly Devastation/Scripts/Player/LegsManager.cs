@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using UnityEngine;
 using FirstGearGames.SmoothCameraShaker;
+using RKS.DD.Core.Managers;
+using Zenject;
 
 [RequireComponent(typeof(PlayerContext))]
 public class LegsManager : MonoBehaviour
@@ -22,14 +24,17 @@ public class LegsManager : MonoBehaviour
 
     private Animator _animator;
     private PlayerContext _ctx;
+    private AudioManager audioManager;
     private PlayerMovement _playerMovement;
     private bool _isKicking = false;
 
+    [Inject]
     private void Awake()
     {
         _ctx = GetComponent<PlayerContext>();
         _animator = _ctx.Animator;
         _playerMovement = _ctx.Movement;
+        audioManager = audioManager;
     }
 
     private void Update()
@@ -49,7 +54,7 @@ public class LegsManager : MonoBehaviour
     {
         _isKicking = true;
 
-        AudioManager.Instance.Play("Woosh");
+        audioManager.Play("Woosh");
 
         int randomKickIndex = Random.Range(1, kickAnimationCount);
         _animator.SetInteger("KickIndex", randomKickIndex);
@@ -69,7 +74,7 @@ public class LegsManager : MonoBehaviour
             IHittable hittable = hitCollider.GetComponent<IHittable>();
             if (hittable != null)
             {
-                AudioManager.Instance.PlayAndForget("Hit");
+                audioManager.PlayAndForget("Hit");
                 Vector3 force = transform.forward * kickForce;
                 hittable.OnHit(force, kickDamage, gameObject);
                 hitSomething = true;

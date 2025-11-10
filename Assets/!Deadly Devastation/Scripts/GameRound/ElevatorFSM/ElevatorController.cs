@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
-namespace RKS.DD.Game
+namespace RKS.DD.Game.Elevator
 {
     public class ElevatorController : MonoBehaviour
     {
