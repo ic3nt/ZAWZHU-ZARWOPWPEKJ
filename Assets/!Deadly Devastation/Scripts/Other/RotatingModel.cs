@@ -1,98 +1,70 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using RKS.DD.Core;
 
-public class RotatingModel : MonoBehaviour
+namespace RKS.DD.Menu
 {
-    public float rotatingSpeed = 10f;
-    public float deceleration = 0.95f;
-    private bool isRotating = false;
-    private float startMousePosition;
-    private float currentRotationX;
-    private float currentRotationSpeed;
-
-    // скрипт для вращения объектов
-
-    void Update()
+    public class RotateModelByInput : RKSBehaviour
     {
-        if (isRotating)
+        [Header("Rotation Settings")]
+        [SerializeField] private float rotatingSpeed = 200f;
+        [SerializeField] private float deceleration = 4f;
+
+        private float currentRotationSpeed = 0f;
+        private float lastMouseX;
+        private bool dragging = false;
+        private float rotationY = 0f;
+
+        protected override void Update()
         {
-            // вращение мышкой
+            HandleMouseDrag();
+            HandleKeyboardInput();
 
-            float currentMousePosition = Input.mousePosition.x;
-            float mouseMovement = currentMousePosition - startMousePosition;
-            startMousePosition = currentMousePosition;
-
-            currentRotationSpeed = mouseMovement * rotatingSpeed * Time.deltaTime;
-            currentRotationX -= currentRotationSpeed;
-
-            RotateModel();
-        }
-        else if (currentRotationSpeed != 0)
-        {
-            currentRotationSpeed *= deceleration;
-
-            if (Mathf.Abs(currentRotationSpeed) < 0.01f)
+            if (!dragging)
             {
-                currentRotationSpeed = 0;
+                currentRotationSpeed = Mathf.MoveTowards(
+                    currentRotationSpeed,
+                    0f,
+                    deceleration * Time.deltaTime
+                );
             }
 
-            currentRotationX -= currentRotationSpeed;
+            rotationY += currentRotationSpeed * Time.deltaTime;
 
-            RotateModel();
+            transform.rotation = Quaternion.Euler(0, rotationY, 0);
         }
 
-        if (Input.GetKey(KeyCode.A))
+        private void HandleMouseDrag()
         {
-            // вращение на A
+            if (dragging)
+            {
+                float deltaX = Input.mousePosition.x - lastMouseX;
+                lastMouseX = Input.mousePosition.x;
 
-            //Debug.Log("A");
-            currentRotationSpeed -= rotatingSpeed * Time.deltaTime;
-            currentRotationX -= currentRotationSpeed * Time.deltaTime;
+                currentRotationSpeed = -deltaX * rotatingSpeed * 0.01f;
+            }
 
-            RotateModel();
+            if (Input.GetMouseButtonDown(0))
+            {
+                dragging = true;
+                lastMouseX = Input.mousePosition.x;
+            }
+
+            if (Input.GetMouseButtonUp(0))
+            {
+                dragging = false;
+            }
         }
-        else if (Input.GetKey(KeyCode.D))
+
+        private void HandleKeyboardInput()
         {
-            // вращение на D
-
-            //Debug.Log("D");
-            currentRotationSpeed += rotatingSpeed * Time.deltaTime;
-            currentRotationX += currentRotationSpeed * Time.deltaTime;
-
-            RotateModel();
+            if (Input.GetKey(KeyCode.A))
+            {
+                currentRotationSpeed -= rotatingSpeed * Time.deltaTime;
+            }
+            else if (Input.GetKey(KeyCode.D))
+            {
+                currentRotationSpeed += rotatingSpeed * Time.deltaTime;
+            }
         }
-    }
-
-    public void OnMouseEnter()
-    {
-        //Debug.Log("Mouse Entered");
-    }
-
-    public void OnMouseExit()
-    {
-        //Debug.Log("Mouse Exited");
-        isRotating = false;
-        currentRotationSpeed *= deceleration;
-    }
-
-    void OnMouseDown()
-    {
-        isRotating = true;
-        startMousePosition = Input.mousePosition.x;
-        currentRotationSpeed = 0;
-    }
-
-    void OnMouseUp()
-    {
-        isRotating = false;
-    }
-
-    private void RotateModel()
-    {
-        // само вращение 
-
-        Quaternion targetRotation = Quaternion.Euler(0, currentRotationX, 0);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 10f);
     }
 }

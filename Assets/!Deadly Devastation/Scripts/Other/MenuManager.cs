@@ -15,6 +15,7 @@ using UnityEngine.Diagnostics;
 using Zenject;
 using RKS.DD.Core.Managers;
 using RKS.DD.Core;
+using RKS.DD.Menu;
 
 #if UNITY_EDITOR
 [CustomEditor(typeof(MenuManager))]
@@ -438,7 +439,7 @@ public class MenuManager : RKSBehaviour
         isNotSelect = true;
         animator.SetTrigger("DefaultMenu");
 
-        Kail.GetComponent<RotatingModel>().enabled = true;
+        Kail.GetComponent<RotateModelByInput>().enabled = true;
 
         switch (Localization.currentLanguage)
         {
@@ -566,7 +567,7 @@ public class MenuManager : RKSBehaviour
         isNotSelect = true;
         animator.SetTrigger("SettingsMenu");
 
-        Kail.GetComponent<RotatingModel>().enabled = false;
+        Kail.GetComponent<RotateModelByInput>().enabled = false;
     }
     public void CatalogButton()
     {
