@@ -655,7 +655,7 @@ public class MenuManager : RKSBehaviour
     public void SingleplayerButton()
     {
         Debug.Log("Single-player mode");
-        Transition.LoadScene("TEST");
+        Transition.LoadScene("TEST 1");
     }
     public void MultiplayerButton()
     {
