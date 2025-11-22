@@ -22,7 +22,7 @@ namespace RKS.DD.Core.Managers
 
             CurrentData = LoadInternal();
         }
-        public void Save(GameData.Data data)
+        public void Write(GameData.Data data)
         {
             if (data == null)
             {
@@ -35,7 +35,7 @@ namespace RKS.DD.Core.Managers
             Debug.Log("[SaveManager] Data saved successfully (via parameter).");
         }
 
-        public void Save()
+        public void Write()
         {
             if (CurrentData == null)
             {
@@ -71,7 +71,7 @@ namespace RKS.DD.Core.Managers
         public void ResetToDefault()
         {
             CurrentData = new GameData.Data();
-            Save();
+            Write();
             Debug.Log("[SaveManager] Reset to default.");
         }
 

@@ -48,7 +48,7 @@ namespace RKS.DD.Core
                 _ => "Initialization..."
             };
 
-            Discord.details = message;
+            DiscordRPC.details = message;
             Debug.Log("[IntroBootstrap] Discord initialized with message: " + message);
         }
 
@@ -57,7 +57,7 @@ namespace RKS.DD.Core
             if (Save.CurrentData == null)
                 Save.Load();
             
-            Save.Save();
+            Save.Write();
             Debug.Log("[IntroBootstrap] Save data initialized.");
         }
 
@@ -74,7 +74,7 @@ namespace RKS.DD.Core
             if (data.isFirstRun)
             {
                 data.isFirstRun = false;
-                Save.Save();
+                Save.Write();
                 Debug.Log("[IntroBootstrap] First run → loading 'IsFirstGameOpenScene'.");
                 SceneManager.LoadScene("IsFirstGameOpenScene");
                 return;

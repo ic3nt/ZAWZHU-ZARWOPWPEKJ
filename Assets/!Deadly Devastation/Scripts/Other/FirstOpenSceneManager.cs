@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using DG.Tweening;
 using EasyTransition;
 using RKS.DD.Core;
+using System;
 
 namespace RKS.DD.Core.Managers 
 {
@@ -22,7 +23,7 @@ namespace RKS.DD.Core.Managers
         [SerializeField] private float tweenDuration = 0.5f;
 
         [Header("Transition")]
-        [SerializeField] private DemoLoadScene transitionManager;
+        //[SerializeField] private DemoLoadScene transitionManager;
 
         [Header("Camera Rotation")]
         [SerializeField] private Camera cameraToRotate;
@@ -35,9 +36,9 @@ namespace RKS.DD.Core.Managers
 
         protected override void OnReady()
         {
+            InitializeSave();
             InitializeCamera();
             InitializeUI();
-            InitializeSave();
         }
 
         private void InitializeCamera()
@@ -62,13 +63,15 @@ namespace RKS.DD.Core.Managers
 
         private void InitializeSave()
         {
+            Save.Load();
+
             if (Save.CurrentData == null)
             {
-                Debug.LogWarning("[FirstOpenSceneManager] No save data found, creating new.");
-                Save.Load();
-                Save.Save();
+                Debug.LogWarning("[FirstOpenSceneManager] Save was still null after load → creating new one manually.");
+                Save.Write();
             }
         }
+
 
         private void Update()
         {
@@ -106,7 +109,7 @@ namespace RKS.DD.Core.Managers
                 data.isPlayerAgreedPlay = false;
             }
 
-            Save.Save();
+            Save.Write();
         }
 
         public void SelectLocalizationAnimation()
@@ -125,20 +128,9 @@ namespace RKS.DD.Core.Managers
         {
             var data = Save.CurrentData;
             data.isPlayerAgreedPlay = true;
-            Save.Save(data);
+            Save.Write(data);
 
-            if (transitionManager != null)
-            {
-                transitionManager.LoadScene("IsMenuScene");
-            }
-            else if (Transition != null)
-            {
-                Transition.LoadScene("IsMenuScene");
-            }
-            else
-            {
-                UnityEngine.SceneManagement.SceneManager.LoadScene("IsMenuScene");
-            }
+            UnityEngine.SceneManagement.SceneManager.LoadScene("IsMenuScene");
 
             Debug.Log("[FirstOpenSceneManager] Player agreed → loading menu.");
         }

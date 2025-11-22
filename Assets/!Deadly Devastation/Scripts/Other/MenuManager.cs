@@ -196,20 +196,20 @@ public class MenuManager : RKSBehaviour
         switch (Localization.currentLanguage)
         {
             case "en_US":
-                Discord.state = "He just sits on the menu and that's it.";
-                Discord.details = "Menu";
+                DiscordRPC.state = "He just sits on the menu and that's it.";
+                DiscordRPC.details = "Menu";
                 break;
             case "ru_RU":
-                Discord.state = "Просто сидит в меню и все.";
-                Discord.details = "Меню";
+                DiscordRPC.state = "Просто сидит в меню и все.";
+                DiscordRPC.details = "Меню";
                 break;
             case "de_DE":
-                Discord.state = "Es steht einfach auf der Speisekarte und das war’s.";
-                Discord.details = "Speisekarte";
+                DiscordRPC.state = "Es steht einfach auf der Speisekarte und das war’s.";
+                DiscordRPC.details = "Speisekarte";
                 break;
             case "es_ES":
-                Discord.state = "Sólo se sienta en el menú y eso es todo.";
-                Discord.details = "Menú";
+                DiscordRPC.state = "Sólo se sienta en el menú y eso es todo.";
+                DiscordRPC.details = "Menú";
                 break;
         }
     }
@@ -228,20 +228,20 @@ public class MenuManager : RKSBehaviour
                 switch (Localization.currentLanguage)
                 {
                     case "en_US":
-                        Discord.state = "He just sits on the menu and that's it.";
-                        Discord.details = "Menu";
+                        DiscordRPC.state = "He just sits on the menu and that's it.";
+                        DiscordRPC.details = "Menu";
                         break;
                     case "ru_RU":
-                        Discord.state = "Просто сидит в меню и все.";
-                        Discord.details = "Меню";
+                        DiscordRPC.state = "Просто сидит в меню и все.";
+                        DiscordRPC.details = "Меню";
                         break;
                     case "de_DE":
-                        Discord.state = "Es steht einfach auf der Speisekarte und das war’s.";
-                        Discord.details = "Speisekarte";
+                        DiscordRPC.state = "Es steht einfach auf der Speisekarte und das war’s.";
+                        DiscordRPC.details = "Speisekarte";
                         break;
                     case "es_ES":
-                        Discord.state = "Sólo se sienta en el menú y eso es todo.";
-                        Discord.details = "Menú";
+                        DiscordRPC.state = "Sólo se sienta en el menú y eso es todo.";
+                        DiscordRPC.details = "Menú";
                         break;
                 }
             }
@@ -265,16 +265,16 @@ public class MenuManager : RKSBehaviour
                 switch (Localization.currentLanguage)
                 {
                     case "en_US":
-                        Discord.state = "Sets up Deadly Devastation...";
+                        DiscordRPC.state = "Sets up Deadly Devastation...";
                         break;
                     case "ru_RU":
-                        Discord.state = "Настраивает Deadly Devastation...";
+                        DiscordRPC.state = "Настраивает Deadly Devastation...";
                         break;
                     case "es_ES":
-                        Discord.state = "Configura Deadly Devastation...";
+                        DiscordRPC.state = "Configura Deadly Devastation...";
                         break;
                     case "de_DE":
-                        Discord.state = "Konfiguriert Deadly Devastation...";
+                        DiscordRPC.state = "Konfiguriert Deadly Devastation...";
                         break;
                 }
             }
@@ -311,16 +311,16 @@ public class MenuManager : RKSBehaviour
                 switch (Localization.currentLanguage)
                 {
                     case "en_US":
-                        Discord.state = "Carefully examines the manual...";
+                        DiscordRPC.state = "Carefully examines the manual...";
                         break;
                     case "ru_RU":
-                        Discord.state = "Внимательно изучает справочник...";
+                        DiscordRPC.state = "Внимательно изучает справочник...";
                         break;
                     case "es_ES":
-                        Discord.state = "Estudiando atentamente el libro de referencia...";
+                        DiscordRPC.state = "Estudiando atentamente el libro de referencia...";
                         break;
                     case "de_DE":
-                        Discord.state = "Das Nachschlagewerk sorgfältig studieren...";
+                        DiscordRPC.state = "Das Nachschlagewerk sorgfältig studieren...";
                         break;
                 }
             }
@@ -345,16 +345,16 @@ public class MenuManager : RKSBehaviour
                 switch (Localization.currentLanguage)
                 {
                     case "en_US":
-                        Discord.state = "On a shopping trip...";
+                        DiscordRPC.state = "On a shopping trip...";
                         break;
                     case "ru_RU":
-                        Discord.state = "На шоппинге...";
+                        DiscordRPC.state = "На шоппинге...";
                         break;
                     case "es_ES":
-                        Discord.state = "On a shopping trip...";
+                        DiscordRPC.state = "On a shopping trip...";
                         break;
                     case "de_DE":
-                        Discord.state = "On a shopping trip...";
+                        DiscordRPC.state = "On a shopping trip...";
                         break;
                 }
             }
@@ -392,16 +392,16 @@ public class MenuManager : RKSBehaviour
                 switch (Localization.currentLanguage)
                 {
                     case "en_US":
-                        Discord.state = "Looks at the catalog...";
+                        DiscordRPC.state = "Looks at the catalog...";
                         break;
                     case "ru_RU":
-                        Discord.state = "Рассматривает каталог...";
+                        DiscordRPC.state = "Рассматривает каталог...";
                         break;
                     case "es_ES":
-                        Discord.state = "Mirando el catálogo...";
+                        DiscordRPC.state = "Mirando el catálogo...";
                         break;
                     case "de_DE":
-                        Discord.state = "Blick in den Katalog...";
+                        DiscordRPC  .state = "Blick in den Katalog...";
                         break;
                 }
             }
@@ -443,20 +443,20 @@ public class MenuManager : RKSBehaviour
         switch (Localization.currentLanguage)
         {
             case "en_US":
-                Discord.state = "He just sits on the menu and that's it.";
-                Discord.details = "Menu";
+                DiscordRPC.state = "He just sits on the menu and that's it.";
+                DiscordRPC.details = "Menu";
                 break;
             case "ru_RU":
-                Discord.state = "Просто сидит в меню и все.";
-                Discord.details = "Меню";
+                DiscordRPC.state = "Просто сидит в меню и все.";
+                DiscordRPC.details = "Меню";
                 break;
             case "de_DE":
-                Discord.state = "Es steht einfach auf der Speisekarte und das war’s.";
-                Discord.details = "Speisekarte";
+                DiscordRPC.state = "Es steht einfach auf der Speisekarte und das war’s.";
+                DiscordRPC.details = "Speisekarte";
                 break;
             case "es_ES":
-                Discord.state = "Sólo se sienta en el menú y eso es todo.";
-                Discord.details = "Menú";
+                DiscordRPC.state = "Sólo se sienta en el menú y eso es todo.";
+                DiscordRPC.details = "Menú";
                 break;
         }
     }
@@ -476,20 +476,20 @@ public class MenuManager : RKSBehaviour
         switch (Localization.currentLanguage)
         {
             case "en_US":
-                Discord.state = "Multiplayer or Single-player? Hmmm.";
-                Discord.details = "Menu";
+                DiscordRPC.state = "Multiplayer or Single-player? Hmmm.";
+                DiscordRPC.details = "Menu";
                 break;
             case "ru_RU":
-                Discord.state = "Мультиплеер или Одиночная игра? Хммм.";
-                Discord.details = "Меню";
+                DiscordRPC.state = "Мультиплеер или Одиночная игра? Хммм.";
+                DiscordRPC.details = "Меню";
                 break;
             case "de_DE":
-                Discord.state = "Mehrspieler oder Einzelspieler? Hmmm.";
-                Discord.details = "Speisekarte";
+                DiscordRPC.state = "Mehrspieler oder Einzelspieler? Hmmm.";
+                DiscordRPC.details = "Speisekarte";
                 break;
             case "es_ES":
-                Discord.state = "¿Multijugador o un jugador? Mmm.";
-                Discord.details = "Menú";
+                DiscordRPC.state = "¿Multijugador o un jugador? Mmm.";
+                DiscordRPC.details = "Menú";
                 break;
         }
     }
@@ -507,20 +507,20 @@ public class MenuManager : RKSBehaviour
         switch (Localization.currentLanguage)
         {
             case "en_US":
-                Discord.state = "WANTS TO QUIT THE GAME ((((";
-                Discord.details = "Menu";
+                DiscordRPC.state = "WANTS TO QUIT THE GAME ((((";
+                DiscordRPC.details = "Menu";
                 break;
             case "ru_RU":
-                Discord.state = "ХОЧЕТ ВЫЙТИ ИЗ ИГРЫ ((((";
-                Discord.details = "Меню";
+                DiscordRPC.state = "ХОЧЕТ ВЫЙТИ ИЗ ИГРЫ ((((";
+                DiscordRPC.details = "Меню";
                 break;
             case "de_DE":
-                Discord.state = "WILL DAS SPIEL VERLASSEN ((((";
-                Discord.details = "Speisekarte";
+                DiscordRPC.state = "WILL DAS SPIEL VERLASSEN ((((";
+                DiscordRPC.details = "Speisekarte";
                 break;
             case "es_ES":
-                Discord.state = "QUIERE SALIR DEL JUEGO ((((";
-                Discord.details = "Menú";
+                DiscordRPC.state = "QUIERE SALIR DEL JUEGO ((((";
+                DiscordRPC.details = "Menú";
                 break;
         }
     }
@@ -538,20 +538,20 @@ public class MenuManager : RKSBehaviour
         switch (Localization.currentLanguage)
         {
             case "en_US":
-                Discord.state = "Admires the developers ^^";
-                Discord.details = "Menu";
+                DiscordRPC.state = "Admires the developers ^^";
+                DiscordRPC.details = "Menu";
                 break;
             case "ru_RU":
-                Discord.state = "Любуется разработчиками ^^";
-                Discord.details = "Меню";
+                DiscordRPC.state = "Любуется разработчиками ^^";
+                DiscordRPC.details = "Меню";
                 break;
             case "de_DE":
-                Discord.state = "Von den Entwicklern geliebt ^^";
-                Discord.details = "Speisekarte";
+                DiscordRPC.state = "Von den Entwicklern geliebt ^^";
+                DiscordRPC.details = "Speisekarte";
                 break;
             case "es_ES":
-                Discord.state = "Amado por los desarrolladores ^^";
-                Discord.details = "Menú";
+                DiscordRPC.state = "Amado por los desarrolladores ^^";
+                DiscordRPC.details = "Menú";
                 break;
         }
     }

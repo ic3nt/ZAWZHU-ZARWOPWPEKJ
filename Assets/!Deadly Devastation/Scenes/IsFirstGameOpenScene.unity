@@ -38,7 +38,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -385,9 +384,6 @@ MonoBehaviour:
   buttonAgreeRectTransform: {fileID: 560629995}
   toggleAgree: {fileID: 2133147809}
   buttonAgree: {fileID: 560629998}
-  transitionManager: {fileID: 0}
-  saveManager: {fileID: 0}
-  animator: {fileID: 265401970}
   middleTogglePosX: -170
   rightTogglePosX: -480
   downButtonPosY: -800
@@ -395,6 +391,7 @@ MonoBehaviour:
   tweenDuration: 1
   cameraToRotate: {fileID: 1497362417}
   rotationSpeed: 20
+  animator: {fileID: 265401970}
 --- !u!114 &265401966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -710,9 +707,6 @@ MonoBehaviour:
   buttonAgreeRectTransform: {fileID: 0}
   toggleAgree: {fileID: 0}
   buttonAgree: {fileID: 0}
-  transitionManager: {fileID: 0}
-  saveManager: {fileID: 0}
-  animator: {fileID: 0}
   middleTogglePosX: 0
   rightTogglePosX: 0
   downButtonPosY: 0
@@ -720,6 +714,7 @@ MonoBehaviour:
   tweenDuration: 0
   cameraToRotate: {fileID: 0}
   rotationSpeed: 30
+  animator: {fileID: 0}
 --- !u!114 &307519846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -792,7 +787,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8c2e706ea3a1234cb8fc63049d7b283, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  localizationManager: {fileID: 0}
+  languageCode: 
 --- !u!95 &307519849
 Animator:
   serializedVersion: 5
@@ -1707,12 +1702,12 @@ MonoBehaviour:
   m_RequiresColorTexture: 0
   m_Version: 2
   m_TaaSettings:
-    quality: 3
-    frameInfluence: 0.1
-    jitterScale: 1
-    mipBias: 0
-    varianceClampScale: 0.9
-    contrastAdaptiveSharpening: 0
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
 --- !u!1 &501778921
 GameObject:
   m_ObjectHideFlags: 0
@@ -2093,6 +2088,69 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 560629994}
   m_CullTransparentMesh: 1
+--- !u!1 &571912212
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 571912214}
+  - component: {fileID: 571912213}
+  m_Layer: 0
+  m_Name: SceneContext
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &571912213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 571912212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89715ad69b973a14899afa2c6730b30b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scriptableObjectInstallers: []
+  _monoInstallers: []
+  _installerPrefabs: []
+  _autoRun: 1
+  OnPreInstall:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPostInstall:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPreResolve:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPostResolve:
+    m_PersistentCalls:
+      m_Calls: []
+  _parentNewObjectsUnderSceneContext: 0
+  _contractNames: []
+  _parentContractNames: []
+--- !u!4 &571912214
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 571912212}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &682918759
 GameObject:
   m_ObjectHideFlags: 0
@@ -3087,7 +3145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8c2e706ea3a1234cb8fc63049d7b283, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  localizationManager: {fileID: 0}
+  languageCode: 
 --- !u!95 &1190727860
 Animator:
   serializedVersion: 5
@@ -3458,12 +3516,12 @@ MonoBehaviour:
   m_RequiresColorTexture: 0
   m_Version: 2
   m_TaaSettings:
-    quality: 3
-    frameInfluence: 0.1
-    jitterScale: 1
-    mipBias: 0
-    varianceClampScale: 0.9
-    contrastAdaptiveSharpening: 0
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
 --- !u!20 &1497362417
 Camera:
   m_ObjectHideFlags: 0
@@ -4489,9 +4547,6 @@ MonoBehaviour:
   buttonAgreeRectTransform: {fileID: 0}
   toggleAgree: {fileID: 0}
   buttonAgree: {fileID: 0}
-  transitionManager: {fileID: 0}
-  saveManager: {fileID: 0}
-  animator: {fileID: 8135178009750865294}
   middleTogglePosX: 0
   rightTogglePosX: 0
   downButtonPosY: 0
@@ -4499,6 +4554,7 @@ MonoBehaviour:
   tweenDuration: 0
   cameraToRotate: {fileID: 0}
   rotationSpeed: 30
+  animator: {fileID: 8135178009750865294}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -4511,3 +4567,4 @@ SceneRoots:
   - {fileID: 22381584}
   - {fileID: 768114045}
   - {fileID: 1759626808}
+  - {fileID: 571912214}

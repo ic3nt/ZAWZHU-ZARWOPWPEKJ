@@ -16,7 +16,7 @@ public class LocalizationManager : RKSBehaviour
     public delegate void ChangeLangText();
     public event ChangeLangText OnLanguageChanged;
 
-        protected override void OnInjected()
+        protected override void OnReady()
         {
             Save.Load();
 
@@ -43,7 +43,7 @@ public class LocalizationManager : RKSBehaviour
                         break;
                 }
 
-                Save.Save();
+                Save.Write();
             }
 
         currentLanguage = Save.CurrentData.language;
@@ -101,7 +101,7 @@ public class LocalizationManager : RKSBehaviour
         if (langName == currentLanguage) return;
 
         Save.CurrentData.language = langName;
-        Save.Save();
+        Save.Write();
         StartCoroutine(LoadLocalizedTextCoroutine(langName));
     }
 

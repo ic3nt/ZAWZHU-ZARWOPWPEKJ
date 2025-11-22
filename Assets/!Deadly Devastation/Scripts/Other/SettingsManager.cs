@@ -43,7 +43,7 @@ namespace RKS.DD.UI
             data.volumeValue = volumeSlider.value;
             data.isVisualMoverEnabled = visualMoverToggle.isOn;
 
-            Save.Save();
+            Save.Write();
             Debug.Log("[SettingsManager] Settings saved.");
         }
 
@@ -55,7 +55,7 @@ namespace RKS.DD.UI
             {
                 Debug.LogWarning("[SettingsManager] No save found. Creating default data.");
                 data = new GameData.Data();
-                Save.Save(data);
+                Save.Write(data);
             }
 
             ApplySettings(data);

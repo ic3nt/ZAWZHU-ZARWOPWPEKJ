@@ -9,7 +9,7 @@ namespace RKS.DD.Core
     {
         protected LocalizationManager Localization { get; private set; }
         protected AudioManager Audio { get; private set; }
-        protected DiscordController Discord { get; private set; }
+        protected DiscordController DiscordRPC { get; private set; }
         protected SaveManager Save { get; private set; }
         protected TransitionManager Transition { get; private set; }
 
@@ -25,7 +25,7 @@ namespace RKS.DD.Core
         {
             Localization = localization;
             Audio = audio;
-            Discord = discord;
+            DiscordRPC = discord;
             Save = save;
             Transition = transition;
 

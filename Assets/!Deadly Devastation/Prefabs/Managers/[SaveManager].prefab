@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3276617365343497790}
   - component: {fileID: 4594893543064269524}
-  - component: {fileID: 5591058299236857716}
   m_Layer: 0
   m_Name: '[SaveManager]'
   m_TagString: GameManager
@@ -46,23 +45,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fileName: DD_Data.rkst
---- !u!114 &5591058299236857716
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2384125951640924691}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6efa64aed859a8b40af66783d1eb0bf1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameData:
-    isFirstRun: 0
-    isPlayerAgreedPlay: 0
-    language: 
-    frameRateIndex: 0
-    windowModeIndex: 0
-    volumeValue: 1
-    isVisualMoverEnabled: 0

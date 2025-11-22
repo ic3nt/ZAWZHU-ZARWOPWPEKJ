@@ -1,105 +1,89 @@
 using Discord;
 using UnityEngine;
+using RKS.DD.Core;
 
-public class DiscordController : MonoBehaviour
+namespace RKS.DD.Core.Managers
 {
-    [Header("Discord Application Settings")]
-
-    [Space(10)]
-
-    public long applicationID;
-
-    [Header("Rich Presence Details")]
-
-    [Space(10)]
-
-    public string details = "";
-
-    public string state = "";
-
-    public string largeImage = "";
-
-    public string largeText = "";
-
-
-    private long time;
-
-    private static bool instanceExists;
-    public Discord.Discord discord;
-
-    void Awake()
+    public class DiscordController : RKSBehaviour
     {
-        if (!instanceExists)
+        [Header("Discord Application Settings")]
+        [Space(10)]
+        public long applicationID;
+
+        [Header("Rich Presence Details")]
+        [Space(10)]
+        public string details;
+        public string state;
+        public string largeImage;
+        public string largeText;
+
+        private long time;
+
+        private static bool instanceExists;
+        public Discord.Discord discord;
+
+        protected override void OnReady()
         {
-            instanceExists = true;
+            discord = new Discord.Discord(applicationID, (System.UInt64)Discord.CreateFlags.NoRequireDiscord);
+
+            time = System.DateTimeOffset.Now.ToUnixTimeMilliseconds();
+
+            UpdateStatus();
         }
-        else if (FindObjectsOfType(GetType()).Length > 1)
+
+        protected override void Update()
         {
-            Destroy(gameObject);
-        }
-    }
+            UpdateStatus();
 
-    void Start()
-    {
-        discord = new Discord.Discord(applicationID, (System.UInt64)Discord.CreateFlags.NoRequireDiscord);
-
-        time = System.DateTimeOffset.Now.ToUnixTimeMilliseconds();
-
-        UpdateStatus();
-    }
-
-    void Update()
-    {
-        UpdateStatus();
-
-        try
-        {
-            discord.RunCallbacks();
-        }
-        catch
-        {
-            Destroy(gameObject);
-        }
-    }
-
-    void UpdateStatus()
-    {
-        try
-        {
-            var activityManager = discord.GetActivityManager();
-            var activity = new Discord.Activity
+            try
             {
-                Details = details,
-                State = state,
-                Assets =
+                discord.RunCallbacks();
+            }
+            catch
+            {
+                Destroy(gameObject);
+            }
+        }
+
+        void UpdateStatus()
+        {
+            try
+            {
+                var activityManager = discord.GetActivityManager();
+                var activity = new Discord.Activity
+                {
+                    Details = details,
+                    State = state,
+                    Assets =
                 {
                     LargeImage = largeImage,
                     LargeText = largeText
                 },
-                Timestamps =
+                    Timestamps =
                 {
                     Start = time
                 }
-            };
+                };
 
-            activityManager.UpdateActivity(activity, (res) =>
+                activityManager.UpdateActivity(activity, (res) =>
+                {
+                    if (res != Discord.Result.Ok)
+                        Debug.LogWarning("Failed connecting to Discord!");
+                });
+            }
+            catch
             {
-                if (res != Discord.Result.Ok)
-                    Debug.LogWarning("Failed connecting to Discord!");
-            });
+                Destroy(gameObject);
+            }
         }
-        catch
+
+        private void OnDispose()
         {
-            Destroy(gameObject);
+            if (discord != null)
+            {
+                discord.Dispose();
+                discord = null;
+            }
         }
     }
-
-     private void OnDestroy()
-     {
-         if (discord != null)
-         {
-             discord.Dispose();
-             discord = null;
-         }
-     }
 }

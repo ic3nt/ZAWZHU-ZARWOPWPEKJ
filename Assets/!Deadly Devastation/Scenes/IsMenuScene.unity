@@ -6858,6 +6858,69 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1e3875c939a298247be5cae5b4ade1cc, type: 3}
   m_PrefabInstance: {fileID: 333573914}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &341513941
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 341513943}
+  - component: {fileID: 341513942}
+  m_Layer: 0
+  m_Name: SceneContext
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &341513942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 341513941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89715ad69b973a14899afa2c6730b30b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scriptableObjectInstallers: []
+  _monoInstallers: []
+  _installerPrefabs: []
+  _autoRun: 1
+  OnPreInstall:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPostInstall:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPreResolve:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPostResolve:
+    m_PersistentCalls:
+      m_Calls: []
+  _parentNewObjectsUnderSceneContext: 0
+  _contractNames: []
+  _parentContractNames: []
+--- !u!4 &341513943
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 341513941}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &342336168
 GameObject:
   m_ObjectHideFlags: 0
@@ -27480,7 +27543,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8c2e706ea3a1234cb8fc63049d7b283, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  localizationManager: {fileID: 0}
+  languageCode: 
 --- !u!114 &1242304611
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28723,7 +28786,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8c2e706ea3a1234cb8fc63049d7b283, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  localizationManager: {fileID: 0}
+  languageCode: 
 --- !u!1 &1297718469
 GameObject:
   m_ObjectHideFlags: 0
@@ -29707,7 +29770,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8c2e706ea3a1234cb8fc63049d7b283, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  localizationManager: {fileID: 0}
+  languageCode: 
 --- !u!114 &1321149133
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31533,7 +31596,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8c2e706ea3a1234cb8fc63049d7b283, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  localizationManager: {fileID: 0}
+  languageCode: 
 --- !u!1 &1389790653
 GameObject:
   m_ObjectHideFlags: 0
@@ -35339,10 +35402,6 @@ MonoBehaviour:
   world: {fileID: 1153066894}
   manualObjects: {fileID: 1482352105}
   mainCamera: {fileID: 498434103}
-  discordController: {fileID: 0}
-  localizationManager: {fileID: 0}
-  transitionManager: {fileID: 0}
-  initSuccessful: 0
   transition: {fileID: 11400000, guid: 3ad3e86dc386e60458fda4c93a2c3d62, type: 2}
   startDelay: 0
   animator: {fileID: 498434108}
@@ -35455,8 +35514,6 @@ MonoBehaviour:
   volumeSlider: {fileID: 1444704569}
   visualMoverToggle: {fileID: 399545129}
   visualMover: {fileID: 1655642068}
-  saveManager: {fileID: 0}
-  localizationManager: {fileID: 0}
 --- !u!1 &1532978176
 GameObject:
   m_ObjectHideFlags: 0
@@ -59180,3 +59237,4 @@ SceneRoots:
   - {fileID: 1364177118}
   - {fileID: 1592925479}
   - {fileID: 1047311066}
+  - {fileID: 341513943}

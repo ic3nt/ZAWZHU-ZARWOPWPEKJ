@@ -5,7 +5,6 @@ namespace RKS.DD.Core
     [System.Serializable]
     public class GameData
     {
-        [System.Serializable]
         public class Data
         {
             public bool isFirstRun = true;
