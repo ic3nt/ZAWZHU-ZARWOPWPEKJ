@@ -13380,8 +13380,6 @@ GameObject:
   m_Component:
   - component: {fileID: 889742755}
   - component: {fileID: 889742754}
-  - component: {fileID: 889742753}
-  - component: {fileID: 889742756}
   m_Layer: 0
   m_Name: SceneContext
   m_TagString: Untagged
@@ -13389,20 +13387,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &889742753
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 889742752}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 045dd0c86327a3e4090c26965cb379e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  elevatorController: {fileID: 1585043798}
-  stateMachine: {fileID: 889742756}
 --- !u!114 &889742754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13416,8 +13400,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scriptableObjectInstallers: []
-  _monoInstallers:
-  - {fileID: 889742753}
+  _monoInstallers: []
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -13450,18 +13433,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &889742756
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 889742752}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a574066992ed224abb20fcda2f1a8d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &891919530
 GameObject:
   m_ObjectHideFlags: 0
@@ -20487,6 +20458,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a574066992ed224abb20fcda2f1a8d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  elevator: {fileID: 1585043798}
 --- !u!114 &1585043798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20518,6 +20490,7 @@ MonoBehaviour:
   goodLuckContainer: {fileID: 749499277}
   chunkManager: {fileID: 1632652725}
   roundManager: {fileID: 224801992}
+  fsm: {fileID: 1585043797}
   highlightMaterial: {fileID: 2100000, guid: 3fbd38d20aa3c9347b2abe6e6e5b7ce0, type: 2}
   highlightDuration: 0.5
   originalMaterialWindow: {fileID: 0}
