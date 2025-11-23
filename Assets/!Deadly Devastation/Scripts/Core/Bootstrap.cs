@@ -76,14 +76,14 @@ namespace RKS.DD.Core
                 data.isFirstRun = false;
                 Save.Write();
                 Debug.Log("[IntroBootstrap] First run → loading 'IsFirstGameOpenScene'.");
-                SceneManager.LoadScene("IsFirstGameOpenScene");
+                Transition?.LoadScene("IsFirstGameOpenScene");
                 return;
             }
 
             if (!data.isPlayerAgreedPlay)
             {
                 Debug.Log("[IntroBootstrap] Player not agreed → loading 'IsFirstGameOpenScene'.");
-                SceneManager.LoadScene("IsFirstGameOpenScene");
+                Transition?.LoadScene("IsFirstGameOpenScene");
                 return;
             }
 

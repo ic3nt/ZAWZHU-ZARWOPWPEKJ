@@ -7,25 +7,20 @@ namespace RKS.DD.Core.Managers
     public class DiscordController : RKSBehaviour
     {
         [Header("Discord Application Settings")]
-        [Space(10)]
         public long applicationID;
 
         [Header("Rich Presence Details")]
-        [Space(10)]
         public string details;
         public string state;
         public string largeImage;
         public string largeText;
 
         private long time;
-
-        private static bool instanceExists;
-        public Discord.Discord discord;
+        private Discord.Discord discord;
 
         protected override void OnReady()
         {
-            discord = new Discord.Discord(applicationID, (System.UInt64)Discord.CreateFlags.NoRequireDiscord);
-
+            discord = new Discord.Discord(applicationID, (ulong)Discord.CreateFlags.NoRequireDiscord);
             time = System.DateTimeOffset.Now.ToUnixTimeMilliseconds();
 
             UpdateStatus();
@@ -33,56 +28,75 @@ namespace RKS.DD.Core.Managers
 
         protected override void Update()
         {
-            UpdateStatus();
+            if (discord == null)
+                return;
+
+            SafeInvoke(UpdateStatus);
 
             try
             {
                 discord.RunCallbacks();
             }
-            catch
+            catch (System.Exception ex)
             {
-                Destroy(gameObject);
+                Debug.LogError($"Discord callbacks error: {ex}");
+                SafeDispose();
             }
         }
 
-        void UpdateStatus()
+        private void UpdateStatus()
         {
-            try
+            var activityManager = discord.GetActivityManager();
+
+            var activity = new Discord.Activity
             {
-                var activityManager = discord.GetActivityManager();
-                var activity = new Discord.Activity
-                {
-                    Details = details,
-                    State = state,
-                    Assets =
+                Details = details,
+                State = state,
+                Assets =
                 {
                     LargeImage = largeImage,
                     LargeText = largeText
                 },
-                    Timestamps =
+                Timestamps =
                 {
                     Start = time
                 }
-                };
+            };
 
-                activityManager.UpdateActivity(activity, (res) =>
-                {
-                    if (res != Discord.Result.Ok)
-                        Debug.LogWarning("Failed connecting to Discord!");
-                });
-            }
-            catch
+            activityManager.UpdateActivity(activity, res =>
             {
-                Destroy(gameObject);
-            }
+                if (res != Discord.Result.Ok)
+                    Debug.LogWarning("Failed connecting to Discord!");
+            });
         }
 
-        private void OnDispose()
+        protected override void OnDisposed()
+        {
+            SafeDispose();
+        }
+
+        private void OnApplicationQuit()
+        {
+            SafeDispose();
+        }
+
+        private void OnDisable()
+        {
+            SafeDispose();
+        }
+
+        private void SafeDispose()
         {
             if (discord != null)
             {
-                discord.Dispose();
+                try { discord.Dispose(); }
+                catch (System.Exception ex)
+                {
+                    Debug.LogError($"Discord Dispose exception: {ex}");
+                }
+
                 discord = null;
+                Debug.Log("Discord RPC disposed.");
             }
         }
     }
