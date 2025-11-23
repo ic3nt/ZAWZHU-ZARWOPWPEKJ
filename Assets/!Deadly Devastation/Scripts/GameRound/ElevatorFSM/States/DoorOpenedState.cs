@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace RKS.DD.Game.ElevatorStates
+namespace RKS.DD.Game.Elevator.States
 {
     public class DoorOpenedState : ElevatorState
     {
@@ -24,7 +24,7 @@ namespace RKS.DD.Game.ElevatorStates
 
             fsm.elevator.WaitAndContinue(fsm.elevator.doorOpenDuration, () =>
             {
-                fsm.SetState(new RKS.DD.Game.ElevatorStates.DoorClosedState(fsm));
+                fsm.SetState(new RKS.DD.Game.Elevator.States.DoorClosedState(fsm));
             });
         }
     }

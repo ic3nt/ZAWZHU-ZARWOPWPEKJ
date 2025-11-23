@@ -76,7 +76,7 @@ namespace RKS.DD.Game.Elevator
 
         public void StartSequence()
         {
-            fsm.SetState(new RKS.DD.Game.ElevatorStates.BegginingState(fsm));
+            fsm.SetState(new RKS.DD.Game.Elevator.States.BegginingState(fsm));
             Debug.Log("Лифт запущен");
         }
 

@@ -1,7 +1,7 @@
 using UnityEngine;
 using static RKS.DD.Game.Elevator.ElevatorController;
 
-namespace RKS.DD.Game.ElevatorStates
+namespace RKS.DD.Game.Elevator.States
 {
     public class DoorClosedState : ElevatorState
     {
@@ -26,7 +26,7 @@ namespace RKS.DD.Game.ElevatorStates
 
             fsm.elevator.WaitUntilConditionMetAndContinue(() => fsm.elevator.roundManager.taskCompleted, () =>
             {
-                fsm.SetState(new RKS.DD.Game.ElevatorStates.WaitingForPlayersState(fsm));
+                fsm.SetState(new RKS.DD.Game.Elevator.States.WaitingForPlayersState(fsm));
             });
         }
     }

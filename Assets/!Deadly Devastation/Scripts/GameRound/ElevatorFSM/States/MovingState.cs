@@ -1,7 +1,7 @@
 using UnityEngine;
 using static RKS.DD.Game.Elevator.ElevatorController;
 
-namespace RKS.DD.Game.ElevatorStates
+namespace RKS.DD.Game.Elevator.States
 {
     public class MovingState : ElevatorState
     {
@@ -24,7 +24,7 @@ namespace RKS.DD.Game.ElevatorStates
 
             fsm.elevator.WaitAndContinue(fsm.elevator.elevatorMoveDuration, () =>
             {
-                fsm.SetState(new RKS.DD.Game.ElevatorStates.ArrivingState(fsm));
+                fsm.SetState(new RKS.DD.Game.Elevator.States.ArrivingState(fsm));
             });
         }
     }

@@ -1,7 +1,7 @@
 using UnityEngine;
 using static RKS.DD.Game.Elevator.ElevatorController;
 
-namespace RKS.DD.Game.ElevatorStates
+namespace RKS.DD.Game.Elevator.States
 {
     public class WaitingForPlayersState : ElevatorState
     {
@@ -33,7 +33,7 @@ namespace RKS.DD.Game.ElevatorStates
                 fsm.elevator.TeleportMisplacedPlayers(TeleportTarget.Inside);
                 fsm.elevator.chunkManager.currentFloorIndex--;
                 RoundEvents.InvokeTaskCompleted(false);
-                fsm.SetState(new RKS.DD.Game.ElevatorStates.MovingState(fsm));
+                fsm.SetState(new RKS.DD.Game.Elevator.States.MovingState(fsm));
             });
         }
     }
