@@ -1,6 +1,8 @@
 using System;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 using UnityEngine.SceneManagement;
 
 namespace RKS.DD.Core.Managers
@@ -8,7 +10,6 @@ namespace RKS.DD.Core.Managers
     public class TransitionManager : RKSBehaviour
     {
         [SerializeField] private GameObject transitionPrefab;
-        [SerializeField] private Camera transitionUICamera;
         [SerializeField] private float delayBeforeLoad = 0f;
 
         private readonly string triggerIn = "TransitionIn";
@@ -19,17 +20,8 @@ namespace RKS.DD.Core.Managers
 
         protected override void OnReady()
         {
-            transitionUICamera.enabled = false;
-
             var instance = Instantiate(transitionPrefab, transform);
-
             var canvas = instance.GetComponentInChildren<Canvas>(true);
-            if (canvas != null)
-            {
-                canvas.renderMode = RenderMode.ScreenSpaceCamera;
-                canvas.worldCamera = transitionUICamera;
-            }
-
             _animator = instance.GetComponent<Animator>();
         }
 
@@ -44,7 +36,6 @@ namespace RKS.DD.Core.Managers
                 return;
 
             _isTransitioning = true;
-            transitionUICamera.enabled = true;
 
             if (_animator)
                 _animator.SetTrigger(triggerIn);
@@ -64,9 +55,6 @@ namespace RKS.DD.Core.Managers
             if (_animator)
                 _animator.SetTrigger(triggerOut);
 
-            await Task.Delay(1000);
-
-            transitionUICamera.enabled = false;
             _isTransitioning = false;
         }
     }
