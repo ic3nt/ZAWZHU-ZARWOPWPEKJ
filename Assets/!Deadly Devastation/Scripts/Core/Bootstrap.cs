@@ -76,7 +76,7 @@ namespace RKS.DD.Core
                 data.isFirstRun = false;
                 Save.Write();
                 Debug.Log("[IntroBootstrap] First run → loading 'IsFirstGameOpenScene'.");
-                Transition?.LoadScene("IsFirstGameOpenScene");
+                SceneManager.LoadScene("IsFirstGameOpenScene");
                 return;
             }
 

@@ -130,7 +130,7 @@ namespace RKS.DD.Core.Managers
             data.isPlayerAgreedPlay = true;
             Save.Write(data);
 
-            UnityEngine.SceneManagement.SceneManager.LoadScene("IsMenuScene");
+            Transition?.LoadScene("IsMenuScene");
 
             Debug.Log("[FirstOpenSceneManager] Player agreed → loading menu.");
         }
