@@ -49,7 +49,6 @@ public class PlayerCameraController : NetworkBehaviour
     private Vector2 _frameVel;
     private float _bobTimer;
 
-    // Добавлено для плавного наклона
     private float _currentTilt = 0f;
 
     private void Awake()
@@ -170,7 +169,6 @@ public class PlayerCameraController : NetworkBehaviour
         float yawDelta = Input.GetAxis("Mouse X");
         targetTilt -= yawDelta * 0.5f;
 
-        // Плавное изменение наклона
         _currentTilt = Mathf.Lerp(_currentTilt, targetTilt, Time.deltaTime * tiltSpeed);
 
         cameraHolder.localRotation = Quaternion.Euler(0f, 0f, _currentTilt);

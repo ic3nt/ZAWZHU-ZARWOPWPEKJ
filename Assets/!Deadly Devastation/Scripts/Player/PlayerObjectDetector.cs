@@ -42,6 +42,9 @@ public class PlayerObjectDetector : MonoBehaviour
     private void Update()
     {
         DetectObjectsInView();
+    }
+    private void LateUpdate()
+    {
         UpdateBoxes();
     }
 
