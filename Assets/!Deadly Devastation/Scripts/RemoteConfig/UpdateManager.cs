@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Unity.RemoteConfig;
+using Unity.Services.RemoteConfig;
+using Unity.Services.Core;
 using System;
 
 public class UpdateManager : MonoBehaviour
@@ -10,44 +9,48 @@ public class UpdateManager : MonoBehaviour
     public GameObject updateWindow;
     public GameObject mainButtonsGroup;
 
-    // тут все просто если уметь работать с remote config, скрипт для проверки обновлений
+    const string VERSION_KEY = "newAppVersion";
 
-    void Awake()
+    public struct UserAttributes { }
+    public struct AppAttributes { }
+
+    async void Awake()
     {
-        // отключаем некоторые объекты на сцене и проверяем remote config
         updateWindow.SetActive(false);
-        ConfigManager.FetchCompleted += AppyRemoteSettings;
-        ConfigManager.FetchConfigs(new usersAttributes(), new appAttributes());
+
+        await UnityServices.InitializeAsync();
+
+        RemoteConfigService.Instance.FetchCompleted += ApplyRemoteSettings;
+        RemoteConfigService.Instance.FetchConfigs(
+            new UserAttributes(),
+            new AppAttributes()
+        );
     }
 
-    private void AppyRemoteSettings(ConfigResponse configResponse)
+    void ApplyRemoteSettings(ConfigResponse response)
     {
-        // присваиваем newAppVersion стрингу newAppVersion в remote config
+        if (response.requestOrigin != ConfigOrigin.Remote &&
+            response.requestOrigin != ConfigOrigin.Cached)
+            return;
 
-        string newAppVersion = ConfigManager.appConfig.GetString("newAppVersion");
+        string remoteVersion =
+            RemoteConfigService.Instance.appConfig.GetString(VERSION_KEY, "");
 
-        // если newAppVersion, не та которая нужна, то (вся логика действий написана и понятна)
-
-        if (!string.IsNullOrEmpty(newAppVersion) && Application.version != newAppVersion)
+        if (!string.IsNullOrEmpty(remoteVersion) &&
+            Application.version != remoteVersion)
         {
             mainButtonsGroup.SetActive(false);
             updateWindow.SetActive(true);
         }
-        else
-        {
-        }
 
-#if DEBUG
-        print("Game client version : " + Application.version + " - " + "Remote version : " + newAppVersion);
-#endif 
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
+        Debug.Log($"Game client version: {Application.version} | Remote version: {remoteVersion}");
+#endif
     }
 
     void OnDestroy()
     {
-        ConfigManager.FetchCompleted -= AppyRemoteSettings;
+        if (RemoteConfigService.Instance != null)
+            RemoteConfigService.Instance.FetchCompleted -= ApplyRemoteSettings;
     }
-
-    struct usersAttributes { }
-
-    struct appAttributes { }
 }

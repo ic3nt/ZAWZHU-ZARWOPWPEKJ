@@ -157,7 +157,7 @@ public class PlayerCameraController : NetworkBehaviour
     {
         if (!cameraHolder || movement == null) return;
 
-        Vector3 localVel = characterRoot.InverseTransformDirection(movement.GetComponent<Rigidbody>().velocity);
+        Vector3 localVel = characterRoot.InverseTransformDirection(movement.GetComponent<Rigidbody>().linearVelocity);
         float strafeSpeed = Mathf.Clamp(localVel.x / movement.walkMaxSpeed, -1f, 1f);
 
         float tiltMultiplier = movement.IsRunning ? 1.3f : 1f;

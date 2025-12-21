@@ -1,5 +1,6 @@
 using UnityEngine;
 using Unity.Services.RemoteConfig;
+using Unity.Services.Core;
 using System.Threading.Tasks;
 
 public class RemoteConfigMenuManager : MonoBehaviour
@@ -7,37 +8,53 @@ public class RemoteConfigMenuManager : MonoBehaviour
     public struct UserAttributes { }
     public struct AppAttributes { }
 
-    private bool multiplayerAvailable;
+    [SerializeField] private GameObject[] multiplayerGameObjects;
 
-    public GameObject[] multiplayerGameObjects;
-
-    // нигде не используется, пока что, потому что скрипт не рабочий 
+    private bool multiplayerAvailable = false;
 
     async void Start()
     {
         await InitializeRemoteConfig();
 
-        foreach (var gameObject in multiplayerGameObjects)
+        foreach (var go in multiplayerGameObjects)
         {
-            gameObject.SetActive(multiplayerAvailable);
+            if (go != null)
+                go.SetActive(multiplayerAvailable);
         }
     }
 
     private async Task InitializeRemoteConfig()
     {
-        ConfigManager.FetchCompleted += OnFetchCompleted;
-        await ConfigManager.FetchConfigsAsync(new UserAttributes(), new AppAttributes());
+        await UnityServices.InitializeAsync();
+
+        RemoteConfigService.Instance.FetchCompleted += OnFetchCompleted;
+
+        RemoteConfigService.Instance.FetchConfigs(
+            new UserAttributes(),
+            new AppAttributes()
+        );
     }
 
     private void OnFetchCompleted(ConfigResponse response)
     {
-        if (response.status == ConfigRequestStatus.Success)
+        if (response.requestOrigin == ConfigOrigin.Remote ||
+            response.requestOrigin == ConfigOrigin.Cached)
         {
-            multiplayerAvailable = ConfigManager.appConfig.GetBool("multiplayerAvailable", false);
+            multiplayerAvailable =
+                RemoteConfigService.Instance.appConfig.GetBool(
+                    "multiplayerAvailable",
+                    false
+                );
         }
         else
         {
-            Debug.LogError("Failed to fetch remote config.");
+            Debug.LogError("Remote Config fetch failed");
         }
+    }
+
+    private void OnDestroy()
+    {
+        if (RemoteConfigService.Instance != null)
+            RemoteConfigService.Instance.FetchCompleted -= OnFetchCompleted;
     }
 }

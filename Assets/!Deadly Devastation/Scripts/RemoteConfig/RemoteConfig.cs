@@ -1,57 +1,50 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Unity.RemoteConfig;
+using Unity.Services.RemoteConfig;
+using Unity.Services.Core;
+using System.Collections.Generic;
+using System;
 
-public class RemoteConfig : MonoBehaviour
+public class RemoteConfigManager : MonoBehaviour
 {
     public GameObject UpdateWindow;
-    [SerializeField] float UpdateVersion;
-    string Update = "newAppVersion";
 
-    public struct userAttribute { };
-    public struct appAttribute { };
-    void Start()
+    const string VERSION_KEY = "newAppVersion";
+
+    public struct UserAttributes { }
+    public struct AppAttributes { }
+
+    async void Awake()
     {
-        FetchConfigData();
+        await UnityServices.InitializeAsync();
 
+        RemoteConfigService.Instance.FetchCompleted += OnFetchCompleted;
+        RemoteConfigService.Instance.FetchConfigs(
+            new UserAttributes(),
+            new AppAttributes()
+        );
     }
 
-    private void FetchConfigData()
+    void OnFetchCompleted(ConfigResponse response)
     {
-        ConfigManager.FetchCompleted += RemoteFetchComplete;
-        ConfigManager.FetchConfigs<userAttribute, appAttribute>(new userAttribute(), new appAttribute());
+        if (response.requestOrigin == ConfigOrigin.Remote ||
+            response.requestOrigin == ConfigOrigin.Cached)
+        {
+            float remoteVersion =
+                RemoteConfigService.Instance.appConfig.GetFloat(VERSION_KEY, 0f);
 
+            float currentVersion;
+            float.TryParse(Application.version, out currentVersion);
+
+            if (currentVersion < remoteVersion)
+            {
+                UpdateWindow.SetActive(true);
+            }
+        }
     }
 
-    public void RemoteFetchComplete(ConfigResponse response)
+    void OnDestroy()
     {
-        switch (response.requestOrigin)
-        {
-            case ConfigOrigin.Default:
-
-                break;
-            case ConfigOrigin.Cached:
-
-                break;
-            case ConfigOrigin.Remote:
-
-                float CurrentVersion;
-                float.TryParse(Application.version, out CurrentVersion);
-                if (CurrentVersion < UpdateVersion)
-                {
-                    break;
-                }
-                ShowUpdatePouput();
-
-                break;
-            default:
-                break;
-        }
-
-         void ShowUpdatePouput()
-        {
-            UpdateWindow.SetActive(true);
-        }
+        if (RemoteConfigService.Instance != null)
+            RemoteConfigService.Instance.FetchCompleted -= OnFetchCompleted;
     }
 }

@@ -51,7 +51,7 @@ public class PlayerMovement : NetworkBehaviour
     public bool IsFalling { get; private set; }
     public float RunProgress01 { get; private set; }
     public float RunProgress02 { get; private set; }
-    public float CurrentHorizontalSpeed => new Vector3(_rb.velocity.x, 0f, _rb.velocity.z).magnitude;
+    public float CurrentHorizontalSpeed => new Vector3(_rb.linearVelocity.x, 0f, _rb.linearVelocity.z).magnitude;
 
     public event Action OnHardStop;
     public event Action OnSprintCollision;
@@ -109,7 +109,7 @@ public class PlayerMovement : NetworkBehaviour
         const float rayLength = 1.0f;
         bool grounded = Physics.Raycast(transform.position + Vector3.up * 0.1f, Vector3.down, rayLength);
 
-        if (!grounded && _rb.velocity.y < -0.1f)
+        if (!grounded && _rb.linearVelocity.y < -0.1f)
         {
             if (!IsFalling)
             {
@@ -250,11 +250,11 @@ public class PlayerMovement : NetworkBehaviour
         _currentSpeed = Mathf.MoveTowards(_currentSpeed, targetMax, Time.fixedDeltaTime * (IsMoving ? accelRate : decelRate));
 
         Vector3 targetVel = worldDir * _currentSpeed;
-        Vector3 horizVel = new Vector3(_rb.velocity.x, 0f, _rb.velocity.z);
+        Vector3 horizVel = new Vector3(_rb.linearVelocity.x, 0f, _rb.linearVelocity.z);
         Vector3 smooth = Vector3.SmoothDamp(horizVel, targetVel, ref _velSmoothRef, IsMoving ? accelerationTime : decelerationTime * Mathf.Max(1f, inertiaMultiplier));
 
-        smooth.y = _rb.velocity.y;
-        _rb.velocity = smooth;
+        smooth.y = _rb.linearVelocity.y;
+        _rb.linearVelocity = smooth;
 
         RunProgress02 = (IsRunning && IsMoving && CurrentHorizontalSpeed >= runMaxSpeed - 5f) ? 1f : 0f;
     }
@@ -266,7 +266,7 @@ public class PlayerMovement : NetworkBehaviour
         if (inputDir.sqrMagnitude > 0.01f) inputDir.Normalize();
 
         Vector3 airDir = transform.TransformDirection(inputDir);
-        Vector3 horizVel = new Vector3(_rb.velocity.x, 0f, _rb.velocity.z);
+        Vector3 horizVel = new Vector3(_rb.linearVelocity.x, 0f, _rb.linearVelocity.z);
         horizVel = horizVel * airInertia + airDir * airControlFactor;
 
         float horizontalSpeed = horizVel.magnitude;
@@ -274,8 +274,8 @@ public class PlayerMovement : NetworkBehaviour
             horizVel = horizVel.normalized * minFallMoveSpeed;
 
         float gravityBoost = Physics.gravity.y * (fallGravityMultiplier - 1f);
-        Vector3 newVel = horizVel + new Vector3(0, _rb.velocity.y + gravityBoost * Time.fixedDeltaTime, 0);
-        _rb.velocity = newVel;
+        Vector3 newVel = horizVel + new Vector3(0, _rb.linearVelocity.y + gravityBoost * Time.fixedDeltaTime, 0);
+        _rb.linearVelocity = newVel;
     }
 
     private void OnCollisionEnter(Collision col)
@@ -286,15 +286,15 @@ public class PlayerMovement : NetworkBehaviour
 
     public void AddImpulse(Vector3 impulse)
     {
-        _rb.velocity += impulse;
+        _rb.linearVelocity += impulse;
     }
 
     private void HaltHorizontal()
     {
-        Vector3 v = _rb.velocity;
+        Vector3 v = _rb.linearVelocity;
         v.x = 0;
         v.z = 0;
-        _rb.velocity = v;
+        _rb.linearVelocity = v;
 
         _currentSpeed = 0f;
         _velSmoothRef = Vector3.zero;
