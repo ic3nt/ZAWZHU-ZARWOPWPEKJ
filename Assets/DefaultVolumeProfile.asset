@@ -106,6 +106,28 @@ MonoBehaviour:
   texture:
     m_OverrideState: 1
     m_Value: {fileID: 0}
+--- !u!114 &-7503459578262899203
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abdf82dce54b9634196816626582aa87, type: 3}
+  m_Name: ChromaticVolume
+  m_EditorClassIdentifier: Assembly-CSharp::UnityEngine.Rendering.Universal.ChromaticVolume
+  active: 1
+  Active:
+    m_OverrideState: 1
+    m_Value: 0
+  When:
+    m_OverrideState: 1
+    m_Value: 500
+  Chroma:
+    m_OverrideState: 1
+    m_Value: 8
 --- !u!114 &-7447150692440037876
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -292,6 +314,59 @@ MonoBehaviour:
   EdgeColor:
     m_OverrideState: 1
     m_Value: {r: 1, g: 1, b: 1, a: 1}
+--- !u!114 &-4515232088227468877
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 877fd545cff4205419055662e62e7c39, type: 3}
+  m_Name: MonochromeVolume
+  m_EditorClassIdentifier: Assembly-CSharp::UnityEngine.Rendering.Universal.MonochromeVolume
+  active: 1
+  Active:
+    m_OverrideState: 1
+    m_Value: 0
+  When:
+    m_OverrideState: 1
+    m_Value: 500
+  Scale:
+    m_OverrideState: 1
+    m_Value: 0
+  ColorLight:
+    m_OverrideState: 1
+    m_Value: {r: 1, g: 1, b: 1, a: 1}
+  ColorDark:
+    m_OverrideState: 1
+    m_Value: {r: 0, g: 0, b: 0, a: 1}
+--- !u!114 &-4143268913039213772
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77a7ddf9f9a3e454faa7ae68ee5ebbb3, type: 3}
+  m_Name: EdgeGlowVolume
+  m_EditorClassIdentifier: Assembly-CSharp::UnityEngine.Rendering.Universal.EdgeGlowVolume
+  active: 1
+  Active:
+    m_OverrideState: 1
+    m_Value: 0
+  When:
+    m_OverrideState: 1
+    m_Value: 500
+  Scale:
+    m_OverrideState: 1
+    m_Value: 1
+  EdgeColor:
+    m_OverrideState: 1
+    m_Value: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &-4070229228555953258
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -438,6 +513,53 @@ MonoBehaviour:
   ColorDark:
     m_OverrideState: 1
     m_Value: {r: 0, g: 0, b: 0, a: 1}
+--- !u!114 &-2900624778555988074
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b634000b1fe567b4c94f944178b5e9a5, type: 3}
+  m_Name: OutlineVolume
+  m_EditorClassIdentifier: SleeplessOwl.URPPostProcessing::SleeplessOwl.URPPostProcessing.OutlineVolume
+  active: 1
+  SampleDistance:
+    m_OverrideState: 1
+    m_Value: 0
+  StrengthPow:
+    m_OverrideState: 1
+    m_Value: 30
+--- !u!114 &-2870039347649771589
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 745dbe63215d76041a5b631c8de9de3d, type: 3}
+  m_Name: CartoonVolume
+  m_EditorClassIdentifier: Assembly-CSharp::UnityEngine.Rendering.Universal.CartoonVolume
+  active: 1
+  Active:
+    m_OverrideState: 1
+    m_Value: 0
+  When:
+    m_OverrideState: 1
+    m_Value: 500
+  Lines:
+    m_OverrideState: 1
+    m_Value: 1
+  ColorLight:
+    m_OverrideState: 1
+    m_Value: {r: 1, g: 1, b: 1, a: 1}
+  ColorDark:
+    m_OverrideState: 1
+    m_Value: {r: 0, g: 0, b: 0, a: 1}
 --- !u!114 &-2166653135926839952
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -466,6 +588,63 @@ MonoBehaviour:
   Offset:
     m_OverrideState: 1
     m_Value: 1
+--- !u!114 &-2030661602655145571
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a81bb4d263f55354fb1bfb579f9dddf7, type: 3}
+  m_Name: SimpleEdgeVolume
+  m_EditorClassIdentifier: Assembly-CSharp::UnityEngine.Rendering.Universal.SimpleEdgeVolume
+  active: 1
+  Active:
+    m_OverrideState: 1
+    m_Value: 0
+  When:
+    m_OverrideState: 1
+    m_Value: 500
+  Multiplier:
+    m_OverrideState: 1
+    m_Value: 1
+--- !u!114 &-81686426245727362
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9552dc531ee036d499efc8422245ab19, type: 3}
+  m_Name: GlitchVolume
+  m_EditorClassIdentifier: Assembly-CSharp::UnityEngine.Rendering.Universal.GlitchVolume
+  active: 1
+  Active:
+    m_OverrideState: 1
+    m_Value: 0
+  When:
+    m_OverrideState: 1
+    m_Value: 500
+  Noise:
+    m_OverrideState: 1
+    m_Value: {fileID: 0}
+    dimension: 1
+  Size:
+    m_OverrideState: 1
+    m_Value: 16
+  BlockDensity:
+    m_OverrideState: 1
+    m_Value: 0.2
+  LineDensity:
+    m_OverrideState: 1
+    m_Value: 0.7
+  Speed:
+    m_OverrideState: 1
+    m_Value: 5
 --- !u!114 &-62893979907311318
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -521,17 +700,22 @@ MonoBehaviour:
   - {fileID: 5950093383786421155}
   - {fileID: 542781823537235521}
   - {fileID: -7447150692440037876}
-  - {fileID: 6090967521973713544}
-  - {fileID: -62893979907311318}
-  - {fileID: 7417298475984423265}
-  - {fileID: -2949264076653661830}
-  - {fileID: -4070229228555953258}
-  - {fileID: -5169975081448186914}
-  - {fileID: 3180117517273782230}
-  - {fileID: -7112372982021875908}
-  - {fileID: -2166653135926839952}
-  - {fileID: 5918374635536764832}
-  - {fileID: 6323080893142066872}
+  - {fileID: 2188759620452336274}
+  - {fileID: 2785711155555593836}
+  - {fileID: 6785470548031705198}
+  - {fileID: 2643664704428745885}
+  - {fileID: -2900624778555988074}
+  - {fileID: -2030661602655145571}
+  - {fileID: 8600468514749994917}
+  - {fileID: -81686426245727362}
+  - {fileID: -4515232088227468877}
+  - {fileID: -2870039347649771589}
+  - {fileID: -4143268913039213772}
+  - {fileID: -7503459578262899203}
+  - {fileID: 4921127267733172991}
+  - {fileID: 6763181650639436189}
+  - {fileID: 5093965759683463903}
+  - {fileID: 6440038957786334198}
 --- !u!114 &542781823537235521
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -661,6 +845,84 @@ MonoBehaviour:
   chromaticAbberationIntensity:
     m_OverrideState: 1
     m_Value: 0.5
+--- !u!114 &2188759620452336274
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f21f170b640032a4ba47bfe9e6497f01, type: 3}
+  m_Name: WorldPositionVolume
+  m_EditorClassIdentifier: SleeplessOwl.URPPostProcessing::SleeplessOwl.URPPostProcessing.WorldPositionVolume
+  active: 1
+  ColorAddMode:
+    m_OverrideState: 1
+    m_Value: 1
+  GridSize:
+    m_OverrideState: 1
+    m_Value: 0
+  GridLineWidth:
+    m_OverrideState: 1
+    m_Value: 2
+--- !u!114 &2643664704428745885
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 012d3263da3d1234bb848967c99084f1, type: 3}
+  m_Name: GlitchVolume
+  m_EditorClassIdentifier: SleeplessOwl.URPPostProcessing::SleeplessOwl.URPPostProcessing.GlitchVolume
+  active: 1
+  Speed:
+    m_OverrideState: 1
+    m_Value: 10
+  BlockSize:
+    m_OverrideState: 1
+    m_Value: 0
+  BlockSizeJitter:
+    m_OverrideState: 1
+    m_Value: 0
+  MaxRGBSplitX:
+    m_OverrideState: 1
+    m_Value: 1
+  MaxRGBSplitY:
+    m_OverrideState: 1
+    m_Value: 1
+--- !u!114 &2785711155555593836
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4fd7d3882af82046b3945e7a77b5ef3, type: 3}
+  m_Name: CloudShadowVolume
+  m_EditorClassIdentifier: SleeplessOwl.URPPostProcessing::SleeplessOwl.URPPostProcessing.CloudShadowVolume
+  active: 1
+  ShadowStrength:
+    m_OverrideState: 1
+    m_Value: 0
+  SmoothStepRange:
+    m_OverrideState: 1
+    m_Value: {x: 0.45, y: 0.55}
+  NoiseScale1:
+    m_OverrideState: 1
+    m_Value: {x: 1, y: 1}
+  NoiseTime1:
+    m_OverrideState: 1
+    m_Value: 1
+  DebugMode:
+    m_OverrideState: 1
+    m_Value: 0
 --- !u!114 &3180117517273782230
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -753,6 +1015,63 @@ MonoBehaviour:
   contribution:
     m_OverrideState: 1
     m_Value: 0
+--- !u!114 &4921127267733172991
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9cfa44da4f34c64bb4e878d6833959b, type: 3}
+  m_Name: VCRVolume
+  m_EditorClassIdentifier: Assembly-CSharp::UnityEngine.Rendering.Universal.VCRVolume
+  active: 1
+  Active:
+    m_OverrideState: 1
+    m_Value: 0
+  When:
+    m_OverrideState: 1
+    m_Value: 500
+  Noise:
+    m_OverrideState: 1
+    m_Value: {fileID: 0}
+    dimension: 1
+  Stripes:
+    m_OverrideState: 1
+    m_Value: 4
+  Noisy:
+    m_OverrideState: 1
+    m_Value: 1
+  VerticalShift:
+    m_OverrideState: 1
+    m_Value: 0.25
+  HorizontalShift:
+    m_OverrideState: 1
+    m_Value: 1.8
+--- !u!114 &5093965759683463903
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e164acabf378b54fb9216ba720815f9, type: 3}
+  m_Name: DrunkVolume
+  m_EditorClassIdentifier: Assembly-CSharp::UnityEngine.Rendering.Universal.DrunkVolume
+  active: 1
+  Active:
+    m_OverrideState: 1
+    m_Value: 0
+  When:
+    m_OverrideState: 1
+    m_Value: 500
+  Speed:
+    m_OverrideState: 1
+    m_Value: 1
 --- !u!114 &5709908869319504049
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -1071,6 +1390,103 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
+--- !u!114 &6440038957786334198
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69ce6ba353c5f22478a1234908cde861, type: 3}
+  m_Name: SketchVolume
+  m_EditorClassIdentifier: Assembly-CSharp::UnityEngine.Rendering.Universal.SketchVolume
+  active: 1
+  Active:
+    m_OverrideState: 1
+    m_Value: 0
+  When:
+    m_OverrideState: 1
+    m_Value: 500
+  Noise:
+    m_OverrideState: 1
+    m_Value: {fileID: 0}
+    dimension: 1
+  Sensitivity:
+    m_OverrideState: 1
+    m_Value: 1
+  Color:
+    m_OverrideState: 1
+    m_Value: 0.5
+--- !u!114 &6763181650639436189
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 200a29924df02d048adc76ad97d6f738, type: 3}
+  m_Name: CRTVolume
+  m_EditorClassIdentifier: Assembly-CSharp::UnityEngine.Rendering.Universal.CRTVolume
+  active: 1
+  Active:
+    m_OverrideState: 1
+    m_Value: 0
+  When:
+    m_OverrideState: 1
+    m_Value: 500
+  Scan:
+    m_OverrideState: 1
+    m_Value: -0.18
+  Brightness:
+    m_OverrideState: 1
+    m_Value: 1
+  Offset:
+    m_OverrideState: 1
+    m_Value: 1
+--- !u!114 &6785470548031705198
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7443357ba9cb024f9e0f59d75c1c066, type: 3}
+  m_Name: HalfToneVolume
+  m_EditorClassIdentifier: SleeplessOwl.URPPostProcessing::SleeplessOwl.URPPostProcessing.HalfToneVolume
+  active: 1
+  _visibleInSceneview:
+    m_OverrideState: 1
+    m_Value: 1
+  _Density:
+    m_OverrideState: 1
+    m_Value: 0
+  _Radius:
+    m_OverrideState: 1
+    m_Value: 0.3
+  _SmoothEdge:
+    m_OverrideState: 1
+    m_Value: 0.2
+  _HalfToneFactor:
+    m_OverrideState: 1
+    m_Value: 0.5
+  _SourceFactor:
+    m_OverrideState: 1
+    m_Value: 0.5
+  _Lightness:
+    m_OverrideState: 1
+    m_Value: 1
+  _PointColor:
+    m_OverrideState: 1
+    m_Value: {r: 0, g: 0, b: 0, a: 1}
+  _ColorFactor:
+    m_OverrideState: 1
+    m_Value: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &7216951211885238132
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -1150,6 +1566,28 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: 0.7
   Speed:
+    m_OverrideState: 1
+    m_Value: 5
+--- !u!114 &8600468514749994917
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 605214c209438034a935cdb9812bae62, type: 3}
+  m_Name: FastBlurVolume
+  m_EditorClassIdentifier: Assembly-CSharp::UnityEngine.Rendering.Universal.FastBlurVolume
+  active: 1
+  Active:
+    m_OverrideState: 1
+    m_Value: 0
+  When:
+    m_OverrideState: 1
+    m_Value: 500
+  Scale:
     m_OverrideState: 1
     m_Value: 5
 --- !u!114 &8613348055628783723

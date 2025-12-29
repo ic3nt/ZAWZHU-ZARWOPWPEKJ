@@ -2,7 +2,6 @@
 
 using DG.Tweening;
 using Discord;
-using EasyTransition;
 using System;
 using TMPro;
 using System.Collections;
@@ -11,7 +10,6 @@ using UnityEngine;
 using UnityEditor;
 using UnityEngine.PlayerLoop;
 using UnityEngine.SceneManagement;
-using UnityEngine.Diagnostics;
 using Zenject;
 using RKS.DD.Core.Managers;
 using RKS.DD.Core;
@@ -102,10 +100,6 @@ public class MenuManager : RKSBehaviour
     public GameObject world;
     public GameObject manualObjects;
     public GameObject mainCamera;
-
-    [Header("Transition Settings")]
-    public TransitionSettings transition;
-    [HideInInspector] public float startDelay;
     
     [Header("Animators")]
     public Animator animator;

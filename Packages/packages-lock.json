@@ -535,6 +535,16 @@
       },
       "url": "https://packages.unity.com"
     },
+    "com.yusiang.urp.postprocess": {
+      "version": "https://github.com/SleeplessOwl0102/URP-Custom-Post-Processing.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.render-pipelines.universal": "10.2.2",
+        "com.unity.render-pipelines.core": "10.2.2"
+      },
+      "hash": "b48f7a1325ebe1270fe7d1748ecb781c5142addd"
+    },
     "com.unity.modules.accessibility": {
       "version": "1.0.0",
       "depth": 0,

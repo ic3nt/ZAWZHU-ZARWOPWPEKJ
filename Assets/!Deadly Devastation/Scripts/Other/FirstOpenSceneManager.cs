@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
-using EasyTransition;
 using RKS.DD.Core;
 using System;
 
@@ -21,9 +20,6 @@ namespace RKS.DD.Core.Managers
         [SerializeField] private float downButtonPosY = -200f;
         [SerializeField] private float topButtonPosY = -50f;
         [SerializeField] private float tweenDuration = 0.5f;
-
-        [Header("Transition")]
-        //[SerializeField] private DemoLoadScene transitionManager;
 
         [Header("Camera Rotation")]
         [SerializeField] private Camera cameraToRotate;
